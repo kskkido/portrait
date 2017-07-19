@@ -1,31 +1,36 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 
 import ProjectView from './ProjectView'
-import Navigation from '../Navigation'
-import { BodyContainer } from '../../Shared/Styles'
+import Navigation from '../Shared/Navigation'
+import { MainContainer, BodyContainer } from '../Shared/Styles'
 
-const Project = ({ navigationList }) => (
-  <BodyContainer>
+const Project = ({ language, navigationList }) => (
+  <MainContainer>
     <Navigation
       navigationList={navigationList}
     />
-    <ProjectView />
-  </BodyContainer>
+    <BodyContainer>
+      <ProjectView
+        language={language}
+      />
+    </BodyContainer>
+  </MainContainer>
 )
 
 class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      navigationList: ['Audiosphere', 'Stackquest', 'Portfolio']
+      currentView: 'view_0',
+      navigationList: ['Index', 'Audiosphere', 'Stackquest', 'Portfolio']
     }
   }
 
   render() {
     return (
       <Project
+        language={this.props.language}
         navigationList={this.state.navigationList}
       />
     )

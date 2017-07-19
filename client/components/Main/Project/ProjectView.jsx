@@ -1,31 +1,23 @@
 import React from 'react'
-import styled from 'styled-components'
 
-const ProjectContainer = styled.div`
-  display: flex
-`
+import { BodyContent, BodyTitle } from '../Shared/Styles'
+import ProjectText from './content'
 
-const createMetadataItem = (metadata) => (key) => (
-  <li key={key}>{metadata[key]}</li>
-)
+// const createMetadataItem = (metadata) => (key) => (
+//   <li key={key}>{metadata[key]}</li>
+// )
 
-const mapMetadata = (metadata) => (
-  Object.keys(metadata).map(createMetadataItem(metadata))
-)
+// const mapMetadata = (metadata) => (
+//   Object.keys(metadata).map(createMetadataItem(metadata))
+// )
 
-const ProjectView = ({ currentProject }) => {
-  if (!currentProject) return null
-
-  const { code, media, metadata, name } = currentProject
+const ProjectView = ({ language }) => {
+  // if (!currentProject) return null
+  // const { code, media, metadata, name } = currentProject
   return (
-    <ProjectContainer>
-      <h1>{name}</h1>
-      <h6 >{code}</h6>{/*link to code*/}
-      <div>
-        {media}
-      </div>
-      <ul>{metadata && mapMetadata(metadata)}</ul>
-    </ProjectContainer>
+    <BodyContent>
+      <BodyTitle>{ProjectText[language].TITLE}</BodyTitle>
+    </BodyContent>
   )
 }
 

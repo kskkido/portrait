@@ -1,17 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
 
-import { BodyContent } from '../../Shared/Styles'
+import { BodyContent, BodyTitle } from '../Shared/Styles'
+import HomeText from './content'
 
-const HomeText = require('../Styles')('Home')
-
-const Title = styled.h1`
-
-`
 
 const HomeView = ({ language }) => (
   <BodyContent>
-    <Title>{HomeText.Title[language]}</Title>
+    <BodyTitle>{HomeText[language].TITLE}</BodyTitle>
   </BodyContent>
 )
 

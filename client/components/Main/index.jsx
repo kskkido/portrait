@@ -1,28 +1,20 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 import store from '../../store'
 
 import Home from './Home'
 import Project from './Project'
 
-import { restartRotation, wheelRotation } from '../../reducers/events'
+import { wheelRotation } from '../../reducers/events'
 
 const theme = {
   bg: 'palevioletred',
   fg: '#fff'
 }
 
-const Content = styled.div`
-  flex: 2;
-  display: flex;
-  min-height: 93vh;
-  border: 2px solid;
-  justify-content: center;
-`
 
-// ====== utils ====== //
+/* ====== utils ====== */
 
 const _preventScroll = (event) => {
     event.preventDefault()
@@ -34,6 +26,8 @@ const _onWheelHandler = ({nativeEvent}) => {
   store.dispatch(wheelRotation(nativeEvent.wheelDelta))
 }
 
+/* ====== COMPONENTS ====== */
+
 const BodyRoutes = () => (
   <Switch>
     <Route exact path ="/" component={Home} />
@@ -44,9 +38,9 @@ const BodyRoutes = () => (
 const Main = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Content onWheel={_onWheelHandler}>
+      <div onWheel={_onWheelHandler}>
         <BodyRoutes  />
-      </Content>
+      </div>
     </ThemeProvider>
   )
 }

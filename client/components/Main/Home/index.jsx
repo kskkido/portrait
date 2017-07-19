@@ -1,35 +1,38 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 
 import HomeView from './HomeView'
-import Navigation from '../Navigation'
-import { BodyContainer } from '../../Shared/Styles'
+import Navigation from '../Shared/Navigation'
+import { MainContainer, BodyContainer } from '../Shared/Styles'
 
 const Home = ({language, navigationList}) => (
-  <BodyContainer>
+  <MainContainer>
     <Navigation
       navigationList={navigationList}
     />
-    <HomeView langauge={language}/>
-  </BodyContainer>
+    <BodyContainer>
+      <HomeView
+        language={language}
+      />
+    </BodyContainer>
+  </MainContainer>
 )
 
 class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      langauge: props.language,
-      navigationList: ['Home', 'Bio', 'Bio2'],
+      currentView: 'view_0',
+      navigationList: ['Home', 'Bio', 'Bio2', 'Bio3'],
     }
   }
 
   render() {
-    const { language, navigationList } = this.state
+    const { navigationList } = this.state
 
     return (
       <Home
-        language={language}
+        language={this.props.language}
         navigationList={navigationList}
       />
     )

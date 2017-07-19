@@ -18,16 +18,22 @@ const List = styled.ul`
     display: inline;
     margin-right: 30px
   };
-  & > a {
+  & a {
+    color: red;
     text-decoration: none;
   }
 `
 
+const LinkStyle = {
+  textDecoration: 'none',
+  color: 'black'
+}
+
 const Header = () => (
   <Container>
     <List>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/projects">Projects</Link></li>
+      <li><Link style={LinkStyle} to="/">Home</Link></li>
+      <li><Link style={LinkStyle} to="/projects">Projects</Link></li>
     </List>
   </Container>
 )

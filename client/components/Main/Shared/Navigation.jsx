@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { restartRotation } from '../../reducers/events'
+import { restartRotation } from '../../../reducers/events'
 
 const NavigationDiv = styled.div`
   position: absolute;
-  top: -200px;
+  top: -225px;
   height: 300px;
   width: 300px;
   border: 2px solid;
   border-radius: 50%;
+  z-index: 1;
 `
 
 export const NavigationText = styled.span`
@@ -19,15 +20,6 @@ export const NavigationText = styled.span`
   border: 1px solid;
   padding: 5px;
 `
-
-// export const InnerNavigationDiv = styled.div`
-//   position: absolute;
-//   height: 300px;
-//   width: 300px;
-//   text-align: center;
-//   border-radius: 50%;
-//   transform: rotate(${props => props.rotation}turn)
-// `
 
 export const InnerNavigationDiv = styled.div.attrs({
   style: props => ({
@@ -41,37 +33,6 @@ export const InnerNavigationDiv = styled.div.attrs({
   border-radius: 50%;
 `
 
-/* ====== utils ====== */
-
-const calculateRotation = (index, length, rotation) => {
-  return rotation - ((1 / length) * index + 1)
-}
-
-const _createNavigationDiv = (rotation) => (text, index, {length}) => {
-    return (
-      <InnerNavigationDiv
-        rotation={calculateRotation(index, length, rotation)}
-        key={text}
-      >
-        <NavigationText>{text}</NavigationText>
-      </InnerNavigationDiv>
-    )
-  }
-
-const _createNavigation = (navigationList, rotation) => {
-  return navigationList.map(_createNavigationDiv(rotation))
-}
-
-/* ====================== */
-
-const Navigation = ({ navigationList, rotation }) => {
-  return (
-    <NavigationDiv>
-      {_createNavigation(navigationList, rotation)}
-    </NavigationDiv>
-  )
-}
-
 class LocalContainer extends Component {
   constructor(props) {
     super(props)
@@ -80,17 +41,42 @@ class LocalContainer extends Component {
     }
   }
 
+  static calculateRotation (index, length, rotation) {
+    return rotation - ((1 / length) * index + 1)
+  }
+
   componentWillMount() {
     this.props.restartRotation()
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(this.navDivs)
+     this.navDivs = this.navDivs.splice()
+  }
+
+  _createNavigationDiv(rotation) {
+    return (text, index, {length}) => (
+      <InnerNavigationDiv
+        rotation={LocalContainer.calculateRotation(index, length, rotation)}
+        key={text}
+        title={`view_${index}`}
+        ref={div => this.navDivs = this.navDivs ? this.navDivs.concat(div) : [div]}
+      >
+        <NavigationText>{text}</NavigationText>
+      </InnerNavigationDiv>
+    )
+  }
+
+  _createNavigation(navigationList, rotation) {
+    return navigationList.map(this._createNavigationDiv(rotation))
+  }
+
   render() {
-    const { navigationList } = this.state
+    const navigationDivs = this._createNavigation(this.state.navigationList, this.props.rotation)
     return (
-      <Navigation
-        navigationList={navigationList}
-        rotation={this.props.rotation}
-      />
+      <NavigationDiv>
+        {navigationDivs}
+      </NavigationDiv>
     )
   }
 }

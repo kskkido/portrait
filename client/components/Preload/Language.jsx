@@ -24,8 +24,8 @@ const Button = styled.button`
 
 const LanguageQuery = ({ onLanguageSelect }) => (
   <LanguageCard>
-    <Button value="English" onClick={({target}) => onLanguageSelect(target.value)}>English</Button>
-    <Button value="Japanese" onClick={({target}) => onLanguageSelect(target.value)}>日本語</Button>
+    <Button value="ENGLISH" onClick={({target}) => onLanguageSelect(target.value)}>English</Button>
+    <Button value="JAPANESE" onClick={({target}) => onLanguageSelect(target.value)}>日本語</Button>
   </LanguageCard>
 )
 
