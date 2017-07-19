@@ -1,24 +1,62 @@
 import React from 'react'
-import { Router, Route, Switch, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import styled, { injectGlobal } from 'styled-components'
 
-import Home from './components/Home'
-import Header from './components/Header'
 import Footer from './components/Footer'
+import Header from './components/Header'
+import Main from './components/Main'
+import Preload from './components/Preload'
 
-export const App = () => (
-  <main>
-    <Header />
-    <Main />
-    <Footer />
-  </main>
+injectGlobal`
+  body {
+    background: #F1F4F3
+  }
+`
+
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+`
+
+// const MainRoutes = () => (
+//   <Switch>
+//     <Route exact path="/" component={Main} />
+//     <Route path="/:type" component={Main} />
+//   </Switch>
+// )
+
+const Loaded = () => (
+    <div>
+        <Header />
+        <Main />
+        <Footer />
+    </div>
 )
 
-const Main = ({ props }) => (
-  <Switch>
-    <Route path="/" component={Home} />
-    <Route />
-  </Switch>
+const App = ({selected}) => (
+  <BrowserRouter>
+    <Container>
+      {selected ?
+        <Loaded /> :
+        <Preload />
+      }
+    </Container>
+  </BrowserRouter>
 )
+
+const mapStateToProps = (state) => ({
+  selected: state.language.selected
+})
+
+export default connect(mapStateToProps)(App)
+
+// const MainRoutes = ({ props }) => (
+//   <Switch>
+//     <Route path="/" component={Home} />
+//     <Route />
+//   </Switch>
+// )
 
 // const Projects = () => (
 //   <Route />

@@ -1,19 +1,20 @@
 /* ====== DEFINE ACTION TYPES ====== */
-const AUTHENTICATE = 'AUTHENTICATE'
+const LANGUAGE_SELECT = 'LANGUAGE SELECT'
 
 /* ====== DEFINE ACTION CREATORS ====== */
-const authenticate = () => ({type: AUTHENTICATE})
+export const languageSelect = (language) => ({type: LANGUAGE_SELECT, language})
 
 /* ====== DEFINE INITIAL STATE ====== */
 const initialState = {
-  authenticated: false
+  language: '',
+  selected: false
 }
 
 /* ====== DEFINE REDUCER ====== */
 export default (state = initialState, action) => {
   switch (action.type) {
-  case AUTHENTICATE:
-    return Object.assign({}, state, {authenticated: true})
+  case LANGUAGE_SELECT:
+    return Object.assign({}, state, {language: action.language, selected: true})
 
   default:
     return state
