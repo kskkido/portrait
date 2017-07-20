@@ -5,7 +5,7 @@ import ProjectView from './ProjectView'
 import Navigation from '../Shared/Navigation'
 import { MainContainer, BodyContainer } from '../Shared/Styles'
 
-const Project = ({ language, navigationList }) => (
+const Project = ({ currentView, language, navigationList }) => (
   <MainContainer>
     <Navigation
       navigationList={navigationList}
@@ -13,6 +13,7 @@ const Project = ({ language, navigationList }) => (
     <BodyContainer>
       <ProjectView
         language={language}
+        currentView={currentView}
       />
     </BodyContainer>
   </MainContainer>
@@ -28,17 +29,21 @@ class LocalContainer extends Component {
   }
 
   render() {
+    const { navigationList } = this.state
+
     return (
       <Project
+        currentView={navigationList[this.props.viewIndex]}
         language={this.props.language}
-        navigationList={this.state.navigationList}
+        navigationList={navigationList}
       />
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  language: state.language.language
+  language: state.language.language,
+  viewIndex: state.events.viewIndex
 })
 
 export default connect(mapStateToProps)(LocalContainer)

@@ -11,12 +11,12 @@ import ProjectText from './content'
 //   Object.keys(metadata).map(createMetadataItem(metadata))
 // )
 
-const ProjectView = ({ language }) => {
+const ProjectView = ({ currentView, language }) => {
   // if (!currentProject) return null
   // const { code, media, metadata, name } = currentProject
   return (
     <BodyContent>
-      <BodyTitle>{ProjectText[language].TITLE}</BodyTitle>
+      <BodyTitle>{currentView}</BodyTitle>
     </BodyContent>
   )
 }
