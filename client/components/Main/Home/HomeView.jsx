@@ -4,9 +4,9 @@ import { BodyContent, BodyTitle } from '../Shared/Styles'
 import HomeText from './content'
 
 
-const HomeView = ({ language }) => (
+const HomeView = ({ currentView, language }) => (
   <BodyContent>
-    <BodyTitle>{HomeText[language].TITLE}</BodyTitle>
+    <BodyTitle>{currentView}</BodyTitle>
   </BodyContent>
 )
 

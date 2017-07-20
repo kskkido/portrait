@@ -5,14 +5,16 @@ import HomeView from './HomeView'
 import Navigation from '../Shared/Navigation'
 import { MainContainer, BodyContainer } from '../Shared/Styles'
 
-const Home = ({language, navigationList}) => (
+const Home = ({ _setCurrentView, currentView, language, navigationList }) => (
   <MainContainer>
     <Navigation
       navigationList={navigationList}
+      setCurrentView={_setCurrentView}
     />
     <BodyContainer>
       <HomeView
         language={language}
+        currentView={navigationList[currentView]}
       />
     </BodyContainer>
   </MainContainer>
@@ -22,18 +24,26 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentView: 'view_0',
+      currentView: 0,
       navigationList: ['Home', 'Bio', 'Bio2', 'Bio3'],
     }
+    this._setCurrentView = this._setCurrentView.bind(this)
+  }
+
+  _setCurrentView(index) {
+    console.log(index, 'SETTING VIEW')
+    if(index !== this.currentView) this.setState(Object.assign({}, ...this.state, {currentView: index}))
   }
 
   render() {
-    const { navigationList } = this.state
+    const { currentView, navigationList } = this.state
 
     return (
       <Home
-        language={this.props.language}
+        currentView={currentView}
         navigationList={navigationList}
+        language={this.props.language}
+        _setCurrentView={this._setCurrentView}
       />
     )
   }

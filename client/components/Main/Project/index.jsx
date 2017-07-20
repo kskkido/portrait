@@ -22,7 +22,7 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentView: 'view_0',
+      currentView: 0,
       navigationList: ['Index', 'Audiosphere', 'Stackquest', 'Portfolio']
     }
   }

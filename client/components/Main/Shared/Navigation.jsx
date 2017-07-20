@@ -46,12 +46,13 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
+    this.navDivs = []
     this.props.restartRotation()
   }
 
   componentWillReceiveProps(nextProps) {
     console.log(this.navDivs)
-     this.navDivs = this.navDivs.splice()
+    this.navDivs.map(({props}) => this.willSetView(props), this)
   }
 
   _createNavigationDiv(rotation) {
@@ -59,8 +60,8 @@ class LocalContainer extends Component {
       <InnerNavigationDiv
         rotation={LocalContainer.calculateRotation(index, length, rotation)}
         key={text}
-        title={`view_${index}`}
-        ref={div => this.navDivs = this.navDivs ? this.navDivs.concat(div) : [div]}
+        index={index}
+        ref={div => this.navDivs[index] = div}
       >
         <NavigationText>{text}</NavigationText>
       </InnerNavigationDiv>
@@ -69,6 +70,11 @@ class LocalContainer extends Component {
 
   _createNavigation(navigationList, rotation) {
     return navigationList.map(this._createNavigationDiv(rotation))
+  }
+
+  willSetView({rotation, index}) {
+    console.log('willset', rotation + 1)
+    if (rotation + 1 > -0.01 && rotation + 1 < 0.01) this.props.setCurrentView(index)
   }
 
   render() {
