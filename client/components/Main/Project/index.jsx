@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import ProjectView from './ProjectView'
+import ProjectView1 from './ProjectView1'
+import ProjectView2 from './ProjectView2'
+import ProjectView3 from './ProjectView3'
 import Navigation from '../Shared/Navigation'
 import { MainContainer, BodyContainer } from '../Shared/Styles'
 
@@ -11,7 +13,7 @@ const Project = ({ currentView, language, navigationList }) => (
       navigationList={navigationList}
     />
     <BodyContainer>
-      <ProjectView
+      <ProjectView1
         language={language}
         currentView={currentView}
       />
@@ -24,7 +26,7 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       currentView: 0,
-      navigationList: ['Index', 'Audiosphere', 'Stackquest', 'Portfolio']
+      navigationList: ['Audiosphere', 'Stackquest', 'Portfolio']
     }
   }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { restartRotation, viewChange, viewRestart } from '../../../reducers/events'
+import { rotationRestart, viewChange, viewRestart } from '../../../reducers/events'
 
 const NavigationDiv = styled.div`
   position: absolute;
@@ -47,12 +47,11 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.navDivs = []
-    this.props.restartRotation()
+    this.props.rotationRestart()
     this.props.viewRestart()
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.navDivs)
     this.navDivs.map(({props}) => this.willSetView(props), this)
   }
 
@@ -69,16 +68,13 @@ class LocalContainer extends Component {
     )
   }
 
-  _createNavigation(navigationList, rotation) {
-    return navigationList.map(this._createNavigationDiv(rotation))
-  }
-
   willSetView({rotation, index}) {
     if (rotation + 1 > -0.01 && rotation + 1 < 0.01 && this.props.viewIndex !== index) this.props.viewChange(index)
   }
 
   render() {
-    const navigationDivs = this._createNavigation(this.state.navigationList, this.props.rotation)
+    const navigationDivs = this.state.navigationList.map(this._createNavigationDiv(this.props.rotation))
+
     return (
       <NavigationDiv>
         {navigationDivs}
@@ -95,7 +91,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  restartRotation: () => dispatch(restartRotation()),
+  rotationRestart: () => dispatch(rotationRestart()),
   viewChange: (index) => dispatch(viewChange(index)),
   viewRestart: () => dispatch(viewRestart())
 })

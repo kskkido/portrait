@@ -94,3 +94,29 @@ export default connect(mapStateToProps)(App)
 
 */
 
+/* ====== DEFINE CONTENT ======
+  GENERAL LAYOUT:
+    Content:
+      Circular navigation at the top to navigate through components within current side nav option
+      Side nav to navigate to different categories below
+
+    Animation:
+      Transition animation for loading screen after language is selected
+
+  HOME:
+    Content:
+      Landing Component -> brief welcome, maybe instruction to scroll to activate circular nav
+      Bio 1 -> Brief explanation of my developer background and my base location
+        -> Pin my locations on a global map or animate my movement on a map
+      Bio 2 ->
+
+  PROJECT:
+
+  CONTACT:
+
+  PRELOAD:
+  +-- Language Query
+    Content: English or Japanese Button
+    Animation:
+*/
+

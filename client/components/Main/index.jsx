@@ -6,7 +6,7 @@ import store from '../../store'
 import Home from './Home'
 import Project from './Project'
 
-import { wheelRotation } from '../../reducers/events'
+import { rotationChange } from '../../reducers/events'
 
 const theme = {
   bg: 'palevioletred',
@@ -23,7 +23,7 @@ const _preventScroll = (event) => {
 
 const _onWheelHandler = ({nativeEvent}) => {
   _preventScroll(nativeEvent)
-  store.dispatch(wheelRotation(nativeEvent.wheelDelta))
+  store.dispatch(rotationChange(nativeEvent.wheelDelta))
 }
 
 /* ====== COMPONENTS ====== */

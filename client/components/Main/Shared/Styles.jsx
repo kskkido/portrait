@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const MainContainer = styled.div`
-  flex: 2;
   display: flex;
   min-height: 93vh;
   border: 4px solid;
@@ -10,13 +9,13 @@ export const MainContainer = styled.div`
 
 export const BodyContainer = styled.div`
   display: flex;
-  align-item: center;
+  flex: 1;
 `
 
 export const BodyContent = styled.div`
   border: 2px solid;
   display: flex;
-  flex-direction: row;
+  flex: 1;
   align-item: center;
   justify-content: center;
 `

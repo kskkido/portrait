@@ -1,12 +1,12 @@
 /* ====== DEFINE ACTION TYPES ====== */
-const WHEEL_ROTATION = 'WHEEL_ROTATION'
-const RESTART_ROTATION = 'RESTART ROTATION'
+const ROTATION_CHANGE = 'ROTATION CHANGE'
+const ROTATION_RESTART = 'ROTATION RESTART'
 const VIEW_CHANGE = 'VIEW CHANGE'
 const VIEW_RESTART = 'VIEW RESTART'
 
 /* ====== DEFINE ACTION CREATORS ====== */
-export const wheelRotation = (wheelDelta) => ({type: WHEEL_ROTATION, wheelDelta})
-export const restartRotation = () => ({type: RESTART_ROTATION})
+export const rotationChange = (wheelDelta) => ({type: ROTATION_CHANGE, wheelDelta})
+export const rotationRestart = () => ({type: ROTATION_RESTART})
 export const viewChange = (viewIndex) => ({type: VIEW_CHANGE, viewIndex})
 export const viewRestart = () => ({type: VIEW_RESTART})
 
@@ -19,10 +19,10 @@ const initialState = {
 /* ====== DEFINE REDUCER ====== */
 export default (state = initialState, action) => {
   switch (action.type) {
-  case WHEEL_ROTATION:
+  case ROTATION_CHANGE:
     return Object.assign({}, state, {rotation: (action.wheelDelta < 0 ? state.rotation + 0.005 : state.rotation - 0.005) % 1})
 
-  case RESTART_ROTATION:
+  case ROTATION_RESTART:
     return Object.assign({}, state, {rotation: 0})
 
   case VIEW_CHANGE:

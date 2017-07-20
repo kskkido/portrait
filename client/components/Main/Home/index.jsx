@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import HomeView from './HomeView'
+import HomeView1 from './HomeView1'
 import Navigation from '../Shared/Navigation'
 import { MainContainer, BodyContainer } from '../Shared/Styles'
 
@@ -11,7 +11,7 @@ const Home = ({ currentView, language, navigationList }) => (
       navigationList={navigationList}
     />
     <BodyContainer>
-      <HomeView
+      <HomeView1
         language={language}
         currentView={currentView}
       />
@@ -23,7 +23,7 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      navigationList: ['Home', 'Bio', 'Bio2', 'Bio3'],
+      navigationList: ['Home', 'Who', 'What', 'Where'],
     }
   }
 
