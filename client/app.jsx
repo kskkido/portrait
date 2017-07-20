@@ -3,20 +3,18 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import styled, { injectGlobal } from 'styled-components'
 
-import Footer from './components/Footer'
-import Header from './components/Header'
+import Sidenav from './components/Sidenav'
 import Main from './components/Main'
 import Preload from './components/Preload'
 
 injectGlobal`
   body {
-    background: #F1F4F3
+    background: #F8F9F9;
   }
 `
 
 const Container = styled.main`
   display: flex;
-  flex-direction: column;
 `
 
 // const MainRoutes = () => (
@@ -27,21 +25,20 @@ const Container = styled.main`
 // )
 
 const Loaded = () => (
-    <div>
-        <Header />
+    <Container>
+        <Sidenav />
         <Main />
-        <Footer />
-    </div>
+    </Container>
 )
 
 const App = ({selected}) => (
   <BrowserRouter>
-    <Container>
+    <div>
       {selected ?
         <Loaded /> :
         <Preload />
       }
-    </Container>
+    </div>
   </BrowserRouter>
 )
 
@@ -96,6 +93,9 @@ export default connect(mapStateToProps)(App)
 
 /* ====== DEFINE CONTENT ======
   GENERAL LAYOUT:
+    Color Theme:
+
+
     Content:
       Circular navigation at the top to navigate through components within current side nav option
       Side nav to navigate to different categories below

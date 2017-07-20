@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BodyContent, BodyTitle } from '../Shared/Styles'
+import { BodyContent, Flex1, Title } from '../Shared/Styles'
 import ProjectText from './content'
 
 // const createMetadataItem = (metadata) => (key) => (
@@ -16,7 +16,9 @@ const ProjectView = ({ currentView, language }) => {
   // const { code, media, metadata, name } = currentProject
   return (
     <BodyContent>
-      <BodyTitle>{currentView}</BodyTitle>
+      <Flex1>
+        <Title>{currentView}</Title>
+      </Flex1>
     </BodyContent>
   )
 }

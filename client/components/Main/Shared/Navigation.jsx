@@ -6,7 +6,7 @@ import { rotationRestart, viewChange, viewRestart } from '../../../reducers/even
 
 const NavigationDiv = styled.div`
   position: absolute;
-  top: -225px;
+  top: -240px;
   height: 300px;
   width: 300px;
   border: 2px solid;
@@ -15,8 +15,9 @@ const NavigationDiv = styled.div`
 `
 
 export const NavigationText = styled.span`
-  font-weight: bold;
-  line-height: 40em;
+  font-size: 1.5em;
+  font-weight: normal;
+  line-height: 27em;
   border: 1px solid;
   padding: 5px;
 `
@@ -34,6 +35,7 @@ export const InnerNavigationDiv = styled.div.attrs({
 `
 
 class LocalContainer extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
@@ -52,7 +54,8 @@ class LocalContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.navDivs.map(({props}) => this.willSetView(props), this)
+    // bottleneck
+    this.navDivs.forEach(({props}) => this.willSetView(props), this)
   }
 
   _createNavigationDiv(rotation) {

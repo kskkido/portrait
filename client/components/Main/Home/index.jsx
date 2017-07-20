@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import HomeView1 from './HomeView1'
-import Navigation from '../Shared/Navigation'
 import { MainContainer, BodyContainer } from '../Shared/Styles'
+import Navigation from '../Shared/Navigation'
+import HomeView1 from './HomeView1'
+import HomeView2 from './HomeView2'
+import HomeView3 from './HomeView3'
+import HomeView4 from './HomeView4'
+
 
 const Home = ({ currentView, language, navigationList }) => (
   <MainContainer>

@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
+import { Flex1 } from '../Main/Shared/Styles'
 import LanguageQuery from './Language'
 
-const preloadDiv = styled.div`
-  flex: 1;
-`
-
 const Preload = () => (
-  <preloadDiv>
+  <Flex1>
     <LanguageQuery />
-  </preloadDiv>
+  </Flex1>
 )
 
 export default Preload

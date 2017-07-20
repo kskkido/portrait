@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import store from '../../store'
+import styled from 'styled-components'
 
 import Home from './Home'
 import Project from './Project'
@@ -12,6 +13,10 @@ const theme = {
   bg: 'palevioletred',
   fg: '#fff'
 }
+
+const Container = styled.div`
+  flex: 6;
+`
 
 
 /* ====== utils ====== */
@@ -38,9 +43,9 @@ const BodyRoutes = () => (
 const Main = () => {
   return (
     <ThemeProvider theme={theme}>
-      <div onWheel={_onWheelHandler}>
+      <Container onWheel={_onWheelHandler}>
         <BodyRoutes  />
-      </div>
+      </Container>
     </ThemeProvider>
   )
 }
