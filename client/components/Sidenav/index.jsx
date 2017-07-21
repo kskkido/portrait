@@ -21,7 +21,11 @@ const List = styled.ul`
   border-collapse: collapse;
 `
 
-const ListRow = styled.li`
+const ListRow = styled.li.attrs({
+  style: props => ({
+    'background-color': `${props.active ? '#ddd' : 'none'}`
+  })
+})`
   border-bottom: 1px solid;
   display: table-row;
   & a {
@@ -49,7 +53,7 @@ const ListText = styled.h2`
 const Header = () => (
   <Container>
     <List>
-      <ListRow>
+      <ListRow >
         <Link to="/">
           <ListText>Keisuke Kido</ListText>
           <ListText>Fullstack Developer</ListText>
