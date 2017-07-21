@@ -23,6 +23,7 @@ export const NavigationText = styled.span`
   font-weight: normal;
   line-height: 27em;
   padding: 5px;
+  margin-right: 10px;
 `
 
 export const InnerNavigationDiv = styled.div.attrs({

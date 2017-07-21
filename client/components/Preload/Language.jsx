@@ -7,17 +7,76 @@ import { languageSelect } from '../../reducers/language'
 const LanguageCard = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid;
+  justify-content: space-around;
   margin: 20%;
 `
 
 const Button = styled.button`
-  padding: 10px;
+  font-size: 2em;
+  padding: 2em;
   margin: 50px;
-  border: 2px solid;
-  border-radius: 5px
+  border: 0;
+  background: none;
+  position: relative;
+  text-transform: uppercase;
+  &:hover {
+    cursor: pointer;
+  }
+  &::before,
+  &::after {
+    box-sizing: inherit;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+    transition: color 0.2s;
+
+  &::before,
+  &::after {
+    border: 2px solid transparent;
+    width: 0;
+    height: 0;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+  }
+
+  &:hover {
+    color: black;
+    opacity: 0.6;
+    transition: opacity 0.3s ease-out
+  }
+
+  &:hover::before,
+  &:hover::after {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover::before {
+    border-top-color: black;
+    border-right-color: black;
+    transition:
+      width 0.2s ease-out,
+      height 0.2s ease-out 0.2s;
+  }
+
+  &:hover::after {
+    border-bottom-color: black;
+    border-left-color: black;
+    transition:
+      border-color 0s ease-out 0.4s,
+      width 0.2s ease-out 0.4s,
+      height 0.2s ease-out 0.60s;
+  }
 `
 
 // add national flag to button

@@ -7,7 +7,6 @@ export const MainContainer = styled.div`
 `
 
 export const BodyContainer = styled.div`
-  flex: 5;
   display: flex;
   flex-direction: column;
   justify-content: flex-start
@@ -21,7 +20,6 @@ export const BodyContent = styled.div`
 
 export const Flex1 = styled.div`
   flex: 1;
-  border: 1px solid;
 `
 
 export const Flex2 = styled.div`
