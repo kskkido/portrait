@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { BodyContent, Flex1, Flex5, Title } from '../Shared/Styles'
+import { Line } from '../Shared/SVG'
 import HomeText from './content'
 
 
@@ -12,9 +13,9 @@ const HomeView = ({ currentView, language }) => (
       </Title>
     </Flex1>
     <Flex5>
-      <h4>
-        Welcome
-      </h4>
+      <p>
+        BODY TEXT
+      </p>
     </Flex5>
   </BodyContent>
 )

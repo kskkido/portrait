@@ -3,16 +3,17 @@ import styled from 'styled-components'
 export const MainContainer = styled.div`
   display: flex;
   min-height: 98vh;
-  justify-content: center;
+  flex-direction: column;
 `
 
 export const BodyContainer = styled.div`
+  flex: 5;
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start
 `
 
 export const BodyContent = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -20,7 +21,7 @@ export const BodyContent = styled.div`
 
 export const Flex1 = styled.div`
   flex: 1;
-
+  border: 1px solid;
 `
 
 export const Flex2 = styled.div`
@@ -44,6 +45,5 @@ export const Flex5 = styled.div`
 `
 
 export const Title = styled.h1`
-  line-height: 10em;
   font-weight: normal;
 `

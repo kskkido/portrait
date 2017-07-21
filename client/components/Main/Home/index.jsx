@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { MainContainer, BodyContainer } from '../Shared/Styles'
+import { MainContainer, BodyContainer, Flex1 } from '../Shared/Styles'
 import Navigation from '../Shared/Navigation'
 import HomeView1 from './HomeView1'
 import HomeView2 from './HomeView2'

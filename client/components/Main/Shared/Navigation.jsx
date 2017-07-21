@@ -5,8 +5,12 @@ import { connect } from 'react-redux'
 import { rotationRestart, viewChange, viewRestart } from '../../../reducers/events'
 
 const NavigationDiv = styled.div`
-  position: absolute;
-  top: -240px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: -250px;
   height: 300px;
   width: 300px;
   border: 2px solid;
@@ -18,13 +22,12 @@ export const NavigationText = styled.span`
   font-size: 1.5em;
   font-weight: normal;
   line-height: 27em;
-  border: 1px solid;
   padding: 5px;
 `
 
 export const InnerNavigationDiv = styled.div.attrs({
   style: props => ({
-    transform: `rotate(${props.rotation}turn)`
+    transform: `rotate(${props.rotation}turn)`,
   })
 })`
   position: absolute;
@@ -79,9 +82,11 @@ class LocalContainer extends Component {
     const navigationDivs = this.state.navigationList.map(this._createNavigationDiv(this.props.rotation))
 
     return (
-      <NavigationDiv>
-        {navigationDivs}
-      </NavigationDiv>
+      <div style={{maxHeight: '100px'}}>
+        <NavigationDiv>
+          {navigationDivs}
+        </NavigationDiv>
+      </div>
     )
   }
 }
