@@ -7,6 +7,9 @@ import HomeText from './content'
 const HomeView = ({ currentView, language }) => (
   <BodyContent>
     <BodyTitle>{currentView}</BodyTitle>
+    <p>
+      
+    </p>
   </BodyContent>
 )
 

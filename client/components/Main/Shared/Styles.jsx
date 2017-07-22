@@ -44,4 +44,10 @@ export const Flex5 = styled.div`
 
 export const Title = styled.h1`
   font-weight: normal;
+  text-transform: uppercase;
+`
+
+export const Title3 = styled.h3`
+  font-weight: normal;
+  text-transform: uppercase;
 `

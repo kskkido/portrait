@@ -11,7 +11,6 @@ const HomeView = ({ currentView, language }) => (
       <Title>
         {currentView}
       </Title>
-      <Line />
     </Flex1>
     <Flex5>
       <p>

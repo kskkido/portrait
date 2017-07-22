@@ -4,17 +4,29 @@ import styled from 'styled-components'
 
 import { languageSelect } from '../../reducers/language'
 
-const LanguageCard = styled.div`
+const Container = styled.div`
+  flex: 1;
+  align-self: center;
+  margin-bottom: 6em;
+`
+
+const ButtonContainer = styled.div`
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
-  margin: 20%;
+  max-width: 60%;
+  border: 1px solid;
 `
 
 const Button = styled.button`
-  font-size: 2em;
+  font-size: 1.5em;
   padding: 2em;
   margin: 50px;
+  height: 200px;
+  width: 300px;
+  color: grey;
+  opacity: 0.8;
   border: 0;
   background: none;
   position: relative;
@@ -30,7 +42,7 @@ const Button = styled.button`
     width: 100%;
     height: 100%;
   }
-    transition: color 0.2s;
+  transition: color 0.2s;
 
   &::before,
   &::after {
@@ -51,8 +63,8 @@ const Button = styled.button`
 
   &:hover {
     color: black;
-    opacity: 0.6;
-    transition: opacity 0.3s ease-out
+    opacity: 1;
+    transition: opacity 0.3s ease-out, color: 0.3s ease-out;
   }
 
   &:hover::before,
@@ -82,10 +94,12 @@ const Button = styled.button`
 // add national flag to button
 
 const LanguageQuery = ({ onLanguageSelect }) => (
-  <LanguageCard>
-    <Button value="ENGLISH" onClick={({target}) => onLanguageSelect(target.value)}>English</Button>
-    <Button value="JAPANESE" onClick={({target}) => onLanguageSelect(target.value)}>日本語</Button>
-  </LanguageCard>
+    <Container>
+      <ButtonContainer>
+        <Button value="ENGLISH" onClick={({target}) => onLanguageSelect(target.value)}>English</Button>
+        <Button value="JAPANESE" onClick={({target}) => onLanguageSelect(target.value)}>日本語</Button>
+      </ButtonContainer>
+    </Container>
 )
 
 const mapDispatchToProps = dispatch => ({

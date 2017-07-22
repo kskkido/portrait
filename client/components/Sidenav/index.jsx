@@ -6,14 +6,13 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   flex: 1.5;
-  border: 1px solid;
   display: flex;
   justify-content: center;
 `
 
 const List = styled.ul`
   list-style: none;
-  margin: 0;
+  margin-top: 55px;
   padding: 0;
   width: 85%;
   height: 60%;
@@ -24,7 +23,7 @@ const List = styled.ul`
 const ListRow = styled.li.attrs({
   style: props => ({
     'padding-left': `${props.active ? '3em' : '1em'}`,
-    'color': `${props.active ? 'grey' : 'black'}`
+    'color': `${props.active ? 'black' : 'grey'}`
   })
 })`
   border-bottom: 1px solid;
@@ -35,11 +34,12 @@ const ListRow = styled.li.attrs({
     text-decoration: none;
     color: inherit;
     padding-left: inherit;
-    transition: padding-left 0.2s;
+    height: 50px;
+    transition: padding-left 0.3s;
   }
   & a:hover {
     padding-left: 3em;
-    color: grey;
+    color: black;
     transition:
       padding-left 0.5s,
       color 0.6s;
@@ -50,13 +50,14 @@ const ListText = styled.h2`
   margin: 0;
   padding: 0;
   font-weight: normal;
-  font-size: 1.25em;
+  font-size: 1.2em;
   text-transform: uppercase;
+  white-space: nowrap;
 `
 
 const listData = {
   row1: {
-    text: ['Keisuke Kido', 'Fullstack Developer'],
+    text: ['Keisuke Kido', 'Developer'],
     path: '/'
   },
   row2: {

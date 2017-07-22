@@ -10,6 +10,7 @@ import Preload from './components/Preload'
 injectGlobal`
   body {
     background: #F8F9F9;
+    letter-spacing: 4px;
   }
 `
 
@@ -31,10 +32,10 @@ const Loaded = () => (
     </Container>
 )
 
-const App = ({selected}) => (
+const App = ({ loaded }) => (
   <BrowserRouter>
     <div>
-      {selected ?
+      {loaded ?
         <Loaded /> :
         <Preload />
       }
@@ -42,11 +43,7 @@ const App = ({selected}) => (
   </BrowserRouter>
 )
 
-const mapStateToProps = (state) => ({
-  selected: state.language.selected
-})
-
-export default connect(mapStateToProps)(App)
+export default connect(({events}) => ({loaded: events.loaded}))(App)
 
 // const MainRoutes = ({ props }) => (
 //   <Switch>

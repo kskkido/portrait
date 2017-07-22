@@ -19,11 +19,12 @@ const NavigationDiv = styled.div`
 `
 
 export const NavigationText = styled.span`
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: normal;
-  line-height: 27em;
+  line-height: 33em;
   padding: 5px;
   margin-right: 10px;
+  text-transform: uppercase;
 `
 
 export const InnerNavigationDiv = styled.div.attrs({
