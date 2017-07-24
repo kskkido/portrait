@@ -8,17 +8,28 @@ import HomeView2 from './HomeView2'
 import HomeView3 from './HomeView3'
 import HomeView4 from './HomeView4'
 
+const renderCurrentView = (currentView, language) => {
+  if (currentView === 'Home') {
+    return <HomeView1 language={language} />
+  } else if (currentView === 'Who') {
+    return <HomeView2 language={language} />
+  } else if (currentView === 'What') {
+    return <HomeView3 language={language} />
+  } else if (currentView === 'Where') {
+    return <HomeView4 language={language} />
+  }
+}
+
 
 const Home = ({ currentView, language, navigationList }) => (
   <MainContainer>
+    <div style={{maxHeight: '100px'}}>
     <Navigation
       navigationList={navigationList}
     />
+    </div>
     <BodyContainer>
-      <HomeView1
-        language={language}
-        currentView={currentView}
-      />
+      {renderCurrentView(currentView, language)}
     </BodyContainer>
   </MainContainer>
 )

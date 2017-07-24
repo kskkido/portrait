@@ -9,7 +9,7 @@ import { activeBlock } from '../Shared/Keyframes'
 const Container = styled.div`
   flex: 1.5;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 `
 
 // const ColorBlock = styled.div.attrs({
@@ -30,11 +30,12 @@ const List = styled.ul`
   height: 60%;
   display: table;
   border-collapse: collapse;
+  align-self: flex-end;
 `
 
 const ListRow = styled.li.attrs({
   style: props => ({
-    'padding-left': `${props.active ? '3em' : '1em'}`,
+    'paddingLeft': `${props.active ? '3em' : '1em'}`,
     'color': `${props.active ? 'black' : 'grey'}`
   })
 })`
@@ -58,11 +59,11 @@ const ListRow = styled.li.attrs({
   }
 `
 
-const ListText = styled.h2`
+const ListText = styled.h3`
   margin: 0;
   padding: 0;
   font-weight: normal;
-  font-size: 1.2em;
+  font-size: 0.95em;
   text-transform: uppercase;
   white-space: nowrap;
 `
@@ -70,7 +71,7 @@ const ListText = styled.h2`
 const listData = {
   row1: {
     text: ['Keisuke Kido', 'Developer'],
-    path: '/'
+    path: '/kido'
   },
   row2: {
     text: ['Home'],
@@ -112,7 +113,7 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeIndex: 0
+      activeIndex: 1
     }
   }
 

@@ -18,6 +18,12 @@ export const BodyContent = styled.div`
   text-align: center;
 `
 
+export const BodyText = styled.div`
+  margin-right: auto;
+  margin-left: auto;
+  width: 70%;
+`
+
 export const Flex1 = styled.div`
   flex: 1;
 `
@@ -45,9 +51,11 @@ export const Flex5 = styled.div`
 export const Title = styled.h1`
   font-weight: normal;
   text-transform: uppercase;
+  font-size: 1.4em;
 `
 
 export const Title3 = styled.h3`
   font-weight: normal;
   text-transform: uppercase;
+  font-size: 1.2em;
 `

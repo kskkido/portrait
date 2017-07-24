@@ -19,6 +19,10 @@ export const fadeOut = keyframes`
     opacity: 0;
   }
 
+  60% {
+    padding-left: 2000px;
+  }
+
   100% {
     opacity: 0;
   }

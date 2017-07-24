@@ -12,6 +12,7 @@ injectGlobal`
   body {
     background: #F8F9F9;
     letter-spacing: 4px;
+    font-size: .8em;
   }
 `
 

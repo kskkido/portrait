@@ -5,6 +5,7 @@ import store from '../../store'
 import styled from 'styled-components'
 
 import Home from './Home'
+import Kido from './Kido'
 import Project from './Project'
 
 import { rotationChange } from '../../reducers/events'
@@ -34,7 +35,8 @@ const _onWheelHandler = ({nativeEvent}) => {
 
 const BodyRoutes = () => (
   <Switch>
-    <Route exact path ="/" component={Home} />
+    <Route path="/kido" component={Kido} />
+    <Route exact path="/" component={Home} />
     <Route path="/projects" component={Project} />
   </Switch>
 )

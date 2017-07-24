@@ -7,17 +7,25 @@ import ProjectView1 from './ProjectView1'
 import ProjectView2 from './ProjectView2'
 import ProjectView3 from './ProjectView3'
 
+const renderCurrentView = (currentView, language) => {
+  if (currentView === 'Audiosphere') {
+    return <ProjectView1 language={language} />
+  } else if (currentView === 'StackQuest') {
+    return <ProjectView2 language={language} />
+  } else if (currentView === 'Portfolio') {
+    return <ProjectView3 language={language} />
+  }
+}
 
 const Project = ({ currentView, language, navigationList }) => (
   <MainContainer>
+    <div style={{maxHeight: '100px'}}>
     <Navigation
       navigationList={navigationList}
     />
+    </div>
     <BodyContainer>
-      <ProjectView1
-        language={language}
-        currentView={currentView}
-      />
+      {renderCurrentView(currentView, language)}
     </BodyContainer>
   </MainContainer>
 )
@@ -27,7 +35,7 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       currentView: 0,
-      navigationList: ['Audiosphere', 'Stackquest', 'Portfolio']
+      navigationList: ['Audiosphere', 'StackQuest', 'Portfolio']
     }
   }
 

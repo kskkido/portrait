@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { loadComplete } from '../../reducers/events'
 
 import { Flex1, Title3 } from '../Shared/Styles'
-import { circlify, fadeOut } from '../Shared/Keyframes'
+import { fadeOut } from '../Shared/Keyframes'
 
 const Container = styled.div.attrs({
   style: props => ({
@@ -29,13 +29,14 @@ const ProgressBar = styled.div.attrs({
     width: `${props.loadProgress}%`,
   })
 })`
-  height: 5px;
+  height: 2px;
   background-color: black;
 `
 
 const LoadingText = Title3.extend`
   margin-left: 30px;
   letter-spacing: 12px;
+  font-size: 11px;
 `
 
 const Load = ({loadProgress}) => (

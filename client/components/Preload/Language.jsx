@@ -16,14 +16,15 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   max-width: 60%;
+  font-size: 11px;
 `
 
 const Button = styled.button`
   font-size: 1.5em;
   padding: 2em;
   margin: 50px;
-  height: 200px;
-  width: 300px;
+  height: 150px;
+  width: 250px;
   color: grey;
   opacity: 0.8;
   border: 0;
@@ -52,12 +53,12 @@ const Button = styled.button`
 
   &::before {
     top: 0;
-    left: 0;
+    right: 0;
   }
 
   &::after {
     bottom: 0;
-    right: 0;
+    left: 0;
   }
 
   &:hover {
@@ -84,9 +85,8 @@ const Button = styled.button`
     border-bottom-color: black;
     border-left-color: black;
     transition:
-      border-color 0s ease-out 0.4s,
-      width 0.2s ease-out 0.4s,
-      height 0.2s ease-out 0.60s;
+      width 0.2s ease-out,
+      height 0.2s ease-out 0.2s;
   }
 `
 
