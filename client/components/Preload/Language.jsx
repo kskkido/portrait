@@ -16,7 +16,6 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   max-width: 60%;
-  border: 1px solid;
 `
 
 const Button = styled.button`
@@ -94,7 +93,7 @@ const Button = styled.button`
 // add national flag to button
 
 const LanguageQuery = ({ onLanguageSelect }) => (
-    <Container>
+    <Container key="language">
       <ButtonContainer>
         <Button value="ENGLISH" onClick={({target}) => onLanguageSelect(target.value)}>English</Button>
         <Button value="JAPANESE" onClick={({target}) => onLanguageSelect(target.value)}>日本語</Button>

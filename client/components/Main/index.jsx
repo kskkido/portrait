@@ -18,7 +18,6 @@ const Container = styled.div`
   flex: 6;
 `
 
-
 /* ====== utils ====== */
 
 const _preventScroll = (event) => {

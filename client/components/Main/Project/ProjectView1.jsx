@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BodyContent, Flex1, Title } from '../Shared/Styles'
+import { BodyContent, Flex1, Title } from '../../Shared/Styles'
 import ProjectText from './content'
 
 // const createMetadataItem = (metadata) => (key) => (

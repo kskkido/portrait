@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { BodyContent, Flex1, Flex5, Title } from '../Shared/Styles'
-import { Line } from '../Shared/SVG'
+import { BodyContent, Flex1, Flex5, Title } from '../../Shared/Styles'
 import HomeText from './content'
 
 

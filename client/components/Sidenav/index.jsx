@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { activeBlock } from '../Shared/Keyframes'
+
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
@@ -9,6 +11,16 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
 `
+
+// const ColorBlock = styled.div.attrs({
+//   style: props => ({
+//     width: props.active ? `100%` : `0%`,
+//     transition: props.active ? `width 0.3s ease-in` : 'null',
+//     backgroundColor: `${props.color}`
+//   })
+// })`
+//   height: 100%;
+// `
 
 const List = styled.ul`
   list-style: none;

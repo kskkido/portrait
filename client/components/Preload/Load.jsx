@@ -4,9 +4,14 @@ import styled from 'styled-components'
 
 import { loadComplete } from '../../reducers/events'
 
-import { Flex1, Title3 } from '../Main/Shared/Styles'
+import { Flex1, Title3 } from '../Shared/Styles'
+import { circlify, fadeOut } from '../Shared/Keyframes'
 
-const Container = styled.div`
+const Container = styled.div.attrs({
+  style: props => ({
+    animation: props.loadProgress === 100 ? `${fadeOut} 1s ease-in-out 0s` : `null`
+  })
+})`
   flex: 1;
   align-self: center;
   position: relative;
@@ -19,12 +24,12 @@ const LoadContainer = styled.div`
   float: right;
 `
 
-const LoadingBar = styled.div.attrs({
+const ProgressBar = styled.div.attrs({
   style: props => ({
-    width: `${props.loadProgress}%`
+    width: `${props.loadProgress}%`,
   })
 })`
-  border: 1px solid;
+  height: 5px;
   background-color: black;
 `
 
@@ -34,10 +39,10 @@ const LoadingText = Title3.extend`
 `
 
 const Load = ({loadProgress}) => (
-  <Container>
+  <Container key="load" loadProgress={loadProgress}>
     <LoadContainer>
       <LoadingText>Loading: {`${loadProgress}`}</LoadingText>
-      <LoadingBar loadProgress={loadProgress} />
+      <ProgressBar loadProgress={loadProgress} />
     </LoadContainer>
   </Container>
 )
@@ -50,14 +55,16 @@ class LocalContainer extends Component {
     }
   }
 
-  updateLoadingBar() {
+  updateProgressBar() {
     const loadProgress = this.state.loadProgress + Math.floor(Math.random() * 3)
     loadProgress > 100 ? this.props.loaded() : this.setState({loadProgress})
   }
 
   componentWillMount() {
     // cheat it
-    this.progressInterval = setInterval(this.updateLoadingBar.bind(this), 10)
+    setTimeout((self) => {
+      self.progressInterval = setInterval(self.updateProgressBar.bind(this), 10)
+    }, 250, this)
   }
 
   componentWillUnmount() {
@@ -74,7 +81,7 @@ class LocalContainer extends Component {
 }
 
 const mapStateToDispatch = (dispatch) => ({
-  loaded: () => dispatch(loadComplete())
+  loaded: () => setTimeout(dispatch, 650, loadComplete())
 })
 
 export default connect(null, mapStateToDispatch)(LocalContainer)

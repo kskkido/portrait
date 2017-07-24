@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import styled, { injectGlobal } from 'styled-components'
 
+import { fadeIn } from './components/Shared/Keyframes'
 import Sidenav from './components/Sidenav'
 import Main from './components/Main'
 import Preload from './components/Preload'
@@ -16,6 +17,7 @@ injectGlobal`
 
 const Container = styled.main`
   display: flex;
+  animation: ${fadeIn} 0.6s ease-in-out 0s;
 `
 
 // const MainRoutes = () => (

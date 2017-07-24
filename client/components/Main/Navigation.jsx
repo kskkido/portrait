@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
-import { rotationRestart, viewChange, viewRestart } from '../../../reducers/events'
+import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
 const NavigationDiv = styled.div`
   position: relative;

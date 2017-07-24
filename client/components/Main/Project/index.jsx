@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { MainContainer, BodyContainer } from '../Shared/Styles'
-import Navigation from '../Shared/Navigation'
+import { MainContainer, BodyContainer } from '../../Shared/Styles'
+import Navigation from '../Navigation'
 import ProjectView1 from './ProjectView1'
 import ProjectView2 from './ProjectView2'
 import ProjectView3 from './ProjectView3'

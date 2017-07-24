@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BodyContent, BodyTitle } from '../Shared/Styles'
+import { BodyContent, BodyTitle } from '../../Shared/Styles'
 import HomeText from './content'
 
 
