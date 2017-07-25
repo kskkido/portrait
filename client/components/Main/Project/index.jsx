@@ -3,19 +3,7 @@ import { connect } from 'react-redux'
 
 import { MainContainer, BodyContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
-import ProjectView1 from './ProjectView1'
-import ProjectView2 from './ProjectView2'
-import ProjectView3 from './ProjectView3'
-
-const renderCurrentView = (currentView, language) => {
-  if (currentView === 'Audiosphere') {
-    return <ProjectView1 language={language} />
-  } else if (currentView === 'StackQuest') {
-    return <ProjectView2 language={language} />
-  } else if (currentView === 'Portfolio') {
-    return <ProjectView3 language={language} />
-  }
-}
+import ProjectView from './ProjectView'
 
 const Project = ({ currentView, language, navigationList }) => (
   <MainContainer>
@@ -24,7 +12,7 @@ const Project = ({ currentView, language, navigationList }) => (
         navigationList={navigationList}
       />
     </div>
-    {renderCurrentView(currentView, language)}
+    <ProjectView currentView={currentView} />
   </MainContainer>
 )
 
@@ -32,8 +20,7 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentView: 0,
-      navigationList: ['Audiosphere', 'StackQuest', 'Portfolio']
+      navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO']
     }
   }
 

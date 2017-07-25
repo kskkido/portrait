@@ -3,20 +3,20 @@ import { connect } from 'react-redux'
 
 import { MainContainer, BodyContainer, Flex1 } from '../../Shared/Styles'
 import Navigation from '../Navigation'
-import HomeView1 from './HomeView1'
-import HomeView2 from './HomeView2'
-import HomeView3 from './HomeView3'
-import HomeView4 from './HomeView4'
+import AboutView1 from './AboutView1'
+import AboutView2 from './AboutView2'
+import AboutView3 from './AboutView3'
+import AboutView4 from './AboutView4'
 
 const renderCurrentView = (currentView, language) => {
-  if (currentView === 'Home') {
-    return <HomeView1 language={language} />
-  } else if (currentView === 'Who') {
-    return <HomeView2 language={language} />
+  if (currentView === 'Who') {
+    return <AboutView1 language={language} />
   } else if (currentView === 'What') {
-    return <HomeView3 language={language} />
+    return <AboutView2 language={language} />
   } else if (currentView === 'Where') {
-    return <HomeView4 language={language} />
+    return <AboutView3 language={language} />
+  } else if (currentView === 'Why') {
+    return <AboutView4 language={language} />
   }
 }
 
@@ -36,11 +36,8 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      navigationList: ['Home', 'Who', 'What', 'Where'],
+      navigationList: ['Who', 'What', 'Where', 'Why'],
     }
-  }
-
-  componentWillUnmount() {
   }
 
   render() {

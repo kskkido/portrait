@@ -60,6 +60,11 @@ class LocalContainer extends Component {
     this.props.viewRestart()
   }
 
+  componentWillUnmount() {
+    this.props.rotationRestart()
+    this.props.viewRestart()
+  }
+
   componentWillReceiveProps() {
     // bottleneck
     this.navDivs.forEach(({props}) => this.willSetView(props), this)

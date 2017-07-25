@@ -10,7 +10,6 @@ export const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  text-align: center;
 `
 
 export const BodyContent = styled.div`
@@ -21,8 +20,8 @@ export const BodyContent = styled.div`
 `
 
 export const BodyText = styled.div`
-  margin-right: auto;
   margin-left: auto;
+  margin-right: auto;
   width: 70%;
 `
 

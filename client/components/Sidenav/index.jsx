@@ -71,11 +71,11 @@ const ListText = styled.h3`
 const listData = {
   row1: {
     text: ['Keisuke Kido', 'Developer'],
-    path: '/kido'
+    path: '/'
   },
   row2: {
-    text: ['Home'],
-    path: '/'
+    text: ['About'],
+    path: '/about'
   },
   row3: {
     text: ['Projects'],
@@ -113,7 +113,7 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeIndex: 1
+      activeIndex: 0
     }
   }
 

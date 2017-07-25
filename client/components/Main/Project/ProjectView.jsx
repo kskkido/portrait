@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { BodyContainer, BodyContent, Flex1, BodyText, Title } from '../../Shared/Styles'
+import { BodyContainer, BodyContent, Flex1, Title } from '../../Shared/Styles'
 import ProjectText from './content'
 
 // const createMetadataItem = (metadata) => (key) => (
@@ -12,13 +12,6 @@ import ProjectText from './content'
 //   Object.keys(metadata).map(createMetadataItem(metadata))
 // )
 
-const TextContainer = styled.div`
-  flex 1;
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-`
-
 const Image = styled.div`
   width: 400px;
   height: 337px;
@@ -27,23 +20,40 @@ const Image = styled.div`
   background-size: contain;
 `
 
-const ProjectView = ({ language }) => {
-  // if (!currentProject) return null
-  // const { code, media, metadata, name } = currentProject
+const BodyText = styled.div`
+  flex 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  max-width: 400px;
+`
+
+const ProjectView = ({ currentView, language }) => {
+  const data = ProjectText[currentView]
+
   return (
   <BodyContainer>
     <Flex1>
       <Title>
-        Audiosphere
+        {`< ${data.title} >`}
       </Title>
     </Flex1>
     <BodyContent>
       <Image />
-      <TextContainer>
-      <p>
-        Your own space for your favorite music
-      </p>
-      </TextContainer>
+      <BodyText>
+        <h3>Technology</h3>
+        <p>
+          {data.technology}
+        </p>
+        <h3>When</h3>
+        <p>
+         {data.when}
+        </p>
+        <h3>Description</h3>
+        <p>
+          {data.description}
+        </p>
+      </BodyText>
     </BodyContent>
   </BodyContainer>
   )

@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import store from '../../store'
 import styled from 'styled-components'
 
-import Home from './Home'
+import About from './About'
 import Kido from './Kido'
 import Project from './Project'
 
@@ -35,8 +35,8 @@ const _onWheelHandler = ({nativeEvent}) => {
 
 const BodyRoutes = () => (
   <Switch>
-    <Route path="/kido" component={Kido} />
-    <Route exact path="/" component={Home} />
+    <Route exact path="/" component={Kido} />
+    <Route path="/about" component={About} />
     <Route path="/projects" component={Project} />
   </Switch>
 )

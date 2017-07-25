@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { BodyContent, Flex1, MainContainer } from '../../Shared/Styles'
+import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-`
-
 
 const Kido = ({ navigationList }) => (
   <MainContainer>
