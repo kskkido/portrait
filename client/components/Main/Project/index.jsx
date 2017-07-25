@@ -20,13 +20,11 @@ const renderCurrentView = (currentView, language) => {
 const Project = ({ currentView, language, navigationList }) => (
   <MainContainer>
     <div style={{maxHeight: '100px'}}>
-    <Navigation
-      navigationList={navigationList}
-    />
+      <Navigation
+        navigationList={navigationList}
+      />
     </div>
-    <BodyContainer>
-      {renderCurrentView(currentView, language)}
-    </BodyContainer>
+    {renderCurrentView(currentView, language)}
   </MainContainer>
 )
 

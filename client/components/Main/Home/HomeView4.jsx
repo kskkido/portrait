@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { BodyContent, BodyText, Flex1, Flex5, Title } from '../../Shared/Styles'
+import { BodyContainer, BodyText, Flex1, Flex5, Title } from '../../Shared/Styles'
 import HomeText from './content'
 
 
 const HomeView = ({ language }) => (
-  <BodyContent>
+  <BodyContainer>
     <Flex1>
       <Title>
         Where
@@ -20,7 +20,7 @@ Proin dignissim urna sed leo finibus cursus. Ut posuere neque quis lectus facili
       </p>
       </BodyText>
     </Flex5>
-  </BodyContent>
+  </BodyContainer>
 )
 
 export default HomeView

@@ -24,13 +24,11 @@ const renderCurrentView = (currentView, language) => {
 const Home = ({ currentView, language, navigationList }) => (
   <MainContainer>
     <div style={{maxHeight: '100px'}}>
-    <Navigation
-      navigationList={navigationList}
-    />
+      <Navigation
+        navigationList={navigationList}
+      />
     </div>
-    <BodyContainer>
-      {renderCurrentView(currentView, language)}
-    </BodyContainer>
+     {renderCurrentView(currentView, language)}
   </MainContainer>
 )
 
@@ -40,6 +38,9 @@ class LocalContainer extends Component {
     this.state = {
       navigationList: ['Home', 'Who', 'What', 'Where'],
     }
+  }
+
+  componentWillUnmount() {
   }
 
   render() {

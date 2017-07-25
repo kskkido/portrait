@@ -15,7 +15,7 @@ export const viewRestart = () => ({type: VIEW_RESTART})
 /* ====== DEFINE INITIAL STATE ====== */
 const initialState = {
   loaded: false,
-  rotation: 0,
+  rotation: -1,
   viewIndex: 0
 }
 

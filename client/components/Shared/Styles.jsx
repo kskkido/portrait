@@ -9,13 +9,15 @@ export const MainContainer = styled.div`
 export const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start
+  justify-content: flex-start;
+  text-align: center;
 `
 
 export const BodyContent = styled.div`
+  flex: 4;
   display: flex;
-  flex-direction: column;
-  text-align: center;
+  flex-direction: row;
+  justify-content: center;
 `
 
 export const BodyText = styled.div`
@@ -26,6 +28,7 @@ export const BodyText = styled.div`
 
 export const Flex1 = styled.div`
   flex: 1;
+  align-self: center;
 `
 
 export const Flex2 = styled.div`
@@ -52,6 +55,7 @@ export const Title = styled.h1`
   font-weight: normal;
   text-transform: uppercase;
   font-size: 1.4em;
+  min-height: 60px;
 `
 
 export const Title3 = styled.h3`

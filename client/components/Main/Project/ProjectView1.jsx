@@ -1,6 +1,7 @@
 import React from 'react'
+import styled from 'styled-components'
 
-import { BodyContent, Flex1, Flex5, Title } from '../../Shared/Styles'
+import { BodyContainer, BodyContent, Flex1, BodyText, Title } from '../../Shared/Styles'
 import ProjectText from './content'
 
 // const createMetadataItem = (metadata) => (key) => (
@@ -11,22 +12,40 @@ import ProjectText from './content'
 //   Object.keys(metadata).map(createMetadataItem(metadata))
 // )
 
+const TextContainer = styled.div`
+  flex 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+`
+
+const Image = styled.div`
+  width: 400px;
+  height: 337px;
+  background-image: url(mac-icon.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+`
+
 const ProjectView = ({ language }) => {
   // if (!currentProject) return null
   // const { code, media, metadata, name } = currentProject
   return (
-  <BodyContent>
+  <BodyContainer>
     <Flex1>
       <Title>
         Audiosphere
       </Title>
     </Flex1>
-    <Flex5>
+    <BodyContent>
+      <Image />
+      <TextContainer>
       <p>
         Your own space for your favorite music
       </p>
-    </Flex5>
-  </BodyContent>
+      </TextContainer>
+    </BodyContent>
+  </BodyContainer>
   )
 }
 

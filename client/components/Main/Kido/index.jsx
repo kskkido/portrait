@@ -24,8 +24,12 @@ class LocalContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      navigationList: ['Welcome', 'Bi', 'Ach']
+      navigationList: ['Welcome', 'To', 'My', 'Website']
     }
+  }
+
+  componentUnmount () {
+
   }
 
   render() {
