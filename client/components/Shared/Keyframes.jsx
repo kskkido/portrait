@@ -28,6 +28,16 @@ export const fadeOut = keyframes`
   }
 `
 
+export const fadeOutTop = keyframes`
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+`
+
 export const circlify = keyframes`
   height: 300px;
   width: 300px;

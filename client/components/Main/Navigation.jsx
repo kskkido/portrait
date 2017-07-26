@@ -6,7 +6,7 @@ import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
 const NavigationDiv = styled.div.attrs({
   style: props => ({
-    top: props.isCenter ? '18vh' : '-250px',
+    top: props.isCenter ? '18vh' : '-250px'
   })
 })`
   position: relative;
@@ -18,7 +18,7 @@ const NavigationDiv = styled.div.attrs({
   width: 300px;
   border: 2px solid;
   border-radius: 50%;
-  z-index: 1;
+  z-index: -1001;
 `
 
 export const NavigationText = styled.span`
@@ -89,7 +89,6 @@ class LocalContainer extends Component {
 
   render() {
     const navigationDivs = this.state.navigationList.map(this._createNavigationDiv(this.props.rotation))
-
     return (
       <NavigationDiv isCenter={this.state.isCenter}>
         {navigationDivs}

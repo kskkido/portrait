@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components'
+
 
 import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
@@ -17,17 +19,14 @@ class LocalContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      navigationList: ['Welcome', 'To', 'My', 'Website']
+      navigationList: ['Welcome', 'To', 'My', 'Website'],
     }
-  }
-
-  componentUnmount () {
-
   }
 
   render() {
     return (
       <Kido
+        inProp={this.state.in}
         navigationList={this.state.navigationList}
       />
     )

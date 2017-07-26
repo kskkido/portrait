@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { MainContainer, BodyContainer, Flex1 } from '../../Shared/Styles'
+import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 import AboutView1 from './AboutView1'
 import AboutView2 from './AboutView2'
@@ -37,7 +37,19 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       navigationList: ['Who', 'What', 'Where', 'Why'],
+      currentIndex: this.props.viewIndex,
+      direction: 'right'
     }
+  }
+
+  static getDirection(prevIndex, nextIndex) {
+    return prevIndex - nextIndex < 0 || nextIndex === 0 ? 'right' : 'left'
+  }
+
+  componentWillReceiveProps({viewIndex}) {
+    const direction = LocalContainer.getDirection(this.state.currentIndex, viewIndex)
+    console.log(direction)
+    this.setState(Object.assign({}, ...this.state, {currentIndex: viewIndex, direction}))
   }
 
   render() {
