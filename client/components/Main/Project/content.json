@@ -4,5 +4,23 @@
    },
    "ENGLISH": {
      "TITLE": "PROJECTS YO"
-   }
+   },
+  "AUDIOSPHERE": {
+    "title": "Audiosphere",
+    "technology": "HTML5/Javascript/Node/Spotify API",
+    "when": "April 2017",
+    "description": "Audiosphere is a music streaming web application that uses Spotify Web API and Three-JS to create a 3d planetary system with your Spotify playlists."
+  },
+    "STACKQUEST": {
+    "title": "StackQuest",
+    "technology": "HTML5/SocketIO/Javascript/Node",
+    "when": "April - May 2017",
+    "description": "StackQuest is an in-browser real-time multiplayer adventure game. The multiplayer aspect is powered by Socket IO and the game logic leverages Phaser JS."
+  },
+    "PORTFOLIO": {
+    "title": "Porfolio",
+    "technology": "HTML5/React/Redux/Node",
+    "when": "July 2017",
+    "description": "Meta"
+  }
 }

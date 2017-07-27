@@ -1,12 +1,14 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import { Router, Route, Switch } from 'react-router-dom'
+import { TransitionGroup } from 'react-transition-group'
+import styled, { ThemeProvider } from 'styled-components'
 import store from '../../store'
-import styled from 'styled-components'
 
-import Home from './Home'
+import About from './About'
+import Kido from './Kido'
 import Project from './Project'
 
+import { FadeTransition } from '../Shared/Transition'
 import { rotationChange } from '../../reducers/events'
 
 const theme = {
@@ -18,13 +20,12 @@ const Container = styled.div`
   flex: 6;
 `
 
-
 /* ====== utils ====== */
 
 const _preventScroll = (event) => {
-    event.preventDefault()
-    event.stopPropagation()
-  }
+  event.preventDefault()
+  event.stopPropagation()
+}
 
 const _onWheelHandler = ({nativeEvent}) => {
   _preventScroll(nativeEvent)
@@ -34,13 +35,22 @@ const _onWheelHandler = ({nativeEvent}) => {
 /* ====== COMPONENTS ====== */
 
 const BodyRoutes = () => (
-  <Switch>
-    <Route exact path ="/" component={Home} />
-    <Route path="/projects" component={Project} />
-  </Switch>
+  <Route render={({ location }) => (
+    <TransitionGroup>
+      <FadeTransition key={location.key}>
+        <Switch location={location}>
+          <Route exact path="/" component={Kido} />
+          <Route path="/about" component={About} />
+          <Route path="/projects" component={Project} />
+        </Switch>
+      </FadeTransition>
+    </TransitionGroup>
+  )}
+  />
 )
 
 const Main = () => {
+  console.log(TransitionGroup)
   return (
     <ThemeProvider theme={theme}>
       <Container onWheel={_onWheelHandler}>

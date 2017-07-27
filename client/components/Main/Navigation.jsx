@@ -1,30 +1,36 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
-import { rotationRestart, viewChange, viewRestart } from '../../../reducers/events'
+import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
-const NavigationDiv = styled.div`
-  position: absolute;
-  top: -240px;
+const NavigationDiv = styled.div.attrs({
+  style: props => ({
+    top: props.isCenter ? '18vh' : '-250px'
+  })
+})`
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   height: 300px;
   width: 300px;
   border: 2px solid;
   border-radius: 50%;
-  z-index: 1;
+  z-index: -1001;
 `
 
 export const NavigationText = styled.span`
-  font-size: 1.5em;
   font-weight: normal;
-  line-height: 27em;
-  border: 1px solid;
+  line-height: 50em;
   padding: 5px;
+  text-transform: uppercase;
 `
 
 export const InnerNavigationDiv = styled.div.attrs({
   style: props => ({
-    transform: `rotate(${props.rotation}turn)`
+    transform: `rotate(${props.rotation}turn)`,
   })
 })`
   position: absolute;
@@ -40,6 +46,7 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       navigationList: props.navigationList,
+      isCenter: props.isCenter || false
     }
   }
 
@@ -53,7 +60,12 @@ class LocalContainer extends Component {
     this.props.viewRestart()
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillUnmount() {
+    this.props.rotationRestart()
+    this.props.viewRestart()
+  }
+
+  componentWillReceiveProps() {
     // bottleneck
     this.navDivs.forEach(({props}) => this.willSetView(props), this)
   }
@@ -77,9 +89,8 @@ class LocalContainer extends Component {
 
   render() {
     const navigationDivs = this.state.navigationList.map(this._createNavigationDiv(this.props.rotation))
-
     return (
-      <NavigationDiv>
+      <NavigationDiv isCenter={this.state.isCenter}>
         {navigationDivs}
       </NavigationDiv>
     )

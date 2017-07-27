@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import styled, { injectGlobal } from 'styled-components'
 
+import { fadeIn } from './components/Shared/Keyframes'
 import Sidenav from './components/Sidenav'
 import Main from './components/Main'
 import Preload from './components/Preload'
@@ -10,11 +11,14 @@ import Preload from './components/Preload'
 injectGlobal`
   body {
     background: #F8F9F9;
+    letter-spacing: 4px;
+    font-size: .8em;
   }
 `
 
 const Container = styled.main`
   display: flex;
+  animation: ${fadeIn} 0.6s ease-in-out 0s;
 `
 
 // const MainRoutes = () => (
@@ -31,10 +35,10 @@ const Loaded = () => (
     </Container>
 )
 
-const App = ({selected}) => (
+const App = ({ loaded }) => (
   <BrowserRouter>
     <div>
-      {selected ?
+      {loaded ?
         <Loaded /> :
         <Preload />
       }
@@ -42,11 +46,7 @@ const App = ({selected}) => (
   </BrowserRouter>
 )
 
-const mapStateToProps = (state) => ({
-  selected: state.language.selected
-})
-
-export default connect(mapStateToProps)(App)
+export default connect(({events}) => ({loaded: events.loaded}))(App)
 
 // const MainRoutes = ({ props }) => (
 //   <Switch>

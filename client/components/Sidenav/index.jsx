@@ -2,77 +2,134 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { activeBlock } from '../Shared/Keyframes'
+
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
   flex: 1.5;
-  border: 1px solid;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 `
+
+// const ColorBlock = styled.div.attrs({
+//   style: props => ({
+//     width: props.active ? `100%` : `0%`,
+//     transition: props.active ? `width 0.3s ease-in` : 'null',
+//     backgroundColor: `${props.color}`
+//   })
+// })`
+//   height: 100%;
+// `
 
 const List = styled.ul`
   list-style: none;
-  margin: 0;
+  margin-top: 55px;
   padding: 0;
   width: 85%;
   height: 60%;
   display: table;
   border-collapse: collapse;
+  align-self: flex-end;
 `
 
-const ListRow = styled.li`
+const ListRow = styled.li.attrs({
+  style: props => ({
+    'paddingLeft': `${props.active ? '3em' : '1em'}`,
+    'color': `${props.active ? 'black' : 'grey'}`
+  })
+})`
   border-bottom: 1px solid;
   display: table-row;
   & a {
     display: table-cell;
     vertical-align: middle;
     text-decoration: none;
-    color: black;
-    padding-left: 1em;
+    color: inherit;
+    padding-left: inherit;
+    height: 50px;
     transition: padding-left 0.3s;
   }
   & a:hover {
     padding-left: 3em;
-    transition: padding-left 0.6s;
+    color: black;
+    transition:
+      padding-left 0.5s,
+      color 0.6s;
   }
 `
 
-const ListText = styled.h2`
+const ListText = styled.h3`
   margin: 0;
   padding: 0;
   font-weight: normal;
-  font-size: 1.25em;
+  font-size: 0.95em;
   text-transform: uppercase;
+  white-space: nowrap;
 `
 
-const Header = () => (
+const listData = {
+  row1: {
+    text: ['Keisuke Kido', 'Developer'],
+    path: '/'
+  },
+  row2: {
+    text: ['About'],
+    path: '/about'
+  },
+  row3: {
+    text: ['Projects'],
+    path: '/projects'
+  },
+  row4: {
+    text: ['Contact'],
+    path: '/'
+  }
+}
+
+const createListItem = ({text, path}, isActive, clickHandler) => {
+  return (
+    <ListRow key={text[0]} active={isActive}>
+      <Link to={path} onClick={clickHandler}>
+        {text.map(el => <ListText key={el}>{el}</ListText>)}
+      </Link>
+    </ListRow>
+  )
+}
+
+const createList = (data, activeIndex, clickHandler) => (
+  Object.keys(data).map((row, index) => createListItem(data[row], activeIndex === index, clickHandler(index)))
+)
+
+const SideNav = ({ activeIndex, handleClick }) => (
   <Container>
     <List>
-      <ListRow>
-        <Link to="/">
-          <ListText>Keisuke Kido</ListText>
-          <ListText>Fullstack Developer</ListText>
-        </Link>
-      </ListRow>
-      <ListRow>
-        <Link to="/">
-          <ListText>Home</ListText>
-        </Link>
-      </ListRow>
-      <ListRow>
-        <Link to="/projects">
-          <ListText>Projects</ListText>
-        </Link>
-      </ListRow>
-      <ListRow>
-        <Link to="/projects">
-          <ListText>Contact</ListText>
-        </Link>
-      </ListRow>
+      {createList(listData, activeIndex, handleClick)}
     </List>
   </Container>
 )
 
-export default Header
+class LocalContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      activeIndex: 0
+    }
+  }
+
+  _handleClick(index) {
+    return () => this.setState({activeIndex: index})
+  }
+
+  render() {
+    return (
+      <SideNav
+        activeIndex={this.state.activeIndex}
+        handleClick={this._handleClick.bind(this)}
+      />
+    )
+  }
+}
+
+export default LocalContainer
 
