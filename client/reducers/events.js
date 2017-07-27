@@ -26,6 +26,7 @@ export default (state = initialState, action) => {
     return Object.assign({}, state, {loaded: true})
 
   case ROTATION_CHANGE:
+    console.log(action.wheelDelta, 'WHEEL DELTA')
     return Object.assign({}, state, {rotation: (action.wheelDelta < 0 ? state.rotation + 0.005 : state.rotation - 0.005) % 1})
 
   case ROTATION_RESTART:

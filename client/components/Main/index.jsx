@@ -29,7 +29,7 @@ const _preventScroll = (event) => {
 
 const _onWheelHandler = ({nativeEvent}) => {
   _preventScroll(nativeEvent)
-  store.dispatch(rotationChange(nativeEvent.wheelDelta))
+  store.dispatch(rotationChange(nativeEvent.wheelDelta || nativeEvent.deltaY))
 }
 
 /* ====== COMPONENTS ====== */
