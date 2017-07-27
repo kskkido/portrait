@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import styled, { injectGlobal } from 'styled-components'
 
 import { fadeIn } from './components/Shared/Keyframes'
@@ -21,13 +21,6 @@ const Container = styled.main`
   animation: ${fadeIn} 0.6s ease-in-out 0s;
 `
 
-// const MainRoutes = () => (
-//   <Switch>
-//     <Route exact path="/" component={Main} />
-//     <Route path="/:type" component={Main} />
-//   </Switch>
-// )
-
 const Loaded = () => (
     <Container>
         <Sidenav />
@@ -47,17 +40,6 @@ const App = ({ loaded }) => (
 )
 
 export default connect(({events}) => ({loaded: events.loaded}))(App)
-
-// const MainRoutes = ({ props }) => (
-//   <Switch>
-//     <Route path="/" component={Home} />
-//     <Route />
-//   </Switch>
-// )
-
-// const Projects = () => (
-//   <Route />
-// )
 
 /* ==== DEFINE ROUTES ====
   PATH: /
