@@ -4,7 +4,7 @@
 
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transition: opacity 300ms ease-in;
+  transition: opacity 300ms linear;
 }
 
 .fade-exit {
@@ -13,5 +13,54 @@
 
 .fade-exit.fade-exit-active {
   opacity: 0;
-  transition: opacity 300ms ease-in;
+  transition: opacity 300ms linear;
+}
+
+.rt-enter {
+  opacity: 0;
+  margin-right: -12em;
+}
+
+.rt-enter.rt-enter-active {
+  opacity: 1;
+  margin-right: 0em;
+  transition: opacity 700ms linear, margin-right 500ms linear;
+}
+
+.rt-exit {
+  opacity: 1;
+}
+
+.rt-exit.rt-exit-active {
+  opacity: 0;
+  transition: opacity 300ms linear;
+}
+
+.lf-enter {
+  opacity: 0;
+  margin-left: -10em;
+}
+
+.lf-enter.lf-enter-active {
+  opacity: 1;
+  margin-left: 0;
+  transition: opacity 700ms linear, margin-left 500ms linear;
+}
+
+.lf-exit {
+  opacity: 1;
+}
+
+.lf-exit.lf-exit-active {
+  opacity: 0;
+  transition: opacity 300ms linear;
+}
+
+.up-exit {
+  top: 0px;
+}
+
+.up-exit.up-exit-active {
+  top: -250px;
+  transition: top 300ms linear;
 }

@@ -2,16 +2,20 @@ import React, { Component } from 'react'
 import { TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components'
 
-
+import { SlideTransition } from '../../Shared/Transition'
 import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 
 const Kido = ({ navigationList }) => (
   <MainContainer>
-    <Navigation
-      navigationList={navigationList}
-      isCenter={true}
-    />
+    <TransitionGroup>
+      <SlideTransition key="kido" enter={false} direction="up">
+        <Navigation
+          navigationList={navigationList}
+          isCenter={true}
+        />
+      </SlideTransition>
+    </TransitionGroup>
   </MainContainer>
 )
 

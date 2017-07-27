@@ -37,7 +37,7 @@ const _onWheelHandler = ({nativeEvent}) => {
 const BodyRoutes = () => (
   <Route render={({ location }) => (
     <TransitionGroup>
-      <FadeTransition key={location.key}>
+      <FadeTransition key={location.key} exit={false}>
         <Switch location={location}>
           <Route exact path="/" component={Kido} />
           <Route path="/about" component={About} />
