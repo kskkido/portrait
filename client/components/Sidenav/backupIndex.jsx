@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
 
 import { activeBlock } from '../Shared/Keyframes'
-import { Hide } from '../Shared/Transition'
+import { Show } from '../Shared/Transition'
 import SubList from './SubList'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
@@ -30,60 +30,70 @@ const List = styled.ul`
   margin-top: 100px;
   padding: 0;
   width: 85%;
-  height: 100%;
+  height: 40%;
+  display: table;
+  border-collapse: collapse;
   align-self: flex-end;
 `
 
 const ListRow = styled.li`
   border-bottom: 1px solid;
+  display: table-row;
+  height: 30px;
+  & a {
+    display: table-cell;
+    vertical-align: middle;
+    text-decoration: none;
+    color: inherit;
+    padding-left: inherit;
+  }
+  & a:hover ${props => props.active ? 'null' : `{
+    padding-left: 3em;
+    color: black;
+    transition:
+      padding-left 0.4s,
+      color 0.6s;
+  }`}
 `
 
 const ListRowContainer = styled.div`
   height: 100%;
   width: 100%;
-    & > a {
-    display: block;
-    height: 80px;
-    text-decoration: none;
-    color: ${props => props.active ? 'black' : 'grey'};
-    padding-left: ${props => props.active ? '3em' : '1em'};
-    transition: padding-left 0.3s;
-  }
-  & > a:hover ${props => props.active ? 'null' : `{
-    padding-left: 3em;
-    color: black;
-    transition:
-      padding-left 0.3s,
-      color 0.6s;
-  }`}
 `
 
-const ListText = styled.h3`
+const ListText = styled.h3.attrs({
+  style: props => props.active ?
+    {paddingLeft: '3em', color: 'black'} :
+    {paddingLeft: '1em', color: 'grey'}
+})`
+  margin: 0;
+  padding: 0;
   font-weight: normal;
   font-size: 0.95em;
   text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: padding-left 0.3s;
 `
 
 const listData = {
   row1: {
     text: ['Keisuke Kido', 'Developer'],
-    path: '/',
-    subTextList: []
+    path: '/'
   },
   row2: {
     text: ['About'],
     path: '/about',
-    subTextList: ['Who', 'What', 'Where', 'Why'],
+    subPath: ''
   },
   row3: {
     text: ['Projects'],
     path: '/projects',
-    subTextList: ['Audiosphere', 'StackQuest', 'Portfolio'],
+    subPath: ''
   },
   row4: {
     text: ['Contact'],
-    path: '/',
-    subTextList: [],
+    path: '/'
   }
 }
 
@@ -104,18 +114,22 @@ class LocalContainer extends Component {
     }
   }
 
-  createListItem ({text, path, subTextList}, index) {
+  createListItem ({text, path}, index) {
     const isActive = index === this.state.activeIndex
 
     return (
-      <ListRow key={text[0]}>
-        <ListRowContainer active={isActive}>
+      <ListRow key={text[0]} active={isActive}>
+        <ListRowContainer>
         <Link to={path} onClick={this.handleClick(index)}>
           {text.map(el => <ListText key={el} active={isActive}>{el}</ListText>)}
         </Link>
-          <div>
-            {isActive && subTextList.length > 0 && <SubList textList={subTextList} path={path} />}
-          </div>
+        <TransitionGroup>
+          <Show key={index}>
+            <div>
+              {isActive && (index === 1 || index === 2) && <SubList row={index} />}
+            </div>
+          </Show>
+        </TransitionGroup>
         </ListRowContainer>
       </ListRow>
     )

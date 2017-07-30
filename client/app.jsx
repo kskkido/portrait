@@ -10,7 +10,7 @@ import Preload from './components/Preload'
 
 injectGlobal`
   body {
-    background: #F8F9F9;
+    background: #FFFCFF;
     letter-spacing: 4px;
     font-size: .8em;
   }

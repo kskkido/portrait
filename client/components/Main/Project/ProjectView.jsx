@@ -18,6 +18,27 @@ const Image = styled.div`
   background-image: url(mac-icon.png);
   background-repeat: no-repeat;
   background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`
+
+const ImageLink = styled.a`
+  align-self: center;
+  margin-top: 20px;
+  width: 360px;
+  height: 202px;
+`
+
+const ProjectImage = styled.div.attrs({
+  style: props => ({
+    backgroundImage: `url(${props.imageSource})`
+  })
+})`
+  width: inherit;
+  height: inherit;
+  background-repeat: no-repeat;
+  background-size: contain;
 `
 
 const BodyText = styled.div`
@@ -30,7 +51,6 @@ const BodyText = styled.div`
 
 const ProjectView = ({ currentView, language }) => {
   const data = ProjectText[currentView]
-
   return (
   <BodyContainer>
     <Flex1>
@@ -39,7 +59,11 @@ const ProjectView = ({ currentView, language }) => {
       </Title>
     </Flex1>
     <BodyContent>
-      <Image />
+      <Image>
+        <ImageLink href={data.url} target="_blank">
+          <ProjectImage imageSource={data.imageSource} />
+        </ImageLink>
+      </Image>
       <BodyText>
         <h3>Technology</h3>
         <p>

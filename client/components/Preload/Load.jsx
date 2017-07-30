@@ -57,19 +57,20 @@ class LocalContainer extends Component {
   }
 
   updateProgressBar() {
-    const loadProgress = this.state.loadProgress + Math.floor(Math.random() * 3)
-    loadProgress > 100 ? this.props.loaded() : this.setState({loadProgress})
+    const loadProgress = this.state.loadProgress + Math.floor(Math.random() * 2)
+    loadProgress > 100 ? this.completeLoad() : this.setState({loadProgress})
+  }
+
+  completeLoad() {
+    this.props.loaded()
+    clearInterval(this.progressInterval)
   }
 
   componentWillMount() {
     // cheat it
     setTimeout((self) => {
-      self.progressInterval = setInterval(self.updateProgressBar.bind(this), 10)
+      self.progressInterval = setInterval(self.updateProgressBar.bind(this), 5)
     }, 250, this)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.progressInterval)
   }
 
   render() {

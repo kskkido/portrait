@@ -1,21 +1,17 @@
 import React, { Component } from 'react'
-import { TransitionGroup } from 'react-transition-group';
-import styled from 'styled-components'
+import { TransitionGroup } from 'react-transition-group'
 
-import { SlideTransition } from '../../Shared/Transition'
+import { SlideOut } from '../../Shared/Transition'
 import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 
-const Kido = ({ navigationList }) => (
+const Kido = ({ inputRef, navigationList }) => (
   <MainContainer>
-    <TransitionGroup>
-      <SlideTransition key="kido" enter={false} direction="up">
-        <Navigation
-          navigationList={navigationList}
-          isCenter={true}
-        />
-      </SlideTransition>
-    </TransitionGroup>
+      <Navigation
+        navigationList={navigationList}
+        isCenter={true}
+        getDom={(component) => inputRef(component)}
+      />
   </MainContainer>
 )
 
@@ -27,11 +23,16 @@ class LocalContainer extends Component {
     }
   }
 
+  componentWillUnmount() {
+    console.log(this.nav, 'wut')
+  }
+
   render() {
     return (
       <Kido
         inProp={this.state.in}
         navigationList={this.state.navigationList}
+        inputRef={ref => this.nav=ref}
       />
     )
   }

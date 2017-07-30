@@ -45,12 +45,14 @@ export const circlify = keyframes`
   border-radius: 50%;
 `
 
-export const activeBlock = keyframes`
+export const uncollapse = keyframes`
   0% {
-    width: 100%;
+    max-height 0px;
+    opacity: 0;
   }
 
   100% {
-    width: 100vh;
+    max-height 500px;
+    opacity: 1;
   }
 `
