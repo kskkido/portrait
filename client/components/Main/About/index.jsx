@@ -49,7 +49,7 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      navigationList: ['Who', 'What', 'Where', 'Why'],
+      navigationList: ['Who', 'What', 'Where', 'Why'], // shouldn't be in state, doesn't change
       currentIndex: 0,
       direction: 'left'
     }
@@ -59,8 +59,8 @@ class LocalContainer extends Component {
     return nextIndex > prevIndex ? 'right' : 'left'
   }
 
-  static calculateRotation (index, length, rotation) {
-    return (rotation - ((1 / length) * index + 1))
+  static setRotation (index, length) {
+    return (1 / length) * index + 1
   }
 
   componentDidMount() {
@@ -69,14 +69,14 @@ class LocalContainer extends Component {
     // const { params: { index }} = this.props.match
   }
 
-  componentWillUnmount() {
-    console.log('UNMOUNTING ABOUT')
-  }
-
-  componentWillReceiveProps({match: {params: { index = 0}}, viewIndex}) {
-    console.log(this.props.match.params.index, 'COMPONENT RECEIVE PROPS')
-    const nextIndex = this.props.match.params.index !== index ? viewIndex : index
-    console.log('CHANGING ABOUT VIEW', nextIndex)
+  componentWillReceiveProps({match: {params: { index }}, viewIndex}) {
+    let nextIndex
+    if (this.props.match.params.index !== index) { // bottleneck
+      nextIndex = index
+      this.props.rotationChange(LocalContainer.setRotation(nextIndex, this.state.navigationList.length))
+    } else {
+      nextIndex = viewIndex
+    }
     const direction = LocalContainer.getDirection(this.state.currentIndex, nextIndex)
     this.setState(Object.assign({}, ...this.state, {currentIndex: nextIndex, direction}))
   }
@@ -101,9 +101,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  rotationChange: (rotation) => dispatch(rotationChange(rotation)),
-  rotationRestart: () => dispatch(rotationRestart()),
-  viewRestart: () => dispatch(viewRestart())
+  rotationChange: (rotation) => dispatch(rotationChange(rotation))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)

@@ -7,6 +7,8 @@ import { MainContainer, BodyContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 import ProjectView from './ProjectView'
 
+import { rotationChange } from '../../../reducers/events'
+
 const Project = ({ currentIndex, direction, language, navigationList }) => {
   const currentView = navigationList[currentIndex]
 
@@ -43,8 +45,18 @@ class LocalContainer extends Component {
     return dif < 0 || (nextIndex === 0 && prevIndex !== 1) ? 'right' : 'left'
   }
 
-  componentWillReceiveProps({match: {params: { index = 0 }}, viewIndex}) {
-    const nextIndex = this.props.index === index ? viewIndex : index
+  static setRotation (index, length) {
+    return (1 / length) * index + 1
+  }
+
+  componentWillReceiveProps({match: {params: { index }}, viewIndex}) {
+    let nextIndex
+    if (this.props.match.params.index !== index) { // bottleneck
+      nextIndex = index
+      this.props.rotationChange(LocalContainer.setRotation(nextIndex, this.state.navigationList.length))
+    } else {
+      nextIndex = viewIndex
+    }
     const direction = LocalContainer.getDirection(this.state.currentIndex, nextIndex)
     this.setState(Object.assign({}, ...this.state, {currentIndex: nextIndex, direction}))
   }
@@ -68,4 +80,8 @@ const mapStateToProps = (state) => ({
   viewIndex: state.events.viewIndex
 })
 
-export default connect(mapStateToProps)(LocalContainer)
+const mapDispatchToProps = (dispatch) => ({
+  rotationChange: (rotation) => dispatch(rotationChange(rotation))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)

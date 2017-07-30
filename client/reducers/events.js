@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
     return Object.assign({}, state, {loaded: true})
 
   case ROTATION_CHANGE:
-    return Object.assign({}, state, {rotation: state.rotation + action.rotation})
+    return Object.assign({}, state, {rotation: action.rotation})
 
   case ROTATION_RESTART:
     return Object.assign({}, state, {rotation: 0})

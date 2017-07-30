@@ -23,7 +23,8 @@ const Container = styled.div`
 /* ====== utils ====== */
 
 const getRotation = (wheelDelta) => {
-  return wheelDelta < 0 ? 0.005 : -0.005
+  const currentRotation = store.getState().events.rotation
+  return wheelDelta < 0 ? currentRotation + 0.005 : currentRotation - 0.005
 }
 
 const _preventScroll = (event) => {
