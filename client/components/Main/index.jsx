@@ -12,7 +12,7 @@ import { Show } from '../Shared/Transition'
 import { rotationChange } from '../../reducers/events'
 
 const theme = {
-  bg: 'palevioletred',
+  bg: '#E1F4CB',
   fg: '#fff'
 }
 

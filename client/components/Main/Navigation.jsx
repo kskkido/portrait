@@ -19,7 +19,7 @@ const NavigationDiv = styled.div.attrs({
   width: 300px;
   border: 2px solid;
   border-radius: 50%;
-  z-index: -1001;
+  z-index: 1001;
 `
 
 const NavigationText = styled.span`

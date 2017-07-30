@@ -113,13 +113,9 @@ class LocalContainer extends Component {
         <Link to={path} onClick={this.handleClick(index)}>
           {text.map(el => <ListText key={el} active={isActive}>{el}</ListText>)}
         </Link>
-        <TransitionGroup>
-          <Hide key={index}>
-            <div>
-              {isActive && subTextList.length > 0 && <SubList textList={subTextList} path={path} />}
-            </div>
-          </Hide>
-        </TransitionGroup>
+          <div>
+            {isActive && subTextList.length > 0 && <SubList textList={subTextList} path={path} />}
+          </div>
         </ListRowContainer>
       </ListRow>
     )
