@@ -1,30 +1,77 @@
 import React from 'react'
-import { CSSTransition } from 'react-transition-group'
+import { Transition } from 'react-transition-group'
+import { TweenMax, Power2 } from 'gsap'
 
-const onEnterFadeAnimation = {
-  // define custom animations for different pathnames
-}
+const showAnimation = (duration) => (target) => (
+  TweenMax.from(target, duration, {
+    opacity: 0,
+    height: 0,
+    ease: Power2.easeInOut
+  })
+)
 
-export const FadeTransition = (props) => (
-  <CSSTransition
+export const Show = (props) => (
+  <Transition
     {...props}
-    classNames="fade"
-    timeout={{ enter: 500 }}
-    {...onEnterFadeAnimation[props.pathname]}
+    timeout={1000}
+    onEntering={showAnimation(props.duration || 0.5)}
   />
 )
 
-const slideDirection = {
-  right: {classNames: 'rt', timeout: 700},
-  left: {classNames: 'lf', timeout: 700},
-  up: {classNames: 'up', timeout: 2000}
-}
+const hideAnimation = (duration) => (target) => (
+  TweenMax.to(target, duration, {
+    opacity: 0,
+    height: 0,
+    ease: Power2.easeInOut
+  })
+)
 
-export const SlideTransition = (props) => (
-  <CSSTransition
+export const Hide = (props) => (
+  <Transition
     {...props}
-    classNames="right"
-    timeout={{ enter: 300 }}
-    {...slideDirection[props.direction]}
+    timeout={1000}
+    onExiting={hideAnimation(props.duration || 0.5)}
   />
 )
+
+const slideAnimationDirection = {
+  right: {opacity: 0, marginLeft: '10em', ease: Power2.easeOut},
+  left: {opacity: 0, marginRight: '10em', ease: Power2.easeOut},
+}
+
+const slideAnimation = (duration, direction) => (target) => (
+  TweenMax.from(target, duration, slideAnimationDirection[direction])
+)
+
+export const Slide = (props) => (
+  <Transition
+    {...props}
+    timeout={600}
+    onEntering={slideAnimation(props.duration || 0.6, props.direction || 'right')}
+  />
+)
+
+const slideOutAnimation = (duration) => (target) => {
+  return (
+    TweenMax.from(target, duration, {
+      marginTop: '-250px',
+      ease: Power2.easeOut
+    })
+  )
+}
+
+export const SlideOut = (props) => (
+  <Transition
+    {...props}
+    timeout={300}
+    onEntering={slideOutAnimation(props.duration || 0.3)}
+  />
+)
+
+export const slidePaddingLeft = (paddingLeft, color, target) => (
+  TweenMax.to(target, 0.3, {
+    paddingLeft,
+    color
+  })
+)
+

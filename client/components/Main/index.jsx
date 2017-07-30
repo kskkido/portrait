@@ -8,7 +8,7 @@ import About from './About'
 import Kido from './Kido'
 import Project from './Project'
 
-import { FadeTransition } from '../Shared/Transition'
+import { Show } from '../Shared/Transition'
 import { rotationChange } from '../../reducers/events'
 
 const theme = {
@@ -36,16 +36,15 @@ const _onWheelHandler = ({nativeEvent}) => {
 
 const BodyRoutes = () => (
   <Route render={({ location }) => {
-    console.log(location)
     return (
     <TransitionGroup>
-      <FadeTransition key={location.key} exit={false} pathname={location.pathname}>
+      <Show key={location.key} timeout={500} exit={false} pathname={location.pathname}>
         <Switch location={location}>
           <Route exact path="/" component={Kido} />
           <Route path="/about" component={About} />
           <Route path="/projects" component={Project} />
         </Switch>
-      </FadeTransition>
+      </Show>
     </TransitionGroup>
     )
   }}
@@ -53,10 +52,9 @@ const BodyRoutes = () => (
 )
 
 const Main = () => {
-  console.log(TransitionGroup)
   return (
     <ThemeProvider theme={theme}>
-      <Container onWheel={_onWheelHandler}>
+      <Container onWheel={_onWheelHandler} id="bodyContainer">
         <BodyRoutes  />
       </Container>
     </ThemeProvider>

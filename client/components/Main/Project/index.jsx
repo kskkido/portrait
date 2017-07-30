@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { TransitionGroup } from 'react-transition-group'
 
-import { SlideTransition } from '../../Shared/Transition'
+import { Slide } from '../../Shared/Transition'
 import { MainContainer, BodyContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 import ProjectView from './ProjectView'
@@ -15,9 +15,9 @@ const Project = ({ currentView, direction, language, navigationList }) => (
       />
     </div>
     <TransitionGroup>
-      <SlideTransition key={currentView} direction={direction} exit={false}>
+      <Slide key={currentView} direction={direction} exit={false}>
         <ProjectView currentView={currentView} language={language}/>
-      </SlideTransition>
+      </Slide>
     </TransitionGroup>
   </MainContainer>
 )

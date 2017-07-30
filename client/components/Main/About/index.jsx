@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { TransitionGroup } from 'react-transition-group'
 
-import { FadeTransition, SlideTransition } from '../../Shared/Transition'
+import { Slide } from '../../Shared/Transition'
 import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 import AboutView1 from './AboutView1'
@@ -31,9 +31,9 @@ const Home = ({ currentView, direction, language, navigationList }) => (
       />
     </div>
     <TransitionGroup>
-      <SlideTransition key={currentView} direction={direction} exit={false}>
+      <Slide key={currentView} direction={direction} exit={false}>
         {renderCurrentView(currentView, language)}
-      </SlideTransition>
+      </Slide>
     </TransitionGroup>
   </MainContainer>
 )
@@ -49,13 +49,11 @@ class LocalContainer extends Component {
   }
 
   static getDirection(prevIndex, nextIndex) {
-    const dif = prevIndex - nextIndex
-    return dif < 0 || (nextIndex === 0 && prevIndex !== 1) ? 'right' : 'left'
+    return nextIndex > prevIndex ? 'right' : 'left'
   }
 
   componentWillReceiveProps({viewIndex}) {
     const direction = LocalContainer.getDirection(this.state.currentIndex, viewIndex)
-    console.log(direction)
     this.setState(Object.assign({}, ...this.state, {currentIndex: viewIndex, direction}))
   }
 
