@@ -1,9 +1,11 @@
 import styled from 'styled-components'
+import { fadeIn } from './Keyframes'
 
 export const MainContainer = styled.div`
   display: flex;
   min-height: 98vh;
   flex-direction: column;
+  animation: ${fadeIn} 0.7s;
 `
 
 export const BodyContainer = styled.div`

@@ -65,7 +65,7 @@ class LocalContainer extends Component {
   createListItem (path) {
     return (text, index) => (
       <ListRow key={text} active={this.state.activeIndex === index}>
-        <Link to={{ pathname: path }} onClick={this.handleClick(index)}>
+        <Link to={`${path}/${index}`} onClick={this.handleClick(index)}>
           <ListText>{text}</ListText>
         </Link>
       </ListRow>

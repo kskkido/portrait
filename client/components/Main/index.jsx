@@ -22,6 +22,10 @@ const Container = styled.div`
 
 /* ====== utils ====== */
 
+const getRotation = (wheelDelta) => {
+  return wheelDelta < 0 ? 0.005 : -0.005
+}
+
 const _preventScroll = (event) => {
   event.preventDefault()
   event.stopPropagation()
@@ -29,23 +33,38 @@ const _preventScroll = (event) => {
 
 const _onWheelHandler = ({nativeEvent}) => {
   _preventScroll(nativeEvent)
-  store.dispatch(rotationChange(nativeEvent.wheelDelta || (-1 * nativeEvent.deltaY)))
+  store.dispatch(rotationChange(getRotation(nativeEvent.wheelDelta || (-1 * nativeEvent.deltaY))))
 }
 
 /* ====== COMPONENTS ====== */
 
+//WITH TRANSITION GROUP
+// const BodyRoutes = () => (
+//   <Route render={({ location }) => {
+//     return (
+//      <TransitionGroup>
+//       <Show key={location.key} timeout={500} exit={false} pathname={location.pathname}>
+//         <Switch location={location}>
+//           <Route path="/about/:index?" component={About} />
+//           <Route path="/projects/:index?" component={Project} />
+//           <Route exact path="/" component={Kido} />
+//         </Switch>
+//        </Show>
+//     </TransitionGroup>
+//     )
+//   }}
+//   />
+// )
+
+//WITHOUT TRANSITION
 const BodyRoutes = () => (
   <Route render={({ location }) => {
     return (
-    <TransitionGroup>
-      <Show key={location.key} timeout={500} exit={false} pathname={location.pathname}>
-        <Switch location={location}>
-          <Route exact path="/" component={Kido} />
-          <Route path="/about" component={About} />
-          <Route path="/projects" component={Project} />
-        </Switch>
-      </Show>
-    </TransitionGroup>
+      <Switch location={location}>
+        <Route path="/about/:index?" component={About} />
+        <Route path="/projects/:index?" component={Project} />
+        <Route exact path="/" component={Kido} />
+      </Switch>
     )
   }}
   />
