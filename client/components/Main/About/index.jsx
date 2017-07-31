@@ -10,7 +10,7 @@ import AboutView2 from './AboutView2'
 import AboutView3 from './AboutView3'
 import AboutView4 from './AboutView4'
 
-import { rotationChange, rotationRestart, viewRestart } from '../../../reducers/events'
+import { rotationChange } from '../../../reducers/events'
 
 const renderCurrentView = (currentView, language) => {
   if (currentView === 'Who') {
@@ -59,26 +59,14 @@ class LocalContainer extends Component {
     return nextIndex > prevIndex ? 'right' : 'left'
   }
 
-  static setRotation (index, length) {
-    return (1 / length) * index + 1
-  }
-
   componentDidMount() {
     // params doesnt hit here, but does with transition group
-    console.log(this.props.match.params.index, 'MOUNTED ABOUT')
     // const { params: { index }} = this.props.match
   }
 
-  componentWillReceiveProps({match: {params: { index }}, viewIndex}) {
-    let nextIndex
-    if (this.props.match.params.index !== index) { // bottleneck
-      nextIndex = index
-      this.props.rotationChange(LocalContainer.setRotation(nextIndex, this.state.navigationList.length))
-    } else {
-      nextIndex = viewIndex
-    }
-    const direction = LocalContainer.getDirection(this.state.currentIndex, nextIndex)
-    this.setState(Object.assign({}, ...this.state, {currentIndex: nextIndex, direction}))
+  componentWillReceiveProps({viewIndex}) {
+    const direction = LocalContainer.getDirection(this.state.currentIndex, viewIndex)
+    this.setState(Object.assign({}, ...this.state, {currentIndex: viewIndex, direction}))
   }
 
   render() {

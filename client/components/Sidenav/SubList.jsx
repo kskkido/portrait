@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { rotationChange, viewChange } from '../../reducers/events'
 import { uncollapse } from '../Shared/Keyframes'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
@@ -63,22 +65,32 @@ class LocalContainer extends Component {
   }
 
   createListItem (path) {
-    return (text, index) => (
-      <ListRow key={text} active={this.state.activeIndex === index}>
-        <Link to={`${path}/${index}`} onClick={this.handleClick(index)}>
-          <ListText>{text}</ListText>
-        </Link>
-      </ListRow>
-    )
+    return (text, index, { length }) => {
+      const isActive = this.props.viewIndex === index
+
+      return (
+        <ListRow key={text} active={isActive}>
+          <Link to={`${path}`} onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}>
+            <ListText>{text}</ListText>
+          </Link>
+        </ListRow>
+      )
+    }
+  }
+
+  static setRotation (index, length) {
+    return (1 / length) * index + 1
   }
 
   createList (textList, path) {
     return textList.map(this.createListItem(path))
   }
 
-  handleClick(index) {
-    if (index === this.state.activeIndex) return
-    return () => this.setState({activeIndex: index})
+  handleClick(index, length) {
+    return () => {
+      this.props.viewChange(index)
+      this.props.rotationChange(LocalContainer.setRotation(index, length))
+    }
   }
 
   render() {
@@ -92,5 +104,10 @@ class LocalContainer extends Component {
   }
 }
 
-export default LocalContainer
+const mapDispatchToProps = (dispatch) => ({
+  viewChange: (index) => dispatch(viewChange(index)),
+  rotationChange: (rotation) => dispatch(rotationChange(rotation))
+})
+
+export default connect(({events: { viewIndex }}) => ({viewIndex}), mapDispatchToProps)(LocalContainer)
 

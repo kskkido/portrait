@@ -62,8 +62,8 @@ const BodyRoutes = () => (
   <Route render={({ location }) => {
     return (
       <Switch location={location}>
-        <Route path="/about/:index?" component={About} />
-        <Route path="/projects/:index?" component={Project} />
+        <Route path="/about/" component={About} />
+        <Route path="/projects" component={Project} />
         <Route exact path="/" component={Kido} />
       </Switch>
     )

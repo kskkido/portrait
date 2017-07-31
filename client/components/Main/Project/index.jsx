@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { TransitionGroup } from 'react-transition-group'
 
 import { Slide } from '../../Shared/Transition'
-import { MainContainer, BodyContainer } from '../../Shared/Styles'
+import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 import ProjectView from './ProjectView'
 
@@ -49,16 +49,9 @@ class LocalContainer extends Component {
     return (1 / length) * index + 1
   }
 
-  componentWillReceiveProps({match: {params: { index }}, viewIndex}) {
-    let nextIndex
-    if (this.props.match.params.index !== index) { // bottleneck
-      nextIndex = index
-      this.props.rotationChange(LocalContainer.setRotation(nextIndex, this.state.navigationList.length))
-    } else {
-      nextIndex = viewIndex
-    }
-    const direction = LocalContainer.getDirection(this.state.currentIndex, nextIndex)
-    this.setState(Object.assign({}, ...this.state, {currentIndex: nextIndex, direction}))
+  componentWillReceiveProps({viewIndex}) {
+    const direction = LocalContainer.getDirection(this.state.currentIndex, viewIndex)
+    this.setState(Object.assign({}, ...this.state, {currentIndex: viewIndex, direction}))
   }
 
   render() {
