@@ -72,7 +72,7 @@ class LocalContainer extends Component {
   }
 
   static setRotation (index, length) {
-    return (1 / length) * index + 1
+    return (360 / length) * index
   }
 
   createList (textList, path) {

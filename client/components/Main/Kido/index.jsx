@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { TransitionGroup } from 'react-transition-group'
-
-import { SlideOut } from '../../Shared/Transition'
+import { TweenMax, Power2 } from 'gsap'
 import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 
@@ -12,8 +10,19 @@ const Kido = ({ inputRef, navigationList }) => (
         isCenter={true}
         getDom={(component) => inputRef(component)}
       />
+      <div></div>
   </MainContainer>
 )
+
+
+// const logProps = (target, props) => {
+//   const propsVal = target._gsTransform[props]
+// }
+
+const createAnimation = (target) => {
+  TweenMax.fromTo(target, 3, {rotationX: 90}, {rotationX: 0, rotation: 360, ease: Power2.easeInOut})
+}
+
 
 class LocalContainer extends Component {
   constructor (props) {
@@ -23,13 +32,14 @@ class LocalContainer extends Component {
     }
   }
 
-  componentWillUnmount() {
-    console.log('UNMOUNTING KIDO')
+  componentDidMount() {
+    this.tl = createAnimation(this.nav)
   }
 
   render() {
     return (
       <Kido
+        onClick={() => this.tl.reverse()}
         inProp={this.state.in}
         navigationList={this.state.navigationList}
         inputRef={ref => this.nav=ref}

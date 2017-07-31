@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import Draggable from 'gsap/Draggable'
+import { TweenMax, Power2 } from 'gsap'
 
 import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
@@ -42,14 +42,25 @@ const InnerNavigationDiv = styled.div.attrs({
 `
 
 class LocalContainer extends Component {
-
-  constructor(props) {
-    super(props)
+  static calculateRotation (index, length) {
+    // console.log((Math.abs(rotation) * 360 % 360) / 360, 'ITS THE ROTATION')
+    return -((1 / length) * index + 1)
   }
 
-  static calculateRotation (index, length, rotation) {
-    // console.log((Math.abs(rotation) * 360 % 360) / 360, 'ITS THE ROTATION')
-    return rotation - ((1 / length) * index + 1)
+  static createNavigationDiv(text, index, { length }) {
+    return (
+      <InnerNavigationDiv
+        rotation={LocalContainer.calculateRotation(index, length)}
+        key={text}
+        index={index}
+      >
+        <NavigationText>{text}</NavigationText>
+      </InnerNavigationDiv>
+    )
+  }
+
+  static round (rotation, length) {
+    return (rotation % 360 / (360 / length))
   }
 
   componentWillMount() {
@@ -61,37 +72,30 @@ class LocalContainer extends Component {
     this.props.viewRestart()
   }
 
-  componentWillReceiveProps({ currentIndex, rotation }) {
-    // bottleneck
-    this.navDivs.forEach(({props}) => this.willSetView(props), this)
+  componentWillReceiveProps({ rotation }) {
+    const { length } = this.props.navigationList
+    TweenMax.to(this.mainNav, 0.7, {rotation})
+    this.willSetView(LocalContainer.round(rotation, length))
   }
 
-  willSetView({rotation, index}) {
-    rotation = Math.abs(rotation) % 1
-    if (rotation > 0.99 || rotation < 0.01 && this.props.currentIndex !== index) {
-      this.props.viewChange(index)
+  willSetView(rounded) {
+    const ratio = rounded % 1
+    if (ratio === 0 && rounded !== this.props.currentIndex) {
+      this.props.viewChange(rounded)
     }
   }
 
-  _createNavigationDiv(rotation) {
-    return (text, index, {length}) => (
-      <InnerNavigationDiv
-        rotation={LocalContainer.calculateRotation(index, length, rotation)}
-        key={text}
-        index={index}
-        id="test"
-        ref={div => this.navDivs[index] = div}
-      >
-        <NavigationText>{text}</NavigationText>
-      </InnerNavigationDiv>
-    )
-  }
-
   render() {
-    const navigationDivs = this.props.navigationList.map(this._createNavigationDiv(this.props.rotation))
+    const navigationDivs = this.props.navigationList.map(LocalContainer.createNavigationDiv)
 
     return (
-      <NavigationDiv isCenter={this.props.isCenter}>
+      <NavigationDiv
+        isCenter={this.props.isCenter || false}
+        innerRef={(div) => {
+          this.mainNav = div
+          this.props.getDom && this.props.getDom(div)
+        }}
+      >
         {navigationDivs}
       </NavigationDiv>
     )

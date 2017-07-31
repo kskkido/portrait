@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { TransitionGroup } from 'react-transition-group'
+import Draggable from 'gsap/Draggable'
+import { TweenMax } from 'gsap'
 
 import { Slide } from '../../Shared/Transition'
 import { MainContainer } from '../../Shared/Styles'
@@ -10,7 +12,7 @@ import AboutView2 from './AboutView2'
 import AboutView3 from './AboutView3'
 import AboutView4 from './AboutView4'
 
-import { rotationChange } from '../../../reducers/events'
+import { rotationChange, viewChange } from '../../../reducers/events'
 
 const renderCurrentView = (currentView, language) => {
   if (currentView === 'Who') {
@@ -25,15 +27,16 @@ const renderCurrentView = (currentView, language) => {
 }
 
 
-const Home = ({ currentIndex, direction, language, navigationList }) => {
+const Home = ({ currentIndex, direction, inputMain, inputNav, language, navigationList }) => {
   const currentView = navigationList[currentIndex]
 
   return (
-    <MainContainer>
+    <MainContainer innerRef={inputMain}>
       <div style={{maxHeight: '100px'}}>
         <Navigation
           navigationList={navigationList}
           currentIndex={currentIndex}
+          getDom={inputNav}
         />
       </div>
       <TransitionGroup>
@@ -55,17 +58,37 @@ class LocalContainer extends Component {
     }
   }
 
-  static getDirection(prevIndex, nextIndex) {
-    return nextIndex > prevIndex ? 'right' : 'left'
+  static defineDirectionMethod(length) {
+    return (prevIndex, nextIndex) => {
+     return nextIndex > prevIndex || (nextIndex === 0 && prevIndex === length) ? 'right' : 'left'
+    }
+  }
+
+  static nearest(fn, ratio) {
+    return function () {
+      const { rotation, target } = this
+          , targetRotation = Math.round(rotation / ratio) * ratio
+      TweenMax.to(target, 0.3, {rotation: targetRotation, onComplete: fn, onCompleteParams: [targetRotation]})
+    }
   }
 
   componentDidMount() {
-    // params doesnt hit here, but does with transition group
-    // const { params: { index }} = this.props.match
+    const { length } = this.state.navigationList
+
+    this.getDirection = LocalContainer.defineDirectionMethod(length - 1)
+    this.getNearestRatio = LocalContainer.nearest(this.props.rotationChange, 360 / length)
+
+    // DEFINE DRAGGABLE
+    Draggable.create(this.nav, {
+      type: 'rotation',
+      trigger: this.mainDiv,
+      onDragEnd: this.getNearestRatio,
+    })
   }
 
+
   componentWillReceiveProps({viewIndex}) {
-    const direction = LocalContainer.getDirection(this.state.currentIndex, viewIndex)
+    const direction = this.getDirection(this.state.currentIndex, viewIndex)
     this.setState(Object.assign({}, ...this.state, {currentIndex: viewIndex, direction}))
   }
 
@@ -76,6 +99,8 @@ class LocalContainer extends Component {
       <Home
         currentIndex = {currentIndex}
         direction={this.state.direction}
+        inputMain={div => this.mainDiv = div}
+        inputNav={div => this.nav = div}
         language={this.props.language}
         navigationList={navigationList}
       />
@@ -89,7 +114,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  rotationChange: (rotation) => dispatch(rotationChange(rotation))
+  rotationChange: (rotation) => dispatch(rotationChange(rotation)),
+  viewChange: (index) => dispatch(viewChange(index))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)
