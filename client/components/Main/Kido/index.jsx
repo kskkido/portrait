@@ -24,7 +24,7 @@ class LocalContainer extends Component {
   }
 
   componentWillUnmount() {
-    console.log(this.nav, 'wut')
+    console.log('UNMOUNTING KIDO')
   }
 
   render() {

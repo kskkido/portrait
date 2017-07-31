@@ -3,31 +3,38 @@ import { connect } from 'react-redux'
 import { TransitionGroup } from 'react-transition-group'
 
 import { Slide } from '../../Shared/Transition'
-import { MainContainer, BodyContainer } from '../../Shared/Styles'
+import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 import ProjectView from './ProjectView'
 
-const Project = ({ currentView, direction, language, navigationList }) => (
-  <MainContainer>
-    <div style={{maxHeight: '100px'}}>
-      <Navigation
-        navigationList={navigationList}
-      />
-    </div>
-    <TransitionGroup>
-      <Slide key={currentView} direction={direction} exit={false}>
-        <ProjectView currentView={currentView} language={language}/>
-      </Slide>
-    </TransitionGroup>
-  </MainContainer>
-)
+import { rotationChange } from '../../../reducers/events'
+
+const Project = ({ currentIndex, direction, language, navigationList }) => {
+  const currentView = navigationList[currentIndex]
+
+  return (
+    <MainContainer>
+      <div style={{maxHeight: '100px'}}>
+        <Navigation
+          navigationList={navigationList}
+          currentIndex={currentIndex}
+        />
+      </div>
+      <TransitionGroup>
+        <Slide key={currentView} direction={direction} exit={false}>
+          <ProjectView currentView={currentView} language={language} />
+        </Slide>
+      </TransitionGroup>
+    </MainContainer>
+  )
+}
 
 class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
-      currentIndex: this.props.viewIndex,
+      currentIndex: 0,
       direction: 'right'
     }
   }
@@ -38,17 +45,21 @@ class LocalContainer extends Component {
     return dif < 0 || (nextIndex === 0 && prevIndex !== 1) ? 'right' : 'left'
   }
 
+  static setRotation (index, length) {
+    return (1 / length) * index + 1
+  }
+
   componentWillReceiveProps({viewIndex}) {
     const direction = LocalContainer.getDirection(this.state.currentIndex, viewIndex)
     this.setState(Object.assign({}, ...this.state, {currentIndex: viewIndex, direction}))
   }
 
   render() {
-    const { navigationList } = this.state
+    const { currentIndex, navigationList } = this.state
 
     return (
       <Project
-        currentView={navigationList[this.props.viewIndex]}
+        currentIndex = {currentIndex}
         direction={this.state.direction}
         language={this.props.language}
         navigationList={navigationList}
@@ -62,4 +73,8 @@ const mapStateToProps = (state) => ({
   viewIndex: state.events.viewIndex
 })
 
-export default connect(mapStateToProps)(LocalContainer)
+const mapDispatchToProps = (dispatch) => ({
+  rotationChange: (rotation) => dispatch(rotationChange(rotation))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)

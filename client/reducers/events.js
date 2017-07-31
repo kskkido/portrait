@@ -7,7 +7,7 @@ const VIEW_RESTART = 'VIEW RESTART'
 
 /* ====== DEFINE ACTION CREATORS ====== */
 export const loadComplete = () => ({type: LOAD_COMPLETE})
-export const rotationChange = (wheelDelta) => ({type: ROTATION_CHANGE, wheelDelta})
+export const rotationChange = (rotation) => ({type: ROTATION_CHANGE, rotation})
 export const rotationRestart = () => ({type: ROTATION_RESTART})
 export const viewChange = (viewIndex) => ({type: VIEW_CHANGE, viewIndex})
 export const viewRestart = () => ({type: VIEW_RESTART})
@@ -15,7 +15,7 @@ export const viewRestart = () => ({type: VIEW_RESTART})
 /* ====== DEFINE INITIAL STATE ====== */
 const initialState = {
   loaded: false,
-  rotation: -1,
+  rotation: 1,
   viewIndex: 0
 }
 
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
     return Object.assign({}, state, {loaded: true})
 
   case ROTATION_CHANGE:
-    return Object.assign({}, state, {rotation: (action.wheelDelta < 0 ? state.rotation + 0.005 : state.rotation - 0.005) % 1})
+    return Object.assign({}, state, {rotation: action.rotation})
 
   case ROTATION_RESTART:
     return Object.assign({}, state, {rotation: 0})

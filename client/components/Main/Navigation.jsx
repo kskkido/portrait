@@ -45,22 +45,15 @@ class LocalContainer extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      navigationList: props.navigationList,
-      isCenter: props.isCenter || false
-    }
   }
 
   static calculateRotation (index, length, rotation) {
-    // console.log(rotation * 360, 'ITS THE ROTATION')
+    // console.log((Math.abs(rotation) * 360 % 360) / 360, 'ITS THE ROTATION')
     return rotation - ((1 / length) * index + 1)
   }
 
   componentWillMount() {
     this.navDivs = []
-    this.props.rotationRestart()
-    this.props.viewRestart()
-    // this.props.getDom && this.props.getDom(this)
   }
 
   componentWillUnmount() {
@@ -68,14 +61,16 @@ class LocalContainer extends Component {
     this.props.viewRestart()
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps({ currentIndex, rotation }) {
     // bottleneck
     this.navDivs.forEach(({props}) => this.willSetView(props), this)
   }
 
   willSetView({rotation, index}) {
-    rotation = rotation % 1
-    if (rotation + 1 > -0.01 && rotation + 1 < 0.01 && this.props.viewIndex !== index) this.props.viewChange(index)
+    rotation = Math.abs(rotation) % 1
+    if (rotation > 0.99 || rotation < 0.01 && this.props.currentIndex !== index) {
+      this.props.viewChange(index)
+    }
   }
 
   _createNavigationDiv(rotation) {
@@ -93,9 +88,10 @@ class LocalContainer extends Component {
   }
 
   render() {
-    const navigationDivs = this.state.navigationList.map(this._createNavigationDiv(this.props.rotation))
+    const navigationDivs = this.props.navigationList.map(this._createNavigationDiv(this.props.rotation))
+
     return (
-      <NavigationDiv isCenter={this.state.isCenter}>
+      <NavigationDiv isCenter={this.props.isCenter}>
         {navigationDivs}
       </NavigationDiv>
     )
@@ -106,7 +102,6 @@ class LocalContainer extends Component {
 
 const mapStateToProps = (state) => ({
   rotation: state.events.rotation,
-  viewIndex: state.events.viewIndex
 })
 
 const mapDispatchToProps = (dispatch) => ({
