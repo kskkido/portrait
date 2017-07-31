@@ -57,13 +57,6 @@ const SideNav = ({ children }) => (
 
 
 class LocalContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      activeIndex: 0
-    }
-  }
-
   createListItem (path) {
     return (text, index, { length }) => {
       const isActive = this.props.viewIndex === index
