@@ -12,7 +12,7 @@ import AboutView2 from './AboutView2'
 import AboutView3 from './AboutView3'
 import AboutView4 from './AboutView4'
 
-import { rotationChange, viewChange } from '../../../reducers/events'
+import { rotationChange } from '../../../reducers/events'
 
 const renderCurrentView = (currentView, inputBody, language) => {
   if (currentView === 'Who') {
@@ -27,20 +27,20 @@ const renderCurrentView = (currentView, inputBody, language) => {
 }
 
 
-const Home = ({ currentIndex, direction, inputBody, inputMain, inputNav, language, navigationList }) => {
-  const currentView = navigationList[currentIndex]
+const About = ({ direction, inputBody, inputMain, inputNav, language, navigationList, targetOffset, viewIndex }) => {
+  const currentView = navigationList[viewIndex]
 
   return (
     <MainContainer innerRef={inputMain}>
       <div style={{maxHeight: '100px'}}>
         <Navigation
           navigationList={navigationList}
-          currentIndex={currentIndex}
+          currentIndex={viewIndex}
           getDom={inputNav}
         />
       </div>
       <TransitionGroup>
-        <Slide key={currentView} direction={direction} exit={false}>
+        <Slide key={viewIndex} targetOffset={targetOffset} exit={false}>
           <div ref={inputBody}>
             {renderCurrentView(currentView, inputBody, language)}
           </div>
@@ -55,7 +55,8 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       navigationList: ['Who', 'What', 'Where', 'When'], // shouldn't be in state, doesn't change
-      direction: 'left'
+      direction: 'left',
+      targetOffset: 20, //arbitrary
     }
   }
 
@@ -76,13 +77,16 @@ class LocalContainer extends Component {
   static slide(targetDOM, length, index) {
     const navSpace = 360 / length
         , ratio = (targetDOM.offsetWidth / 2) / navSpace
-        , findRotation = ((rat) => (rotation) => (rotation - navSpace * index) * rat)(ratio)
+        , findOffset = ((rat) => (rotation) => (rotation - navSpace * index) * rat)(ratio)
 
     return (rotation) => {
-      console.log(rotation - 90, 'HYPOTHETICAl')
+      const targetOffset = findOffset(rotation)
+
       TweenMax.to(targetDOM, 0.7, {
-        marginRight: `${findRotation(rotation)}px`
-      })
+        marginRight: `${targetOffset}px`
+      }) // separate this
+
+      return targetOffset
     }
   } // for gradual slide
 
@@ -102,9 +106,9 @@ class LocalContainer extends Component {
   }
 
   componentWillReceiveProps({ rotation }) {
-    this.slideBody(rotation)
+    const targetOffset = this.slideBody(rotation)
     const direction = LocalContainer.getDirection(this.props.rotation - rotation)
-    this.setState(Object.assign({}, ...this.state, {direction}))
+    this.setState(Object.assign({}, this.state, {direction, targetOffset}))
   }
 
   shouldComponentUpdate({ viewIndex }) {
@@ -117,16 +121,14 @@ class LocalContainer extends Component {
   }
 
   render() {
-    const { navigationList } = this.state
+
     return (
-      <Home
-        currentIndex = {this.props.viewIndex}
-        direction={this.state.direction}
+      <About
+        {...this.props}
+        {...this.state}
         inputBody={div => this.body = div}
         inputMain={div => this.mainDiv = div}
         inputNav={div => this.nav = div}
-        language={this.props.language}
-        navigationList={navigationList}
       />
     )
   }
@@ -140,7 +142,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   rotationChange: (rotation) => dispatch(rotationChange(rotation)),
-  viewChange: (index) => dispatch(viewChange(index))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)

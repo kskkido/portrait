@@ -2,32 +2,28 @@ import React, { Component } from 'react'
 import { TweenMax, Power2 } from 'gsap'
 import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
+import styled from 'styled-components'
 
-const Kido = ({ inputRef, navigationList }) => (
+const Kido = ({ inputRef, navigationList, onHover }) => (
   <MainContainer>
-      <Navigation
-        navigationList={navigationList}
-        isCenter={true}
-        getDom={(component) => inputRef(component)}
-      />
-      <div></div>
+    <Navigation
+      navigationList={navigationList}
+      isCenter={true}
+      getDom={(component) => inputRef(component)}
+      onMouseOver={onHover}
+    />
   </MainContainer>
 )
 
-
-// const logProps = (target, props) => {
-//   const propsVal = target._gsTransform[props]
-// }
-
 const createAnimation = (target) => {
-  TweenMax.fromTo(target, 3, {
+  TweenMax.from(target, 2, {
     rotationX: 90,
-    borderRadius: 0,
+    rotationY: 90,
   }, {
     rotationX: 0,
+    rotationY: 0,
     rotation: 360,
-    borderRadius: '50%',
-    ease: Power2.easeInOut
+    ease: Power2.easeIn
   })
 }
 
@@ -40,14 +36,18 @@ class LocalContainer extends Component {
     }
   }
 
+  handleOnHover(e) {
+    console.log(e)
+  }
+
   componentDidMount() {
-    this.tl = createAnimation(this.nav)
+    createAnimation(this.nav)
   }
 
   render() {
     return (
       <Kido
-        onClick={() => this.tl.reverse()}
+        onHover={this.handleOnHover.bind(this)}
         inProp={this.state.in}
         navigationList={this.state.navigationList}
         inputRef={ref => this.nav=ref}

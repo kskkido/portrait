@@ -78,13 +78,15 @@ class LocalContainer extends Component {
   componentDidMount() {
     LocalContainer.enterAnimation(this.mainDiv)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
-    this.hoverAnimations[this.props.viewIndex].play()
+
+    if (this.props.viewIndex === 0 ) { // a little hacky
+     this.hoverAnimations[this.props.viewIndex].play()
+    }
   }
 
   componentWillReceiveProps({viewIndex}) {
-    console.log(viewIndex, 'WILL RECEIVE')
+    this.hoverAnimations[this.props.viewIndex] && this.hoverAnimations[this.props.viewIndex].reverse()
     this.hoverAnimations[viewIndex].play()
-    this.hoverAnimations[this.props.viewIndex].reverse()
   }
 
   createListItem (path) {

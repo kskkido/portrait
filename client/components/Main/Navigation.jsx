@@ -19,7 +19,6 @@ const NavigationDiv = styled.div.attrs({
   width: 300px;
   border: 2px solid;
   border-radius: 50%;
-  z-index: 1001;
 `
 
 const NavigationText = styled.span`
@@ -63,27 +62,26 @@ class LocalContainer extends Component {
     return (rotation % 360 / (360 / length))
   }
 
-  componentWillMount() {
-    this.navDivs = []
-  }
-
-  componentWillUnmount() {
-    this.props.rotationRestart()
-    this.props.viewRestart()
-  }
-
-  componentWillReceiveProps({ rotation }) {
-    const { length } = this.props.navigationList
-    console.log(rotation, 'what')
-    TweenMax.to(this.mainNav, 0.7, {rotation})
-    this.willSetView(LocalContainer.round(rotation, length))
-  }
-
   willSetView(rounded) {
     const ratio = rounded % 1
     if (ratio === 0 && rounded !== this.props.currentIndex) {
       this.props.viewChange(rounded)
     }
+  }
+
+  componentWillMount() {
+    this.navDivs = []
+  }
+
+  componentWillReceiveProps({ rotation }) {
+    const { length } = this.props.navigationList
+    TweenMax.to(this.mainNav, 0.7, {rotation})
+    this.willSetView(LocalContainer.round(rotation, length))
+  }
+
+  componentWillUnmount() {
+    this.props.rotationRestart()
+    this.props.viewRestart()
   }
 
   render() {

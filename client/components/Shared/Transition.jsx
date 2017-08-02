@@ -34,22 +34,29 @@ import { TweenMax, Power2 } from 'gsap'
 //   />
 // )
 
-const slideAnimationDirection = {
-  right: {opacity: 0, marginLeft: '10em', ease: Power2.easeOut},
-  left: {opacity: 0, marginRight: '10em', ease: Power2.easeOut},
-}
+// don't need this right now
+// const slideAnimationDirection = {
+//   right: {opacity: 0, marginRight: '-200px', ease: Power2.easeOut},
+//   left: {opacity: 0, marginRight: '200px', ease: Power2.easeOut},
+// }
 
-const slideAnimation = (duration, direction) => (target) => (
-  TweenMax.from(target, duration, slideAnimationDirection[direction])
+const slideAnimation = (duration, offset) => (target) => (
+  TweenMax.from(target, duration, {
+    opacity: 0,
+    marginLeft: `${offset}px`,
+    ease: Power2.easeOut
+  })
 )
 
-export const Slide = (props) => {
-  console.log(props.direction, 'WITHIN SLIDE ANIMATION')
+export const Slide = (_props) => {
+  const props = Object.assign({}, _props)
+  delete props.targetOffset
+
   return (
     <Transition
       {...props}
       timeout={600}
-      onEntering={slideAnimation(props.duration || 0.6, props.direction)}
+      onEntering={slideAnimation(props.duration || 0.8, _props.targetOffset % 200)}
     />
   )
 }

@@ -10,20 +10,20 @@ import ProjectView from './ProjectView'
 
 import { rotationChange } from '../../../reducers/events'
 
-const Project = ({ currentIndex, direction, inputBody, inputMain, inputNav, language, navigationList }) => {
-  const currentView = navigationList[currentIndex]
+const Project = ({  direction, inputBody, inputMain, inputNav, language, navigationList, targetOffset, viewIndex }) => {
+  const currentView = navigationList[viewIndex]
 
   return (
     <MainContainer innerRef={inputMain}>
       <div style={{maxHeight: '100px'}}>
         <Navigation
           navigationList={navigationList}
-          currentIndex={currentIndex}
+          currentIndex={viewIndex}
           getDom={inputNav}
         />
       </div>
       <TransitionGroup>
-        <Slide key={currentView} direction={direction} exit={false}>
+        <Slide key={viewIndex} targetOffset={targetOffset} exit={false}>
           <div ref={inputBody}>
             <ProjectView currentView={currentView} language={language} />
           </div>
@@ -38,10 +38,10 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
-      direction: 'right'
+      direction: 'right',
+      targetOffset: 20,
     }
   }
-
 
   static getDirection(magnitude) {
     return magnitude > 0 ? 'left' : 'right'
@@ -60,12 +60,16 @@ class LocalContainer extends Component {
   static slide(targetDOM, length, index) {
     const navSpace = 360 / length
         , ratio = (targetDOM.offsetWidth / 2) / navSpace
-        , findRotation = ((rat) => (rotation) => (rotation - navSpace * index) * rat)(ratio)
+        , findOffset = ((rat) => (rotation) => (rotation - navSpace * index) * rat)(ratio)
 
     return (rotation) => {
+      const targetOffset = findOffset(rotation)
+
       TweenMax.to(targetDOM, 0.7, {
-        marginRight: `${findRotation(rotation)}px`
-      })
+        marginRight: `${targetOffset}px`
+      }) // separate this
+
+      return targetOffset
     }
   } // for gradual slide
 
@@ -85,9 +89,9 @@ class LocalContainer extends Component {
   }
 
   componentWillReceiveProps({ rotation }) {
-    this.slideBody(rotation)
+    const targetOffset = this.slideBody(rotation)
     const direction = LocalContainer.getDirection(this.props.rotation - rotation)
-    this.setState(Object.assign({}, ...this.state, {direction}))
+    this.setState(Object.assign({}, this.state, {direction, targetOffset}))
   }
 
   shouldComponentUpdate({ viewIndex }) {
@@ -100,17 +104,14 @@ class LocalContainer extends Component {
   }
 
   render() {
-    const { navigationList } = this.state
 
     return (
       <Project
-        currentIndex = {this.props.viewIndex}
-        direction={this.state.direction}
+        {...this.props}
+        {...this.state}
         inputBody={div => this.body = div}
         inputMain={div => this.mainDiv = div}
         inputNav={div => this.nav = div}
-        language={this.props.language}
-        navigationList={navigationList}
       />
     )
   }
@@ -123,7 +124,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  rotationChange: (rotation) => dispatch(rotationChange(rotation))
+  rotationChange: (rotation) => dispatch(rotationChange(rotation)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)

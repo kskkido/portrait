@@ -5,7 +5,7 @@ import HomeText from './content'
 
 
 const HomeView = ({ language }) => (
-  <BodyContainer >
+  <BodyContainer>
     <Flex1>
       <Title>
         {'< What >'}
