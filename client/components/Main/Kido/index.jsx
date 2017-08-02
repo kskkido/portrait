@@ -20,7 +20,15 @@ const Kido = ({ inputRef, navigationList }) => (
 // }
 
 const createAnimation = (target) => {
-  TweenMax.fromTo(target, 3, {rotationX: 90}, {rotationX: 0, rotation: 360, ease: Power2.easeInOut})
+  TweenMax.fromTo(target, 3, {
+    rotationX: 90,
+    borderRadius: 0,
+  }, {
+    rotationX: 0,
+    rotation: 360,
+    borderRadius: '50%',
+    ease: Power2.easeInOut
+  })
 }
 
 

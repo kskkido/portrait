@@ -25,7 +25,7 @@ const Button = styled.button`
   margin: 50px;
   height: 150px;
   width: 250px;
-  color: grey;
+  color: #D3D3D3;
   opacity: 0.8;
   border: 0;
   background: none;

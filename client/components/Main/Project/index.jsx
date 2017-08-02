@@ -10,7 +10,7 @@ import ProjectView from './ProjectView'
 
 import { rotationChange } from '../../../reducers/events'
 
-const Project = ({ currentIndex, direction, inputMain, inputNav, language, navigationList }) => {
+const Project = ({ currentIndex, direction, inputBody, inputMain, inputNav, language, navigationList }) => {
   const currentView = navigationList[currentIndex]
 
   return (
@@ -24,7 +24,9 @@ const Project = ({ currentIndex, direction, inputMain, inputNav, language, navig
       </div>
       <TransitionGroup>
         <Slide key={currentView} direction={direction} exit={false}>
-          <ProjectView currentView={currentView} language={language} />
+          <div ref={inputBody}>
+            <ProjectView currentView={currentView} language={language} />
+          </div>
         </Slide>
       </TransitionGroup>
     </MainContainer>
@@ -36,52 +38,75 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
-      currentIndex: 0,
       direction: 'right'
     }
   }
 
 
-  static defineDirectionMethod(length) {
-    return (prevIndex, nextIndex) => {
-     return nextIndex > prevIndex || (nextIndex === 0 && prevIndex === length) ? 'right' : 'left'
-    }
+  static getDirection(magnitude) {
+    return magnitude > 0 ? 'left' : 'right'
   }
 
   static nearest(fn, ratio) {
-    return function () {
-      const { rotation, target } = this
-          , targetRotation = Math.round(rotation / ratio) * ratio
-      TweenMax.to(target, 0.3, {rotation: targetRotation, onComplete: fn, onCompleteParams: [targetRotation]})
+    return function (getRatio) {
+      return function () {
+        const { rotation } = this
+            , targetRotation = getRatio ? Math.round(rotation / ratio) * ratio : rotation
+        fn(targetRotation)
+      }
     }
   }
+
+  static slide(targetDOM, length, index) {
+    const navSpace = 360 / length
+        , ratio = (targetDOM.offsetWidth / 2) / navSpace
+        , findRotation = ((rat) => (rotation) => (rotation - navSpace * index) * rat)(ratio)
+
+    return (rotation) => {
+      TweenMax.to(targetDOM, 0.7, {
+        marginRight: `${findRotation(rotation)}px`
+      })
+    }
+  } // for gradual slide
 
   componentDidMount() {
     const { length } = this.state.navigationList
 
-    this.getDirection = LocalContainer.defineDirectionMethod(length - 1)
-    this.getNearestRatio = LocalContainer.nearest(this.props.rotationChange, 360 / length)
+    this.slideBody = LocalContainer.slide(this.body, length, this.props.viewIndex)
+    this.getTargetRotation = LocalContainer.nearest(this.props.rotationChange, 360 / length)
 
     // DEFINE DRAGGABLE
     Draggable.create(this.nav, {
       type: 'rotation',
       trigger: this.mainDiv,
-      onDragEnd: this.getNearestRatio,
+      onDrag: this.getTargetRotation(false),
+      onDragEnd: this.getTargetRotation(true),
     })
   }
 
-  componentWillReceiveProps({viewIndex}) {
-    const direction = this.getDirection(this.state.currentIndex, viewIndex)
-    this.setState(Object.assign({}, ...this.state, {currentIndex: viewIndex, direction}))
+  componentWillReceiveProps({ rotation }) {
+    this.slideBody(rotation)
+    const direction = LocalContainer.getDirection(this.props.rotation - rotation)
+    this.setState(Object.assign({}, ...this.state, {direction}))
+  }
+
+  shouldComponentUpdate({ viewIndex }) {
+    return this.props.viewIndex !== viewIndex
+  }
+
+  componentDidUpdate() {
+    // reassign slideBody with new props index
+    this.slideBody = LocalContainer.slide(this.body, this.state.navigationList.length, this.props.viewIndex)
   }
 
   render() {
-    const { currentIndex, navigationList } = this.state
+    const { navigationList } = this.state
 
     return (
       <Project
-        currentIndex = {currentIndex}
+        currentIndex = {this.props.viewIndex}
         direction={this.state.direction}
+        inputBody={div => this.body = div}
         inputMain={div => this.mainDiv = div}
         inputNav={div => this.nav = div}
         language={this.props.language}
@@ -93,7 +118,8 @@ class LocalContainer extends Component {
 
 const mapStateToProps = (state) => ({
   language: state.language.language,
-  viewIndex: state.events.viewIndex
+  viewIndex: state.events.viewIndex,
+  rotation: state.events.rotation
 })
 
 const mapDispatchToProps = (dispatch) => ({

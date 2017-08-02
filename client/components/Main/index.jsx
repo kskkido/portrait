@@ -1,16 +1,13 @@
 import React from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
-import { TransitionGroup } from 'react-transition-group'
+import { Route, Switch } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
-import store from '../../store'
 
-import { TweenMax } from 'gsap'
+import store from '../../store'
 
 import About from './About'
 import Kido from './Kido'
 import Project from './Project'
 
-import { Show } from '../Shared/Transition'
 import { rotationChange } from '../../reducers/events'
 
 const theme = {
@@ -78,7 +75,7 @@ const _onWheelHandler = ({nativeEvent}) => {
 //   />
 // )
 
-//WITHOUT TRANSITION
+// WITHOUT TRANSITION
 const BodyRoutes = () => (
   <Route render={({ location }) => {
     return (

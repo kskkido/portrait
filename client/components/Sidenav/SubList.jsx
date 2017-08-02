@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-
+import { TimelineMax } from 'gsap'
 import { rotationChange, viewChange } from '../../reducers/events'
-import { uncollapse } from '../Shared/Keyframes'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
@@ -13,30 +12,21 @@ const Container = styled.div`
 `
 
 const List = styled.ul`
-  list-style: none;
   padding-right: 0;
   width: 100%;
   opacity: 0.8;
-  animation: ${uncollapse} 0.6s ease-in-out 0s;
 `
 
 const ListRow = styled.li`
-  border-top: 1px solid;
+  border-bottom: 2px solid;
+  padding-left: 1em;
+  color: #D3D3D3;
   & a {
     display: block;
     height: 30px;
     text-decoration: none;
-    color: ${props => props.active ? 'black' : 'grey'};
-    padding-left: ${props => props.active ? '3em' : '1em'};
-    transition: padding-left 0.3s;
+    color: inherit;
   }
-  & a:hover ${props => props.active ? 'null' : `{
-    padding-left: 3em;
-    color: black;
-    transition:
-      padding-left 0.3s,
-      color 0.6s;
-  }`}
 `
 
 const ListText = styled.h3`
@@ -47,9 +37,9 @@ const ListText = styled.h3`
   text-transform: uppercase;
 `
 
-const SideNav = ({ children }) => (
+const SideNav = ({ children, inputRef }) => (
   <Container>
-    <List>
+    <List innerRef={inputRef}>
       {children}
     </List>
   </Container>
@@ -57,12 +47,58 @@ const SideNav = ({ children }) => (
 
 
 class LocalContainer extends Component {
+  static setRotation (index, length) {
+    return (360 / length) * index
+  }
+
+  static createHoverAnimation(target) {
+    return new TimelineMax({paused: true})
+      .to(target, 0.3, {
+        paddingLeft: '3em',
+        color: 'black',
+      })
+  }
+
+  static enterAnimation(target) {
+    new TimelineMax()
+      .from(target, 0.2, {
+        height: '0px',
+      })
+      .from(target, 0.2, {
+        marginLeft: '-10px',
+        opacity: 0,
+      })
+  }
+
+  componentWillMount() {
+    this.listRows = []
+    // renders before viewIndex is resetted
+  }
+
+  componentDidMount() {
+    LocalContainer.enterAnimation(this.mainDiv)
+    this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
+    this.hoverAnimations[this.props.viewIndex].play()
+  }
+
+  componentWillReceiveProps({viewIndex}) {
+    console.log(viewIndex, 'WILL RECEIVE')
+    this.hoverAnimations[viewIndex].play()
+    this.hoverAnimations[this.props.viewIndex].reverse()
+  }
+
   createListItem (path) {
     return (text, index, { length }) => {
       const isActive = this.props.viewIndex === index
 
       return (
-        <ListRow key={text} active={isActive}>
+        <ListRow
+          key={text}
+          active={isActive}
+          onMouseOver={this.handleOnHover(index)}
+          onMouseOut={this.handleOnHoverOff(index)}
+          innerRef={div => this.listRows.push(div)}
+        >
           <Link to={`${path}`} onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}>
             <ListText>{text}</ListText>
           </Link>
@@ -71,9 +107,6 @@ class LocalContainer extends Component {
     }
   }
 
-  static setRotation (index, length) {
-    return (360 / length) * index
-  }
 
   createList (textList, path) {
     return textList.map(this.createListItem(path))
@@ -86,11 +119,23 @@ class LocalContainer extends Component {
     }
   }
 
+  handleOnHover(index) {
+    if (index === this.props.viewIndex) return
+    return () => {
+      return this.hoverAnimations[index].play()
+    }
+  }
+
+  handleOnHoverOff(index) {
+    if (index === this.props.viewIndex) return
+    return () => this.hoverAnimations[index].reverse()
+  }
+
   render() {
     const { textList, path } = this.props
 
     return (
-      <SideNav>
+      <SideNav inputRef={div => this.mainDiv = div}>
         {this.createList(textList, path)}
       </SideNav>
     )

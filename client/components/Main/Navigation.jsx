@@ -74,6 +74,7 @@ class LocalContainer extends Component {
 
   componentWillReceiveProps({ rotation }) {
     const { length } = this.props.navigationList
+    console.log(rotation, 'what')
     TweenMax.to(this.mainNav, 0.7, {rotation})
     this.willSetView(LocalContainer.round(rotation, length))
   }
