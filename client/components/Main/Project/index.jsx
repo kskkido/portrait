@@ -57,13 +57,13 @@ class LocalContainer extends Component {
     }
   }
 
-  static slide(targetDOM, length, index) {
-    const navSpace = 360 / length
-        , ratio = (targetDOM.offsetWidth / 2) / navSpace
-        , findOffset = ((rat) => (rotation) => (rotation - navSpace * index) * rat)(ratio)
+  static slide(targetDOM, length) {
+    const ratio = (targetDOM.offsetWidth / 2) / (360 / length) // get the half of targetdom
+        , getOffset = ((rat) => (rotation) => (rotation * rat))(ratio)
+    let prevRotation = 0
 
-    return (rotation) => {
-      const targetOffset = findOffset(rotation)
+    return (magnitude) => {
+      const targetOffset = getOffset(prevRotation -= magnitude)
 
       TweenMax.to(targetDOM, 0.7, {
         marginRight: `${targetOffset}px`
@@ -76,7 +76,7 @@ class LocalContainer extends Component {
   componentDidMount() {
     const { length } = this.state.navigationList
 
-    this.slideBody = LocalContainer.slide(this.body, length, this.props.viewIndex)
+    this.slideBody = LocalContainer.slide(this.body, length)
     this.getTargetRotation = LocalContainer.nearest(this.props.rotationChange, 360 / length)
 
     // DEFINE DRAGGABLE
@@ -89,8 +89,9 @@ class LocalContainer extends Component {
   }
 
   componentWillReceiveProps({ rotation }) {
-    const targetOffset = this.slideBody(rotation)
-    const direction = LocalContainer.getDirection(this.props.rotation - rotation)
+    const magnitude = this.props.rotation - rotation
+        , targetOffset = this.slideBody(magnitude) // get magnitude
+        , direction = LocalContainer.getDirection(magnitude)
     this.setState(Object.assign({}, this.state, {direction, targetOffset}))
   }
 

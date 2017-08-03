@@ -4,13 +4,12 @@ import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 import styled from 'styled-components'
 
-const Kido = ({ inputRef, navigationList, onHover }) => (
+const Kido = ({ inputRef, navigationList }) => (
   <MainContainer>
     <Navigation
       navigationList={navigationList}
       isCenter={true}
       getDom={(component) => inputRef(component)}
-      onMouseOver={onHover}
     />
   </MainContainer>
 )
@@ -36,10 +35,6 @@ class LocalContainer extends Component {
     }
   }
 
-  handleOnHover(e) {
-    console.log(e)
-  }
-
   componentDidMount() {
     createAnimation(this.nav)
   }
@@ -47,7 +42,6 @@ class LocalContainer extends Component {
   render() {
     return (
       <Kido
-        onHover={this.handleOnHover.bind(this)}
         inProp={this.state.in}
         navigationList={this.state.navigationList}
         inputRef={ref => this.nav=ref}

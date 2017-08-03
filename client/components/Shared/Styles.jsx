@@ -42,6 +42,7 @@ export const BodyContainer = styled.div`
 `
 
 export const BodyContent = styled.div`
+  margin-top: 10px;
   flex: 4;
   display: flex;
   flex-direction: row;

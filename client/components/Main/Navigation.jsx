@@ -59,7 +59,8 @@ class LocalContainer extends Component {
   }
 
   static round (rotation, length) {
-    return (rotation % 360 / (360 / length))
+    const rounded = (rotation % 360 / (360 / length))
+    return rounded < 0 ? length + rounded : rounded
   }
 
   willSetView(rounded) {

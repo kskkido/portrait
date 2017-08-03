@@ -12,6 +12,7 @@ const Container = styled.div`
 `
 
 const List = styled.ul`
+  list-style: disc;
   padding-right: 0;
   width: 100%;
   opacity: 0.8;
