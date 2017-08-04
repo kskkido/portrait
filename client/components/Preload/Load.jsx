@@ -4,8 +4,7 @@ import styled from 'styled-components'
 
 import { loadComplete } from '../../reducers/events'
 
-import { Flex1, Title3 } from '../Shared/Styles'
-import { fadeOut } from '../Shared/Keyframes'
+import { fadeOut, Title3 } from '../Shared/Styles'
 
 const Container = styled.div.attrs({
   style: props => ({

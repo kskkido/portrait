@@ -3,43 +3,25 @@ import { connect } from 'react-redux'
 import { TransitionGroup } from 'react-transition-group'
 import Draggable from 'gsap/Draggable'
 import { TweenMax } from 'gsap'
+
 import { Slide } from '../../Shared/Transition'
 import { MainContainer } from '../../Shared/Styles'
-import Navigation from '../Navigation'
-import ProjectView from './ProjectView'
-
 import { rotationChange } from '../../../reducers/events'
 
-const Project = ({  direction, inputBody, inputMain, inputNav, language, navigationList, targetOffset, viewIndex }) => {
-  const currentView = navigationList[viewIndex]
+import { viewData } from '../../Shared/Data'
 
-  return (
-    <MainContainer innerRef={inputMain}>
-      <div style={{maxHeight: '100px'}}>
-        <Navigation
-          navigationList={navigationList}
-          currentIndex={viewIndex}
-          getDom={inputNav}
-        />
-      </div>
-      <TransitionGroup>
-        <Slide key={viewIndex} targetOffset={targetOffset} exit={false}>
-          <div ref={inputBody}>
-            <ProjectView currentView={currentView} language={language} />
-          </div>
-        </Slide>
-      </TransitionGroup>
-    </MainContainer>
-  )
-}
+/* ====== HIGHER LEVEL COMPONENT FOR ABOUT AND PROJECT ====== */
+  /* ===== UNIQUE TRAITS =====
+    navigationList
+  */
 
 class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
-      direction: 'right',
-      targetOffset: 20,
+      navigationList: viewData[this.props.match.params || 'about'].navigationList,
+      direction: 'left',
+      targetOffset: 20, //arbitrary
     }
   }
 
@@ -52,7 +34,7 @@ class LocalContainer extends Component {
       return function () {
         const { rotation } = this
             , targetRotation = getRatio ? Math.round(rotation / ratio) * ratio : rotation
-        fn(targetRotation)
+        fn && fn(targetRotation)
       }
     }
   }
@@ -107,9 +89,9 @@ class LocalContainer extends Component {
   render() {
 
     return (
-      <Project
+      <About // ABOUT OR PROJECT
         {...this.props}
-        {...this.state}
+        navigationList={}
         inputBody={div => this.body = div}
         inputMain={div => this.mainDiv = div}
         inputNav={div => this.nav = div}
@@ -120,8 +102,8 @@ class LocalContainer extends Component {
 
 const mapStateToProps = (state) => ({
   language: state.language.language,
-  viewIndex: state.events.viewIndex,
-  rotation: state.events.rotation
+  rotation: state.events.rotation,
+  viewIndex: state.events.viewIndex
 })
 
 const mapDispatchToProps = (dispatch) => ({

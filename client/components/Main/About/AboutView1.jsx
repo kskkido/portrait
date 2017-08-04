@@ -4,7 +4,7 @@ import { BodyContainer, BodyContent, BodyText, Flex1, Flex5, Title } from '../..
 import HomeText from './content'
 
 
-const HomeView = ({ language }) => (
+const HomeView = () => (
   <BodyContainer>
     <Flex1>
       <Title>

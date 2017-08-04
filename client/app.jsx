@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import styled, { injectGlobal } from 'styled-components'
 
-import { fadeIn } from './components/Shared/Keyframes'
+import { fadeIn } from './components/Shared/Styles'
 import Sidenav from './components/Sidenav'
 import Main from './components/Main'
 import Preload from './components/Preload'

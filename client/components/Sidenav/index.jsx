@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { TransitionGroup } from 'react-transition-group'
+import { TimelineMax } from 'gsap'
 
-import { activeBlock } from '../Shared/Keyframes'
-import { Hide } from '../Shared/Transition'
 import SubList from './SubList'
+import { viewData } from '../Shared/Data'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
@@ -13,6 +12,7 @@ const Container = styled.div`
   flex: 1.5;
   display: flex;
   flex-direction: column;
+  border: 2px solid;
 `
 
 // const ColorBlock = styled.div.attrs({
@@ -35,30 +35,25 @@ const List = styled.ul`
 `
 
 const ListRow = styled.li`
-  border-bottom: 1px solid;
 `
 
 const ListRowContainer = styled.div`
   height: 100%;
   width: 100%;
+  border-left: 3px solid;
+  padding-left: 1em;
+  color: #D3D3D3;
     & > a {
     display: block;
     height: 80px;
     text-decoration: none;
-    color: ${props => props.active ? 'black' : 'grey'};
-    padding-left: ${props => props.active ? '3em' : '1em'};
-    transition: padding-left 0.3s;
+    color: inherit;
   }
-  & > a:hover ${props => props.active ? 'null' : `{
-    padding-left: 3em;
-    color: black;
-    transition:
-      padding-left 0.3s,
-      color 0.6s;
-  }`}
+}
 `
 
 const ListText = styled.h3`
+  padding-top: 10px;
   font-weight: normal;
   font-size: 0.95em;
   text-transform: uppercase;
@@ -73,12 +68,12 @@ const listData = {
   row2: {
     text: ['About'],
     path: '/about',
-    subTextList: ['Who', 'What', 'Where', 'Why'],
+    subTextList: viewData.about.navigationList,
   },
   row3: {
     text: ['Projects'],
     path: '/projects',
-    subTextList: ['Audiosphere', 'StackQuest', 'Portfolio'],
+    subTextList: viewData.projects.navigationList,
   },
   row4: {
     text: ['Contact'],
@@ -104,15 +99,49 @@ class LocalContainer extends Component {
     }
   }
 
+  static createHoverAnimation(target) {
+    return new TimelineMax({paused: true})
+      .to(target, 0.3, {
+        paddingLeft: '3em',
+        color: 'black'
+      })
+  }
+
+  componentWillMount() {
+    this.listRows = []
+  }
+
+  componentDidMount() {
+    this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
+    this.hoverAnimations[this.state.activeIndex].play()
+  }
+
+  shouldComponentUpdate(_, { activeIndex }) {
+    return activeIndex !== this.state.activeIndex
+  }
+
+  componentWillUpdate() {
+    this.hoverAnimations[this.state.activeIndex].reverse()
+  }
+
   createListItem ({text, path, subTextList}, index) {
     const isActive = index === this.state.activeIndex
 
     return (
       <ListRow key={text[0]}>
-        <ListRowContainer active={isActive}>
-        <Link to={path} onClick={this.handleClick(index)}>
-          {text.map(el => <ListText key={el} active={isActive}>{el}</ListText>)}
-        </Link>
+        <ListRowContainer
+          active={isActive}
+          onMouseOver={this.handleOnHover(index)}
+          onMouseOut={this.handleOnHoverOff(index)}
+          innerRef={div => this.listRows.push(div)}
+        >
+          <Link
+            to={path}
+            onClick={ isActive ? e => e.preventDefault() : this.handleClick(index)}
+          >
+            {text.map(el => <ListText key={el}>{el}</ListText>)}
+          </Link>
+
           <div>
             {isActive && subTextList.length > 0 && <SubList textList={subTextList} path={path} />}
           </div>
@@ -126,8 +155,19 @@ class LocalContainer extends Component {
   }
 
   handleClick(index) {
-    if (index === this.state.activeIndex) return
     return () => this.setState({activeIndex: index})
+  }
+
+  handleOnHover(index) {
+    if (index === this.state.activeIndex) return
+    return () => {
+      return this.hoverAnimations[index].play()
+    }
+  }
+
+  handleOnHoverOff(index) {
+    if (index === this.state.activeIndex) return
+    return () => this.hoverAnimations[index].reverse()
   }
 
   render() {

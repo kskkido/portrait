@@ -15,7 +15,7 @@ export const viewRestart = () => ({type: VIEW_RESTART})
 /* ====== DEFINE INITIAL STATE ====== */
 const initialState = {
   loaded: false,
-  rotation: 1,
+  rotation: 0,
   viewIndex: 0
 }
 
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
     return Object.assign({}, state, {loaded: true})
 
   case ROTATION_CHANGE:
-    return Object.assign({}, state, {rotation: action.rotation})
+    return Object.assign({}, state, {rotation: action.rotation % 360}) // patch it up
 
   case ROTATION_RESTART:
     return Object.assign({}, state, {rotation: 0})

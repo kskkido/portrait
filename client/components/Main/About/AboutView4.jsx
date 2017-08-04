@@ -8,7 +8,7 @@ const HomeView = ({ language }) => (
   <BodyContainer>
     <Flex1>
       <Title>
-       {'< Why >'}
+       {'< When >'}
       </Title>
     </Flex1>
     <BodyContent>

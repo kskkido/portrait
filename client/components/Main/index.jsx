@@ -1,14 +1,13 @@
 import React from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
-import { TransitionGroup } from 'react-transition-group'
+import { Route, Switch } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
+
 import store from '../../store'
 
 import About from './About'
 import Kido from './Kido'
 import Project from './Project'
 
-import { Show } from '../Shared/Transition'
 import { rotationChange } from '../../reducers/events'
 
 const theme = {
@@ -24,7 +23,7 @@ const Container = styled.div`
 
 const getRotation = (wheelDelta) => {
   const currentRotation = store.getState().events.rotation
-  return wheelDelta < 0 ? currentRotation + 0.005 : currentRotation - 0.005
+  return wheelDelta < 0 ? currentRotation + 1 : currentRotation - 1
 }
 
 const _preventScroll = (event) => {
@@ -36,6 +35,25 @@ const _onWheelHandler = ({nativeEvent}) => {
   _preventScroll(nativeEvent)
   store.dispatch(rotationChange(getRotation(nativeEvent.wheelDelta || (-1 * nativeEvent.deltaY))))
 }
+// modified onwheel
+
+// const rotate = (target, wheelDelta) => {
+//   const targetRotation = wheelDelta < 0 ? 5 : -5
+//   return TweenMax.to(target, 0.1, {rotation: targetRotation, onComplete})
+// }
+
+// const getDirection = (wheelDelta) => {
+//   return wheelDelta < 0 ? 'up' : 'down'
+// }
+
+// const onWheel = ({nativeEvent}, target) => {
+//   const direction = getDirection(nativeEvent.wheelDelta || (-1 * nativeEvent.deltaY))
+//   if (direction === 'up') {
+//     TweenMax
+//   } else {
+
+//   }
+// }
 
 /* ====== COMPONENTS ====== */
 
@@ -57,7 +75,7 @@ const _onWheelHandler = ({nativeEvent}) => {
 //   />
 // )
 
-//WITHOUT TRANSITION
+// WITHOUT TRANSITION
 const BodyRoutes = () => (
   <Route render={({ location }) => {
     return (

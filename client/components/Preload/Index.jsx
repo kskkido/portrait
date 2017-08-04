@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { Flex1 } from '../Shared/Styles'
-import { fadeIn } from '../Shared/Keyframes'
+import { fadeIn } from '../Shared/Styles'
 import LanguageQuery from './Language'
 import Load from './Load'
 

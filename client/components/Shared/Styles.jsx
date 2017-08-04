@@ -1,11 +1,38 @@
-import styled from 'styled-components'
-import { fadeIn } from './Keyframes'
+import styled, {keyframes} from 'styled-components'
+
+export const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`
+
+export const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  60% {
+    padding-left: 2000px;
+  }
+
+  100% {
+    opacity: 0;
+  }
+`
 
 export const MainContainer = styled.div`
   display: flex;
   min-height: 98vh;
   flex-direction: column;
-  animation: ${fadeIn} 0.7s;
+  animation: ${fadeIn} 0.3s ease-in;
 `
 
 export const BodyContainer = styled.div`
@@ -15,6 +42,7 @@ export const BodyContainer = styled.div`
 `
 
 export const BodyContent = styled.div`
+  margin-top: 10px;
   flex: 4;
   display: flex;
   flex-direction: row;
