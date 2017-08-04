@@ -8,7 +8,7 @@ import { rotationChange, viewChange } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
-  width: inherit;
+  border: 2px solid;
 `
 
 const List = styled.ul`

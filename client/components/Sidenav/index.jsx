@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { TimelineMax } from 'gsap'
 
 import SubList from './SubList'
+import { viewData } from '../Shared/Data'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
@@ -11,6 +12,7 @@ const Container = styled.div`
   flex: 1.5;
   display: flex;
   flex-direction: column;
+  border: 2px solid;
 `
 
 // const ColorBlock = styled.div.attrs({
@@ -66,12 +68,12 @@ const listData = {
   row2: {
     text: ['About'],
     path: '/about',
-    subTextList: ['Who', 'What', 'Where', 'When'],
+    subTextList: viewData.about.navigationList,
   },
   row3: {
     text: ['Projects'],
     path: '/projects',
-    subTextList: ['Audiosphere', 'StackQuest', 'Portfolio'],
+    subTextList: viewData.projects.navigationList,
   },
   row4: {
     text: ['Contact'],
