@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import ProjectView from './ProjectView'
 import { TransitionGroup } from 'react-transition-group'
 import { Slide } from '../../Shared/Transition'
-import BodyComponent from '../_proto'
+import BodyComponent from '../Body'
 
 import { viewData } from '../../Shared/Data'
 

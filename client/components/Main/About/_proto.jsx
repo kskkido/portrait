@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { TransitionGroup } from 'react-transition-group'
-import { Slide } from '../../Shared/Transition'
 
-import BodyComponent from '../_proto'
+import BodyComponent from '../Body'
 import AboutView1 from './AboutView1'
 import AboutView2 from './AboutView2'
 import AboutView3 from './AboutView3'

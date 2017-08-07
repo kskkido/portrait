@@ -8,8 +8,6 @@ import { Slide } from '../Shared/Transition'
 import { MainContainer } from '../Shared/Styles'
 import { rotationChange, rotationRestart, viewRestart } from '../../reducers/events'
 
-import About from './About/_proto'
-import Project from './Project/_proto'
 import Navigation from './Navigation'
 
 /* ====== HIGHER LEVEL COMPONENT FOR ABOUT AND PROJECT ====== */
@@ -18,7 +16,9 @@ import Navigation from './Navigation'
   */
 
 
-const ContentView = ({ children, inputBody, inputMain, inputNav, language, navigationList, onWheel, viewIndex, targetOffset }) => {
+const ContentView = ({ children, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
+  console.log(targetOffset, 'OFFSET UPDATE')
+
   return (
     <MainContainer innerRef={inputMain} onWheel={onWheel}>
       <div style={{maxHeight: '100px'}}>
@@ -60,18 +60,27 @@ class LocalContainer extends Component {
     }
   }
 
+  static tap (value, fn) {
+    return (fn(value), value)
+  }
+
+  static slideDOM(bodyDOM) {
+    return (targetOffset) => {
+      TweenMax.to(bodyDOM, 0.7, {
+        marginRight: `${targetOffset}px`
+      })
+    }
+  }
+
   static slide(bodyDOM, mainDOM, length) {
     const ratio = (mainDOM.offsetWidth / 2) / (360 / length) // get the half of bodyDOM
         , getOffset = ((rat) => (rotation) => (rotation * rat))(ratio)
+        , slideBodyDOM = LocalContainer.slideDOM(bodyDOM)
     let prevRotation = 0
-    console.log(mainDOM.offsetWidth, 'IN SLIDEBODY')
 
     return (magnitude) => {
-      const targetOffset = getOffset(prevRotation -= magnitude)
-      TweenMax.to(bodyDOM, 0.7, {
-        marginRight: `${targetOffset}px`
-      }) // separate this
-      return targetOffset
+      prevRotation -= magnitude
+      return LocalContainer.tap(getOffset(prevRotation), slideBodyDOM)
     }
   } // for gradual <slide></slide>
 
@@ -110,12 +119,10 @@ class LocalContainer extends Component {
   }
 
   componentDidUpdate() {
-    console.log('UPDATE', this.body)
     this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
   }
 
   componentWillUnMount() {
-    console.log('UNMOUNT')
     this.props.rotationRestart()
     this.props.viewRestart()
   }

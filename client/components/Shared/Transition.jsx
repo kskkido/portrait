@@ -41,7 +41,7 @@ import { TweenMax, Power2 } from 'gsap'
 // }
 
 const slideAnimation = (duration, offset = 200) => (target) => {
-  console.log(target, 'animation')
+  console.log(offset, 'animation')
   TweenMax.from(target, duration, {
     opacity: 0,
     marginLeft: `${offset}px`,

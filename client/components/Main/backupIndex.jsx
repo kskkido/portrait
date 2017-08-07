@@ -6,8 +6,6 @@ import About from './About/_proto'
 import Project from './Project/_proto'
 import Kido from './Kido'
 
-import { viewData } from '../Shared/Data'
-
 const theme = {
   bg: '#E1F4CB',
   fg: '#fff'
@@ -23,14 +21,8 @@ const BodyRoutes = () => (
   <Route render={({ location }) => {
     return (
       <Switch location={location}>
-        <Route
-          path="/about"
-          component={About}
-        />
-        <Route
-          path="/projects"
-          component={Project}
-        />
+        <Route path="/about" component={About} />
+        <Route path="/projects" component={Project} />
         <Route exact path="/" component={Kido} />
       </Switch>
     )
