@@ -28,7 +28,9 @@ export const fadeOut = keyframes`
   }
 `
 
-export const MainContainer = styled.div`
+export const MainContainer = styled.div.attrs({
+  tabIndex: 0
+})`
   display: flex;
   min-height: 98vh;
   flex-direction: column;

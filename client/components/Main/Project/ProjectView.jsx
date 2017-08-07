@@ -1,6 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
-
 import { BodyContainer, BodyContent, Flex1, Title } from '../../Shared/Styles'
 import { MacIcon } from '../../Shared/SVG'
 import ProjectText from './content'
@@ -50,17 +50,17 @@ const BodyText = styled.div`
   max-width: 400px;
 `
 
-const ProjectView = ({ currentView, language, scale }) => {
-  const data = ProjectText[currentView]
+const ProjectView = ({ viewIndex, language, scale }) => {
+  const data = ProjectText[viewIndex]
   return (
-  <BodyContainer>
+  <BodyContainer key={viewIndex}>
     <Flex1>
       <Title>
         {`< ${data.title} >`}
       </Title>
     </Flex1>
     <BodyContent>
-      <MacIcon imageSource={data.imageSource} scale={scale} />
+      <MacIcon imageSource={data.imageSource} url={data.url} scale={scale} />
       <BodyText>
         <h3>Technology</h3>
         <p>
@@ -80,4 +80,4 @@ const ProjectView = ({ currentView, language, scale }) => {
   )
 }
 
-export default ProjectView
+export default connect(({events: {viewIndex, language}}) => ({viewIndex, language}))(ProjectView)

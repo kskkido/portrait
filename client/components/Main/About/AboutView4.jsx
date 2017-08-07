@@ -14,7 +14,8 @@ const HomeView = ({ language }) => (
     <BodyContent>
       <BodyText>
       <p>
-        I've studied Music Business in Berklee College of Music for my undergrad and spent half of my post work in the Music Industry in New York. The experience was fruitful, but the work was missing something. That something, I realized was creativity. Being a musician at heart I always loved building and expressing in new ways. It used to be music, but now my instrument of expression is coding. There is so much to learn in between where I currently stand and greatness, but I enjoy every step of this journey.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non ornare quam. Morbi condimentum convallis euismod. Mauris nec porttitor elit. Suspendisse mi lectus, ullamcorper id sagittis tristique, hendrerit at dolor. Curabitur sed enim tellus. Nulla eu mattis ipsum. Duis auctor eleifend purus eu fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
       </p>
       </BodyText>
     </BodyContent>

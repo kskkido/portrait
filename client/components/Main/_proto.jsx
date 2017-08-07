@@ -4,62 +4,91 @@ import { TransitionGroup } from 'react-transition-group'
 import Draggable from 'gsap/Draggable'
 import { TweenMax } from 'gsap'
 
-import { Slide } from '../../Shared/Transition'
-import { MainContainer } from '../../Shared/Styles'
-import { rotationChange } from '../../../reducers/events'
+import { Slide } from '../Shared/Transition'
+import { MainContainer } from '../Shared/Styles'
+import { rotationChange, rotationRestart, viewRestart } from '../../reducers/events'
 
-import { viewData } from '../../Shared/Data'
+import About from './About/_proto'
+import Project from './Project/_proto'
+import Navigation from './Navigation'
 
 /* ====== HIGHER LEVEL COMPONENT FOR ABOUT AND PROJECT ====== */
   /* ===== UNIQUE TRAITS =====
     navigationList
   */
 
+
+const ContentView = ({ children, inputBody, inputMain, inputNav, language, navigationList, onWheel, viewIndex, targetOffset }) => {
+  return (
+    <MainContainer innerRef={inputMain} onWheel={onWheel}>
+      <div style={{maxHeight: '100px'}}>
+        <Navigation
+          navigationList={navigationList}
+          getDom={inputNav}
+        />
+      </div>
+      <TransitionGroup>
+        <Slide key={viewIndex} targetOffset={targetOffset} exit={false}>
+          <div ref={inputBody}>
+            {children}
+          </div>
+        </Slide>
+      </TransitionGroup>
+    </MainContainer>
+  )
+}
+
+
 class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      navigationList: viewData[this.props.match.params || 'about'].navigationList,
       direction: 'left',
-      targetOffset: 20, //arbitrary
+      targetOffset: 50, //arbitrary
     }
+
+    this.handleOnWheel = this.handleOnWheel.bind(this)
   }
 
-  static getDirection(magnitude) {
-    return magnitude > 0 ? 'left' : 'right'
-  }
-
-  static nearest(fn, ratio) {
+  static nearest(ratio, callback) {
     return function (getRatio) {
       return function () {
         const { rotation } = this
             , targetRotation = getRatio ? Math.round(rotation / ratio) * ratio : rotation
-        fn && fn(targetRotation)
+        callback && callback(targetRotation)
       }
     }
   }
 
-  static slide(targetDOM, length) {
-    const ratio = (targetDOM.offsetWidth / 2) / (360 / length) // get the half of targetdom
+  static slide(bodyDOM, mainDOM, length) {
+    const ratio = (mainDOM.offsetWidth / 2) / (360 / length) // get the half of bodyDOM
         , getOffset = ((rat) => (rotation) => (rotation * rat))(ratio)
     let prevRotation = 0
+    console.log(mainDOM.offsetWidth, 'IN SLIDEBODY')
 
     return (magnitude) => {
       const targetOffset = getOffset(prevRotation -= magnitude)
-
-      TweenMax.to(targetDOM, 0.7, {
+      TweenMax.to(bodyDOM, 0.7, {
         marginRight: `${targetOffset}px`
       }) // separate this
-
       return targetOffset
     }
-  } // for gradual slide
+  } // for gradual <slide></slide>
+
+  static getRotation (wheelDelta, currentRotation) {
+    return wheelDelta < 0 ? currentRotation + 1 : currentRotation - 1
+  }
+
+  static preventEvent (event) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
 
   componentDidMount() {
-    const { length } = this.state.navigationList
+    const { length } = this.props.navigationList
 
-    this.slideBody = LocalContainer.slide(this.body, length)
-    this.getTargetRotation = LocalContainer.nearest(this.props.rotationChange, 360 / length)
+    this.slideBody = LocalContainer.slide(this.body, this.mainDiv, length)
+    this.getTargetRotation = LocalContainer.nearest(360 / length, this.props.rotationChange)
 
     // DEFINE DRAGGABLE
     Draggable.create(this.nav, {
@@ -73,8 +102,7 @@ class LocalContainer extends Component {
   componentWillReceiveProps({ rotation }) {
     const magnitude = this.props.rotation - rotation
         , targetOffset = this.slideBody(magnitude) // get magnitude
-        , direction = LocalContainer.getDirection(magnitude)
-    this.setState(Object.assign({}, this.state, {direction, targetOffset}))
+    this.setState(Object.assign({}, this.state, {targetOffset}))
   }
 
   shouldComponentUpdate({ viewIndex }) {
@@ -82,16 +110,30 @@ class LocalContainer extends Component {
   }
 
   componentDidUpdate() {
-    // reassign slideBody with new props index
-    this.slideBody = LocalContainer.slide(this.body, this.state.navigationList.length, this.props.viewIndex)
+    console.log('UPDATE', this.body)
+    this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
+  }
+
+  componentWillUnMount() {
+    console.log('UNMOUNT')
+    this.props.rotationRestart()
+    this.props.viewRestart()
+  }
+
+  handleOnWheel ({nativeEvent}) {
+    LocalContainer.preventEvent(nativeEvent)
+    this.props.rotationChange(
+      LocalContainer.getRotation(nativeEvent.wheelDelta || (-1 * nativeEvent.deltaY)
+    , this.props.rotation))
   }
 
   render() {
 
     return (
-      <About // ABOUT OR PROJECT
+      <ContentView // ABOUT OR PROJECT
         {...this.props}
-        navigationList={}
+        {...this.state}
+        onWheel={this.handleOnWheel}
         inputBody={div => this.body = div}
         inputMain={div => this.mainDiv = div}
         inputNav={div => this.nav = div}
@@ -101,13 +143,14 @@ class LocalContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  language: state.language.language,
   rotation: state.events.rotation,
-  viewIndex: state.events.viewIndex
+  viewIndex: state.events.viewIndex,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   rotationChange: (rotation) => dispatch(rotationChange(rotation)),
+  rotationRestart: () => dispatch(rotationRestart()),
+  viewRestart: () => dispatch(viewRestart())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)

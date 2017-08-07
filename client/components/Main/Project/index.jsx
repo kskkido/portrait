@@ -25,7 +25,7 @@ const Project = ({  direction, inputBody, inputMain, inputNav, language, navigat
       <TransitionGroup>
         <Slide key={viewIndex} targetOffset={targetOffset} exit={false}>
           <div ref={inputBody}>
-            <ProjectView currentView={currentView} language={language} />
+            <ProjectView viewIndex={viewIndex} language={language} />
           </div>
         </Slide>
       </TransitionGroup>

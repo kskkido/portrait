@@ -14,15 +14,15 @@ import AboutView4 from './AboutView4'
 
 import { rotationChange } from '../../../reducers/events'
 
-const renderCurrentView = (currentView, inputBody, language) => {
-  if (currentView === 'Who') {
-    return <AboutView1 language={language} getDom={inputBody} />
-  } else if (currentView === 'What') {
-    return <AboutView2 language={language} getDom={inputBody} />
-  } else if (currentView === 'Where') {
-    return <AboutView3 language={language} getDom={inputBody} />
-  } else if (currentView === 'When') {
-    return <AboutView4 language={language} getDom={inputBody} />
+const renderCurrentView = (viewIndex, language) => {
+  if (viewIndex === 0) {
+    return <AboutView1 key="one" language={language} />
+  } else if (viewIndex === 1) {
+    return <AboutView2 language={language} />
+  } else if (viewIndex === 2) {
+    return <AboutView3 language={language} />
+  } else if (viewIndex === 3) {
+    return <AboutView4 language={language} />
   }
 }
 
@@ -42,7 +42,7 @@ const About = ({ direction, inputBody, inputMain, inputNav, language, navigation
       <TransitionGroup>
         <Slide key={viewIndex} targetOffset={targetOffset} exit={false}>
           <div ref={inputBody}>
-            {renderCurrentView(currentView, inputBody, language)}
+            {renderCurrentView(viewIndex, language)}
           </div>
         </Slide>
       </TransitionGroup>
@@ -65,10 +65,10 @@ class LocalContainer extends Component {
   }
 
   static nearest(fn, ratio) {
-    return function (getRatio) {
+    return function (isRatio) {
       return function () {
         const { rotation } = this
-            , targetRotation = getRatio ? Math.round(rotation / ratio) * ratio : rotation
+            , targetRotation = isRatio ? Math.round(rotation / ratio) * ratio : rotation
         fn && fn(targetRotation)
       }
     }
@@ -122,7 +122,7 @@ class LocalContainer extends Component {
   }
 
   render() {
-
+    console.log(this.handleKeyDown)
     return (
       <About
         {...this.props}

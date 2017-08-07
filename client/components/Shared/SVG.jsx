@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const MacIcon = ({ imageSource, scale = 1 }) => {
+export const MacIcon = ({ imageSource, url, scale = 1 }) => {
   console.log(imageSource, 'IMAGE')
 
   const height = 300.0010070800781 * scale
@@ -35,7 +35,9 @@ export const MacIcon = ({ imageSource, scale = 1 }) => {
       </defs>
 
       <path d="M 0 0 L 0 232 L 384 232 L 384 0 L 0 0 Z" style={style} transform="matrix(1, 0, 0, 1, 2.842170943040401e-14, 1.4210854715202004e-14)" />
-      <rect width="360" height="200" y="15" x="12" fill="url(#image)" />
+      <a target="_blank" href={url}>
+        <rect width="360" height="200" y="15" x="12" fill="url(#image)" />
+      </a>
       <rect x="102" y="284" width="180" height="16.001" transform="matrix(1, 0, 0, 1, 2.842170943040401e-14, 1.4210854715202004e-14)" />
       <rect x="170" y="231" width="44.132" height="62" transform="matrix(1, 0, 0, 1, 2.842170943040401e-14, 1.4210854715202004e-14)" />
       <ellipse transform="matrix(-0.7071060538291931, 0.7071060538291931, -0.7071050405502319, -0.7071030139923096, 597.1436157226562, 211.54261779785156)" cx="295.995" cy="276.692" rx="6.5" ry="6.5" style={ellipseStyle} />
