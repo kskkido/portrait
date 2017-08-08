@@ -1,25 +1,25 @@
 import React from 'react'
 import { Transition } from 'react-transition-group'
-import { TweenMax, Power2 } from 'gsap'
+import { TweenLite, Power2 } from 'gsap'
 
-// const showAnimation = (duration) => (target) => (
-//   TweenMax.from(target, duration, {
-//     opacity: 0,
-//     height: 0,
-//     ease: Power2.easeInOut
-//   })
-// )
+const showAnimation = (duration) => (target) => (
+  TweenLite.from(target, duration, {
+    autoAlpha: 0,
+    height: 0,
+    ease: Power2.easeInOut
+  })
+)
 
-// export const Show = (props) => (
-//   <Transition
-//     {...props}
-//     timeout={1000}
-//     onEntering={showAnimation(props.duration || 0.5)}
-//   />
-// )
+export const Show = (props) => (
+  <Transition
+    {...props}
+    timeout={1000}
+    onEntering={showAnimation(props.duration || 0.5)}
+  />
+)
 
 // const hideAnimation = (duration) => (target) => (
-//   TweenMax.to(target, duration, {
+//   TweenLite.to(target, duration, {
 //     opacity: 0,
 //     height: 0,
 //     ease: Power2.easeInOut
@@ -41,7 +41,7 @@ import { TweenMax, Power2 } from 'gsap'
 // }
 
 const slideAnimation = (duration, offset) => (target) => {
-  TweenMax.from(target, duration, {
+  TweenLite.from(target, duration, {
     marginLeft: `${offset}px`,
     autoAlpha: 0,
     ease: Power2.easeOut
