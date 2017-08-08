@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { TransitionGroup } from 'react-transition-group'
 import Draggable from 'gsap/Draggable'
-import { TweenMax } from 'gsap'
+import { TweenLite } from 'gsap'
 
 import { Slide } from '../Shared/Transition'
 import { MainContainer } from '../Shared/Styles'
@@ -65,7 +65,7 @@ class LocalContainer extends Component {
 
   static slideDOM(bodyDOM) {
     return (targetOffset) => {
-      TweenMax.to(bodyDOM, 0.7, {
+      TweenLite.to(bodyDOM, 0.7, {
         marginRight: `${targetOffset}px`
       })
     }

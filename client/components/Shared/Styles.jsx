@@ -1,5 +1,22 @@
 import styled, {keyframes} from 'styled-components'
 
+// const cyan = '#66D7D1'
+//     , orange = '#FC7753'
+//     , blue = '#42CAFD'
+//     , skyBlue = '#D7F5F5'
+//     , rouge = '#FDF5BF'
+//     , green = '#C2EFB3'
+//     , yellow = '#F7F052'
+//     , purple = '#9DACFF'
+//     , lightGreen = '#94E8B4'
+//     , slimeGreen = '#7DDF64'
+
+const red = '#E3170A'
+    , cyan = '#A9E5BB'
+    , skin = '#FCF6B1'
+    , yellow = '#F7B32B'
+
+
 export const fadeIn = keyframes`
   0% {
     opacity: 0;
@@ -32,7 +49,6 @@ export const MainContainer = styled.div`
   display: flex;
   min-height: 98vh;
   flex-direction: column;
-  animation: ${fadeIn} 0.3s ease-in;
 `
 
 export const BodyContainer = styled.div`

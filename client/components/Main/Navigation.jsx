@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { TweenMax, Power2 } from 'gsap'
+import { TweenLite } from 'gsap'
 
 import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
@@ -76,7 +76,7 @@ class LocalContainer extends Component {
 
   componentWillReceiveProps({ rotation }) {
     const { length } = this.props.navigationList
-    TweenMax.to(this.mainNav, 0.7, {rotation})
+    TweenLite.to(this.mainNav, 0.7, {rotation})
     this.willSetView(LocalContainer.round(rotation, length))
   }
 
