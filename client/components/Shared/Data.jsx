@@ -1,8 +1,8 @@
 export const viewData = {
   about: {
-    navigationList: ['Who', 'What', 'Where', 'When']
+    navigationList: ['WHO', 'WHAT', 'WHERE', 'WHEN']
   },
   projects: {
-    navigationList: ['AudioSphere', 'StackQuest', 'Portfolio']
+    navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO']
   },
 }

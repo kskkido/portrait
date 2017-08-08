@@ -65,7 +65,7 @@ class LocalContainer extends Component {
 
   willSetView(rounded) {
     const ratio = rounded % 1
-    if (ratio === 0 && rounded !== this.props.currentIndex) {
+    if (ratio === 0 && rounded !== this.props.viewIndex) {
       this.props.viewChange(rounded)
     }
   }
@@ -106,6 +106,7 @@ class LocalContainer extends Component {
 
 const mapStateToProps = (state) => ({
   rotation: state.events.rotation,
+  viewIndex: state.events.viewIndex
 })
 
 const mapDispatchToProps = (dispatch) => ({

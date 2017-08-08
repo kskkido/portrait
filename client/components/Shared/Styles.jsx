@@ -47,6 +47,7 @@ export const BodyContent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  overflow: hidden;
 `
 
 export const BodyText = styled.div`

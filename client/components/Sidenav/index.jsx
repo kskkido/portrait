@@ -12,7 +12,6 @@ const Container = styled.div`
   flex: 1.5;
   display: flex;
   flex-direction: column;
-  border: 2px solid;
 `
 
 // const ColorBlock = styled.div.attrs({
@@ -38,9 +37,9 @@ const ListRow = styled.li`
 `
 
 const ListRowContainer = styled.div`
+  border-left: 2px solid;
   height: 100%;
   width: 100%;
-  border-left: 3px solid;
   padding-left: 1em;
   color: #D3D3D3;
     & > a {
@@ -137,7 +136,7 @@ class LocalContainer extends Component {
         >
           <Link
             to={path}
-            onClick={ isActive ? e => e.preventDefault() : this.handleClick(index)}
+            onClick={ isActive ? e => e.preventDefault() : this.handleClick(index) }
           >
             {text.map(el => <ListText key={el}>{el}</ListText>)}
           </Link>

@@ -40,18 +40,17 @@ import { TweenMax, Power2 } from 'gsap'
 //   left: {opacity: 0, marginRight: '200px', ease: Power2.easeOut},
 // }
 
-const slideAnimation = (duration, offset) => (target) => (
+const slideAnimation = (duration, offset) => (target) => {
   TweenMax.from(target, duration, {
-    opacity: 0,
     marginLeft: `${offset}px`,
+    autoAlpha: 0,
     ease: Power2.easeOut
   })
-)
+}
 
 export const Slide = (_props) => {
   const props = Object.assign({}, _props)
   delete props.targetOffset
-
   return (
     <Transition
       {...props}
