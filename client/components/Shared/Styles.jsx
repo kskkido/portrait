@@ -28,9 +28,7 @@ export const fadeOut = keyframes`
   }
 `
 
-export const MainContainer = styled.div.attrs({
-  tabIndex: 0
-})`
+export const MainContainer = styled.div`
   display: flex;
   min-height: 98vh;
   flex-direction: column;
@@ -49,6 +47,7 @@ export const BodyContent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  overflow: hidden;
 `
 
 export const BodyText = styled.div`

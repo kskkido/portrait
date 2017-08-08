@@ -29,14 +29,14 @@ export const MacIcon = ({ imageSource, url, scale = 1 }) => {
     <svg viewBox="-0.000009099945600610226 1.4210854715202004e-14 384 300.0010070800781" width={width} height={height}>
 
       <defs>
-        <pattern id="image" height="1" width="1"  x="0" y="0" preserveAspectRatio="none">
+        <pattern id="icon" height="1" width="1"  x="0" y="0" preserveAspectRatio="none">
           <image href={imageSource} />
         </pattern>
       </defs>
 
       <path d="M 0 0 L 0 232 L 384 232 L 384 0 L 0 0 Z" style={style} transform="matrix(1, 0, 0, 1, 2.842170943040401e-14, 1.4210854715202004e-14)" />
       <a target="_blank" href={url}>
-        <rect width="360" height="200" y="15" x="12" fill="url(#image)" />
+        <rect width="360" height="200" y="15" x="12" fill="url(#icon)" />
       </a>
       <rect x="102" y="284" width="180" height="16.001" transform="matrix(1, 0, 0, 1, 2.842170943040401e-14, 1.4210854715202004e-14)" />
       <rect x="170" y="231" width="44.132" height="62" transform="matrix(1, 0, 0, 1, 2.842170943040401e-14, 1.4210854715202004e-14)" />

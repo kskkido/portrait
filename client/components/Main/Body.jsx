@@ -16,14 +16,13 @@ import Navigation from './Navigation'
   */
 
 
-const ContentView = ({ children, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
-  console.log(targetOffset, 'OFFSET UPDATE')
-
+const ContentView = ({ children, isCenter, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
   return (
     <MainContainer innerRef={inputMain} onWheel={onWheel}>
       <div style={{maxHeight: '100px'}}>
         <Navigation
           navigationList={navigationList}
+          isCenter={isCenter}
           getDom={inputNav}
         />
       </div>
@@ -55,7 +54,7 @@ class LocalContainer extends Component {
       return function () {
         const { rotation } = this
             , targetRotation = getRatio ? Math.round(rotation / ratio) * ratio : rotation
-        callback && callback(targetRotation)
+        callback(targetRotation)
       }
     }
   }
@@ -94,6 +93,8 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
+    this.props.getNav && this.props.getNav(this.nav)
+
     const { length } = this.props.navigationList
 
     this.slideBody = LocalContainer.slide(this.body, this.mainDiv, length)

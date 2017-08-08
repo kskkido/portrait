@@ -5,7 +5,7 @@ import styled, { injectGlobal } from 'styled-components'
 
 import { fadeIn } from './components/Shared/Styles'
 import Sidenav from './components/Sidenav'
-import Main from './components/Main/backupIndex'
+import Main from './components/Main'
 import Preload from './components/Preload'
 
 injectGlobal`

@@ -2,17 +2,8 @@ import React, { Component } from 'react'
 import { TweenMax, Power2 } from 'gsap'
 import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
-import styled from 'styled-components'
 
-const Kido = ({ inputRef, navigationList }) => (
-  <MainContainer>
-    <Navigation
-      navigationList={navigationList}
-      isCenter={true}
-      getDom={(component) => inputRef(component)}
-    />
-  </MainContainer>
-)
+import BodyComponent from '../Body'
 
 const createAnimation = (target) => {
   TweenMax.from(target, 2, {
@@ -36,15 +27,16 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
-    createAnimation(this.nav)
+    console.log(this.bodyDiv)
+    createAnimation(this.bodyDiv)
   }
 
   render() {
     return (
-      <Kido
-        inProp={this.state.in}
+      <BodyComponent
         navigationList={this.state.navigationList}
-        inputRef={ref => this.nav=ref}
+        isCenter={true}
+        getNav={div => this.bodyDiv = div}
       />
     )
   }

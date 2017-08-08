@@ -37,7 +37,7 @@ const ListRow = styled.li`
 `
 
 const ListRowContainer = styled.div`
-  border-left: 3px solid;
+  border-left: 2px solid;
   height: 100%;
   width: 100%;
   padding-left: 1em;
