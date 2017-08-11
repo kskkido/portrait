@@ -11,7 +11,7 @@ import Preload from './components/Preload'
 
 injectGlobal`
   body {
-    background: #ecf0f1;
+    background: #E1E5EE;
     letter-spacing: 4px;
     font-size: .8em;
   }

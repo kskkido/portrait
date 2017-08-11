@@ -42,8 +42,13 @@ class LocalContainer extends Component {
     return viewData.about.backgroundColor
   }
 
+  componentWillMount() {
+    console.log('MOUNTINIINIING')
+    this.props.rotationRestart(); this.props.viewRestart();
+  }
+
   render () {
-    console.log(LocalContainer.backgroundColor, 'BACKGROUND COLOR')
+
     return (
       <About
         backgroundColor={LocalContainer.backgroundColor}

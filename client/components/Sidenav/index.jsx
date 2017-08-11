@@ -38,12 +38,15 @@ const List = styled.ul`
 const ListRow = styled.li`
 `
 
-const ListRowContainer = styled.div`
-  border-left: 2px solid;
+const ListRowContainer = styled.div.attrs({
+  style: props => ({
+    borderLeft: `2px solid`
+  })
+})`
   height: 100%;
   width: 100%;
   padding-left: 1em;
-  color: #D3D3D3;
+  color: #F2F7EF;
     & > a {
     display: block;
     height: 80px;
@@ -64,21 +67,25 @@ const listData = {
   row1: {
     text: ['Keisuke Kido', 'Developer'],
     path: '/',
+    color: '#ecf0f1',
     subTextList: []
   },
   row2: {
     text: ['About'],
     path: '/about',
+    color: '#65AFFF',
     subTextList: viewData.about.navigationList,
   },
   row3: {
     text: ['Projects'],
     path: '/projects',
+    color: '#DD614A',
     subTextList: viewData.projects.navigationList,
   },
   row4: {
     text: ['Contact'],
     path: '/',
+    color: '#ecf0f1',
     subTextList: [],
   }
 }
@@ -125,7 +132,7 @@ class LocalContainer extends Component {
     this.hoverAnimations[this.state.activeIndex].reverse()
   }
 
-  createListItem ({text, path, subTextList}, index) {
+  createListItem ({color, text, path, subTextList}, index) {
     const isActive = index === this.state.activeIndex
 
     return (
@@ -135,6 +142,7 @@ class LocalContainer extends Component {
           onMouseOver={this.handleOnHover(index)}
           onMouseOut={this.handleOnHoverOff(index)}
           innerRef={div => this.listRows.push(div)}
+          color={color}
         >
           <Link
             to={path}
@@ -157,7 +165,7 @@ class LocalContainer extends Component {
 
   handleClick(index) {
     return () => {
-      this.props.rotationRestart(); this.props.viewRestart()
+      // this.props.rotationRestart(); this.props.viewRestart()
       this.setState({activeIndex: index})
     }
   }

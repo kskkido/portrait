@@ -18,7 +18,7 @@ const List = styled.ul`
 
 const ListRow = styled.li`
   padding-left: 1em;
-  color: #D3D3D3;
+  color: #F2F7EF;
   & a {
     display: block;
     height: 30px;

@@ -5,7 +5,7 @@ import Draggable from 'gsap/Draggable'
 import { TweenLite } from 'gsap'
 
 import { Slide } from '../Shared/Transition'
-import { MainContainer, BackgroundWrapper } from '../Shared/Styles'
+import { MainContainer } from '../Shared/Styles'
 import { rotationChange, rotationRestart, viewRestart } from '../../reducers/events'
 
 import Navigation from './Navigation'
@@ -26,8 +26,13 @@ const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain
           getDom={inputNav}
         />
       </div>
-      <TransitionGroup>
-        <Slide key={viewIndex} color={backgroundColor ? backgroundColor[viewIndex] : undefined} targetOffset={targetOffset} exit={false}>
+      <TransitionGroup appear={false}>
+        <Slide
+          key={viewIndex}
+          color={backgroundColor ? backgroundColor[viewIndex] : undefined}
+          targetOffset={targetOffset}
+          exit={false}
+        >
           <div ref={inputBody}>
             {children}
           </div>
@@ -42,7 +47,6 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      direction: 'left',
       targetOffset: 50, //arbitrary
     }
 
@@ -123,11 +127,9 @@ class LocalContainer extends Component {
     this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
   }
 
-  componentWillUnmount() {
-    console.log('UNMOUNTING')
-    this.props.viewRestart()
-    this.props.rotationRestart()
-  }
+  // componentWillUnmount() {
+  //   this.props.rotationRestart(); this.props.viewRestart();
+  // }
 
   handleOnWheel ({nativeEvent}) {
     LocalContainer.preventEvent(nativeEvent)

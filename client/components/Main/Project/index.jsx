@@ -28,6 +28,11 @@ class LocalContainer extends Component {
     return viewData.projects.backgroundColor
   }
 
+  componentWillMount() {
+       console.log('MOUNTINIINIING')
+    this.props.rotationRestart(); this.props.viewRestart();
+  }
+
   render () {
 
     return (

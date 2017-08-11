@@ -5,7 +5,7 @@ import { TimelineLite, Power2 } from 'gsap'
 import { viewData } from './Data'
 
 let toggle = false
-  , prevColor = '#ecf0f1'
+  , running = false
 
 const themeColor = {
   '/': '#ecf0f1',
@@ -22,14 +22,13 @@ const showAnimation = (() => {
   const slideVerticalBackground = (bgBehind, bgFront, tl, lastAnimation, repeat = 0) => {
     if (repeat < 0) {
       lastAnimation(tl)
-    }
-    else {
+    } else {
       tl
         .set(bgBehind, {zIndex: behindIndex}) // push current front to back
         .set(bgFront, {zIndex: frontIndex}) // push current back to front, does not appear, since height will be tweened from 0
         .from(bgFront, slideDuration, {
           height: 0,
-          onComplete: (toggle = !toggle, slideVerticalBackground),
+          onComplete: slideVerticalBackground,
           onCompleteParams: [bgFront, bgBehind, tl, lastAnimation, repeat - 1]
         }) // tween new front to fill background
     }
@@ -39,11 +38,14 @@ const showAnimation = (() => {
     tl
       .to(target, fadeInDuration, {
         autoAlpha: 1,
-        marginTop: '+=20px'
+        marginTop: '+=20px',
+        onComplete: () => running = false
       })
   }
 
   return (duration, color) => (target) => {
+    console.log('RUNNIN VERTICAL SLIDE')
+    running = true
     const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
         , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
         , repeat = Math.floor((duration - fadeInDuration) / slideDuration) - 1
@@ -51,7 +53,7 @@ const showAnimation = (() => {
           .set(target, {autoAlpha: 0, marginTop: '-=20px'})
           .set(behind, {backgroundColor: color})
     slideVerticalBackground(front, behind, tl, fadeInContent(target), repeat)
-    console.log(toggle, 'BGONE IS FRONT IF FALSE : BGTWO IF TRUE')
+    toggle = !toggle
   }
 })()
 
@@ -70,7 +72,7 @@ export const Show = (props) => {
   return (
     <Transition
       {...props}
-      onEntering={showAnimation(duration || 0.5, themeColor[props.pathname || '/'])}
+      onEnter={showAnimation(duration || 0.5, themeColor[props.pathname || '/'])}
     />
   )
 }
@@ -111,7 +113,6 @@ const slideAnimation = (() => {
       .from(bgFront, slideDuration, {
         width: 0,
         ease: Power2.easeInOut,
-        onComplete: () => toggle = !toggle
       })
   }
 
@@ -125,14 +126,17 @@ const slideAnimation = (() => {
   }
 
   return (duration, offset, color) => (target) => {
+    if (running) return
+    console.log('HORIZONTAL SLIDE')
+
     const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
         , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
         , direction = offset > 0 ? 'right' : 'left'
         , tl = new TimelineLite()
           .set(behind, {backgroundColor: color})
           // .set(front, {backgroundColor: prevColor})
-    slideHorizontalBackground(front, behind, tl, direction)
-    slideInContent(offset, target, tl)
+    slideHorizontalBackground(front, behind, tl, direction); slideInContent(offset, target, tl)
+    toggle = !toggle
   }
 })()
 
