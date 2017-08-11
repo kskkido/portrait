@@ -11,7 +11,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items; center;
-  min-height: 100vh;
+  height: 100vh;
   animation: ${fadeIn} 0.5s ease-in-out 0s;
 `
 

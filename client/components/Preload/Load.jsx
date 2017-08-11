@@ -12,15 +12,14 @@ const Container = styled.div.attrs({
   })
 })`
   flex: 1;
-  align-self: center;
   position: relative;
 `
 
 const LoadContainer = styled.div`
   position: absolute;
-  bottom: 50px;
+  height: 50vh;
   width: 100%;
-  float: right;
+  bottom: 0px;
 `
 
 const ProgressBar = styled.div.attrs({
@@ -28,8 +27,8 @@ const ProgressBar = styled.div.attrs({
     width: `${props.loadProgress}%`,
   })
 })`
-  height: 2px;
-  background-color: black;
+  border-top: 2px solid;
+  height: 100%;
 `
 
 const LoadingText = Title3.extend`
@@ -39,7 +38,7 @@ const LoadingText = Title3.extend`
 `
 
 const Load = ({loadProgress}) => (
-  <Container key="load" loadProgress={loadProgress}>
+  <Container loadProgress={loadProgress}>
     <LoadContainer>
       <LoadingText>Loading: {`${loadProgress}`}</LoadingText>
       <ProgressBar loadProgress={loadProgress} />

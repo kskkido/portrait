@@ -5,7 +5,7 @@ import Draggable from 'gsap/Draggable'
 import { TweenLite } from 'gsap'
 
 import { Slide } from '../Shared/Transition'
-import { MainContainer } from '../Shared/Styles'
+import { MainContainer, BackgroundWrapper } from '../Shared/Styles'
 import { rotationChange, rotationRestart, viewRestart } from '../../reducers/events'
 
 import Navigation from './Navigation'
@@ -16,7 +16,7 @@ import Navigation from './Navigation'
   */
 
 
-const ContentView = ({ children, isCenter, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
+const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
   return (
     <MainContainer innerRef={inputMain} onWheel={onWheel}>
       <div style={{maxHeight: '100px'}}>
@@ -27,7 +27,7 @@ const ContentView = ({ children, isCenter, inputBody, inputMain, inputNav, navig
         />
       </div>
       <TransitionGroup>
-        <Slide key={viewIndex} targetOffset={targetOffset} exit={false}>
+        <Slide key={viewIndex} color={backgroundColor ? backgroundColor[viewIndex] : undefined} targetOffset={targetOffset} exit={false}>
           <div ref={inputBody}>
             {children}
           </div>
@@ -123,9 +123,10 @@ class LocalContainer extends Component {
     this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
   }
 
-  componentWillUnMount() {
-    this.props.rotationRestart()
+  componentWillUnmount() {
+    console.log('UNMOUNTING')
     this.props.viewRestart()
+    this.props.rotationRestart()
   }
 
   handleOnWheel ({nativeEvent}) {
@@ -138,14 +139,14 @@ class LocalContainer extends Component {
   render() {
 
     return (
-      <ContentView // ABOUT OR PROJECT
-        {...this.props}
-        {...this.state}
-        onWheel={this.handleOnWheel}
-        inputBody={div => this.body = div}
-        inputMain={div => this.mainDiv = div}
-        inputNav={div => this.nav = div}
-      />
+        <ContentView // ABOUT OR PROJECT
+          {...this.props}
+          {...this.state}
+          onWheel={this.handleOnWheel}
+          inputBody={div => this.body = div}
+          inputMain={div => this.mainDiv = div}
+          inputNav={div => this.nav = div}
+        />
     )
   }
 }

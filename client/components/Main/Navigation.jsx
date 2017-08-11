@@ -80,16 +80,12 @@ class LocalContainer extends Component {
     this.willSetView(LocalContainer.round(rotation, length))
   }
 
-  componentWillUnmount() {
-    this.props.rotationRestart()
-    this.props.viewRestart()
-  }
-
   render() {
     const navigationDivs = this.props.navigationList.map(LocalContainer.createNavigationDiv)
 
     return (
       <NavigationDiv
+        id="nav"
         isCenter={this.props.isCenter || false}
         innerRef={(div) => {
           this.mainNav = div

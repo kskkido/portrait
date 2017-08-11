@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import styled, { injectGlobal } from 'styled-components'
 
 import { fadeIn } from './components/Shared/Styles'
+import Background from './components/Background'
 import Sidenav from './components/Sidenav'
 import Main from './components/Main'
 import Preload from './components/Preload'
@@ -31,6 +32,7 @@ const Loaded = () => (
 const App = ({ loaded }) => (
   <BrowserRouter>
     <div>
+      <Background />
       {loaded ?
         <Loaded /> :
         <Preload />

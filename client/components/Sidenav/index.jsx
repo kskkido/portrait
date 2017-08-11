@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineMax } from 'gsap'
@@ -6,6 +7,7 @@ import { TimelineMax } from 'gsap'
 import SubList from './SubList'
 import { viewData } from '../Shared/Data'
 
+import { rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
@@ -154,7 +156,10 @@ class LocalContainer extends Component {
   }
 
   handleClick(index) {
-    return () => this.setState({activeIndex: index})
+    return () => {
+      this.props.rotationRestart(); this.props.viewRestart()
+      this.setState({activeIndex: index})
+    }
   }
 
   handleOnHover(index) {
@@ -178,5 +183,10 @@ class LocalContainer extends Component {
   }
 }
 
-export default LocalContainer
+const mapDispatchToProps = (dispatch) => ({
+  rotationRestart: () => dispatch(rotationRestart()),
+  viewRestart: () => dispatch(viewRestart()),
+})
+
+export default connect(null, mapDispatchToProps)(LocalContainer)
 
