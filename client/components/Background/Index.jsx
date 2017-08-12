@@ -17,17 +17,20 @@ const cyan = '#66D7D1'
     , yellowLight = '#F7B32B'
     , cloud = '#ecf0f1'
 
-const BgWrapper = styled.div`
+const BgWrapper = styled.div.attrs({
+  style: props => ({
+    height: props.height || '100%',
+    width: props.width || '100%'
+  })
+})`
   overflow: hidden;
   position: absolute;
   top: 0;
-  width: 100%;
-  height: 100vh;
   z-index: -1000;
 `
 
 const BgOne = styled.div`
-  background: ${cloud};
+  background-color: ${cloud};
   position: absolute;
   top: 0;
   width: 100%;
@@ -36,7 +39,7 @@ const BgOne = styled.div`
 `
 
 const BgTwo = styled.div`
-  background: ${skin};
+  background-color: ${skin};
   position: absolute;
   top: 0;
   width: 100%;
@@ -44,12 +47,31 @@ const BgTwo = styled.div`
   z-index: -100;
 `
 
+const BgDiv = styled.div`
+  background-color: inherit;
+  float: left;
+  top: 0;
+  width: 25%;
+  height: 100%;
+  z-index: inherit;
+`
+
 const Background = (props) => {
 
   return (
-    <BgWrapper>
-      <BgOne id="bgOne" />
-      <BgTwo id="bgTwo" />
+    <BgWrapper {...props}>
+      <BgOne id="bgOne">
+        {/* <BgDiv />
+        <BgDiv />
+        <BgDiv />
+        <BgDiv /> */}
+      </BgOne>
+      <BgTwo id="bgTwo">
+        {/* <BgDiv />
+        <BgDiv />
+        <BgDiv />
+        <BgDiv /> */}
+      </BgTwo>
     </BgWrapper>
   )
 }
@@ -58,14 +80,29 @@ class LocalContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      top: 0
+      height: '100%',
+      width: '100%'
     }
+
+    this.onResize = this.onResize.bind(this)
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', () => {
+      this.onResize(window.innerHeight, window.innerWidth)
+    })
+  }
+
+  onResize(height, width) {
+    this.setState(Object.assign({}, {height, width}))
   }
 
   render () {
 
     return (
-      <Background />
+      <Background
+        {...this.state}
+      />
     )
   }
 }

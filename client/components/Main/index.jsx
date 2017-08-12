@@ -3,7 +3,9 @@ import { Route, Switch } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
 import { Show } from '../Shared/Transition'
+
 import About from './About'
+import Contact from './Contact'
 import Project from './Project'
 import Kido from './Kido'
 
@@ -27,6 +29,7 @@ const BodyRoutes = () => (
           <Switch location={location}>
             <Route path="/about" component={About} />
             <Route path="/projects" component={Project} />
+            <Route path="/contact" component={Contact} />
             <Route exact path="/" component={Kido} />
           </Switch>
         </Show>

@@ -11,6 +11,7 @@ const themeColor = {
   '/': '#ecf0f1',
   '/about': viewData.about.backgroundColor[0],
   '/projects': viewData.projects.backgroundColor[0],
+  '/contact': '#ecf0f1'
 }
 
 const showAnimation = (() => {
@@ -53,6 +54,48 @@ const showAnimation = (() => {
           .set(target, {autoAlpha: 0, marginTop: '-=20px'})
           .set(behind, {backgroundColor: color})
     slideVerticalBackground(front, behind, tl, fadeInContent(target), repeat)
+    toggle = !toggle
+  }
+})()
+
+const _showAnimation = (() => {
+  const frontIndex = -99
+    , behindIndex = -100
+    , slideDuration = 0.39
+    , fadeInDuration = 0.3
+
+  const slideVerticalBackground = ([bgFront, ...rest], tl, lastAnimation, color) => {
+    if (!bgFront) {
+      lastAnimation(tl)
+    } else {
+      tl
+        .set(bgFront, {zIndex: frontIndex, backgroundColor: color}) // push current back to front, does not appear, since height will be tweened from 0
+        .from(bgFront, 0.3, {
+          height: 0,
+          onComplete: slideVerticalBackground,
+          onCompleteParams: [rest, tl, lastAnimation, color]
+        }) // tween new front to fill background
+    }
+  }
+
+  const fadeInContent = (target) => (tl) => {
+    tl
+      .to(target, fadeInDuration, {
+        autoAlpha: 1,
+        marginTop: '+=20px',
+        onComplete: () => running = false
+      })
+  }
+
+  return (duration, color) => (target) => {
+    running = true
+    const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
+        , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
+        , tl = new TimelineLite()
+          .set(target, {autoAlpha: 0, marginTop: '-=20px'})
+          .set(behind, {zIndex: frontIndex})
+          .set(front, {zIndex: behindIndex}) // push current front to back
+    slideVerticalBackground(behind.childNodes, tl, fadeInContent(target), color)
     toggle = !toggle
   }
 })()
@@ -109,10 +152,12 @@ const slideAnimation = (() => {
   const slideHorizontalBackground = (bgBehind, bgFront, tl, direction) => {
     tl
       .set(bgBehind, {zIndex: behindIndex})
-      .set(bgFront, {zIndex: frontIndex, [direction]: 0})
+      .set(bgFront, {zIndex: frontIndex})
       .from(bgFront, slideDuration, {
+        [direction]: 0,
         width: 0,
         ease: Power2.easeInOut,
+        clearProps: direction
       })
   }
 
@@ -126,15 +171,13 @@ const slideAnimation = (() => {
   }
 
   return (duration, offset, color) => (target) => {
-    if (running) return
-    console.log('HORIZONTAL SLIDE')
+    if (running) return // hacky
 
     const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
         , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
         , direction = offset > 0 ? 'right' : 'left'
         , tl = new TimelineLite()
           .set(behind, {backgroundColor: color})
-          // .set(front, {backgroundColor: prevColor})
     slideHorizontalBackground(front, behind, tl, direction); slideInContent(offset, target, tl)
     toggle = !toggle
   }

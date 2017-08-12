@@ -31,12 +31,12 @@ export const fadeOut = keyframes`
 export const MainContainer = styled.div`
   display: flex;
   min-height: 100vh;
-  flex-direction: column;
+  flex-direction: ${props => props.row ? 'row' : 'column'};
 `
 
 export const BodyContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => props.row ? 'row' : 'column'};
   justify-content: flex-start;
 `
 

@@ -84,7 +84,7 @@ const listData = {
   },
   row4: {
     text: ['Contact'],
-    path: '/',
+    path: '/contact',
     color: '#ecf0f1',
     subTextList: [],
   }
