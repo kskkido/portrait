@@ -29,7 +29,10 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-       console.log('MOUNTINIINIING')
+    this.props.rotationRestart(); this.props.viewRestart();
+  }
+
+  componentWillUnmount() {
     this.props.rotationRestart(); this.props.viewRestart();
   }
 

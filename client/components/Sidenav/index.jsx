@@ -110,7 +110,7 @@ const SideNav = ({ children }) => (
     <List>
       {children}
     </List>
-        <Overlay />
+    <Overlay />
   </Container>
 )
 

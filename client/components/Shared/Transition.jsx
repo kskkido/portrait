@@ -29,7 +29,7 @@ const showAnimation = (() => {
         .set(bgFront, {zIndex: frontIndex}) // push current back to front, does not appear, since height will be tweened from 0
         .from(bgFront, slideDuration, {
           height: 0,
-          ease: Power2.easeInOut,
+          ease: Power2.easeOut,
           onComplete: slideVerticalBackground,
           onCompleteParams: [bgFront, bgBehind, tl, lastAnimation, repeat - 1]
         }) // tween new front to fill background
@@ -40,7 +40,7 @@ const showAnimation = (() => {
     tl
       .to([sideNav, target], fadeInDuration, {
         autoAlpha: 1,
-        marginTop: '+=20px',
+        marginTop: '+=40px',
         onComplete: () => running = false
       })
   }
@@ -52,7 +52,7 @@ const showAnimation = (() => {
         , sideNav = document.getElementById('sideNav')
         , repeat = Math.floor((duration - fadeInDuration) / slideDuration) - 1
         , tl = new TimelineLite()
-          .set([target, sideNav], {autoAlpha: 0, marginTop: '-=20px'})
+          .set([target, sideNav], {autoAlpha: 0, marginTop: '-=40px'})
           .set(behind, {backgroundColor: color})
     slideVerticalBackground(front, behind, tl, fadeInContent(sideNav, target), repeat)
     toggle = !toggle
@@ -111,6 +111,14 @@ const slideAnimation = (() => {
   }
 })()
 
+const fadeOut = (target) => {
+  const tl = new TimelineLite()
+  tl
+    .to(target, 0.1, {
+      autoAlpha: 0
+    })
+}
+
 export const Slide = (_props) => {
   const props = Object.assign({}, _props)
     delete props.targetOffset; delete props.color
@@ -118,7 +126,7 @@ export const Slide = (_props) => {
     <Transition
       {...props}
       timeout={600}
-      onEntering={slideAnimation(props.duration || 0.8, _props.targetOffset % 200, _props.color || '#ecf0f1')}
+      onEnter={slideAnimation(props.duration || 0.8, _props.targetOffset % 200, _props.color || '#ecf0f1')}
     />
   )
 }
