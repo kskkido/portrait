@@ -12,20 +12,19 @@ const Container = styled.div`
 
 const List = styled.ul`
   list-style: disc;
-  padding-right: 0;
-  width: 100%;
+  width: 70%;
   opacity: 0.8;
 `
 
 const ListRow = styled.li`
-  border-bottom: 2px solid;
   padding-left: 1em;
-  color: #D3D3D3;
+  color: #F2F7EF;
   & a {
     display: block;
     height: 30px;
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
   }
 `
 
@@ -60,7 +59,7 @@ class LocalContainer extends Component {
   }
 
   static enterAnimation(target) {
-    new TimelineMax()
+    return new TimelineMax()
       .from(target, 0.2, {
         height: '0px',
       })
@@ -76,7 +75,7 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
-    LocalContainer.enterAnimation(this.mainDiv)
+    this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
 
     if (this.props.viewIndex === 0 ) { // a little hacky
@@ -101,9 +100,9 @@ class LocalContainer extends Component {
           onMouseOut={this.handleOnHoverOff(index)}
           innerRef={div => this.listRows.push(div)}
         >
-          <Link to={`${path}`} onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}>
+          <a onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}>
             <ListText>{text}</ListText>
-          </Link>
+          </a>
         </ListRow>
       )
     }

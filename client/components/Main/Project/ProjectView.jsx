@@ -13,34 +13,35 @@ import ProjectText from './content'
 //   Object.keys(metadata).map(createMetadataItem(metadata))
 // )
 
-// const Image = styled.div`
-//   width: 400px;
-//   height: 337px;
-//   background-image: url(mac-icon.png);
-//   background-repeat: no-repeat;
-//   background-size: contain;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-// `
+const Image = styled.div`
+  align-self: center;
+  width: 450px;
+  height: 214px;
+  background-image: url(leopard.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`
 
-// const ImageLink = styled.a`
-//   align-self: center;
-//   margin-top: 20px;
-//   width: 360px;
-//   height: 202px;
-// `
+const ImageLink = styled.a`
+  align-self: center;
+  margin-top: 14px;
+  width: 308px;
+  height: 190px;
+`
 
-// const ProjectImage = styled.div.attrs({
-//   style: props => ({
-//     backgroundImage: `url(${props.imageSource})`
-//   })
-// })`
-//   width: inherit;
-//   height: inherit;
-//   background-repeat: no-repeat;
-//   background-size: contain;
-// `
+const ProjectImage = styled.div.attrs({
+  style: props => ({
+    backgroundImage: `url(${props.imageSource})`
+  })
+})`
+  width: inherit;
+  height: inherit;
+  background-repeat: no-repeat;
+  background-size: contain;
+`
 
 const BodyText = styled.div`
   flex 1;
@@ -60,7 +61,11 @@ const ProjectView = ({ viewIndex, language, scale }) => {
       </Title>
     </Flex1>
     <BodyContent>
-      <MacIcon imageSource={data.imageSource} url={data.url} scale={scale} />
+      <Image>
+        <ImageLink href={data.url} target="_blank">
+          <ProjectImage imageSource={data.imageSource}/>
+        </ImageLink>
+      </Image>
       <BodyText>
         <h3>Technology</h3>
         <p>

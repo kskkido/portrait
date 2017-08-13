@@ -1,21 +1,5 @@
+import React from 'react'
 import styled, {keyframes} from 'styled-components'
-
-// const cyan = '#66D7D1'
-//     , orange = '#FC7753'
-//     , blue = '#42CAFD'
-//     , skyBlue = '#D7F5F5'
-//     , rouge = '#FDF5BF'
-//     , green = '#C2EFB3'
-//     , yellow = '#F7F052'
-//     , purple = '#9DACFF'
-//     , lightGreen = '#94E8B4'
-//     , slimeGreen = '#7DDF64'
-
-const red = '#E3170A'
-    , cyan = '#A9E5BB'
-    , skin = '#FCF6B1'
-    , yellow = '#F7B32B'
-
 
 export const fadeIn = keyframes`
   0% {
@@ -33,11 +17,8 @@ export const fadeOut = keyframes`
   }
 
   50% {
+    width: 0px;
     opacity: 0;
-  }
-
-  60% {
-    padding-left: 2000px;
   }
 
   100% {
@@ -47,13 +28,13 @@ export const fadeOut = keyframes`
 
 export const MainContainer = styled.div`
   display: flex;
-  min-height: 98vh;
-  flex-direction: column;
+  min-height: 100vh;
+  flex-direction: ${props => props.row ? 'row' : 'column'};
 `
 
 export const BodyContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => props.row ? 'row' : 'column'};
   justify-content: flex-start;
 `
 
@@ -63,7 +44,6 @@ export const BodyContent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  overflow: hidden;
 `
 
 export const BodyText = styled.div`
@@ -109,3 +89,23 @@ export const Title3 = styled.h3`
   text-transform: uppercase;
   font-size: 1.2em;
 `
+
+export const TitleDiv = styled.div`
+  min-height: 60px;
+`
+
+const Letter = styled.span`
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1.4em;
+`
+
+export const createTitle = (string) => {
+  const title = []
+  for (let i = 0; i < string.length; i++) {
+    title.push(
+      <Letter key={`${string}_${i}`}>{string[i]}</Letter>
+    )
+  }
+  return title
+}

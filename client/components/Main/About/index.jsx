@@ -7,6 +7,7 @@ import AboutView2 from './AboutView2'
 import AboutView3 from './AboutView3'
 import AboutView4 from './AboutView4'
 
+import { viewRestart, rotationRestart } from '../../../reducers/events'
 import { viewData } from '../../Shared/Data'
 
 const renderCurrentView = (viewIndex, language) => {
@@ -21,11 +22,11 @@ const renderCurrentView = (viewIndex, language) => {
   }
 }
 
-const About = ({ navigationList, viewIndex }) => {
+const About = ({ backgroundColor, navigationList, viewIndex }) => {
   return (
     <BodyComponent
+      backgroundColor={backgroundColor}
       navigationList={navigationList}
-      viewIndex={viewIndex}
     >
       {renderCurrentView(viewIndex)}
     </BodyComponent>
@@ -37,10 +38,23 @@ class LocalContainer extends Component {
     return viewData.about.navigationList
   }
 
+  static get backgroundColor () {
+    return viewData.about.backgroundColor
+  }
+
+  componentWillMount() {
+    this.props.rotationRestart(); this.props.viewRestart();
+  }
+
+  componentWillReceiveProps() {
+    console.log(document.getElementById('title').childNodes, 'WEI')
+  }
+
   render () {
 
     return (
       <About
+        backgroundColor={LocalContainer.backgroundColor}
         navigationList={LocalContainer.navigationList}
         viewIndex={this.props.viewIndex}
       />
@@ -48,4 +62,9 @@ class LocalContainer extends Component {
   }
 }
 
-export default connect(({events: {viewIndex, language}}) => ({viewIndex, language}))(LocalContainer)
+const mapDispatchToProps = (dispatch) => ({
+  viewRestart: () => dispatch(viewRestart()),
+  rotationRestart: () => dispatch(rotationRestart())
+})
+
+export default connect(({events: {viewIndex, language}}) => ({viewIndex, language}), mapDispatchToProps)(LocalContainer)

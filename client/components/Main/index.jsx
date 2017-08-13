@@ -3,7 +3,9 @@ import { Route, Switch } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
 import { Show } from '../Shared/Transition'
+
 import About from './About'
+import Contact from './Contact'
 import Project from './Project'
 import Kido from './Kido'
 
@@ -18,35 +20,37 @@ const Container = styled.div`
 
 /* ====== utils ====== */
 
-// const BodyRoutes = () => (
-//   <Route render={({ location }) => {
-//     return (
-//       <TransitionGroup>
-//         <Show key={location.key} timeout={700} exit={false}>
-//           <Switch location={location}>
-//             <Route path="/about" component={About} />
-//             <Route path="/projects" component={Project} />
-//             <Route exact path="/" component={Kido} />
-//           </Switch>
-//         </Show>
-//       </TransitionGroup>
-//     )
-//   }}
-//   />
-// )
-
 const BodyRoutes = () => (
   <Route render={({ location }) => {
+    console.log(location, 'LOCAATION')
     return (
-      <Switch location={location}>
-        <Route path="/about" component={About} />
-        <Route path="/projects" component={Project} />
-        <Route exact path="/" component={Kido} />
-      </Switch>
+      <TransitionGroup>
+        <Show key={location.key} pathname={location.pathname} timeout={1500} exit={false}>
+          <Switch location={location}>
+            <Route path="/about" component={About} />
+            <Route path="/projects" component={Project} />
+            <Route path="/contact" component={Contact} />
+            <Route exact path="/" component={Kido} />
+          </Switch>
+        </Show>
+      </TransitionGroup>
     )
   }}
   />
 )
+
+// const BodyRoutes = () => (
+//   <Route render={({ location }) => {
+//     return (
+//       <Switch location={location}>
+//         <Route path="/about" component={About} />
+//         <Route path="/projects" component={Project} />
+//         <Route exact path="/" component={Kido} />
+//       </Switch>
+//     )
+//   }}
+//   />
+// )
 
 const Main = () => {
   return (

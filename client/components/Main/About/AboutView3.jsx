@@ -1,15 +1,15 @@
 import React from 'react'
 
-import { BodyContainer, BodyText, Flex1, BodyContent, Title } from '../../Shared/Styles'
+import { BodyContainer, BodyText, Flex1, BodyContent, TitleDiv, createTitle } from '../../Shared/Styles'
 import HomeText from './content'
 
 
 const HomeView = ({ language }) => (
   <BodyContainer>
     <Flex1>
-      <Title>
-        {'< Where >'}
-      </Title>
+      <TitleDiv id="title">
+        {createTitle('< Where >')}
+      </TitleDiv>
     </Flex1>
     <BodyContent>
       <BodyText>
