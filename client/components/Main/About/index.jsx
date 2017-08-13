@@ -43,8 +43,11 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-    console.log('MOUNTINIINIING')
     this.props.rotationRestart(); this.props.viewRestart();
+  }
+
+  componentWillReceiveProps() {
+    console.log(document.getElementById('title').childNodes, 'WEI')
   }
 
   render () {

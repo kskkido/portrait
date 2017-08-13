@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { TransitionGroup } from 'react-transition-group'
 import styled from 'styled-components'
 import { TimelineMax } from 'gsap'
-
 import SubList from './SubList'
+
 import { viewData } from '../Shared/Data'
+import { Collapse } from '../Shared/Transition'
 
 import { rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
   flex: 1.5;
-  display: flex;
-  flex-direction: column;
+  position: relative;
 `
 
 // const ColorBlock = styled.div.attrs({
@@ -26,13 +27,26 @@ const Container = styled.div`
 //   height: 100%;
 // `
 
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 285px;
+  z-index: 99;
+  background-color: #D3D3D3;
+  opacity: 0.4;
+`
+
 const List = styled.ul`
+  position: fixed;
+  margin-left: 30px;
   list-style: none;
   margin-top: 100px;
   padding: 0;
-  width: 85%;
-  height: 100%;
-  align-self: flex-end;
+  width: 285px;
+  height: 80%;
+  z-index: 100;
+}
 `
 
 const ListRow = styled.li`
@@ -55,6 +69,7 @@ const ListRowContainer = styled.div.attrs({
   }
 }
 `
+// shadow... box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 
 const ListText = styled.h3`
   padding-top: 10px;
@@ -91,10 +106,11 @@ const listData = {
 }
 
 const SideNav = ({ children }) => (
-  <Container>
+  <Container id="sideNav">
     <List>
       {children}
     </List>
+       {/* <Overlay /> */}
   </Container>
 )
 
@@ -151,9 +167,7 @@ class LocalContainer extends Component {
             {text.map(el => <ListText key={el}>{el}</ListText>)}
           </Link>
 
-          <div>
-            {isActive && subTextList.length > 0 && <SubList textList={subTextList} path={path} />}
-          </div>
+          {isActive && subTextList.length > 0 && <SubList textList={subTextList} path={path} />}
         </ListRowContainer>
       </ListRow>
     )

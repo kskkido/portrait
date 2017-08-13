@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { TweenMax, Power2 } from 'gsap'
+import { viewData } from '../../Shared/Data'
 import { MainContainer } from '../../Shared/Styles'
 import Navigation from '../Navigation'
 
@@ -19,22 +21,23 @@ const createAnimation = (target) => {
 
 
 class LocalContainer extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      navigationList: ['Welcome', 'To', 'My', 'Website'],
-    }
+  static get navigationList() {
+    return viewData.home.navigationList
+  }
+
+  static get backgroundColor() {
+    return viewData.home.backgroundColor
   }
 
   componentDidMount() {
-    console.log(this.bodyDiv)
     createAnimation(this.bodyDiv)
   }
 
   render() {
     return (
       <BodyComponent
-        navigationList={this.state.navigationList}
+        backgroundColor={LocalContainer.backgroundColor}
+        navigationList={LocalContainer.navigationList}
         isCenter={true}
         getNav={div => this.bodyDiv = div}
       />

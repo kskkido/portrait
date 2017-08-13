@@ -8,10 +8,10 @@ let toggle = false
   , running = false
 
 const themeColor = {
-  '/': '#ecf0f1',
+  '/': '#e8e5e6',
   '/about': viewData.about.backgroundColor[0],
   '/projects': viewData.projects.backgroundColor[0],
-  '/contact': '#ecf0f1'
+  '/contact': '#c1839f'
 }
 
 const showAnimation = (() => {
@@ -29,15 +29,16 @@ const showAnimation = (() => {
         .set(bgFront, {zIndex: frontIndex}) // push current back to front, does not appear, since height will be tweened from 0
         .from(bgFront, slideDuration, {
           height: 0,
+          ease: Power2.easeInOut,
           onComplete: slideVerticalBackground,
           onCompleteParams: [bgFront, bgBehind, tl, lastAnimation, repeat - 1]
         }) // tween new front to fill background
     }
   }
 
-  const fadeInContent = (target) => (tl) => {
+  const fadeInContent = (sideNav, target) => (tl) => {
     tl
-      .to(target, fadeInDuration, {
+      .to([sideNav, target], fadeInDuration, {
         autoAlpha: 1,
         marginTop: '+=20px',
         onComplete: () => running = false
@@ -45,69 +46,18 @@ const showAnimation = (() => {
   }
 
   return (duration, color) => (target) => {
-    console.log('RUNNIN VERTICAL SLIDE')
     running = true
     const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
         , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
+        , sideNav = document.getElementById('sideNav')
         , repeat = Math.floor((duration - fadeInDuration) / slideDuration) - 1
         , tl = new TimelineLite()
-          .set(target, {autoAlpha: 0, marginTop: '-=20px'})
+          .set([target, sideNav], {autoAlpha: 0, marginTop: '-=20px'})
           .set(behind, {backgroundColor: color})
-    slideVerticalBackground(front, behind, tl, fadeInContent(target), repeat)
+    slideVerticalBackground(front, behind, tl, fadeInContent(sideNav, target), repeat)
     toggle = !toggle
   }
 })()
-
-const _showAnimation = (() => {
-  const frontIndex = -99
-    , behindIndex = -100
-    , slideDuration = 0.39
-    , fadeInDuration = 0.3
-
-  const slideVerticalBackground = ([bgFront, ...rest], tl, lastAnimation, color) => {
-    if (!bgFront) {
-      lastAnimation(tl)
-    } else {
-      tl
-        .set(bgFront, {zIndex: frontIndex, backgroundColor: color}) // push current back to front, does not appear, since height will be tweened from 0
-        .from(bgFront, 0.3, {
-          height: 0,
-          onComplete: slideVerticalBackground,
-          onCompleteParams: [rest, tl, lastAnimation, color]
-        }) // tween new front to fill background
-    }
-  }
-
-  const fadeInContent = (target) => (tl) => {
-    tl
-      .to(target, fadeInDuration, {
-        autoAlpha: 1,
-        marginTop: '+=20px',
-        onComplete: () => running = false
-      })
-  }
-
-  return (duration, color) => (target) => {
-    running = true
-    const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
-        , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
-        , tl = new TimelineLite()
-          .set(target, {autoAlpha: 0, marginTop: '-=20px'})
-          .set(behind, {zIndex: frontIndex})
-          .set(front, {zIndex: behindIndex}) // push current front to back
-    slideVerticalBackground(behind.childNodes, tl, fadeInContent(target), color)
-    toggle = !toggle
-  }
-})()
-
-// const hideAnimation = (duration) => (target) => {
-//   return new TimelineLite()
-//     .to(target.childNodes[0], duration, {
-//     autoAlpha: 0,
-//     marginTop: '40px',
-//     ease: Power2.easeInOut
-//   })
-// }
 
 export const Show = (props) => {
   const duration = props.timeout / 1000
@@ -119,28 +69,6 @@ export const Show = (props) => {
     />
   )
 }
-
-// const hideAnimation = (duration) => (target) => (
-//   TweenLite.to(target, duration, {
-//     opacity: 0,
-//     height: 0,
-//     ease: Power2.easeInOut
-//   })
-// )
-
-// export const Hide = (props) => (
-//   <Transition
-//     {...props}
-//     timeout={1000}
-//     onExiting={hideAnimation(props.duration || 0.5)}
-//   />
-// )
-
-// don't need this right now
-// const slideAnimationDirection = {
-//   right: {opacity: 0, marginRight: '-200px', ease: Power2.easeOut},
-//   left: {opacity: 0, marginRight: '200px', ease: Power2.easeOut},
-// }
 
 const slideAnimation = (() => {
 
@@ -194,3 +122,34 @@ export const Slide = (_props) => {
     />
   )
 }
+
+// const collapseAnimation = (() => {
+
+//   const collapse = (target, tl) => {
+//     tl
+//       .from(target, 0.2, {
+//         height: '0px',
+//       })
+//       .from(target, 0.2, {
+//         marginLeft: '-10px',
+//         opacity: 0,
+//       })
+//   }
+
+//   return (duration) => (target) => {
+//     const tl = new TimelineLite()
+//     collapse(target, tl)
+//   }
+
+// })()
+
+// export const Collapse = (props) => {
+//   console.log('DO IT', props)
+//   return (
+//     <Transition
+//       {...props}
+//       timeout={600}
+//       onEnter={collapseAnimation(props.duration || 0.4)}
+//     />
+//   )
+// }

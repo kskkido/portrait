@@ -1,49 +1,29 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 
-const cyan = '#66D7D1'
-    , orange = '#FC7753'
-    , blue = '#42CAFD'
-    , skyBlue = '#2EC4B6'
-    , rouge = '#FDF5BF'
-    , green = '#C2EFB3'
-    , yellow = '#F7F052'
-    , purple = '#9DACFF'
-    , lightGreen = '#94E8B4'
-    , slimeGreen = '#7DDF64'
-    , red = '#E3170A'
-    , cyanLight = '#A9E5BB'
-    , skin = '#FCF6B1'
-    , yellowLight = '#F7B32B'
-    , cloud = '#ecf0f1'
-
-const BgWrapper = styled.div.attrs({
-  style: props => ({
-    height: props.height || '100%',
-    width: props.width || '100%'
-  })
-})`
+const BgWrapper = styled.div`
   overflow: hidden;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   z-index: -1000;
 `
 
-const BgOne = styled.div`
-  background-color: ${cloud};
+const BgOne = styled.div.attrs({
+  style: props => ({
+    height: props.theme.height,
+    width: props.theme.width
+  })
+})`
+  background-color: #e8e5e6;
   position: absolute;
   top: 0;
-  width: 100%;
-  height: 100%;
   z-index: -99;
 `
 
-const BgTwo = styled.div`
-  background-color: ${skin};
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
+const BgTwo = BgOne.extend`
+  background-color: #FCF6B1;
   z-index: -100;
 `
 
@@ -56,10 +36,10 @@ const BgDiv = styled.div`
   z-index: inherit;
 `
 
-const Background = (props) => {
+const Background = () => {
 
   return (
-    <BgWrapper {...props}>
+    <BgWrapper id="bgWrapper">
       <BgOne id="bgOne">
         {/* <BgDiv />
         <BgDiv />
@@ -87,6 +67,10 @@ class LocalContainer extends Component {
     this.onResize = this.onResize.bind(this)
   }
 
+  static getDimensions ({height, width}) {
+    return {height, width}
+  }
+
   componentDidMount() {
     window.addEventListener('resize', () => {
       this.onResize(window.innerHeight, window.innerWidth)
@@ -100,9 +84,10 @@ class LocalContainer extends Component {
   render () {
 
     return (
-      <Background
-        {...this.state}
-      />
+      <ThemeProvider theme={LocalContainer.getDimensions(this.state)}>
+        <Background
+        />
+      </ThemeProvider>
     )
   }
 }

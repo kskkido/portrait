@@ -1,3 +1,8 @@
+const grey1 = '#e8e5e6'
+    , grey2 = '#D2CBCB'
+    , grey3 = '#e3e1dd'
+    , grey4 = '#ecf0f1'
+
 const blue2 = '#42CAFD'
     , blue3 = '#84D9FA'
     , blue1 = '#65AFFF'
@@ -6,7 +11,12 @@ const blue2 = '#42CAFD'
 const red1 = '#DD614A'
     , red2 = '#F48668'
     , red3 = '#F4A698'
+
 export const viewData = {
+  home: {
+    navigationList: ['WELCOME', 'TO', 'MY', 'WEBSITE'],
+    backgroundColor: [grey1, grey2, grey3, grey4]
+  },
   about: {
     navigationList: ['WHO', 'WHAT', 'WHERE', 'WHEN'],
     backgroundColor: [blue1, blue2, blue3, blue4],
@@ -18,3 +28,18 @@ export const viewData = {
 }
 
 
+// const cyan = '#66D7D1'
+//     , orange = '#FC7753'
+//     , blue = '#42CAFD'
+//     , skyBlue = '#2EC4B6'
+//     , rouge = '#FDF5BF'
+//     , green = '#C2EFB3'
+//     , yellow = '#F7F052'
+//     , purple = '#9DACFF'
+//     , lightGreen = '#94E8B4'
+//     , slimeGreen = '#7DDF64'
+//     , red = '#E3170A'
+//     , cyanLight = '#A9E5BB'
+//     , skin = '#FCF6B1'
+//     , yellowLight = '#F7B32B'
+//     , cloud = '#e8e5e6'

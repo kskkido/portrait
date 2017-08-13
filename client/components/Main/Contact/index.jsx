@@ -17,8 +17,6 @@ const Column = styled.div`
   position: relative;
 `
 
-const ColumnTop = styled.div``
-
 const ColumnHeader = styled.div`
   position: absolute;
   left: 0;
@@ -33,25 +31,25 @@ const ContactView = ({ inputRef }) => {
     <MainContainer row={true}>
       <ColumnContainer>
         <Column innerRef={inputRef}>
-          <ColumnHeader>col1</ColumnHeader>
+          <ColumnHeader>HOME</ColumnHeader>
         </Column>
       </ColumnContainer>
 
       <ColumnContainer>
         <Column innerRef={inputRef}>
-          <ColumnHeader>col2</ColumnHeader>
+          <ColumnHeader>ABOUT</ColumnHeader>
         </Column>
       </ColumnContainer>
 
       <ColumnContainer>
         <Column innerRef={inputRef}>
-          <ColumnHeader>col3</ColumnHeader>
+          <ColumnHeader>PROJECT</ColumnHeader>
         </Column>
       </ColumnContainer>
 
       <ColumnContainer>
         <Column innerRef={inputRef}>
-          <ColumnHeader>col4</ColumnHeader>
+          <ColumnHeader>CONTACT</ColumnHeader>
         </Column>
       </ColumnContainer>
     </MainContainer>

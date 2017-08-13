@@ -6,20 +6,21 @@ import { loadComplete } from '../../reducers/events'
 
 import { fadeOut, Title3 } from '../Shared/Styles'
 
-const Container = styled.div.attrs({
-  style: props => ({
-    animation: props.loadProgress === 100 ? `${fadeOut} 1s ease-in-out 0s` : `null`
-  })
-})`
+const Container = styled.div`
   flex: 1;
   position: relative;
 `
 
-const LoadContainer = styled.div`
+const LoadContainer = styled.div.attrs({
+  style: props => ({
+    animation: props.loadProgress === 100 ? `${fadeOut} 1s ease-in-out 0s` : `null`
+  })
+})`
   position: absolute;
   height: 50vh;
   width: 100%;
   bottom: 0px;
+  right: 0;
 `
 
 const ProgressBar = styled.div.attrs({
@@ -38,8 +39,8 @@ const LoadingText = Title3.extend`
 `
 
 const Load = ({loadProgress}) => (
-  <Container loadProgress={loadProgress}>
-    <LoadContainer>
+  <Container>
+    <LoadContainer loadProgress={loadProgress}>
       <LoadingText>Loading: {`${loadProgress}`}</LoadingText>
       <ProgressBar loadProgress={loadProgress} />
     </LoadContainer>

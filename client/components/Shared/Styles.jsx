@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, {keyframes} from 'styled-components'
 
 export const fadeIn = keyframes`
@@ -16,11 +17,8 @@ export const fadeOut = keyframes`
   }
 
   50% {
+    width: 0px;
     opacity: 0;
-  }
-
-  60% {
-    padding-left: 2000px;
   }
 
   100% {
@@ -91,3 +89,23 @@ export const Title3 = styled.h3`
   text-transform: uppercase;
   font-size: 1.2em;
 `
+
+export const TitleDiv = styled.div`
+  min-height: 60px;
+`
+
+const Letter = styled.span`
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1.4em;
+`
+
+export const createTitle = (string) => {
+  const title = []
+  for (let i = 0; i < string.length; i++) {
+    title.push(
+      <Letter key={`${string}_${i}`}>{string[i]}</Letter>
+    )
+  }
+  return title
+}
