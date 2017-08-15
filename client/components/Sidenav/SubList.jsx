@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { TimelineMax } from 'gsap'
+import { TimelineLite } from 'gsap'
 import { rotationChange, viewChange } from '../../reducers/events'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
@@ -11,29 +11,59 @@ const Container = styled.div`
 `
 
 const List = styled.ul`
-  list-style: disc;
-  width: 70%;
+  list-style: none;
+  width: 95%;
   opacity: 0.8;
+  padding-left: 6em;
 `
 
 const ListRow = styled.li`
-  padding-left: 1em;
-  color: #F2F7EF;
-  & a {
-    display: block;
-    height: 30px;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-  }
+  color: #F3F2F2;
+`
+
+const ListLink = styled.a`
+  display: block;
+  height: 30px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+`
+
+const LinkBlock = styled.div.attrs({
+  style: props => ({
+    borderLeft: `4px solid ${props.themeColor}`
+  })
+})`
+  height: inherit;
+  position: relative;
+`
+
+const LinkBackground = styled.div.attrs({
+  style: props => ({
+    backgroundColor: props.themeColor
+  })
+})`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  box-size; inherit;
+  z-index: -1;
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)
 `
 
 const ListText = styled.h3`
   vertical-align: middle;
+  padding-left: 1em;
   padding-top: 5px;
   font-weight: normal;
   font-size: 0.7em;
   text-transform: uppercase;
+  opacity: 0.6;
 `
 
 const SideNav = ({ children, inputRef }) => (
@@ -50,23 +80,29 @@ class LocalContainer extends Component {
     return (360 / length) * index
   }
 
-  static createHoverAnimation(target) {
-    return new TimelineMax({paused: true})
-      .to(target, 0.3, {
-        paddingLeft: '3em',
-        color: 'black',
-      })
+  static createHoverAnimation({ childNodes: [background, ...text]}) {
+    return new TimelineLite({paused: true})
+        .to(background, 0.4, {
+          scaleX: 1,
+        })
+        .to(text, 0.4, {
+          opacity: 1,
+          paddingLeft: '3em',
+          color: 'black',
+        }, '-=0.4')
   }
 
-  static enterAnimation(target) {
-    return new TimelineMax()
-      .from(target, 0.2, {
+  static enterAnimation(main, list) {
+    return new TimelineLite()
+      .from(main, 0.6, {
         height: '0px',
       })
-      .from(target, 0.2, {
-        marginLeft: '-10px',
-        opacity: 0,
-      })
+      .staggerFrom(list, 0.5, {
+        autoAlpha: 0,
+        scale: 0,
+        rotationX: '45',
+        rotationY: '45'
+      }, 0.1)
   }
 
   componentWillMount() {
@@ -75,7 +111,7 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
-    this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv)
+    this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv, this.listRows)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
 
     if (this.props.viewIndex === 0 ) { // a little hacky
@@ -88,7 +124,7 @@ class LocalContainer extends Component {
     this.hoverAnimations[viewIndex].play()
   }
 
-  createListItem (path) {
+  createListItem (colors, path) {
     return (text, index, { length }) => {
       const isActive = this.props.viewIndex === index
 
@@ -98,19 +134,26 @@ class LocalContainer extends Component {
           active={isActive}
           onMouseOver={this.handleOnHover(index)}
           onMouseOut={this.handleOnHoverOff(index)}
-          innerRef={div => this.listRows.push(div)}
         >
-          <a onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}>
-            <ListText>{text}</ListText>
-          </a>
+          <ListLink
+            onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}
+          >
+            <LinkBlock
+              themeColor={colors[index]}
+              innerRef={div => this.listRows.push(div)}
+            >
+              <LinkBackground themeColor={colors[index]} />
+              <ListText>{text}</ListText>
+            </LinkBlock>
+          </ListLink>
         </ListRow>
       )
     }
   }
 
 
-  createList (textList, path) {
-    return textList.map(this.createListItem(path))
+  createList ({colors, textList}, path) {
+    return textList.map(this.createListItem(colors, path))
   }
 
   handleClick(index, length) {
@@ -133,11 +176,11 @@ class LocalContainer extends Component {
   }
 
   render() {
-    const { textList, path } = this.props
+    const { colors, textList, path } = this.props
 
     return (
       <SideNav inputRef={div => this.mainDiv = div}>
-        {this.createList(textList, path)}
+        {this.createList({colors, textList}, path)}
       </SideNav>
     )
   }

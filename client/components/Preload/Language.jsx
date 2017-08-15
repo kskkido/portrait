@@ -39,17 +39,11 @@ const Button = styled.button`
     box-sizing: inherit;
     content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  transition: color 0.2s;
-
-  &::before,
-  &::after {
     border: 2px solid transparent;
     width: 0;
     height: 0;
   }
+  transition: color 0.2s;
 
   &::before {
     top: 0;

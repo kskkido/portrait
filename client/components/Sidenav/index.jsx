@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 import styled from 'styled-components'
-import { TimelineMax } from 'gsap'
+import { TimelineLite } from 'gsap'
 import SubList from './SubList'
 
 import { viewData } from '../Shared/Data'
@@ -13,8 +13,10 @@ import { rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
-  flex: 1.5;
+  min-width: 325px;
   position: relative;
+  display: block;
+  z-index: 100;
 `
 
 // const ColorBlock = styled.div.attrs({
@@ -28,61 +30,88 @@ const Container = styled.div`
 // `
 
 const Overlay = styled.div`
-  position: fixed;
-  top: 0;
   height: 100%;
   width: 285px;
-  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 40px;
+  z-index: -2;
   background-color: #D3D3D3;
   opacity: 0.4;
+  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14)
 `
 
 const List = styled.ul`
-  position: fixed;
-  margin-left: 30px;
-  list-style: none;
-  margin-top: 100px;
-  padding: 0;
-  width: 285px;
   height: 80%;
+  width: 265px;
+  position: absolute;
+  list-style: none;
+  left: 60px;
+  top: 80px;
+  padding: 0;
   z-index: 100;
 }
 `
 
+
 const ListRow = styled.li`
+  width: 100%;
+  color: #F3F2F2;
+}
 `
 
-const ListRowContainer = styled.div.attrs({
+const ListLink = styled(Link)`
+  display: block;
+  height: 100px;
+  text-decoration: none;
+  color: inherit;
+`
+
+const LinkBlock = styled.div.attrs({
   style: props => ({
-    borderLeft: `2px solid`
+    borderLeft: `6px solid ${props.themeColor}`
+  })
+})`
+  height: inherit;
+  position: relative;
+`
+
+const LinkBackground = styled.div.attrs({
+  style: props => ({
+    backgroundColor: props.themeColor
   })
 })`
   height: 100%;
-  width: 100%;
-  padding-left: 1em;
-  color: #F2F7EF;
-    & > a {
-    display: block;
-    height: 80px;
-    text-decoration: none;
-    color: inherit;
-  }
-}
+  width: 95%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  box-size; inherit;
+  z-index: -1;
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)
 `
+
 // shadow... box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 
 const ListText = styled.h3`
+  top: 0;
+  bottom: 0;
+  padding-left: 1em;
   padding-top: 10px;
   font-weight: normal;
   font-size: 0.95em;
   text-transform: uppercase;
+  opacity: 0.6;
 `
 
 const listData = {
   row1: {
     text: ['Keisuke Kido', 'Developer'],
     path: '/',
-    color: '#ecf0f1',
+    color: '#e8e5e6',
     subTextList: []
   },
   row2: {
@@ -90,27 +119,29 @@ const listData = {
     path: '/about',
     color: '#65AFFF',
     subTextList: viewData.about.navigationList,
+    colors: viewData.about.backgroundColor
   },
   row3: {
     text: ['Projects'],
     path: '/projects',
     color: '#DD614A',
     subTextList: viewData.projects.navigationList,
+    colors: viewData.projects.backgroundColor
   },
   row4: {
     text: ['Contact'],
     path: '/contact',
-    color: '#ecf0f1',
+    color: '#c1839f',
     subTextList: [],
   }
 }
 
 const SideNav = ({ children }) => (
-  <Container id="sideNav">
-    <List>
+  <Container>
+    <List id="sideNav">
       {children}
     </List>
-        <Overlay />
+      <Overlay />
   </Container>
 )
 
@@ -123,19 +154,36 @@ class LocalContainer extends Component {
     }
   }
 
-  static createHoverAnimation(target) {
-    return new TimelineMax({paused: true})
-      .to(target, 0.3, {
-        paddingLeft: '3em',
-        color: 'black'
-      })
+  static enterAnimation(list) {
+    return new TimelineLite()
+      .staggerFrom(list, 0.4, {
+        autoAlpha: 0,
+        transformOrigin: '0% 0% left',
+        rotationY: 40,
+        rotationX: 40,
+        marginTop: '-=50px',
+        scale: 0,
+      }, 0.07)
   }
+
+  static createHoverAnimation({ childNodes: [background, ...text] }) {
+    return new TimelineLite({paused: true})
+        .to(background, 0.4, {
+          scaleX: 1,
+        })
+        .to(text, 0.4, {
+          paddingLeft: '3em',
+          color: 'black',
+          opacity: 1,
+        }, '-=0.4')
+    }
 
   componentWillMount() {
     this.listRows = []
   }
 
   componentDidMount() {
+    LocalContainer.enterAnimation(this.listRows)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
     this.hoverAnimations[this.state.activeIndex].play()
   }
@@ -148,28 +196,31 @@ class LocalContainer extends Component {
     this.hoverAnimations[this.state.activeIndex].reverse()
   }
 
-  createListItem ({color, text, path, subTextList}, index) {
+  createListItem ({color, text, path, subTextList, colors}, index) {
     const isActive = index === this.state.activeIndex
 
     return (
-      <ListRow key={text[0]}>
-        <ListRowContainer
+        <ListRow
+          key={text[0]}
           active={isActive}
           onMouseOver={this.handleOnHover(index)}
           onMouseOut={this.handleOnHoverOff(index)}
-          innerRef={div => this.listRows.push(div)}
-          color={color}
         >
-          <Link
+          <ListLink
             to={path}
             onClick={ isActive ? e => e.preventDefault() : this.handleClick(index) }
           >
-            {text.map(el => <ListText key={el}>{el}</ListText>)}
-          </Link>
+            <LinkBlock
+              innerRef={div => this.listRows.push(div)}
+              themeColor={color}
+            >
+              <LinkBackground themeColor={color} />
+              {text.map(el => <ListText key={el}>{el}</ListText>)}
+            </LinkBlock>
+          </ListLink>
 
-          {isActive && subTextList.length > 0 && <SubList textList={subTextList} path={path} />}
-        </ListRowContainer>
-      </ListRow>
+          {isActive && subTextList.length > 0 && <SubList textList={subTextList} colors={colors} path={path} />}
+        </ListRow>
     )
   }
 
@@ -179,7 +230,6 @@ class LocalContainer extends Component {
 
   handleClick(index) {
     return () => {
-      // this.props.rotationRestart(); this.props.viewRestart()
       this.setState({activeIndex: index})
     }
   }
