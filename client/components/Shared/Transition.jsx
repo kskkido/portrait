@@ -33,7 +33,7 @@ const showAnimation = (() => {
             ease: Power2.easeOut,
             onComplete: curriedSlide,
             onCompleteParams: [bgFront, bgBehind, tl, repeat - 1]
-          }) // tween new front to fill background
+          }, '+=0.05') // tween new front to fill background
       }
     }
     return curriedSlide
@@ -70,7 +70,7 @@ const showAnimation = (() => {
     running = true
     const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
         , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
-        , sideNav = document.getElementById('sideNav').childNodes
+        , sideNav = [] || document.getElementById('sideNav').childNodes
         , repeat = Math.floor((duration - fadeInDuration) / slideDuration) - 1
         , tl = new TimelineLite()
           .set([target, ...sideNav], {autoAlpha: 0, transformOrigin: '0% 0% left', rotationX: 20, rotationY: 20})

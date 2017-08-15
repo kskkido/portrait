@@ -30,73 +30,81 @@ const Container = styled.div`
 // `
 
 const Overlay = styled.div`
+  height: 100%;
+  width: 285px;
   position: fixed;
   top: 0;
   left: 40px;
-  height: 100%;
-  width: 285px;
   z-index: -2;
   background-color: #D3D3D3;
   opacity: 0.4;
-  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14)
 `
 
 const List = styled.ul`
+  height: 80%;
+  width: 265px;
   position: absolute;
   list-style: none;
   left: 60px;
   top: 80px;
   padding: 0;
-  width: 265px;
-  height: 80%;
   z-index: 100;
 }
 `
 
 
-const ListRow = styled.li.attrs({
-  style: props => ({
-    borderLeft: `6px solid ${props.themeColor}`
-  })
-})`
+const ListRow = styled.li`
   width: 100%;
-  padding-left: 1em;
   color: #F3F2F2;
-  position: relative;
-  &::before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 90%;
-    height: 100%;
-    content: '';
-    box-size; inherit;
-    background-color: ${props => props.themeColor};
-    z-index: -1;
-    transform-origin: left;
-    transform: scaleX(0);
-    transition: transform 0.6s;
-  }
-  &:hover::before {
-    transform: scaleX(1);
-  }
 }
 `
 
 const ListLink = styled(Link)`
-    display: block;
-    height: 100px;
-    text-decoration: none;
-    color: inherit;
+  display: block;
+  height: 100px;
+  text-decoration: none;
+  color: inherit;
+`
+
+const LinkBlock = styled.div.attrs({
+  style: props => ({
+    borderLeft: `6px solid ${props.themeColor}`
+  })
+})`
+  height: inherit;
+  position: relative;
+`
+
+const LinkBackground = styled.div.attrs({
+  style: props => ({
+    backgroundColor: props.themeColor
+  })
+})`
+  height: 100%;
+  width: 95%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  box-size; inherit;
+  z-index: -1;
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)
 `
 
 // shadow... box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 
 const ListText = styled.h3`
+  top: 0;
+  bottom: 0;
+  padding-left: 1em;
   padding-top: 10px;
   font-weight: normal;
   font-size: 0.95em;
   text-transform: uppercase;
+  opacity: 0.6;
 `
 
 const listData = {
@@ -133,7 +141,7 @@ const SideNav = ({ children }) => (
     <List id="sideNav">
       {children}
     </List>
-     <Overlay />
+      <Overlay />
   </Container>
 )
 
@@ -158,11 +166,16 @@ class LocalContainer extends Component {
       }, 0.07)
   }
 
-  static createHoverAnimation(target) {
+  static createHoverAnimation({ childNodes: [background, ...text] }) {
     return new TimelineLite({paused: true})
-        .to(target, 0.3, {
-          paddingLeft: '3em',
+        .to(background, 0.4, {
+          scaleX: 1,
         })
+        .to(text, 0.4, {
+          paddingLeft: '3em',
+          color: 'black',
+          opacity: 1,
+        }, '-=0.4')
     }
 
   componentWillMount() {
@@ -192,14 +205,18 @@ class LocalContainer extends Component {
           active={isActive}
           onMouseOver={this.handleOnHover(index)}
           onMouseOut={this.handleOnHoverOff(index)}
-          innerRef={div => this.listRows.push(div)}
-          themeColor={color}
         >
           <ListLink
             to={path}
             onClick={ isActive ? e => e.preventDefault() : this.handleClick(index) }
           >
-            {text.map(el => <ListText key={el}>{el}</ListText>)}
+            <LinkBlock
+              innerRef={div => this.listRows.push(div)}
+              themeColor={color}
+            >
+              <LinkBackground themeColor={color} />
+              {text.map(el => <ListText key={el}>{el}</ListText>)}
+            </LinkBlock>
           </ListLink>
 
           {isActive && subTextList.length > 0 && <SubList textList={subTextList} colors={colors} path={path} />}

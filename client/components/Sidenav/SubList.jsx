@@ -12,32 +12,58 @@ const Container = styled.div`
 
 const List = styled.ul`
   list-style: none;
-  width: 70%;
+  width: 95%;
   opacity: 0.8;
+  padding-left: 6em;
 `
 
-const ListRow = styled.li.attrs({
+const ListRow = styled.li`
+  color: #F3F2F2;
+`
+
+const ListLink = styled.a`
+  display: block;
+  height: 30px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+`
+
+const LinkBlock = styled.div.attrs({
   style: props => ({
-    borderLeft: `4px solid ${props.themeColor || ''}`
+    borderLeft: `4px solid ${props.themeColor}`
   })
 })`
-  padding-left: 1em;
-  color: #F3F2F2;
-  & a {
-    display: block;
-    height: 30px;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-  }
+  height: inherit;
+  position: relative;
+`
+
+const LinkBackground = styled.div.attrs({
+  style: props => ({
+    backgroundColor: props.themeColor
+  })
+})`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  box-size; inherit;
+  z-index: -1;
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)
 `
 
 const ListText = styled.h3`
   vertical-align: middle;
+  padding-left: 1em;
   padding-top: 5px;
   font-weight: normal;
   font-size: 0.7em;
   text-transform: uppercase;
+  opacity: 0.6;
 `
 
 const SideNav = ({ children, inputRef }) => (
@@ -54,23 +80,28 @@ class LocalContainer extends Component {
     return (360 / length) * index
   }
 
-  static createHoverAnimation(target) {
+  static createHoverAnimation({ childNodes: [background, ...text]}) {
     return new TimelineLite({paused: true})
-      .to(target, 0.3, {
-        paddingLeft: '3em',
-        color: `black`,
-      })
+        .to(background, 0.4, {
+          scaleX: 1,
+        })
+        .to(text, 0.4, {
+          opacity: 1,
+          paddingLeft: '3em',
+          color: 'black',
+        }, '-=0.4')
   }
 
   static enterAnimation(main, list) {
     return new TimelineLite()
-      .from(main, 0.3, {
+      .from(main, 0.6, {
         height: '0px',
       })
-      .staggerFrom(list, 0.3, {
+      .staggerFrom(list, 0.5, {
         autoAlpha: 0,
         scale: 0,
         rotationX: '45',
+        rotationY: '45'
       }, 0.1)
   }
 
@@ -80,7 +111,7 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
-    // this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv, this.listRows)
+    this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv, this.listRows)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
 
     if (this.props.viewIndex === 0 ) { // a little hacky
@@ -103,12 +134,18 @@ class LocalContainer extends Component {
           active={isActive}
           onMouseOver={this.handleOnHover(index)}
           onMouseOut={this.handleOnHoverOff(index)}
-          themeColor={colors[index]}
-          innerRef={div => this.listRows.push(div)}
         >
-          <a onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}>
-            <ListText>{text}</ListText>
-          </a>
+          <ListLink
+            onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}
+          >
+            <LinkBlock
+              themeColor={colors[index]}
+              innerRef={div => this.listRows.push(div)}
+            >
+              <LinkBackground themeColor={colors[index]} />
+              <ListText>{text}</ListText>
+            </LinkBlock>
+          </ListLink>
         </ListRow>
       )
     }
