@@ -42,7 +42,6 @@ export const BodyContent = styled.div`
   margin-top: 10px;
   flex: 4;
   display: flex;
-  flex-direction: row;
   justify-content: center;
 `
 

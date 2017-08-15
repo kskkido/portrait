@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { TimelineMax } from 'gsap'
+import { TimelineLite } from 'gsap'
 import { rotationChange, viewChange } from '../../reducers/events'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
@@ -11,14 +11,18 @@ const Container = styled.div`
 `
 
 const List = styled.ul`
-  list-style: disc;
+  list-style: none;
   width: 70%;
   opacity: 0.8;
 `
 
-const ListRow = styled.li`
+const ListRow = styled.li.attrs({
+  style: props => ({
+    borderLeft: `4px solid ${props.themeColor || ''}`
+  })
+})`
   padding-left: 1em;
-  color: #F2F7EF;
+  color: #F3F2F2;
   & a {
     display: block;
     height: 30px;
@@ -51,22 +55,23 @@ class LocalContainer extends Component {
   }
 
   static createHoverAnimation(target) {
-    return new TimelineMax({paused: true})
+    return new TimelineLite({paused: true})
       .to(target, 0.3, {
         paddingLeft: '3em',
-        color: 'black',
+        color: `black`,
       })
   }
 
-  static enterAnimation(target) {
-    return new TimelineMax()
-      .from(target, 0.2, {
+  static enterAnimation(main, list) {
+    return new TimelineLite()
+      .from(main, 0.3, {
         height: '0px',
       })
-      .from(target, 0.2, {
-        marginLeft: '-10px',
-        opacity: 0,
-      })
+      .staggerFrom(list, 0.3, {
+        autoAlpha: 0,
+        scale: 0,
+        rotationX: '45',
+      }, 0.1)
   }
 
   componentWillMount() {
@@ -75,7 +80,7 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
-    this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv)
+    // this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv, this.listRows)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
 
     if (this.props.viewIndex === 0 ) { // a little hacky
@@ -88,7 +93,7 @@ class LocalContainer extends Component {
     this.hoverAnimations[viewIndex].play()
   }
 
-  createListItem (path) {
+  createListItem (colors, path) {
     return (text, index, { length }) => {
       const isActive = this.props.viewIndex === index
 
@@ -98,6 +103,7 @@ class LocalContainer extends Component {
           active={isActive}
           onMouseOver={this.handleOnHover(index)}
           onMouseOut={this.handleOnHoverOff(index)}
+          themeColor={colors[index]}
           innerRef={div => this.listRows.push(div)}
         >
           <a onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}>
@@ -109,8 +115,8 @@ class LocalContainer extends Component {
   }
 
 
-  createList (textList, path) {
-    return textList.map(this.createListItem(path))
+  createList ({colors, textList}, path) {
+    return textList.map(this.createListItem(colors, path))
   }
 
   handleClick(index, length) {
@@ -133,11 +139,11 @@ class LocalContainer extends Component {
   }
 
   render() {
-    const { textList, path } = this.props
+    const { colors, textList, path } = this.props
 
     return (
       <SideNav inputRef={div => this.mainDiv = div}>
-        {this.createList(textList, path)}
+        {this.createList({colors, textList}, path)}
       </SideNav>
     )
   }

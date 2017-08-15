@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 import styled from 'styled-components'
-import { TimelineMax } from 'gsap'
+import { TimelineLite } from 'gsap'
 import SubList from './SubList'
 
 import { viewData } from '../Shared/Data'
@@ -13,8 +13,10 @@ import { rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
-  flex: 1.5;
+  min-width: 325px;
   position: relative;
+  display: block;
+  z-index: 100;
 `
 
 // const ColorBlock = styled.div.attrs({
@@ -30,45 +32,64 @@ const Container = styled.div`
 const Overlay = styled.div`
   position: fixed;
   top: 0;
+  left: 40px;
   height: 100%;
   width: 285px;
-  z-index: 99;
+  z-index: -2;
   background-color: #D3D3D3;
   opacity: 0.4;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 `
 
 const List = styled.ul`
-  position: fixed;
-  margin-left: 30px;
+  position: absolute;
   list-style: none;
-  margin-top: 100px;
+  left: 60px;
+  top: 80px;
   padding: 0;
-  width: 285px;
+  width: 265px;
   height: 80%;
   z-index: 100;
 }
 `
 
-const ListRow = styled.li`
-`
 
-const ListRowContainer = styled.div.attrs({
+const ListRow = styled.li.attrs({
   style: props => ({
-    borderLeft: `2px solid`
+    borderLeft: `6px solid ${props.themeColor}`
   })
 })`
-  height: 100%;
   width: 100%;
   padding-left: 1em;
-  color: #F2F7EF;
-    & > a {
-    display: block;
-    height: 80px;
-    text-decoration: none;
-    color: inherit;
+  color: #F3F2F2;
+  position: relative;
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 90%;
+    height: 100%;
+    content: '';
+    box-size; inherit;
+    background-color: ${props => props.themeColor};
+    z-index: -1;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.6s;
+  }
+  &:hover::before {
+    transform: scaleX(1);
   }
 }
 `
+
+const ListLink = styled(Link)`
+    display: block;
+    height: 100px;
+    text-decoration: none;
+    color: inherit;
+`
+
 // shadow... box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 
 const ListText = styled.h3`
@@ -82,7 +103,7 @@ const listData = {
   row1: {
     text: ['Keisuke Kido', 'Developer'],
     path: '/',
-    color: '#ecf0f1',
+    color: '#e8e5e6',
     subTextList: []
   },
   row2: {
@@ -90,27 +111,29 @@ const listData = {
     path: '/about',
     color: '#65AFFF',
     subTextList: viewData.about.navigationList,
+    colors: viewData.about.backgroundColor
   },
   row3: {
     text: ['Projects'],
     path: '/projects',
     color: '#DD614A',
     subTextList: viewData.projects.navigationList,
+    colors: viewData.projects.backgroundColor
   },
   row4: {
     text: ['Contact'],
     path: '/contact',
-    color: '#ecf0f1',
+    color: '#c1839f',
     subTextList: [],
   }
 }
 
 const SideNav = ({ children }) => (
-  <Container id="sideNav">
-    <List>
+  <Container>
+    <List id="sideNav">
       {children}
     </List>
-    <Overlay />
+     <Overlay />
   </Container>
 )
 
@@ -123,19 +146,31 @@ class LocalContainer extends Component {
     }
   }
 
-  static createHoverAnimation(target) {
-    return new TimelineMax({paused: true})
-      .to(target, 0.3, {
-        paddingLeft: '3em',
-        color: 'black'
-      })
+  static enterAnimation(list) {
+    return new TimelineLite()
+      .staggerFrom(list, 0.4, {
+        autoAlpha: 0,
+        transformOrigin: '0% 0% left',
+        rotationY: 40,
+        rotationX: 40,
+        marginTop: '-=50px',
+        scale: 0,
+      }, 0.07)
   }
+
+  static createHoverAnimation(target) {
+    return new TimelineLite({paused: true})
+        .to(target, 0.3, {
+          paddingLeft: '3em',
+        })
+    }
 
   componentWillMount() {
     this.listRows = []
   }
 
   componentDidMount() {
+    LocalContainer.enterAnimation(this.listRows)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
     this.hoverAnimations[this.state.activeIndex].play()
   }
@@ -148,28 +183,27 @@ class LocalContainer extends Component {
     this.hoverAnimations[this.state.activeIndex].reverse()
   }
 
-  createListItem ({color, text, path, subTextList}, index) {
+  createListItem ({color, text, path, subTextList, colors}, index) {
     const isActive = index === this.state.activeIndex
 
     return (
-      <ListRow key={text[0]}>
-        <ListRowContainer
+        <ListRow
+          key={text[0]}
           active={isActive}
           onMouseOver={this.handleOnHover(index)}
           onMouseOut={this.handleOnHoverOff(index)}
           innerRef={div => this.listRows.push(div)}
-          color={color}
+          themeColor={color}
         >
-          <Link
+          <ListLink
             to={path}
             onClick={ isActive ? e => e.preventDefault() : this.handleClick(index) }
           >
             {text.map(el => <ListText key={el}>{el}</ListText>)}
-          </Link>
+          </ListLink>
 
-          {isActive && subTextList.length > 0 && <SubList textList={subTextList} path={path} />}
-        </ListRowContainer>
-      </ListRow>
+          {isActive && subTextList.length > 0 && <SubList textList={subTextList} colors={colors} path={path} />}
+        </ListRow>
     )
   }
 
@@ -179,7 +213,6 @@ class LocalContainer extends Component {
 
   handleClick(index) {
     return () => {
-      // this.props.rotationRestart(); this.props.viewRestart()
       this.setState({activeIndex: index})
     }
   }

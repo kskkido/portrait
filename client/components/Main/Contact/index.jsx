@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Draggable from 'gsap/Draggable'
-import { TweenLite } from 'gsap'
+import { TweenLite, Power2 } from 'gsap'
 
 import { BodyContainer, BodyContent, MainContainer } from '../../Shared/Styles'
 
 const ColumnContainer = styled.div`
   flex: 1;
   overflow: hidden;
+  position: relative;
 `
 
 const Column = styled.div`
   width: 100%;
   height: 100%;
   border: 2px solid;
-  position: relative;
+  position: absolute;
 `
 
 const ColumnHeader = styled.div`
@@ -60,7 +61,11 @@ class LocalContainer extends Component {
   static createDraggable (div, index) {
     return Draggable.create(div, {
       type: 'y',
-      trigger: div
+      trigger: div,
+      onDragEnd: function({target}) {
+        console.log('dragend', target.style)
+        TweenLite.to(div, 0.3, {y: 0, ease: Power2.easeIn})
+      }
     })
   }
 

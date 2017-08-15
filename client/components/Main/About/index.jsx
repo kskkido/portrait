@@ -2,33 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import BodyComponent from '../Body'
-import AboutView1 from './AboutView1'
-import AboutView2 from './AboutView2'
-import AboutView3 from './AboutView3'
-import AboutView4 from './AboutView4'
+import AboutView from './AboutView'
 
 import { viewRestart, rotationRestart } from '../../../reducers/events'
 import { viewData } from '../../Shared/Data'
 
-const renderCurrentView = (viewIndex, language) => {
-  if (viewIndex === 0) {
-    return <AboutView1 key="one" language={language} />
-  } else if (viewIndex === 1) {
-    return <AboutView2 key="two" language={language} />
-  } else if (viewIndex === 2) {
-    return <AboutView3 key="three" language={language} />
-  } else if (viewIndex === 3) {
-    return <AboutView4 key="four" language={language} />
-  }
-}
-
-const About = ({ backgroundColor, navigationList, viewIndex }) => {
+const About = ({ backgroundColor, navigationList }) => {
   return (
     <BodyComponent
       backgroundColor={backgroundColor}
       navigationList={navigationList}
     >
-      {renderCurrentView(viewIndex)}
+      <AboutView />
     </BodyComponent>
   )
 }
@@ -46,9 +31,9 @@ class LocalContainer extends Component {
     this.props.rotationRestart(); this.props.viewRestart();
   }
 
-  componentWillReceiveProps() {
-    console.log(document.getElementById('title').childNodes, 'WEI')
-  }
+  // componentWillReceiveProps() {
+  //   console.log(document.getElementById('title').childNodes, 'WEI')
+  // }
 
   render () {
 
@@ -67,4 +52,4 @@ const mapDispatchToProps = (dispatch) => ({
   rotationRestart: () => dispatch(rotationRestart())
 })
 
-export default connect(({events: {viewIndex, language}}) => ({viewIndex, language}), mapDispatchToProps)(LocalContainer)
+export default connect(null, mapDispatchToProps)(LocalContainer)

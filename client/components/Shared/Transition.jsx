@@ -18,43 +18,68 @@ const showAnimation = (() => {
   const frontIndex = -99
     , behindIndex = -100
     , slideDuration = 0.39
-    , fadeInDuration = 0.3
+    , fadeInDuration = 0.4
 
-  const slideVerticalBackground = (bgBehind, bgFront, tl, lastAnimation, repeat = 0) => {
-    if (repeat < 0) {
-      lastAnimation(tl)
-    } else {
-      tl
-        .set(bgBehind, {zIndex: behindIndex}) // push current front to back
-        .set(bgFront, {zIndex: frontIndex}) // push current back to front, does not appear, since height will be tweened from 0
-        .from(bgFront, slideDuration, {
-          height: 0,
-          ease: Power2.easeOut,
-          onComplete: slideVerticalBackground,
-          onCompleteParams: [bgFront, bgBehind, tl, lastAnimation, repeat - 1]
-        }) // tween new front to fill background
+  const slideVerticalBackground = (lastAnimation) => {
+    const curriedSlide = (bgBehind, bgFront, tl, repeat = 0) => {
+      if (repeat < 0) {
+        lastAnimation(tl)
+      } else {
+        tl
+          .set(bgBehind, {zIndex: behindIndex}) // push current front to back
+          .set(bgFront, {zIndex: frontIndex}) // push current back to front, does not appear, since height will be tweened from 0
+          .from(bgFront, slideDuration, {
+            height: 0,
+            ease: Power2.easeOut,
+            onComplete: curriedSlide,
+            onCompleteParams: [bgFront, bgBehind, tl, repeat - 1]
+          }) // tween new front to fill background
+      }
     }
+    return curriedSlide
   }
 
-  const fadeInContent = (sideNav, target) => (tl) => {
+  const fadeInList = (list) => {
+    new TimelineLite()
+      .staggerTo(list, fadeInDuration, {
+        autoAlpha: 1,
+        scale: 1,
+        rotationX: 0,
+        rotationY: 0,
+        marginTop: '-=20px',
+      }, 0.07)
+  }
+
+  const fadeInBody = (target, tl) => {
     tl
-      .to([sideNav, target], fadeInDuration, {
+      .to(target, fadeInDuration, {
         autoAlpha: 1,
         marginTop: '+=40px',
+        rotationX: 0,
+        rotationY: 0,
         onComplete: () => running = false
       })
+  }
+
+  const callBackAnimations = (target, ...rest) => (tl) => {
+    fadeInList(rest)
+    fadeInBody(target, tl)
   }
 
   return (duration, color) => (target) => {
     running = true
     const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
         , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
-        , sideNav = document.getElementById('sideNav')
+        , sideNav = document.getElementById('sideNav').childNodes
         , repeat = Math.floor((duration - fadeInDuration) / slideDuration) - 1
         , tl = new TimelineLite()
-          .set([target, sideNav], {autoAlpha: 0, marginTop: '-=40px'})
+          .set([target, ...sideNav], {autoAlpha: 0, transformOrigin: '0% 0% left', rotationX: 20, rotationY: 20})
+          .set(target, {marginTop: '-=40px'})
+          .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
           .set(behind, {backgroundColor: color})
-    slideVerticalBackground(front, behind, tl, fadeInContent(sideNav, target), repeat)
+
+    slideVerticalBackground(callBackAnimations(target, ...sideNav))(front, behind, tl, repeat)
+
     toggle = !toggle
   }
 })()

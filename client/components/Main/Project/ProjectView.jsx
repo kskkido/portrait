@@ -47,6 +47,7 @@ const BodyText = styled.div`
   flex 1;
   display: flex;
   flex-direction: column;
+  align-self: center;
   margin-left: 50px;
   max-width: 400px;
 `
@@ -66,7 +67,7 @@ const ProjectView = ({ viewIndex, language, scale }) => {
           <ProjectImage imageSource={data.imageSource}/>
         </ImageLink>
       </Image>
-      <BodyText>
+        <BodyText>
         <h3>Technology</h3>
         <p>
           {data.technology}
