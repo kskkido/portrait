@@ -73,12 +73,12 @@ const showAnimation = (() => {
         , sideNav = [] || document.getElementById('sideNav').childNodes
         , repeat = Math.floor((duration - fadeInDuration) / slideDuration) - 1
         , tl = new TimelineLite()
-          .set([target, ...sideNav], {autoAlpha: 0, transformOrigin: '0% 0% left', rotationX: 20, rotationY: 20})
+          .set([target, ...sideNav], {autoAlpha: 0, transformOrigin: 'left mid', rotationX: 22, rotationY: 22})
           .set(target, {marginTop: '-=40px'})
           .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
           .set(behind, {backgroundColor: color})
 
-    slideVerticalBackground(callBackAnimations(target, ...sideNav))(front, behind, tl, repeat)
+    slideVerticalBackground(callBackAnimations(target, ...sideNav))(front, behind, tl, 0)
 
     toggle = !toggle
   }
@@ -186,3 +186,44 @@ export const Slide = (_props) => {
 //     />
 //   )
 // }
+
+const collapseAnimation = (() => {
+
+  const collapse = (main, tl) => {
+    console.log(main, 'YO')
+    return tl
+      .from(main, 0.3, {
+        height: '0px',
+      })
+      .staggerFrom(main.childNodes, 0.6, {
+        autoAlpha: 0,
+        scale: 0,
+        rotationX: '45',
+        rotationY: '45'
+      }, 0.1)
+  }
+
+  const uncollapse = (main, tl) => {
+    tl
+      .to(main, 0.3, {
+        marginTop: '-10px',
+        autoAlpha: 0,
+        height: 0,
+      })
+  }
+
+  return (isReverse) => ({ childNodes: [main]}) => {
+    const tl = new TimelineLite()
+    isReverse ? uncollapse(main, tl) : collapse(main, tl)
+  }
+})()
+
+export const UncollapseList = (props) => {
+  return (
+    <Transition
+      {...props}
+      onEntering={collapseAnimation(false)}
+      onExit={collapseAnimation(true)}
+    />
+  )
+}

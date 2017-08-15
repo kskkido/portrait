@@ -56,14 +56,17 @@ const LinkBackground = styled.div.attrs({
   box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)
 `
 
-const ListText = styled.h3`
-  vertical-align: middle;
+const ListTextContainer = styled.div`
+  margin-top: 10px;
+  opacity: 0.6;
+`
+
+const ListText = styled.span`
+  padding-top: 4px;
   padding-left: 1em;
-  padding-top: 5px;
   font-weight: normal;
   font-size: 0.7em;
   text-transform: uppercase;
-  opacity: 0.6;
 `
 
 const SideNav = ({ children, inputRef }) => (
@@ -111,7 +114,7 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
-    this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv, this.listRows)
+    // this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv, this.listRows)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
 
     if (this.props.viewIndex === 0 ) { // a little hacky
@@ -130,6 +133,7 @@ class LocalContainer extends Component {
 
       return (
         <ListRow
+          id="listRow"
           key={text}
           active={isActive}
           onMouseOver={this.handleOnHover(index)}
@@ -139,11 +143,14 @@ class LocalContainer extends Component {
             onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}
           >
             <LinkBlock
+              id="sublist"
               themeColor={colors[index]}
               innerRef={div => this.listRows.push(div)}
             >
               <LinkBackground themeColor={colors[index]} />
-              <ListText>{text}</ListText>
+              <ListTextContainer>
+                <ListText>{text}</ListText>
+              </ListTextContainer>
             </LinkBlock>
           </ListLink>
         </ListRow>

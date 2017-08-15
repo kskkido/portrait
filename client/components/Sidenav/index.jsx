@@ -7,7 +7,7 @@ import { TimelineLite } from 'gsap'
 import SubList from './SubList'
 
 import { viewData } from '../Shared/Data'
-import { Collapse } from '../Shared/Transition'
+import { UncollapseList } from '../Shared/Transition'
 
 import { rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
@@ -37,7 +37,7 @@ const Overlay = styled.div`
   left: 40px;
   z-index: -2;
   background-color: #D3D3D3;
-  opacity: 0.4;
+  opacity: 0.2;
   box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14)
 `
 
@@ -218,8 +218,21 @@ class LocalContainer extends Component {
               {text.map(el => <ListText key={el}>{el}</ListText>)}
             </LinkBlock>
           </ListLink>
-
-          {isActive && subTextList.length > 0 && <SubList textList={subTextList} colors={colors} path={path} />}
+          {subTextList.length > 0 &&
+            <UncollapseList
+              key={text[0]}
+              in={isActive}
+              timeout={600}
+              mountOnEnter={true}
+              unmountOnExit={true}
+            >
+              <SubList
+                textList={subTextList}
+                colors={colors}
+                path={path}
+              />
+            </UncollapseList>
+          }
         </ListRow>
     )
   }
