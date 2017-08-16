@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { TransitionGroup } from 'react-transition-group'
 import styled from 'styled-components'
 import { TimelineLite } from 'gsap'
 import SubList from './SubList'
@@ -141,7 +140,7 @@ const SideNav = ({ children }) => (
     <List id="sideNav">
       {children}
     </List>
-      <Overlay />
+       <Overlay />
   </Container>
 )
 
@@ -156,14 +155,13 @@ class LocalContainer extends Component {
 
   static enterAnimation(list) {
     return new TimelineLite()
-      .staggerFrom(list, 0.4, {
+      .staggerFrom(list, 0.6, {
         autoAlpha: 0,
-        transformOrigin: '0% 0% left',
-        rotationY: 40,
         rotationX: 40,
+        rotationY: 40,
         marginTop: '-=50px',
         scale: 0,
-      }, 0.07)
+      }, 0.1)
   }
 
   static createHoverAnimation({ childNodes: [background, ...text] }) {

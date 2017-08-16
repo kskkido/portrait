@@ -25,7 +25,14 @@ const BodyRoutes = () => (
     console.log(location, 'LOCAATION')
     return (
       <TransitionGroup>
-        <Show key={location.key} pathname={location.pathname} timeout={1600} exit={false}>
+        <Show
+          key={location.key}
+          pathname={location.pathname}
+          timeout={1600}
+          exit={false}
+          mountOnEnter={true}
+          unmountOnExit={true}
+        >
           <Switch location={location}>
             <Route path="/about" component={About} />
             <Route path="/projects" component={Project} />

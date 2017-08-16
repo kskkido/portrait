@@ -7,14 +7,13 @@ import BodyComponent from '../Body'
 import { viewRestart, rotationRestart } from '../../../reducers/events'
 import { viewData } from '../../Shared/Data'
 
-const Project = ({ backgroundColor, navigationList }) => {
+const Project = ({ backgroundColor, navigationList, viewIndex }) => {
   return (
     <BodyComponent
       backgroundColor={backgroundColor}
       navigationList={navigationList}
     >
-      <ProjectView
-      />
+      <ProjectView />
     </BodyComponent>
   )
 }
@@ -29,11 +28,11 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.rotationRestart(); this.props.viewRestart();
+    this.props.viewRestart(); this.props.rotationRestart()
+    console.log('MOUNTING PROJECT', this.props.viewIndex)
   }
 
   render () {
-
     return (
       <Project
         backgroundColor={LocalContainer.backgroundColor}

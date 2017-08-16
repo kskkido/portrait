@@ -25,5 +25,6 @@ const AboutView = ({viewIndex}) => (
 )
 
 
-export default connect(({events: {viewIndex}}) => ({viewIndex}))(AboutView)
+// export default connect(({events: {viewIndex}}) => ({viewIndex}))(AboutView)
+export default AboutView
 

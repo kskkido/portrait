@@ -3,15 +3,17 @@ import { Transition } from 'react-transition-group'
 import { TimelineLite, Power2 } from 'gsap'
 
 import { viewData } from './Data'
+import { getFirstTwo, once } from './Utils'
 
 let toggle = false
   , running = false
 
+
 const themeColor = {
-  '/': '#e8e5e6',
-  '/about': viewData.about.backgroundColor[0],
-  '/projects': viewData.projects.backgroundColor[0],
-  '/contact': '#c1839f'
+  '/': getFirstTwo(viewData.home.backgroundColor),
+  '/about': getFirstTwo(viewData.about.backgroundColor),
+  '/projects': getFirstTwo(viewData.projects.backgroundColor),
+  '/contact':  getFirstTwo(viewData.contacts.backgroundColor)
 }
 
 const showAnimation = (() => {
@@ -20,7 +22,14 @@ const showAnimation = (() => {
     , slideDuration = 0.39
     , fadeInDuration = 0.4
 
-  const slideVerticalBackground = (lastAnimation) => {
+  const firstCBAnimation = (_bgBehind, secondColor) => {
+    console.log(secondColor, 'SECOND COLORRR')
+    return (_tl) => {
+      _tl.set(_bgBehind, {backgroundColor: secondColor})
+    }
+  }
+
+  const slideVerticalBackground = (cb, lastAnimation) => {
     const curriedSlide = (bgBehind, bgFront, tl, repeat = 0) => {
       if (repeat < 0) {
         lastAnimation(tl)
@@ -34,6 +43,7 @@ const showAnimation = (() => {
             onComplete: curriedSlide,
             onCompleteParams: [bgFront, bgBehind, tl, repeat - 1]
           }, '+=0.05') // tween new front to fill background
+        cb(tl)
       }
     }
     return curriedSlide
@@ -66,7 +76,7 @@ const showAnimation = (() => {
     fadeInBody(target, tl)
   }
 
-  return (duration, color) => (target) => {
+  return (duration, color, color2 = '#fff') => (target) => {
     running = true
     const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
         , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
@@ -78,7 +88,7 @@ const showAnimation = (() => {
           .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
           .set(behind, {backgroundColor: color})
 
-    slideVerticalBackground(callBackAnimations(target, ...sideNav))(front, behind, tl, 0)
+    slideVerticalBackground(once(firstCBAnimation(front, color2)), callBackAnimations(target, ...sideNav), color2)(front, behind, tl, repeat)
 
     toggle = !toggle
   }
@@ -86,11 +96,12 @@ const showAnimation = (() => {
 
 export const Show = (props) => {
   const duration = props.timeout / 1000
+  const [color1, color2] = themeColor[props.pathname || '/']
 
   return (
     <Transition
       {...props}
-      onEnter={showAnimation(duration || 0.5, themeColor[props.pathname || '/'])}
+      onEnter={showAnimation(duration || 0.5, color1, color2)}
     />
   )
 }
@@ -120,7 +131,8 @@ const slideAnimation = (() => {
       marginLeft: `${offset}px`,
       autoAlpha: 0,
       ease: Power2.easeInOut
-    })
+    }, `-=${slideDuration - fadeInDuration}`)
+    .delay(0.15)
   }
 
   return (duration, offset, color) => (target) => {
@@ -137,9 +149,8 @@ const slideAnimation = (() => {
 })()
 
 const fadeOut = (target) => {
-  const tl = new TimelineLite()
-  tl
-    .to(target, 0.1, {
+  new TimelineLite()
+    .to(target, 0.3, {
       autoAlpha: 0
     })
 }
@@ -151,7 +162,8 @@ export const Slide = (_props) => {
     <Transition
       {...props}
       timeout={600}
-      onEnter={slideAnimation(props.duration || 0.8, _props.targetOffset % 200, _props.color || '#ecf0f1')}
+      onEntering={slideAnimation(props.duration || 0.8, ( _props.targetOffset * 2) % 300, _props.color || '#ecf0f1')}
+      onExiting={fadeOut}
     />
   )
 }
@@ -190,7 +202,6 @@ export const Slide = (_props) => {
 const collapseAnimation = (() => {
 
   const collapse = (main, tl) => {
-    console.log(main, 'YO')
     return tl
       .from(main, 0.3, {
         height: '0px',
@@ -199,17 +210,19 @@ const collapseAnimation = (() => {
         autoAlpha: 0,
         scale: 0,
         rotationX: '45',
-        rotationY: '45'
+        rotationY: '45',
       }, 0.1)
   }
 
   const uncollapse = (main, tl) => {
     tl
-      .to(main, 0.3, {
-        marginTop: '-10px',
+      .to(main, 0.2, {
         autoAlpha: 0,
-        height: 0,
       })
+      .to(main, 0.3, {
+        height: 0,
+        marginTop: '-10px',
+      }, '-=0.1')
   }
 
   return (isReverse) => ({ childNodes: [main]}) => {

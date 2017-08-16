@@ -4,3 +4,5 @@ export const once = (fn) => {
     done ? null : (done = true, fn.apply(this, args))
   )
 }
+
+export const getFirstTwo = ([first, second]) => [first, second]

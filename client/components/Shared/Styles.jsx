@@ -29,18 +29,20 @@ export const fadeOut = keyframes`
 export const MainContainer = styled.div`
   display: flex;
   min-height: 100vh;
-  transform-origin: left;
+  cursor: move;
   flex-direction: ${props => props.row ? 'row' : 'column'};
 `
 
 export const BodyContainer = styled.div`
+  position: absolute;
+  width: 100%;
   display: flex;
   flex-direction: ${props => props.row ? 'row' : 'column'};
   justify-content: flex-start;
 `
 
 export const BodyContent = styled.div`
-  margin-top: 10px;
+  margin-top: 5px;
   flex: 4;
   display: flex;
   justify-content: center;
@@ -50,6 +52,7 @@ export const BodyText = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 70%;
+  margin-top: 10px;
 `
 
 export const Flex1 = styled.div`
@@ -81,7 +84,7 @@ export const Title = styled.h1`
   font-weight: normal;
   text-transform: uppercase;
   font-size: 1.4em;
-  min-height: 60px;
+  min-height: 50px;
 `
 
 export const Title3 = styled.h3`

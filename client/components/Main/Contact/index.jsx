@@ -11,7 +11,11 @@ const ColumnContainer = styled.div`
   position: relative;
 `
 
-const Column = styled.div`
+const Column = styled.div.attrs({
+  style: props => ({
+    backgroundColor: props.themeColor
+  })
+})`
   width: 100%;
   height: 100%;
   border: 2px solid;
@@ -31,25 +35,25 @@ const ContactView = ({ inputRef }) => {
   return (
     <MainContainer row={true}>
       <ColumnContainer>
-        <Column innerRef={inputRef}>
+        <Column innerRef={inputRef} themeColor="#D2CBCB">
           <ColumnHeader>HOME</ColumnHeader>
         </Column>
       </ColumnContainer>
 
       <ColumnContainer>
-        <Column innerRef={inputRef}>
+        <Column innerRef={inputRef} themeColor="#65AFFF">
           <ColumnHeader>ABOUT</ColumnHeader>
         </Column>
       </ColumnContainer>
 
       <ColumnContainer>
-        <Column innerRef={inputRef}>
+        <Column innerRef={inputRef} themeColor="#DD614A">
           <ColumnHeader>PROJECT</ColumnHeader>
         </Column>
       </ColumnContainer>
 
       <ColumnContainer>
-        <Column innerRef={inputRef}>
+        <Column innerRef={inputRef} themeColor="#C09BD8">
           <ColumnHeader>CONTACT</ColumnHeader>
         </Column>
       </ColumnContainer>

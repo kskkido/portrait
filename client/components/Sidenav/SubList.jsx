@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineLite } from 'gsap'
 import { rotationChange, viewChange } from '../../reducers/events'
@@ -34,6 +33,7 @@ const LinkBlock = styled.div.attrs({
     borderLeft: `4px solid ${props.themeColor}`
   })
 })`
+  margin-top: 10px;
   height: inherit;
   position: relative;
 `
@@ -57,12 +57,11 @@ const LinkBackground = styled.div.attrs({
 `
 
 const ListTextContainer = styled.div`
-  margin-top: 10px;
+  padding-top: 4px;
   opacity: 0.6;
 `
 
 const ListText = styled.span`
-  padding-top: 4px;
   padding-left: 1em;
   font-weight: normal;
   font-size: 0.7em;
@@ -95,26 +94,11 @@ class LocalContainer extends Component {
         }, '-=0.4')
   }
 
-  static enterAnimation(main, list) {
-    return new TimelineLite()
-      .from(main, 0.6, {
-        height: '0px',
-      })
-      .staggerFrom(list, 0.5, {
-        autoAlpha: 0,
-        scale: 0,
-        rotationX: '45',
-        rotationY: '45'
-      }, 0.1)
-  }
-
   componentWillMount() {
     this.listRows = []
-    // renders before viewIndex is resetted
   }
 
   componentDidMount() {
-    // this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv, this.listRows)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
 
     if (this.props.viewIndex === 0 ) { // a little hacky

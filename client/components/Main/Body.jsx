@@ -18,7 +18,10 @@ import Navigation from './Navigation'
 
 const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
   return (
-    <MainContainer innerRef={inputMain} onWheel={onWheel}>
+    <MainContainer
+      innerRef={inputMain}
+      onWheel={onWheel}
+    >
       <div style={{maxHeight: '100px'}}>
         <Navigation
           navigationList={navigationList}
@@ -26,16 +29,17 @@ const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain
           getDom={inputNav}
         />
       </div>
-      <TransitionGroup appear={false}>
+      <TransitionGroup>
         <Slide
           key={viewIndex}
-          color={backgroundColor ? backgroundColor[viewIndex] : undefined}
+          color={backgroundColor[viewIndex]}
           targetOffset={targetOffset}
-          exit={false}
+          mountOnEnter={true}
+          unmountOnExit={true}
         >
-          <div ref={inputBody}>
-            {children}
-          </div>
+          <div style={{position: 'relative'}} ref={inputBody}>
+            {children && React.cloneElement(children, {viewIndex})}
+           </div>
         </Slide>
       </TransitionGroup>
     </MainContainer>
@@ -70,14 +74,14 @@ class LocalContainer extends Component {
   static slideDOM(bodyDOM) {
     return (targetOffset) => {
       TweenLite.to(bodyDOM, 0.7, {
-        marginRight: `${targetOffset}px`
+        right: `${targetOffset}px`
       })
     }
   }
 
   static slide(bodyDOM, mainDOM, length) {
     const ratio = (mainDOM.offsetWidth / 2) / (360 / length) // get the half of bodyDOM
-        , getOffset = ((rat) => (rotation) => (rotation * rat))(ratio)
+        , getOffset = ((rat) => (rotation) => ((rotation * rat) * 0.5))(ratio)
         , slideBodyDOM = LocalContainer.slideDOM(bodyDOM)
     let prevRotation = 0
 
@@ -127,10 +131,6 @@ class LocalContainer extends Component {
     this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
   }
 
-  // componentWillUnmount() {
-  //   this.props.rotationRestart(); this.props.viewRestart();
-  // }
-
   handleOnWheel ({nativeEvent}) {
     LocalContainer.preventEvent(nativeEvent)
     this.props.rotationChange(
@@ -139,6 +139,7 @@ class LocalContainer extends Component {
   }
 
   render() {
+    console.log(ContentView, 'YOYOY')
 
     return (
         <ContentView // ABOUT OR PROJECT
@@ -160,8 +161,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   rotationChange: (rotation) => dispatch(rotationChange(rotation)),
-  rotationRestart: () => dispatch(rotationRestart()),
-  viewRestart: () => dispatch(viewRestart())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)

@@ -86,4 +86,4 @@ const ProjectView = ({ viewIndex, language, scale }) => {
   )
 }
 
-export default connect(({events: {viewIndex, language}}) => ({viewIndex, language}))(ProjectView)
+export default ProjectView

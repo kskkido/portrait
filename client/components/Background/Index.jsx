@@ -16,7 +16,7 @@ const BgOne = styled.div.attrs({
     width: props.theme.width
   })
 })`
-  background-color: #e8e5e6;
+  background-color: #D2CBCB;
   position: absolute;
   top: 0;
   z-index: -99;
