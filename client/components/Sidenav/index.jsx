@@ -2,42 +2,30 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { TimelineLite } from 'gsap'
+import { TimelineLite, Back } from 'gsap'
 import SubList from './SubList'
-
 import { viewData } from '../Shared/Data'
 import { UncollapseList } from '../Shared/Transition'
-
+import Button from './Button'
 import { rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
   min-width: 325px;
-  position: relative;
-  display: block;
+  position: fixed;
+  left: 0;
   z-index: 100;
 `
 
-// const ColorBlock = styled.div.attrs({
-//   style: props => ({
-//     width: props.active ? `100%` : `0%`,
-//     transition: props.active ? `width 0.3s ease-in` : 'null',
-//     backgroundColor: `${props.color}`
-//   })
-// })`
-//   height: 100%;
-// `
-
 const Overlay = styled.div`
-  height: 100%;
-  width: 285px;
-  position: fixed;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
   top: 0;
-  left: 40px;
-  z-index: -2;
+  z-index: 99;
   background-color: #D3D3D3;
   opacity: 0.2;
-  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14)
+  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);
 `
 
 const List = styled.ul`
@@ -49,14 +37,11 @@ const List = styled.ul`
   top: 80px;
   padding: 0;
   z-index: 100;
-}
 `
-
 
 const ListRow = styled.li`
   width: 100%;
   color: #F3F2F2;
-}
 `
 
 const ListLink = styled(Link)`
@@ -91,6 +76,14 @@ const LinkBackground = styled.div.attrs({
   transform-origin: left;
   transform: scaleX(0);
   box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)
+`
+
+const SVGContainer = styled.div`
+  position: absolute;
+  left: 60px;
+  top: 20px;
+  z-index: 100;
+  cursor: pointer;
 `
 
 // shadow... box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
@@ -135,12 +128,15 @@ const listData = {
   }
 }
 
-const SideNav = ({ children }) => (
-  <Container>
-    <List id="sideNav">
-      {children}
-    </List>
-       <Overlay />
+const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut, mouseOver }) => (
+  <Container >
+    <Button onClick={onClickSVG} />
+    <div id="sideNav" ref={inputMain} style={{height: '100%'}}>
+      <List >
+        {children}
+      </List>
+        <Overlay />
+      </div>
   </Container>
 )
 
@@ -161,7 +157,11 @@ class LocalContainer extends Component {
         rotationY: 40,
         marginTop: '-=50px',
         scale: 0,
+        ease: Back.easeOut,
+        onComplete: console.log,
+        onCompleteParams: ['COMPLETEEEEE']
       }, 0.1)
+      .delay(0.15)
   }
 
   static createHoverAnimation({ childNodes: [background, ...text] }) {
@@ -173,15 +173,38 @@ class LocalContainer extends Component {
           paddingLeft: '3em',
           color: 'black',
           opacity: 1,
+          ease: Back.easeOut,
         }, '-=0.4')
-    }
+  }
+
+  static createSVGCLickAnimation(sidenav) {
+    return new TimelineLite({paused: true})
+      .to(sidenav, 0.4, {
+        x: '-=100%',
+        ease: Back.easeOut,
+      })
+      .to(document.getElementById('bodyContainer'), 0.4, {
+        marginLeft: '-=325px',
+        ease: Back.easeOut,
+      }, '-=0.4')
+  }
+
+  static createSVGHoverAnimation(target) {
+    return new TimelineLite({paused: true})
+      .to(target, 0.4, {
+        scale: 1.2,
+        rotation: 90,
+        ease: Back.easeOut
+      })
+  }
 
   componentWillMount() {
     this.listRows = []
   }
 
   componentDidMount() {
-    LocalContainer.enterAnimation(this.listRows)
+    this.enterAnimation = LocalContainer.enterAnimation(this.listRows)
+    this.svgClickAnimation = LocalContainer.createSVGCLickAnimation(this.container)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
     this.hoverAnimations[this.state.activeIndex].play()
   }
@@ -239,6 +262,11 @@ class LocalContainer extends Component {
     return Object.keys(data).map((row, index) => this.createListItem(data[row], index))
   }
 
+  callEnterAnimation() {
+    console.log('PLEASEE CALL')
+    this.enterAnimation.restart()
+  }
+
   handleClick(index) {
     return () => {
       this.setState({activeIndex: index})
@@ -257,9 +285,16 @@ class LocalContainer extends Component {
     return () => this.hoverAnimations[index].reverse()
   }
 
+  handleOnClickSVG(toggle) {
+      return (toggle ? (this.svgClickAnimation.reverse(), setTimeout((tl) => tl.restart(), 200, this.enterAnimation)) : this.svgClickAnimation.play())
+  }
+
   render() {
     return (
-      <SideNav>
+      <SideNav
+        onClickSVG={this.handleOnClickSVG.bind(this)}
+        inputMain={div => this.container = div}
+      >
         {this.createList(listData)}
       </SideNav>
     )

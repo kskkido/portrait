@@ -13,7 +13,7 @@ const About = ({ backgroundColor, navigationList, viewIndex }) => {
       backgroundColor={backgroundColor}
       navigationList={navigationList}
     >
-          <AboutView />
+          <AboutView navigationList={navigationList}/>
     </BodyComponent>
   )
 }

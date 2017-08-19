@@ -47,3 +47,16 @@ export const MacIcon = ({ imageSource, url, scale = 1 }) => {
 
   //  <rect x="18.607" y="21.946" width="360" height="202" fill="url(#image)"></rect>
 }
+
+export const Cross = (_props) => {
+  const props = Object.assign({}, _props)
+  delete props.scale; delete props.innerRef
+
+  return (
+    <svg {...props} ref={_props.innerRef} viewBox="1.0000416040420532 0.9999443888664246 198.51658630371094 197.80990600585938" width={`${_props.scale * 198.51658630371094}`} height={`${_props.scale * 197.80990600585938}`} xmlns="http://www.w3.org/2000/svg">
+      <path d="M 164.706 184.284 H 177.451 V 451.284 H 164.706 V 184.284 Z" style={{fill: 'black', strokeWidth: 2}} transform="matrix(0.7071080207824707, 0.7071050405502319, -0.7071070075035095, 0.7071070075035095, 204.34811401367188, -245.77272033691406)"/>
+      <path d="M 164.706 184.283 H 177.451 V 451.283 H 164.706 V 184.283 Z" style={{fill: 'black', strokeWidth: 2}} transform="matrix(0.7071080207824707, -0.7071050405502319, 0.7071070075035095, 0.7071070075035095, -245.77268981933594, -3.8313610553741455)"/>
+    </svg>
+
+  )
+}

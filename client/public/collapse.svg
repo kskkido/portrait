@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 199.00001525878906 180" width="199.00001525878906" height="180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient-1" gradientUnits="userSpaceOnUse" x1="106.863" y1="20.588" x2="106.863" y2="37.255" gradientTransform="matrix(1.062946, 0, 0, 1.799965, -14.590108, -37.057695)">
+      <stop offset="0" style="stop-color: rgba(0, 0, 0, 1)"/>
+      <stop offset="1" style="stop-color: rgba(0, 0, 0, 1)"/>
+    </linearGradient>
+    <linearGradient id="gradient-2" gradientUnits="userSpaceOnUse" x1="106.863" y1="20.588" x2="106.863" y2="37.255" gradientTransform="matrix(1.062946, 0, 0, 1.799964, -13.590253, 12.942072)">
+      <stop offset="0" style="stop-color: rgba(0, 0, 0, 1)"/>
+      <stop offset="1" style="stop-color: rgba(0, 0, 0, 1)"/>
+    </linearGradient>
+    <linearGradient id="gradient-3" gradientUnits="userSpaceOnUse" x1="106.863" y1="20.588" x2="106.863" y2="37.255" gradientTransform="matrix(1.062946, 0, 0, 1.799965, -13.590082, 62.942875)">
+      <stop offset="0" style="stop-color: rgba(0, 0, 0, 1)"/>
+      <stop offset="1" style="stop-color: rgba(0, 0, 0, 1)"/>
+    </linearGradient>
+    <linearGradient id="gradient-4" gradientUnits="userSpaceOnUse" x1="106.863" y1="20.588" x2="106.863" y2="37.255" gradientTransform="matrix(1.062945, 0, 0, 1.799964, -13.59001, 112.941995)">
+      <stop offset="0" style="stop-color: rgba(0, 0, 0, 1)"/>
+      <stop offset="1" style="stop-color: rgba(0, 0, 0, 1)"/>
+    </linearGradient>
+  </defs>
+  <path d="M 0 0 H 198 V 30 H 0 V 0 Z" style="fill: none; stroke: url(#gradient-1); stroke-width: 4;" transform="matrix(1, 0, 0, 1, 0, 0)"/>
+  <path d="M 1 50 H 199 V 80 H 1 V 50 Z" style="fill: none; stroke-width: 4; stroke: url(#gradient-2);" transform="matrix(1, 0, 0, 1, 0, 0)"/>
+  <path d="M 1 100 H 199 V 130 H 1 V 100 Z" style="fill: none; stroke-width: 4; stroke: url(#gradient-3);" transform="matrix(1, 0, 0, 1, 0, 0)"/>
+  <path d="M 1 150 H 199 V 180 H 1 V 150 Z" style="fill: none; stroke-width: 4; stroke: url(#gradient-4);" transform="matrix(1, 0, 0, 1, 0, 0)"/>
+</svg>

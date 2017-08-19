@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { TransitionGroup } from 'react-transition-group'
 import Draggable from 'gsap/Draggable'
-import { TweenLite } from 'gsap'
+import { TweenLite, Back } from 'gsap'
 
 import { Slide } from '../Shared/Transition'
 import { MainContainer } from '../Shared/Styles'
@@ -74,7 +74,8 @@ class LocalContainer extends Component {
   static slideDOM(bodyDOM) {
     return (targetOffset) => {
       TweenLite.to(bodyDOM, 0.7, {
-        right: `${targetOffset}px`
+        right: `${targetOffset}px`,
+        ease: Back.easeOut
       })
     }
   }
@@ -102,6 +103,8 @@ class LocalContainer extends Component {
 
   componentDidMount() {
     this.props.getNav && this.props.getNav(this.nav)
+
+    console.log(this.props.viewIndex, 'MOUNTING BODY')
 
     const { length } = this.props.navigationList
 

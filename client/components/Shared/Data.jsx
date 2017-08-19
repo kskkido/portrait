@@ -17,8 +17,8 @@ const purple1 = '#c1839f'
 
 export const viewData = {
   home: {
-    navigationList: ['WELCOME', 'TO', 'MY', 'WEBSITE'],
-    backgroundColor: [grey1, grey2, grey3, grey4]
+    navigationList: ['WELCOME', 'ABOUT', 'PROJECTS', 'CONTACTS'],
+    backgroundColor: [grey1, blue1, red1, purple1]
   },
   about: {
     navigationList: ['WHO', 'WHAT', 'WHERE', 'WHEN'],

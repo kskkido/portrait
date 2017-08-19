@@ -1,15 +1,9 @@
 import React from 'react'
 
-import { BodyContainer, BodyContent, BodyText, Flex1, TitleDiv, createTitle } from '../../Shared/Styles'
+import { BodyContent, BodyText } from '../../Shared/Styles'
 import HomeText from './content'
 
-const HomeView = () => (
-  <BodyContainer>
-    <Flex1>
-      <TitleDiv id="title">
-       {createTitle('< Who >')}
-      </TitleDiv>
-    </Flex1>
+const Content = () => (
     <BodyContent>
       <BodyText>
       <p>
@@ -20,7 +14,6 @@ Aenean vel tellus ac velit eleifend efficitur ac eu massa. Curabitur malesuada a
 
       </BodyText>
     </BodyContent>
-  </BodyContainer>
 )
 
-export default HomeView
+export default Content

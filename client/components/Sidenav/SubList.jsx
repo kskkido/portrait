@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { TimelineLite } from 'gsap'
+import { TimelineLite, Back } from 'gsap'
 import { rotationChange, viewChange } from '../../reducers/events'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
@@ -91,6 +91,7 @@ class LocalContainer extends Component {
           opacity: 1,
           paddingLeft: '3em',
           color: 'black',
+          ease: Back.easeOut,
         }, '-=0.4')
   }
 

@@ -7,6 +7,8 @@ import BodyComponent from '../Body'
 import { viewRestart, rotationRestart } from '../../../reducers/events'
 import { viewData } from '../../Shared/Data'
 
+
+
 const Project = ({ backgroundColor, navigationList, viewIndex }) => {
   return (
     <BodyComponent

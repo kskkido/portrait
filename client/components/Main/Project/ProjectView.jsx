@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { BodyContainer, BodyContent, Flex1, Title } from '../../Shared/Styles'
+import { BodyContainer, BodyContent, Flex1, Title} from '../../Shared/Styles'
+import { createSpans } from '../../Shared/Utils'
+import { Scramble } from '../../Shared/Transition'
 import { MacIcon } from '../../Shared/SVG'
 import ProjectText from './content'
 
@@ -54,35 +56,38 @@ const BodyText = styled.div`
 
 const ProjectView = ({ viewIndex, language, scale }) => {
   const data = ProjectText[viewIndex]
+      , title = data.title
   return (
-  <BodyContainer key={viewIndex}>
-    <Flex1>
-      <Title>
-        {`< ${data.title} >`}
-      </Title>
-    </Flex1>
-    <BodyContent>
-      <Image>
-        <ImageLink href={data.url} target="_blank">
-          <ProjectImage imageSource={data.imageSource}/>
-        </ImageLink>
-      </Image>
-        <BodyText>
-        <h3>Technology</h3>
-        <p>
-          {data.technology}
-        </p>
-        <h3>When</h3>
-        <p>
-         {data.when}
-        </p>
-        <h3>Description</h3>
-        <p>
-          {data.description}
-        </p>
-      </BodyText>
-    </BodyContent>
-  </BodyContainer>
+    <BodyContainer key={viewIndex}>
+      <Flex1>
+        <Scramble key={title} in={true} appear={true} delay={0} text={`<${title}>`}>
+          <Title>
+            {createSpans(title.length + 2)}
+          </Title>
+        </Scramble>
+      </Flex1>
+      <BodyContent>
+        <Image>
+          <ImageLink href={data.url} target="_blank">
+            <ProjectImage imageSource={data.imageSource}/>
+          </ImageLink>
+        </Image>
+          <BodyText>
+          <h3>Technology</h3>
+          <p>
+            {data.technology}
+          </p>
+          <h3>When</h3>
+          <p>
+          {data.when}
+          </p>
+          <h3>Description</h3>
+          <p>
+            {data.description}
+          </p>
+        </BodyText>
+      </BodyContent>
+    </BodyContainer>
   )
 }
 

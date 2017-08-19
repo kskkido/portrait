@@ -15,21 +15,21 @@ const theme = {
 }
 
 const Container = styled.div`
-  flex: 6;
+  position: relative;
+  height: 100vh;
+  margin-left: 325px;
 `
 
 /* ====== utils ====== */
 
 const BodyRoutes = () => (
   <Route render={({ location }) => {
-    console.log(location, 'LOCAATION')
     return (
       <TransitionGroup>
         <Show
           key={location.key}
           pathname={location.pathname}
-          timeout={1600}
-          exit={false}
+          appear={true}
           mountOnEnter={true}
           unmountOnExit={true}
         >
