@@ -1,45 +1,30 @@
 import React from 'react'
-import styled, {keyframes} from 'styled-components'
-
-export const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`
-
-export const fadeOut = keyframes`
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    width: 0px;
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 0;
-  }
-`
+import styled from 'styled-components'
 
 export const MainContainer = styled.div`
   display: flex;
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  cursor: move;
   flex-direction: ${props => props.row ? 'row' : 'column'};
+  position: absolute;
+  opacity: 0;
+  top: -100px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 `
 
 export const BodyContainer = styled.div`
+  position: absolute;
+  width: 100%;
   display: flex;
   flex-direction: ${props => props.row ? 'row' : 'column'};
   justify-content: flex-start;
 `
 
 export const BodyContent = styled.div`
-  margin-top: 10px;
+  margin-top: 5px;
   flex: 4;
   display: flex;
   justify-content: center;
@@ -49,6 +34,7 @@ export const BodyText = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 70%;
+  margin-top: 10px;
 `
 
 export const Flex1 = styled.div`
@@ -80,7 +66,7 @@ export const Title = styled.h1`
   font-weight: normal;
   text-transform: uppercase;
   font-size: 1.4em;
-  min-height: 60px;
+  min-height: 50px;
 `
 
 export const Title3 = styled.h3`
@@ -93,18 +79,28 @@ export const TitleDiv = styled.div`
   min-height: 60px;
 `
 
-const Letter = styled.span`
+export const Letter = styled.span`
   display: inline-block;
   text-transform: uppercase;
   font-size: 1.4em;
 `
 
-export const createTitle = (string) => {
+export const createTitle = (string, LetterComponent = Letter) => {
   const title = []
   for (let i = 0; i < string.length; i++) {
     title.push(
-      <Letter key={`${string}_${i}`}>{string[i]}</Letter>
+      <LetterComponent key={`${string}_${i}`}>{string[i]}</LetterComponent>
     )
   }
   return title
+}
+
+export const createSpans = (length, LetterComponent = Letter) => {
+  const spanList = []
+  for (let i = 0; i < length; i++) {
+    spanList.push(
+      <LetterComponent key={`index_${i}`}></LetterComponent>
+    )
+  }
+  return spanList
 }

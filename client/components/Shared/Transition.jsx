@@ -1,106 +1,145 @@
 import React from 'react'
 import { Transition } from 'react-transition-group'
-import { TimelineLite, Power2 } from 'gsap'
+import { TimelineLite, Back } from 'gsap'
 
 import { viewData } from './Data'
+import { convertToAsci, getFirstTwo, once } from './Utils'
 
 let toggle = false
   , running = false
 
 const themeColor = {
-  '/': '#e8e5e6',
-  '/about': viewData.about.backgroundColor[0],
-  '/projects': viewData.projects.backgroundColor[0],
-  '/contact': '#c1839f'
+  '/': [viewData.home.backgroundColor[0], '#e8e5e6'],
+  '/about': getFirstTwo(viewData.about.backgroundColor),
+  '/projects': getFirstTwo(viewData.projects.backgroundColor),
+  '/contact':  getFirstTwo(viewData.contacts.backgroundColor)
 }
 
-const showAnimation = (() => {
+/* ====== VERTICAL TRANSITION ====== */
+
+const verticalSlide = (() => {
   const frontIndex = -99
     , behindIndex = -100
-    , slideDuration = 0.39
+    , slideDuration = 0.3
     , fadeInDuration = 0.4
 
-  const slideVerticalBackground = (lastAnimation) => {
+  const cbAnimation = (_bgBehind, secondColor) => {
+    return (_tl) => {
+      _tl.set(_bgBehind, {backgroundColor: secondColor})
+    }
+  }
+
+  const slideVerticalBackground = (cb, lastCb, direction) => {
     const curriedSlide = (bgBehind, bgFront, tl, repeat = 0) => {
       if (repeat < 0) {
-        lastAnimation(tl)
+        lastCb(tl)
       } else {
         tl
           .set(bgBehind, {zIndex: behindIndex}) // push current front to back
           .set(bgFront, {zIndex: frontIndex}) // push current back to front, does not appear, since height will be tweened from 0
           .from(bgFront, slideDuration, {
+            [direction]: 0,
             height: 0,
-            ease: Power2.easeOut,
-            onComplete: curriedSlide,
-            onCompleteParams: [bgFront, bgBehind, tl, repeat - 1]
-          }, '+=0.05') // tween new front to fill background
+            onComplete: (...args) => (cb.call(this, args[2]), curriedSlide.apply(this, args)),
+            onCompleteParams: [bgFront, bgBehind, tl, repeat - 1],
+            clearProps: direction
+          }) // tween new front to fill background
       }
     }
     return curriedSlide
   }
 
-  const fadeInList = (list) => {
-    new TimelineLite()
-      .staggerTo(list, fadeInDuration, {
-        autoAlpha: 1,
-        scale: 1,
-        rotationX: 0,
-        rotationY: 0,
-        marginTop: '-=20px',
-      }, 0.07)
-  }
+  // const fadeInList = (list) => {
+  //   new TimelineLite()
+  //     .staggerTo(list, fadeInDuration, {
+  //       autoAlpha: 1,
+  //       scale: 1,
+  //       rotationX: 0,
+  //       rotationY: 0,
+  //       marginTop: '-=20px',
+  //     }, 0.07)
+  // }
 
   const fadeInBody = (target, tl) => {
     tl
       .to(target, fadeInDuration, {
         autoAlpha: 1,
-        marginTop: '+=40px',
-        rotationX: 0,
-        rotationY: 0,
+        top: '+=100px',
+        ease: Back.easeOut,
         onComplete: () => running = false
       })
   }
 
-  const callBackAnimations = (target, ...rest) => (tl) => {
-    fadeInList(rest)
+  const lastCbAnimation = (target) => (tl) => {
+    // fadeInList(rest)
     fadeInBody(target, tl)
   }
 
-  return (duration, color) => (target) => {
-    running = true
-    const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
-        , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
-        , sideNav = [] || document.getElementById('sideNav').childNodes
-        , repeat = Math.floor((duration - fadeInDuration) / slideDuration) - 1
-        , tl = new TimelineLite()
-          .set([target, ...sideNav], {autoAlpha: 0, transformOrigin: '0% 0% left', rotationX: 20, rotationY: 20})
-          .set(target, {marginTop: '-=40px'})
-          .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
-          .set(behind, {backgroundColor: color})
+  return {
+    onEnter: (duration, color, color2, direction = 'top') => (target, isAppearing) => {
+      running = true
+      const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
+          , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
+          , repeat = isAppearing ? -1 : Math.floor((duration - fadeInDuration) / slideDuration) - 1
+          , tl = new TimelineLite()
+            // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
+            // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
+            .set(behind, {backgroundColor: color})
+            .delay(isAppearing ? 0.2 : 0.3)
 
-    slideVerticalBackground(callBackAnimations(target, ...sideNav))(front, behind, tl, repeat)
+      slideVerticalBackground(once(cbAnimation(front, color2)), lastCbAnimation(target), direction)(front, behind, tl, repeat)
 
-    toggle = !toggle
+      toggle = !toggle
+    },
+    onExit: (target) => {
+      new TimelineLite()
+        .to(target, 0.3, {
+          autoAlpha: 0,
+          top: '-=200px',
+        })
+    }
   }
 })()
 
+
+const index = {
+  '/': 0,
+  '/about': 1,
+  '/projects': 2,
+  '/contact': 3
+}
+
+let prev = -1
+
+const getDirection = (prevIndex, nextIndex) => (
+  prevIndex - nextIndex < 0 ? 'top' : 'bottom'
+)
+
 export const Show = (props) => {
-  const duration = props.timeout / 1000
+  const [color1, color2] = themeColor[props.pathname || '/']
+
+  const currentIndex = index[props.pathname || '/']
+      , direction = getDirection(prev, currentIndex)
+  prev = currentIndex
 
   return (
     <Transition
       {...props}
-      onEnter={showAnimation(duration || 0.5, themeColor[props.pathname || '/'])}
+      timeout={{enter: 1400, exit: 300}}
+      onEnter={verticalSlide.onEnter(1.4, color1, color2, direction)}
+      onExit={verticalSlide.onExit}
     />
   )
 }
 
-const slideAnimation = (() => {
+/* ====== HORIZONTAL TRANSITION ====== */
+
+const horizontalSlide = (() => {
 
   const frontIndex = -99
     , behindIndex = -100
     , slideDuration = 0.5
-    , fadeInDuration = 0.3
+    , fadeInDuration = 0.5
 
   const slideHorizontalBackground = (bgBehind, bgFront, tl, direction) => {
     tl
@@ -109,7 +148,6 @@ const slideAnimation = (() => {
       .from(bgFront, slideDuration, {
         [direction]: 0,
         width: 0,
-        ease: Power2.easeInOut,
         clearProps: direction
       })
   }
@@ -119,30 +157,30 @@ const slideAnimation = (() => {
       .from(target, fadeInDuration, {
       marginLeft: `${offset}px`,
       autoAlpha: 0,
-      ease: Power2.easeInOut
-    })
+      ease: Back.easeOut
+    }, `-=${slideDuration - 0.2}`)
   }
 
-  return (duration, offset, color) => (target) => {
-    if (running) return // hacky
+  return {
+    onEnter: (duration, offset, color) => (target) => {
+      if (running) return // hacky
 
-    const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
-        , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
-        , direction = offset > 0 ? 'right' : 'left'
-        , tl = new TimelineLite()
-          .set(behind, {backgroundColor: color})
-    slideHorizontalBackground(front, behind, tl, direction); slideInContent(offset, target, tl)
-    toggle = !toggle
+      const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
+          , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
+          , direction = offset > 0 ? 'right' : 'left'
+          , tl = new TimelineLite()
+            .set(behind, {backgroundColor: color})
+      slideHorizontalBackground(front, behind, tl, direction); slideInContent(offset, target, tl)
+      toggle = !toggle
+    },
+    onExit: (target) => {
+      new TimelineLite()
+        .to(target, 0.2, {
+          autoAlpha: 0,
+        })
+    }
   }
 })()
-
-const fadeOut = (target) => {
-  const tl = new TimelineLite()
-  tl
-    .to(target, 0.1, {
-      autoAlpha: 0
-    })
-}
 
 export const Slide = (_props) => {
   const props = Object.assign({}, _props)
@@ -151,38 +189,146 @@ export const Slide = (_props) => {
     <Transition
       {...props}
       timeout={600}
-      onEnter={slideAnimation(props.duration || 0.8, _props.targetOffset % 200, _props.color || '#ecf0f1')}
+      onEntering={horizontalSlide.onEnter(props.duration || 0.8, ( _props.targetOffset * 2) % 300, _props.color || '#ecf0f1')}
+      onExiting={horizontalSlide.onExit}
     />
   )
 }
 
-// const collapseAnimation = (() => {
+/* ====== COLLAPSE TRANSITION ====== */
 
-//   const collapse = (target, tl) => {
-//     tl
-//       .from(target, 0.2, {
-//         height: '0px',
-//       })
-//       .from(target, 0.2, {
-//         marginLeft: '-10px',
-//         opacity: 0,
-//       })
-//   }
+const collapseAnimation = (() => {
 
-//   return (duration) => (target) => {
-//     const tl = new TimelineLite()
-//     collapse(target, tl)
-//   }
+  const collapse = ({ childNodes: [main] }) => {
+    new TimelineLite()
+      .from(main, 0.3, {
+        height: '0px',
+      })
+      .staggerFrom(main.childNodes, 0.6, {
+        autoAlpha: 0,
+        scale: 0,
+        rotationX: '45',
+        rotationY: '45',
+        ease: Back.easeOut,
+      }, 0.1)
+  }
 
-// })()
+  const uncollapse = ({ childNodes: [main] }) => {
+    new TimelineLite()
+      .to(main, 0.2, {
+        autoAlpha: 0,
+      })
+      .to(main, 0.3, {
+        height: 0,
+        marginTop: '-10px',
+      }, '-=0.1')
+  }
 
-// export const Collapse = (props) => {
-//   console.log('DO IT', props)
-//   return (
-//     <Transition
-//       {...props}
-//       timeout={600}
-//       onEnter={collapseAnimation(props.duration || 0.4)}
-//     />
-//   )
-// }
+  return {
+    onEnter: collapse,
+    onExit: uncollapse,
+  }
+})()
+
+export const UncollapseList = (props) => {
+  return (
+    <Transition
+      {...props}
+      onEntering={collapseAnimation.onEnter}
+      onExit={collapseAnimation.onExit}
+    />
+  )
+}
+
+/* ====== FADE TRANSITION ====== */
+
+const fadeAnimation = (() => {
+
+  const fadeIn = (delay = 0) => (target) => {
+    new TimelineLite()
+      .from(target, 0.6, {
+        autoAlpha: 0,
+        ease: Back.easeIn
+      })
+      .delay(delay)
+  }
+
+  const fadeOut = (delay = 0) => (target) => {
+    new TimelineLite()
+      .to(target, 0.3, {
+        autoAlpha: 0,
+      })
+      .delay(delay)
+  }
+
+  const slideOut = (delay = 0) => (target) => {
+    return new TimelineLite()
+      .to(target, 0.5, {
+        x: '+=100%',
+        autoAlpha: 0
+      })
+      .delay(delay)
+  }
+
+  return {
+    onEnter: fadeIn,
+    onExit: fadeOut,
+    onExitSlide: slideOut
+  }
+})()
+
+export const Fade = (_props) => {
+  const props = Object.assign({}, _props)
+    delete props.onEnterDelay
+    delete props.onExitDelay
+    delete props.slideOut
+  return (
+    <Transition
+      {...props}
+      timeout={{enter: 600, exit: 300}}
+      onEnter={fadeAnimation.onEnter(_props.onEnterDelay)}
+      onExit={_props.slideOut ? fadeAnimation.onExitSlide(_props.onExitDelay) : fadeAnimation.onExit(_props.onExitDelay)}
+    />
+  )
+}
+
+const scrambleAnimation = (() => {
+
+  const writeHtml = function (targetDom) {
+    console.log(targetDom.textContent, String.fromCharCode(Math.floor(this.target.value)), 'writeHTML')
+    targetDom.textContent = String.fromCharCode(Math.floor(this.target.value))
+  }
+
+  const onEnter = (asciList, delay) => ({ childNodes }) => {
+    console.log(asciList, delay)
+    const tl = new TimelineLite()
+        .delay(delay)
+    asciList.forEach((asci, i) => {
+      tl.
+        to({value: Math.floor(33 + Math.random() * 93)}, 0.15, {
+          value: asci,
+          onUpdate: writeHtml,
+          onUpdateParams: [childNodes[i]],
+          ease: Back.easeOut
+        }, '-=0.06')
+    })
+  }
+
+  return {
+    onEnter
+  }
+})()
+
+export const Scramble = (_props) => {
+  const props = Object.assign({}, _props)
+  delete props.text; delete props.delay
+
+  return (
+    <Transition
+      {...props}
+      timeout={800}
+      exit={false}
+      onEnter={scrambleAnimation.onEnter(convertToAsci(_props.text || 'bleh'), _props.delay)}
+    />
+  )
+}

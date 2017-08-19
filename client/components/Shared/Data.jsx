@@ -1,21 +1,24 @@
-const grey1 = '#e8e5e6'
-    , grey2 = '#D2CBCB'
+const grey1 = '#D2CBCB'
+    , grey2 = '#e8e5e6'
     , grey3 = '#e3e1dd'
     , grey4 = '#ecf0f1'
 
-const blue2 = '#42CAFD'
+const blue1 = '#65AFFF'
+    , blue2 = '#42CAFD'
     , blue3 = '#84D9FA'
-    , blue1 = '#65AFFF'
     , blue4 = '#57E2E5'
 
 const red1 = '#DD614A'
     , red2 = '#F48668'
     , red3 = '#F4A698'
 
+const purple1 = '#c1839f'
+    , purple2 = '#C09BD8'
+
 export const viewData = {
   home: {
-    navigationList: ['WELCOME', 'TO', 'MY', 'WEBSITE'],
-    backgroundColor: [grey1, grey2, grey3, grey4]
+    navigationList: ['WELCOME', 'ABOUT', 'PROJECTS', 'CONTACTS'],
+    backgroundColor: [grey1, blue1, red1, purple1]
   },
   about: {
     navigationList: ['WHO', 'WHAT', 'WHERE', 'WHEN'],
@@ -25,6 +28,10 @@ export const viewData = {
     navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
     backgroundColor: [red1, red2, red3],
   },
+  contacts: {
+    navigationList: [],
+    backgroundColor: [purple1, purple2]
+  }
 }
 
 

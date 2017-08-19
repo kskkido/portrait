@@ -1,26 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-
+import { TimelineLite, Back } from 'gsap'
 import { languageSelect } from '../../reducers/language'
+import { Fade } from '../Shared/Transition'
 
 const Container = styled.div`
-  flex: 1;
-  align-self: center;
-  margin-bottom: 6em;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 30%;
 `
 
 const ButtonContainer = styled.div`
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   display: flex;
   justify-content: space-around;
-  max-width: 60%;
-  font-size: 11px;
+  width: 60%;
+  perspective: 800px;
+  font-size: 1.3em;
+  letter-spacing: 4px;
 `
 
 const Button = styled.button`
-  font-size: 1.5em;
   padding: 2em;
   margin: 50px;
   height: 150px;
@@ -31,6 +33,9 @@ const Button = styled.button`
   background: none;
   position: relative;
   text-transform: uppercase;
+  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);
+  transform-style: preserve-3d;
+  cursor: pointer;
   &:hover {
     cursor: pointer;
   }
@@ -86,17 +91,92 @@ const Button = styled.button`
 
 // add national flag to button
 
-const LanguageQuery = ({ onLanguageSelect }) => (
-    <Container key="language">
+const LanguageQuery = ({ language, onClick, onMouseMove, onMouseOut }) => (
+  <Container>
+    <Fade
+      in={!language}
+      key={'language'}
+      appear={true}
+    >
       <ButtonContainer>
-        <Button value="ENGLISH" onClick={({target}) => onLanguageSelect(target.value)}>English</Button>
-        <Button value="JAPANESE" onClick={({target}) => onLanguageSelect(target.value)}>日本語</Button>
+        <Button
+          value="ENGLISH"
+          onClick={onClick}
+          onMouseMove={onMouseMove}
+          onMouseOut={onMouseOut}
+        >
+          English
+        </Button>
+        <Button
+          value="JAPANESE"
+          onClick={onClick}
+          onMouseMove={onMouseMove}
+          onMouseOut={onMouseOut}
+        >
+          日本語
+        </Button>
       </ButtonContainer>
-    </Container>
+    </Fade>
+  </Container>
 )
+
+class LocalContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      language: null
+    }
+  }
+
+  static hoverAnimation({ nativeEvent: { layerX, layerY, target } }) {
+      const ax = (layerY - (target.offsetHeight / 2)) / -5
+          , ay = (layerX - (target.offsetWidth / 2)) / 5
+      new TimelineLite()
+        .to(target, 0.3, {
+          rotationX: ax,
+          rotationY: ay,
+        })
+        .to(target, 0.2, {
+          scale: 1.075,
+          ease: Back.eastOut
+        }, '-=0.3')
+  }
+
+  static hoverOffAnimation({ nativeEvent: { target } }) {
+      new TimelineLite()
+        .to(target, 0.4, {
+          rotationX: 0,
+          rotationY: 0,
+          scale: 1,
+          ease: Back.easeOut
+        })
+  }
+
+  componentWillUpdate(_, { language }) {
+    return language ?
+      setTimeout(this.props.onLanguageSelect, 400, language) :
+      undefined
+  }
+
+  onClickHandler({ nativeEvent: { target: { value }} }) {
+    this.setState(() => ({language: value}))
+  }
+
+  render () {
+
+    return (
+      <LanguageQuery
+        language={this.state.language}
+        onClick={this.onClickHandler.bind(this)}
+        onMouseMove={LocalContainer.hoverAnimation}
+        onMouseOut={LocalContainer.hoverOffAnimation}
+      />
+    )
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   onLanguageSelect: (language) => dispatch(languageSelect(language))
 })
 
-export default connect(null, mapDispatchToProps)(LanguageQuery)
+export default connect(null, mapDispatchToProps)(LocalContainer)

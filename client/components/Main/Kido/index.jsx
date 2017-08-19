@@ -7,17 +7,17 @@ import Navigation from '../Navigation'
 
 import BodyComponent from '../Body'
 
-const createAnimation = (target) => {
-  TweenMax.from(target, 2, {
-    rotationX: 90,
-    rotationY: 90,
-  }, {
-    rotationX: 0,
-    rotationY: 0,
-    rotation: 360,
-    ease: Power2.easeIn
-  })
-}
+// const createAnimation = (target) => {
+//   TweenMax.from(target, 2, {
+//     rotationX: 90,
+//     rotationY: 90,
+//   }, {
+//     rotationX: 0,
+//     rotationY: 0,
+//     rotation: 360,
+//     ease: Power2.easeIn
+//   })
+// }
 
 
 class LocalContainer extends Component {
@@ -30,7 +30,7 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
-    createAnimation(this.bodyDiv)
+    // createAnimation(this.bodyDiv)
   }
 
   render() {

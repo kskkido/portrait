@@ -6,7 +6,6 @@ const BgWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 0;
   z-index: -1000;
 `
 
@@ -16,9 +15,8 @@ const BgOne = styled.div.attrs({
     width: props.theme.width
   })
 })`
-  background-color: #e8e5e6;
+  background-color: #D2CBCB;
   position: absolute;
-  top: 0;
   z-index: -99;
 `
 

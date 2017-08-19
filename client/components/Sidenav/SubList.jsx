@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { TimelineLite } from 'gsap'
+import { TimelineLite, Back } from 'gsap'
 import { rotationChange, viewChange } from '../../reducers/events'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
@@ -34,6 +33,7 @@ const LinkBlock = styled.div.attrs({
     borderLeft: `4px solid ${props.themeColor}`
   })
 })`
+  margin-top: 10px;
   height: inherit;
   position: relative;
 `
@@ -56,14 +56,16 @@ const LinkBackground = styled.div.attrs({
   box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)
 `
 
-const ListText = styled.h3`
-  vertical-align: middle;
+const ListTextContainer = styled.div`
+  padding-top: 4px;
+  opacity: 0.6;
+`
+
+const ListText = styled.span`
   padding-left: 1em;
-  padding-top: 5px;
   font-weight: normal;
   font-size: 0.7em;
   text-transform: uppercase;
-  opacity: 0.6;
 `
 
 const SideNav = ({ children, inputRef }) => (
@@ -89,29 +91,15 @@ class LocalContainer extends Component {
           opacity: 1,
           paddingLeft: '3em',
           color: 'black',
+          ease: Back.easeOut,
         }, '-=0.4')
-  }
-
-  static enterAnimation(main, list) {
-    return new TimelineLite()
-      .from(main, 0.6, {
-        height: '0px',
-      })
-      .staggerFrom(list, 0.5, {
-        autoAlpha: 0,
-        scale: 0,
-        rotationX: '45',
-        rotationY: '45'
-      }, 0.1)
   }
 
   componentWillMount() {
     this.listRows = []
-    // renders before viewIndex is resetted
   }
 
   componentDidMount() {
-    this.enterAnimation = LocalContainer.enterAnimation(this.mainDiv, this.listRows)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
 
     if (this.props.viewIndex === 0 ) { // a little hacky
@@ -130,6 +118,7 @@ class LocalContainer extends Component {
 
       return (
         <ListRow
+          id="listRow"
           key={text}
           active={isActive}
           onMouseOver={this.handleOnHover(index)}
@@ -139,11 +128,14 @@ class LocalContainer extends Component {
             onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}
           >
             <LinkBlock
+              id="sublist"
               themeColor={colors[index]}
               innerRef={div => this.listRows.push(div)}
             >
               <LinkBackground themeColor={colors[index]} />
-              <ListText>{text}</ListText>
+              <ListTextContainer>
+                <ListText>{text}</ListText>
+              </ListTextContainer>
             </LinkBlock>
           </ListLink>
         </ListRow>

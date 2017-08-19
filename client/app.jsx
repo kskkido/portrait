@@ -14,12 +14,14 @@ injectGlobal`
     background: #E1E5EE;
     letter-spacing: 4px;
     font-size: .8em;
+    overflow: hidden;
+  }
+  * {
+    box-sizing: border-box;
   }
 `
 
 const Container = styled.main`
-  display: flex;
-  animation: ${fadeIn} 0.6s ease-in-out 0s;
 `
 
 const Loaded = () => (

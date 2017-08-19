@@ -1,18 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-
+import { TransitionGroup } from 'react-transition-group'
 import { fadeIn } from '../Shared/Styles'
+import { Fade } from  '../Shared/Transition'
 import LanguageQuery from './Language'
 import Load from './Load'
 
+
 const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items; center;
-  height: 100vh;
-  animation: ${fadeIn} 0.5s ease-in-out 0s;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 `
 
 const Preload = ({ selected }) => (

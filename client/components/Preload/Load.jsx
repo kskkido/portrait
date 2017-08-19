@@ -1,26 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-
+import { TimelineLite, Back } from 'gsap'
 import { loadComplete } from '../../reducers/events'
 
-import { fadeOut, Title3 } from '../Shared/Styles'
+import { Title3 } from '../Shared/Styles'
+import { createTitle } from '../Shared/Utils'
+import { Fade, Scramble } from '../Shared/Transition'
 
 const Container = styled.div`
-  flex: 1;
   position: relative;
-`
-
-const LoadContainer = styled.div.attrs({
-  style: props => ({
-    animation: props.loadProgress === 100 ? `${fadeOut} 1s ease-in-out 0s` : `null`
-  })
-})`
-  position: absolute;
-  height: 50vh;
   width: 100%;
-  bottom: 0px;
-  right: 0;
+  height: 100%;
 `
 
 const ProgressBar = styled.div.attrs({
@@ -28,61 +19,113 @@ const ProgressBar = styled.div.attrs({
     width: `${props.loadProgress}%`,
   })
 })`
+  height: 50vh;
+  position: absolute;
+  bottom: 0;
+  background-color: #D2CBCB;
+  left: 0;
   border-top: 2px solid;
-  height: 100%;
+  z-index: 1;
 `
 
 const LoadingText = Title3.extend`
-  margin-left: 30px;
+  position: absolute;
+  left: 30px;
+  top: -40px;
+  width: 250px;
   letter-spacing: 12px;
-  font-size: 11px;
+  font-size: 13px;
 `
 
-const Load = ({loadProgress}) => (
-  <Container>
-    <LoadContainer loadProgress={loadProgress}>
-      <LoadingText>Loading: {`${loadProgress}`}</LoadingText>
-      <ProgressBar loadProgress={loadProgress} />
-    </LoadContainer>
-  </Container>
+const LetterContainer = styled.div`
+  position: absolute;
+  margin: auto;
+  left: 50%;
+  bottom: 33vh;
+  height: 100px;
+  transform: translateX(-50%);
+`
+
+const Letter = styled.span`
+  margin-right: 20px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 5em;
+  opacity: 0;
+`
+
+const Load = ({ inputRef, loaded, loadProgress }) => (
+    <Fade in={!loaded} key={'loadBar'} appear={true} slideOut={true} onExitDelay={0.4}>
+        <Container>
+          <ProgressBar loadProgress={loadProgress}>
+            <LoadingText>Loading: {`${loadProgress}`}</LoadingText>
+          </ProgressBar>
+          <Scramble in={loadProgress === 100} key={'message'} text={'Hello'} delay={0.4}>
+            <LetterContainer
+              innerRef={inputRef}
+            >
+              {createTitle('Hello', Letter)}
+            </LetterContainer>
+          </Scramble>
+        </Container>
+    </Fade>
 )
 
 class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loadProgress: 0
+      loadProgress: 0,
+      loaded: false,
     }
+  }
+
+  static letterAnimation(target, cb) {
+    return new TimelineLite()
+      .staggerTo(target.childNodes, 0.5, {
+        y: '-=140px',
+        autoAlpha: 1,
+        ease: Back.easeOut,
+        onComplete: cb,
+      }, '0.05')
+      .delay(0.3)
   }
 
   updateProgressBar() {
     const loadProgress = this.state.loadProgress + Math.floor(Math.random() * 2)
-    loadProgress > 100 ? this.completeLoad() : this.setState({loadProgress})
+    this.setState({loadProgress}, () => (
+      loadProgress === 100 ?
+        this.clearIntervalAndToggle(this.progressInterval) :
+        undefined
+    ))
   }
 
-  completeLoad() {
-    this.props.loaded()
-    clearInterval(this.progressInterval)
+  clearIntervalAndToggle(interval) {
+    return (clearInterval(interval), LocalContainer.letterAnimation(this.letters, () => this.setState(Object.assign({}, ...this.state, {loaded: true}), console.log('complete'))))
   }
 
-  componentWillMount() {
-    // cheat it
+  componentDidMount() {
     setTimeout((self) => {
       self.progressInterval = setInterval(self.updateProgressBar.bind(this), 5)
-    }, 250, this)
+    }, 570, this)
+  }
+
+  componentWillUpdate(_, { loaded }) {
+    return loaded ? setTimeout(this.props.loaded, 900) : undefined
   }
 
   render() {
     return (
       <Load
-        loadProgress={this.state.loadProgress}
+        {...this.state}
+        inputRef={div => this.letters = div}
       />
     )
   }
 }
 
 const mapStateToDispatch = (dispatch) => ({
-  loaded: () => setTimeout(dispatch, 650, loadComplete())
+  loaded: () => dispatch(loadComplete())
 })
 
 export default connect(null, mapStateToDispatch)(LocalContainer)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { TweenLite } from 'gsap'
+import { TweenLite, TimelineLite, Back } from 'gsap'
 
 import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
@@ -20,13 +20,7 @@ const NavigationDiv = styled.div.attrs({
   border: 2px solid;
   border-radius: 50%;
   box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-`
-
-const NavigationText = styled.span`
-  font-weight: normal;
-  line-height: 50em;
-  padding: 5px;
-  text-transform: uppercase;
+  perspective: 500px;
 `
 
 const InnerNavigationDiv = styled.div.attrs({
@@ -39,6 +33,14 @@ const InnerNavigationDiv = styled.div.attrs({
   width: 300px;
   text-align: center;
   border-radius: 50%;
+  transform-style: preserve-3d;
+`
+
+const NavigationText = styled.span`
+  font-weight: normal;
+  line-height: 50em;
+  padding: 5px;
+  text-transform: uppercase;
 `
 
 class LocalContainer extends Component {
@@ -77,9 +79,26 @@ class LocalContainer extends Component {
 
   componentWillReceiveProps({ rotation }) {
     const { length } = this.props.navigationList
-    TweenLite.to(this.mainNav, 0.7, {rotation})
+    TweenLite.to(this.mainNav, 0.7, {rotation, ease: Back.easeOut})
     this.willSetView(LocalContainer.round(rotation, length))
   }
+
+  // onMouseOverHandler({ nativeEvent: { layerX, layerY } }) {
+  //   const ax = (layerY - (this.mainNav.offsetHeight / 2)) / -5
+  //       , ay = (layerX - (this.mainNav.offsetWidth / 2)) / 5
+  //   TweenLite.to(this.mainNav, 0.3, {
+  //     rotationX: ax,
+  //     rotationY: ay,
+  //   })
+  // }
+
+  // OnMouseOutHandler() {
+  //   TweenLite.to(this.mainNav, 0.4, {
+  //     rotationX: 0,
+  //     rotationY: 0,
+  //     ease: Back.easeOut
+  //   })
+  // }
 
   render() {
     const navigationDivs = this.props.navigationList.map(LocalContainer.createNavigationDiv)

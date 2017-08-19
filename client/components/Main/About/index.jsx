@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import BodyComponent from '../Body'
 import AboutView from './AboutView'
-
+import { Slide } from '../../Shared/Transition'
+import { TransitionGroup } from 'react-transition-group'
 import { viewRestart, rotationRestart } from '../../../reducers/events'
 import { viewData } from '../../Shared/Data'
 
-const About = ({ backgroundColor, navigationList }) => {
+const About = ({ backgroundColor, navigationList, viewIndex }) => {
   return (
     <BodyComponent
       backgroundColor={backgroundColor}
       navigationList={navigationList}
     >
-      <AboutView />
+          <AboutView navigationList={navigationList}/>
     </BodyComponent>
   )
 }
@@ -28,12 +28,9 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.rotationRestart(); this.props.viewRestart();
+    this.props.viewRestart(); this.props.rotationRestart()
+    console.log('MOUNTING ABOUT', this.props.viewIndex)
   }
-
-  // componentWillReceiveProps() {
-  //   console.log(document.getElementById('title').childNodes, 'WEI')
-  // }
 
   render () {
 
@@ -41,7 +38,6 @@ class LocalContainer extends Component {
       <About
         backgroundColor={LocalContainer.backgroundColor}
         navigationList={LocalContainer.navigationList}
-        viewIndex={this.props.viewIndex}
       />
     )
   }
