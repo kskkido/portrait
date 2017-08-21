@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { BodyContainer, BodyContent, Flex1, Title} from '../../Shared/Styles'
 import { createSpans } from '../../Shared/Utils'
 import { Scramble } from '../../Shared/Transition'
-import { MacIcon } from '../../Shared/SVG'
 import ProjectText from './content'
 
 // const createMetadataItem = (metadata) => (key) => (
@@ -15,8 +14,19 @@ import ProjectText from './content'
 //   Object.keys(metadata).map(createMetadataItem(metadata))
 // )
 
+
+const Section = styled.section`
+  flex: 1;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: ${props => props.center ? 'space-around' : ''};
+  margin-bottom: 70px;
+`
+
 const Image = styled.div`
-  align-self: center;
+  margin: 0 auto;
   width: 450px;
   height: 214px;
   background-image: url(leopard.png);
@@ -24,7 +34,6 @@ const Image = styled.div`
   background-size: contain;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 `
 
 const ImageLink = styled.a`
@@ -45,47 +54,95 @@ const ProjectImage = styled.div.attrs({
   background-size: contain;
 `
 
-const BodyText = styled.div`
-  flex 1;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  margin-left: 50px;
-  max-width: 400px;
+const Description = styled.div`
+  text-align: center;
+  padding: 0 10px 0 10px;
 `
+
+const TextContainer = Description.extend`
+  margin-top: 50px;
+  width: 100%;
+`
+
+const Header = styled.h3`
+  font-weight: normal;
+  font-size: 1.7em;
+  margin: 0 0 5px; 0;
+`
+
+const Text = styled.p`
+  margin: 0;
+  text-align: center;
+`
+
+const SubText = styled.span`
+  font-size: 1em;
+`
+
+const Line = styled.hr`
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: black;
+  position: relative;
+  border: 0;
+  margin: .5em 0 1em;
+`
+
 
 const ProjectView = ({ viewIndex, language, scale }) => {
   const data = ProjectText[viewIndex]
       , title = data.title
   return (
     <BodyContainer key={viewIndex}>
-      <Flex1>
-        <Scramble key={title} in={true} appear={true} delay={0} text={`<${title}>`}>
+      <Section>
+        <Scramble key={title} in={true} appear={true} delay={0.2} text={`<${title}>`}>
           <Title>
             {createSpans(title.length + 2)}
           </Title>
         </Scramble>
-      </Flex1>
-      <BodyContent>
+          <Description>
+            <p>{data.description}</p>
+          </Description>
+      </Section>
+    <BodyContent column={true}>
+
+      <Section center>
         <Image>
           <ImageLink href={data.url} target="_blank">
             <ProjectImage imageSource={data.imageSource}/>
           </ImageLink>
         </Image>
-          <BodyText>
-          <h3>Technology</h3>
-          <p>
+      </Section>
+
+      <Section center>
+        <TextContainer>
+          <Header>Technology</Header>
+          <Text>
             {data.technology}
-          </p>
-          <h3>When</h3>
-          <p>
-          {data.when}
-          </p>
-          <h3>Description</h3>
-          <p>
-            {data.description}
-          </p>
-        </BodyText>
+          </Text>
+        </TextContainer>
+        <TextContainer>
+          <Header>Role</Header>
+          <Text>
+            {data.role}
+          </Text>
+        </TextContainer>
+        <TextContainer>
+          <Header>Objective</Header>
+            <Text paragraph>
+              {data.objective}
+            </Text>
+        </TextContainer>
+        <TextContainer>
+          <Header>Idea</Header>
+
+            <Text paragraph>
+              {data.idea}
+            </Text>
+        </TextContainer>
+      </Section>
+
       </BodyContent>
     </BodyContainer>
   )

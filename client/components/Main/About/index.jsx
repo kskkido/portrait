@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import BodyComponent from '../Body'
 import AboutView from './AboutView'
-import { Slide } from '../../Shared/Transition'
-import { TransitionGroup } from 'react-transition-group'
 import { viewRestart, rotationRestart } from '../../../reducers/events'
 import { viewData } from '../../Shared/Data'
 

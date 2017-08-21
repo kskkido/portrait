@@ -16,7 +16,6 @@ const theme = {
 
 const Container = styled.div`
   position: relative;
-  height: 100vh;
   margin-left: 325px;
 `
 

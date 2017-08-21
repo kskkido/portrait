@@ -7,7 +7,7 @@ import SubList from './SubList'
 import { viewData } from '../Shared/Data'
 import { UncollapseList } from '../Shared/Transition'
 import Button from './Button'
-import { rotationRestart, viewRestart } from '../../reducers/events'
+import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
@@ -76,14 +76,6 @@ const LinkBackground = styled.div.attrs({
   transform-origin: left;
   transform: scaleX(0);
   box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)
-`
-
-const SVGContainer = styled.div`
-  position: absolute;
-  left: 60px;
-  top: 20px;
-  z-index: 100;
-  cursor: pointer;
 `
 
 // shadow... box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
@@ -206,19 +198,23 @@ class LocalContainer extends Component {
     this.enterAnimation = LocalContainer.enterAnimation(this.listRows)
     this.svgClickAnimation = LocalContainer.createSVGCLickAnimation(this.container)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
-    this.hoverAnimations[this.state.activeIndex].play()
+    this.hoverAnimations[this.props.pathIndex || 0].play()
   }
 
-  shouldComponentUpdate(_, { activeIndex }) {
-    return activeIndex !== this.state.activeIndex
+  shouldComponentUpdate({ pathIndex }) {
+    return this.props.pathIndex !== pathIndex
   }
 
   componentWillUpdate() {
-    this.hoverAnimations[this.state.activeIndex].reverse()
+    this.hoverAnimations[this.props.pathIndex].reverse()
+  }
+
+  componentDidUpdate() {
+    this.hoverAnimations[this.props.pathIndex].play()
   }
 
   createListItem ({color, text, path, subTextList, colors}, index) {
-    const isActive = index === this.state.activeIndex
+    const isActive = index === this.props.pathIndex
 
     return (
         <ListRow
@@ -263,25 +259,24 @@ class LocalContainer extends Component {
   }
 
   callEnterAnimation() {
-    console.log('PLEASEE CALL')
     this.enterAnimation.restart()
   }
 
   handleClick(index) {
     return () => {
-      this.setState({activeIndex: index})
+      this.props.pathChange(index)
     }
   }
 
   handleOnHover(index) {
-    if (index === this.state.activeIndex) return
+    if (index === this.props.pathIndex) return
     return () => {
       return this.hoverAnimations[index].play()
     }
   }
 
   handleOnHoverOff(index) {
-    if (index === this.state.activeIndex) return
+    if (index === this.props.pathIndex) return
     return () => this.hoverAnimations[index].reverse()
   }
 
@@ -301,10 +296,13 @@ class LocalContainer extends Component {
   }
 }
 
+const mapStateToProps = ({ events }) => ({pathIndex: events.pathIndex})
+
 const mapDispatchToProps = (dispatch) => ({
+  pathChange: (index) => dispatch(pathChange(index)),
   rotationRestart: () => dispatch(rotationRestart()),
   viewRestart: () => dispatch(viewRestart()),
 })
 
-export default connect(null, mapDispatchToProps)(LocalContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)
 

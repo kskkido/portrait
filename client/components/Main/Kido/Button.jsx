@@ -1,15 +1,24 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
-import { Cross } from '../shared/Assets'
+import { Arrow } from '../../Shared/Assets'
+import { pathChange } from '../../../reducers/events'
 
 const Container = styled.div`
-  position: fixed;
-  left: 60px;
-  top: 20px;
-  z-index: 1001;
-  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 `
+
+const hash = {
+  "/": 0,
+  "/about": 1,
+  "/projects": 2,
+  '/contact': 3
+}
 
 class LocalContainer extends Component {
   constructor(props) {
@@ -21,24 +30,12 @@ class LocalContainer extends Component {
     this.onClickWrapper = this.onClickWrapper.bind(this)
   }
 
-  static createSVGCLickAnimation() {
-    return new TimelineLite({paused: true})
-      .to(document.getElementById('sideNav'), 0.4, {
-        x: '-=100%',
-        ease: Back.easeOut,
-
-      })
-      .to(document.getElementById('bodyContainer'), 0.4, {
-        marginLeft: '-=325px',
-        ease: Back.easeOut,
-      }, '-=0.4')
-  }
-
   static createSVGHoverAnimation(target) {
     return new TimelineLite({paused: true})
       .to(target, 0.4, {
-        scale: 1.2,
-        rotation: 90,
+        rotationY: 180,
+        y: '+=10px',
+        scaleY: 1.6,
         ease: Back.easeOut
       })
   }
@@ -64,17 +61,25 @@ class LocalContainer extends Component {
     return (
       <Container
         innerRef={div => this.container = div}
-        onClick={() => this.onClickWrapper(this.props.onClick)}
         onMouseOver={this.onHoverHandler.bind(this)}
         onMouseOut={this.onHoverOffHandler.bind(this)}
       >
-        <Cross
-          scale={0.1}
-          innerRef={div => this.svg = div}
-        />
+        <Link
+          to={this.props.path || '/'}
+          onClick={() => this.props.pathChange(hash[this.props.path])}
+        >
+          <Arrow
+            scale={0.15}
+            innerRef={div => this.svg = div}
+          />
+        </Link>
       </Container>
     )
   }
 }
 
-export default LocalContainer
+const mapDispatchToProps= (dispatch) => ({
+  pathChange: (index) => dispatch(pathChange(index))
+})
+
+export default connect(null, mapDispatchToProps)(LocalContainer)

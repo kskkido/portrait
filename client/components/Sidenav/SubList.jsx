@@ -64,7 +64,7 @@ const ListTextContainer = styled.div`
 const ListText = styled.span`
   padding-left: 1em;
   font-weight: normal;
-  font-size: 0.7em;
+  font-size: 0.5em;
   text-transform: uppercase;
 `
 
@@ -89,7 +89,7 @@ class LocalContainer extends Component {
         })
         .to(text, 0.4, {
           opacity: 1,
-          paddingLeft: '3em',
+          paddingLeft: '1.5em',
           color: 'black',
           ease: Back.easeOut,
         }, '-=0.4')

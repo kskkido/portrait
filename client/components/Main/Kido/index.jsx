@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { TweenMax, Power2 } from 'gsap'
 import { viewData } from '../../Shared/Data'
-import { MainContainer } from '../../Shared/Styles'
-import Navigation from '../Navigation'
-
+import { viewRestart, rotationRestart } from '../../../reducers/events'
 import BodyComponent from '../Body'
+
+import AboutPreview from './About'
+import ContactsPreview from './Contacts'
+import ProjectsPreview from './Projects'
+import WelcomePreview from './Welcome'
+
 
 // const createAnimation = (target) => {
 //   TweenMax.from(target, 2, {
@@ -19,6 +22,28 @@ import BodyComponent from '../Body'
 //   })
 // }
 
+const list = [
+  <WelcomePreview key="welcome" />,
+  <AboutPreview key="about" />,
+  <ProjectsPreview key="projects" />,
+  <ContactsPreview key="contacts" />
+]
+
+const Body = ({ viewIndex = 0 }) => list[viewIndex]
+
+const Welcome = ({ backgroundColor, navigationList }) => {
+
+  return (
+    <BodyComponent
+      backgroundColor={backgroundColor}
+      navigationList={navigationList}
+      isCenter={true}
+    >
+      <Body />
+    </BodyComponent>
+  )
+}
+
 
 class LocalContainer extends Component {
   static get navigationList() {
@@ -29,20 +54,24 @@ class LocalContainer extends Component {
     return viewData.home.backgroundColor
   }
 
-  componentDidMount() {
-    // createAnimation(this.bodyDiv)
+  componentWillMount() {
+    this.props.viewRestart(); this.props.rotationRestart()
   }
 
   render() {
+
     return (
-      <BodyComponent
+      <Welcome
         backgroundColor={LocalContainer.backgroundColor}
         navigationList={LocalContainer.navigationList}
-        isCenter={true}
-        getNav={div => this.bodyDiv = div}
       />
     )
   }
 }
 
-export default LocalContainer
+const mapDispatchToProps = (dispatch) => ({
+  viewRestart: () => dispatch(viewRestart()),
+  rotationRestart: () => dispatch(rotationRestart())
+})
+
+export default connect(null, mapDispatchToProps)(LocalContainer)

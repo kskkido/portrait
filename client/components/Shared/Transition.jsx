@@ -1,6 +1,6 @@
 import React from 'react'
 import { Transition } from 'react-transition-group'
-import { TimelineLite, Back } from 'gsap'
+import { TimelineLite, Back, Power2 } from 'gsap'
 
 import { viewData } from './Data'
 import { convertToAsci, getFirstTwo, once } from './Utils'
@@ -20,7 +20,7 @@ const themeColor = {
 const verticalSlide = (() => {
   const frontIndex = -99
     , behindIndex = -100
-    , slideDuration = 0.3
+    , slideDuration = 0.35
     , fadeInDuration = 0.4
 
   const cbAnimation = (_bgBehind, secondColor) => {
@@ -40,7 +40,8 @@ const verticalSlide = (() => {
           .from(bgFront, slideDuration, {
             [direction]: 0,
             height: 0,
-            onComplete: (...args) => (cb.call(this, args[2]), curriedSlide.apply(this, args)),
+            ease: Power2.easeIn,
+            onComplete: (...args) => (toggle = !toggle, cb.call(this, args[2]), curriedSlide.apply(this, args)),
             onCompleteParams: [bgFront, bgBehind, tl, repeat - 1],
             clearProps: direction
           }) // tween new front to fill background
@@ -84,12 +85,12 @@ const verticalSlide = (() => {
           , tl = new TimelineLite()
             // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
             // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
-            .set(behind, {backgroundColor: color})
-            .delay(isAppearing ? 0.2 : 0.3)
+            .set(behind, {backgroundColor: color2})
+            .delay(isAppearing ? 0.2 : 0.4)
 
-      slideVerticalBackground(once(cbAnimation(front, color2)), lastCbAnimation(target), direction)(front, behind, tl, repeat)
+      slideVerticalBackground(once(cbAnimation(front, color)), lastCbAnimation(target), direction)(front, behind, tl, repeat)
 
-      toggle = !toggle
+
     },
     onExit: (target) => {
       new TimelineLite()
@@ -97,6 +98,7 @@ const verticalSlide = (() => {
           autoAlpha: 0,
           top: '-=200px',
         })
+        .delay(0.1)
     }
   }
 })()
@@ -125,8 +127,8 @@ export const Show = (props) => {
   return (
     <Transition
       {...props}
-      timeout={{enter: 1400, exit: 300}}
-      onEnter={verticalSlide.onEnter(1.4, color1, color2, direction)}
+      timeout={{enter: 1100, exit: 300}}
+      onEnter={verticalSlide.onEnter(1.1, color1, color2, direction)}
       onExit={verticalSlide.onExit}
     />
   )
@@ -295,22 +297,21 @@ export const Fade = (_props) => {
 const scrambleAnimation = (() => {
 
   const writeHtml = function (targetDom) {
-    console.log(targetDom.textContent, String.fromCharCode(Math.floor(this.target.value)), 'writeHTML')
     targetDom.textContent = String.fromCharCode(Math.floor(this.target.value))
   }
 
-  const onEnter = (asciList, delay) => ({ childNodes }) => {
-    console.log(asciList, delay)
-    const tl = new TimelineLite()
+  const onEnter = (duration, delay, asciList) => ({ childNodes }) => {
+    const letterDuration = duration / asciList.length
+        , tl = new TimelineLite()
         .delay(delay)
     asciList.forEach((asci, i) => {
       tl.
-        to({value: Math.floor(33 + Math.random() * 93)}, 0.15, {
+        to({value: Math.floor(Math.random() * 93) + 33}, letterDuration, {
           value: asci,
           onUpdate: writeHtml,
           onUpdateParams: [childNodes[i]],
           ease: Back.easeOut
-        }, '-=0.06')
+        })
     })
   }
 
@@ -326,9 +327,9 @@ export const Scramble = (_props) => {
   return (
     <Transition
       {...props}
-      timeout={800}
+      timeout={650}
       exit={false}
-      onEnter={scrambleAnimation.onEnter(convertToAsci(_props.text || 'bleh'), _props.delay)}
+      onEnter={scrambleAnimation.onEnter(0.65, _props.delay, convertToAsci(_props.text || 'bleh'))}
     />
   )
 }

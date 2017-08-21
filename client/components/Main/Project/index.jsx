@@ -31,7 +31,6 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.props.viewRestart(); this.props.rotationRestart()
-    console.log('MOUNTING PROJECT', this.props.viewIndex)
   }
 
   render () {

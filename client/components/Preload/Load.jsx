@@ -32,7 +32,7 @@ const LoadingText = Title3.extend`
   position: absolute;
   left: 30px;
   top: -40px;
-  width: 250px;
+  width: 300px;
   letter-spacing: 12px;
   font-size: 13px;
 `
@@ -58,7 +58,7 @@ const Load = ({ inputRef, loaded, loadProgress }) => (
     <Fade in={!loaded} key={'loadBar'} appear={true} slideOut={true} onExitDelay={0.4}>
         <Container>
           <ProgressBar loadProgress={loadProgress}>
-            <LoadingText>Loading: {`${loadProgress}`}</LoadingText>
+            <LoadingText>Loading: {`${loadProgress}%`}</LoadingText>
           </ProgressBar>
           <Scramble in={loadProgress === 100} key={'message'} text={'Hello'} delay={0.4}>
             <LetterContainer

@@ -23,6 +23,18 @@ const NavigationDiv = styled.div.attrs({
   perspective: 500px;
 `
 
+const InnerTextContainer = styled.div`
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  text-align: center;
+`
+
+const InnerText = styled.span`
+  line-height: 10em;
+  text-transform: uppercase;
+`
+
 const InnerNavigationDiv = styled.div.attrs({
   style: props => ({
     transform: `rotate(${props.rotation}turn)`,
@@ -37,8 +49,7 @@ const InnerNavigationDiv = styled.div.attrs({
 `
 
 const NavigationText = styled.span`
-  font-weight: normal;
-  line-height: 50em;
+  line-height: 40em;
   padding: 5px;
   text-transform: uppercase;
 `

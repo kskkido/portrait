@@ -7,7 +7,7 @@ import { TweenLite, Back } from 'gsap'
 import { Slide } from '../Shared/Transition'
 import { MainContainer } from '../Shared/Styles'
 import { rotationChange, rotationRestart, viewRestart } from '../../reducers/events'
-
+import styled from 'styled-components'
 import Navigation from './Navigation'
 
 /* ====== HIGHER LEVEL COMPONENT FOR ABOUT AND PROJECT ====== */
@@ -16,11 +16,15 @@ import Navigation from './Navigation'
   */
 
 
+const Body = styled.div`
+  position: relative;
+  top: ${props => props.isCenter ? '55vh' : ''};
+`
+
 const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
   return (
     <MainContainer
       innerRef={inputMain}
-      onWheel={onWheel}
     >
       <div style={{maxHeight: '100px'}}>
         <Navigation
@@ -37,9 +41,12 @@ const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain
           mountOnEnter={true}
           unmountOnExit={true}
         >
-          <div style={{position: 'relative'}} ref={inputBody}>
+          <Body
+            innerRef={inputBody}
+            isCenter={isCenter}
+          >
             {children && React.cloneElement(children, {viewIndex})}
-           </div>
+           </Body>
         </Slide>
       </TransitionGroup>
     </MainContainer>
@@ -62,6 +69,7 @@ class LocalContainer extends Component {
       return function () {
         const { rotation } = this
             , targetRotation = getRatio ? Math.round(rotation / ratio) * ratio : rotation
+        console.log(rotation, 'ROTATION')
         callback(targetRotation)
       }
     }
@@ -103,8 +111,6 @@ class LocalContainer extends Component {
 
   componentDidMount() {
     this.props.getNav && this.props.getNav(this.nav)
-
-    console.log(this.props.viewIndex, 'MOUNTING BODY')
 
     const { length } = this.props.navigationList
 

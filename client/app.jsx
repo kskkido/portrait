@@ -13,8 +13,8 @@ injectGlobal`
   body {
     background: #E1E5EE;
     letter-spacing: 4px;
-    font-size: .8em;
-    overflow: hidden;
+    font-size: 1em;
+    overflow-x: hidden;
   }
   * {
     box-sizing: border-box;

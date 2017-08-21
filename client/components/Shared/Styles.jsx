@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 export const MainContainer = styled.div`
   display: flex;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  max-width: 800px;
   cursor: move;
   flex-direction: ${props => props.row ? 'row' : 'column'};
   position: absolute;
@@ -25,16 +25,14 @@ export const BodyContainer = styled.div`
 
 export const BodyContent = styled.div`
   margin-top: 5px;
-  flex: 4;
   display: flex;
+  flex-direction: ${props => props.row ? 'row' : 'column'};
+  align-items: center;
   justify-content: center;
 `
 
 export const BodyText = styled.div`
-  margin-left: auto;
-  margin-right: auto;
   width: 70%;
-  margin-top: 10px;
 `
 
 export const Flex1 = styled.div`
@@ -44,29 +42,35 @@ export const Flex1 = styled.div`
 
 export const Flex2 = styled.div`
   flex: 2;
-
 `
 
 export const Flex3 = styled.div`
   flex: 3;
-
 `
 
 export const Flex4 = styled.div`
   flex: 4;
-
 `
 
 export const Flex5 = styled.div`
   flex: 5;
+`
 
+export const WelcomeContainer = styled.div`
+  position: absolute;
+  max-width: 600px;
+  min-height: 200px;
+  left: 50%;
+  transform: translateX(-50%);
 `
 
 export const Title = styled.h1`
   font-weight: normal;
   text-transform: uppercase;
-  font-size: 1.4em;
+  font-size: 1.2em;
   min-height: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `
 
 export const Title3 = styled.h3`
@@ -84,23 +88,3 @@ export const Letter = styled.span`
   text-transform: uppercase;
   font-size: 1.4em;
 `
-
-export const createTitle = (string, LetterComponent = Letter) => {
-  const title = []
-  for (let i = 0; i < string.length; i++) {
-    title.push(
-      <LetterComponent key={`${string}_${i}`}>{string[i]}</LetterComponent>
-    )
-  }
-  return title
-}
-
-export const createSpans = (length, LetterComponent = Letter) => {
-  const spanList = []
-  for (let i = 0; i < length; i++) {
-    spanList.push(
-      <LetterComponent key={`index_${i}`}></LetterComponent>
-    )
-  }
-  return spanList
-}
