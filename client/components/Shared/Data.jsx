@@ -8,9 +8,9 @@ const blue1 = '#29b6f6'
     , blue3 = '#4dd0e1'
     , blue4 = '#26c6da'
 
-const red1 = '#e57373'
-    , red2 = '#ff8a80'
-    , red3 = '#ef9a9a'
+const red3 = '#ffbcaf'
+    , red2 = '#ef9a9a'
+    , red1 = '#ff8a80'
 
 const purple1 = '#ffb74d'
     , purple2 = '#ffcc80'
@@ -21,7 +21,7 @@ export const viewData = {
   home: {
     text: ['Keisuke Kido', 'Developer'],
     path: '/',
-    navigationList: ['WELCOME', 'ABOUT', 'PROJECTS', 'CONTACTS'],
+    navigationList: ['WELCOME', 'ABOUT', 'PROJECTS', 'CONTACT'],
     children: [],
     backgroundColor: [grey1, blue1, red1, purple1],
     secondaryColor: '#BDBDBD'
@@ -40,7 +40,7 @@ export const viewData = {
     navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
     children: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
     backgroundColor: [red1, red2, red3],
-    secondaryColor: '#ff9e80'
+    secondaryColor: '#e57373'
   },
   contact: {
     text: ['Contact'],

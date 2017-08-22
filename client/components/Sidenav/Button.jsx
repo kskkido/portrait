@@ -21,19 +21,6 @@ class LocalContainer extends Component {
     this.onClickWrapper = this.onClickWrapper.bind(this)
   }
 
-  static createSVGCLickAnimation() {
-    return new TimelineLite({paused: true})
-      .to(document.getElementById('sideNav'), 0.4, {
-        x: '-=100%',
-        ease: Back.easeOut,
-
-      })
-      .to(document.getElementById('bodyContainer'), 0.4, {
-        marginLeft: '-=325px',
-        ease: Back.easeOut,
-      }, '-=0.4')
-  }
-
   static createSVGHoverAnimation(target) {
     return new TimelineLite({paused: true})
       .to(target, 0.4, {

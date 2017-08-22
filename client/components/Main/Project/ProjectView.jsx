@@ -61,7 +61,7 @@ const Description = styled.div`
 `
 
 const TextContainer = Description.extend`
-  margin-top: 10px;
+  margin-top: 15px;
   width: 100%;
 `
 
