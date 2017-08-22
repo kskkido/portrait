@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import BodyComponent from '../Body'
-import AboutView from './AboutView'
+import Content from './AboutView'
+import Preview from './Preview'
 import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
 import { viewData } from '../../Shared/Data'
 
-const About = ({ backgroundColor, navigationList, viewIndex }) => {
+const About = ({ backgroundColor, navigationList, isBody }) => {
   return (
     <BodyComponent
       backgroundColor={backgroundColor}
       navigationList={navigationList}
+      isCenter={!isBody}
     >
-          <AboutView navigationList={navigationList}/>
+          {isBody ?
+            <Content navigationList={navigationList} /> :
+            <Preview />
+          }
     </BodyComponent>
   )
 }
@@ -26,16 +31,16 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.pathChange(1)
-    this.props.viewRestart(); this.props.rotationRestart()
+    this.isBody = this.props.location.state && this.props.location.state.isBody
+    return !this.isBody && (this.props.pathChange(1), this.props.viewRestart(), this.props.rotationRestart())
   }
 
   render () {
-
     return (
       <About
         backgroundColor={LocalContainer.backgroundColor}
         navigationList={LocalContainer.navigationList}
+        isBody={this.isBody}
       />
     )
   }

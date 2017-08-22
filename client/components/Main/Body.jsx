@@ -18,11 +18,10 @@ import Navigation from './Navigation'
 
 const Body = styled.div`
   position: relative;
-  top: ${props => props.isCenter ? '55vh' : ''};
+  top: ${props => props.isCenter ? '450px' : ''};
 `
 
 const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
-  console.log(viewIndex, 'viewindex')
 
   return (
     <MainContainer

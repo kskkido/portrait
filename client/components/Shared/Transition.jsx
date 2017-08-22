@@ -3,16 +3,30 @@ import { Transition } from 'react-transition-group'
 import { TimelineLite, Back, Power2 } from 'gsap'
 
 import { viewData } from './Data'
-import { convertToAsci, getFirstTwo, once } from './Utils'
+import { convertToAsci, getPrimaryAndSecondary, once } from './Utils'
 
 let toggle = false
   , running = false
 
 const themeColor = {
-  '/': [viewData.home.backgroundColor[0], '#e8e5e6'],
-  '/about': getFirstTwo(viewData.about.backgroundColor),
-  '/projects': getFirstTwo(viewData.projects.backgroundColor),
-  '/contact':  getFirstTwo(viewData.contact.backgroundColor)
+  '/': getPrimaryAndSecondary(viewData.home),
+  '/about': getPrimaryAndSecondary(viewData.about),
+  '/projects': getPrimaryAndSecondary(viewData.projects),
+  '/contact':  getPrimaryAndSecondary(viewData.contact)
+}
+
+const indexHash = {
+  '/': 0,
+  '/about': 1,
+  '/projects': 2,
+  '/contact': 3,
+  prev: -1,
+  update(i) {
+    this.prev = i
+  },
+  getDirection(nextPath) {
+    return (setTimeout(this.update.bind(this), 0, this[nextPath]), this.prev - this[nextPath] < 0 ? 'top' : 'bottom')
+  }
 }
 
 /* ====== VERTICAL TRANSITION ====== */
@@ -41,7 +55,7 @@ const verticalSlide = (() => {
             [direction]: 0,
             height: 0,
             ease: Power2.easeIn,
-            onComplete: (...args) => (toggle = !toggle, cb.call(this, args[2]), curriedSlide.apply(this, args)),
+            onComplete: (...args) => (toggle = !toggle, cb && cb.call(this, args[2]), curriedSlide.apply(this, args)),
             onCompleteParams: [bgFront, bgBehind, tl, repeat - 1],
             clearProps: direction
           }) // tween new front to fill background
@@ -49,17 +63,6 @@ const verticalSlide = (() => {
     }
     return curriedSlide
   }
-
-  // const fadeInList = (list) => {
-  //   new TimelineLite()
-  //     .staggerTo(list, fadeInDuration, {
-  //       autoAlpha: 1,
-  //       scale: 1,
-  //       rotationX: 0,
-  //       rotationY: 0,
-  //       marginTop: '-=20px',
-  //     }, 0.07)
-  // }
 
   const fadeInBody = (target, tl) => {
     tl
@@ -72,23 +75,22 @@ const verticalSlide = (() => {
   }
 
   const lastCbAnimation = (target) => (tl) => {
-    // fadeInList(rest)
     fadeInBody(target, tl)
   }
 
   return {
-    onEnter: (duration, color, color2, direction = 'top') => (target, isAppearing) => {
+    onEnter: (duration, color1, color2, direction = 'top', isBody) => (target, isAppearing) => {
       running = true
       const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
           , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
-          , repeat = isAppearing ? -1 : Math.floor((duration - fadeInDuration) / slideDuration) - 1
+          , repeat = isAppearing || isBody ? -1 : Math.floor((duration - fadeInDuration) / slideDuration) - 1
           , tl = new TimelineLite()
             // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
             // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
             .set(behind, {backgroundColor: color2})
-            .delay(isAppearing ? 0.2 : 0.4)
+            .delay(isBody ? 0.65 : 0.4)
 
-      slideVerticalBackground(once(cbAnimation(front, color)), lastCbAnimation(target), direction)(front, behind, tl, repeat)
+      slideVerticalBackground(once(cbAnimation(front, color1)), lastCbAnimation(target), direction)(front, behind, tl, repeat)
 
 
     },
@@ -103,32 +105,16 @@ const verticalSlide = (() => {
   }
 })()
 
-
-const index = {
-  '/': 0,
-  '/about': 1,
-  '/projects': 2,
-  '/contact': 3
-}
-
-let prev = -1
-
-const getDirection = (prevIndex, nextIndex) => (
-  prevIndex - nextIndex < 0 ? 'top' : 'bottom'
-)
-
 export const Show = (props) => {
   const [color1, color2] = themeColor[props.pathname || '/']
-
-  const currentIndex = index[props.pathname || '/']
-      , direction = getDirection(prev, currentIndex)
-  prev = currentIndex
+      , direction = indexHash.getDirection(props.pathname || '/')
+      , duration = 1100
 
   return (
     <Transition
       {...props}
-      timeout={{enter: 1100, exit: 300}}
-      onEnter={verticalSlide.onEnter(1.1, color1, color2, direction)}
+      timeout={{enter: duration, exit: 300}}
+      onEnter={verticalSlide.onEnter(duration / 1000, color1, color2, direction, props.once.isBody)}
       onExit={verticalSlide.onExit}
     />
   )
