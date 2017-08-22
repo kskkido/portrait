@@ -22,7 +22,7 @@ const ListRow = styled.li`
 
 const ListLink = styled.a`
   display: block;
-  height: 30px;
+  height: 35px;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -64,7 +64,7 @@ const ListTextContainer = styled.div`
 const ListText = styled.span`
   padding-left: 1em;
   font-weight: normal;
-  font-size: 0.5em;
+  font-size: 0.55em;
   text-transform: uppercase;
 `
 

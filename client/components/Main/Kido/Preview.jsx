@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Button from '../../Shared/Button'
+import Button from '../Button'
 import { WelcomeContainer } from '../../Shared/Styles'
 import data from './content'
 

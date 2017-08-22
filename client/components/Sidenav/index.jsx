@@ -4,9 +4,9 @@ import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import SubList from './SubList'
+import Button from './Button'
 import { viewData } from '../Shared/Data'
 import { UncollapseList } from '../Shared/Transition'
-import Button from './Button'
 import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
@@ -46,7 +46,7 @@ const ListRow = styled.li`
 
 const ListLink = styled(Link)`
   display: block;
-  height: 100px;
+  height: 90px;
   text-decoration: none;
   color: inherit;
 `
@@ -86,7 +86,7 @@ const ListText = styled.h3`
   padding-left: 1em;
   padding-top: 10px;
   font-weight: normal;
-  font-size: 0.95em;
+  font-size: 0.9em;
   text-transform: uppercase;
   opacity: 0.6;
 `
@@ -127,6 +127,7 @@ const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut,
       <List >
         {children}
       </List>
+      <Overlay />
       </div>
   </Container>
 )
@@ -189,6 +190,7 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.listRows = []
+    console.log(viewData, 'yoview')
   }
 
   componentDidMount() {
@@ -212,7 +214,7 @@ class LocalContainer extends Component {
 
   createListItem ({ text, path, children, backgroundColor }, index) {
     const isActive = index === this.props.pathIndex
-
+    console.log(text, path, children, backgroundColor)
     return (
         <ListRow
           key={text[0]}
@@ -251,6 +253,7 @@ class LocalContainer extends Component {
   }
 
   createList (data) {
+    console.log(data)
     return Object.keys(data).map((row, index) => this.createListItem(data[row], index))
   }
 

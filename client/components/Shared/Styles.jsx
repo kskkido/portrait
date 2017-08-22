@@ -70,7 +70,7 @@ export const Title = styled.h1`
   text-transform: uppercase;
   font-size: 1.2em;
   min-height: 50px;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 20px;
 `
 

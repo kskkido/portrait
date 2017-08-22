@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import Button from '../../Shared/Button'
+import Button from '../Button'
 import { WelcomeContainer } from '../../Shared/Styles'
 import data from './content'
 

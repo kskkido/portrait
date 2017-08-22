@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { BodyContainer, BodyContent, Flex1, Title} from '../../Shared/Styles'
-import { createSpans } from '../../Shared/Utils'
+import { createSpans, createTitle } from '../../Shared/Utils'
 import { Scramble } from '../../Shared/Transition'
 import ProjectText from './content'
 
@@ -21,7 +21,7 @@ const Section = styled.section`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  justify-content: ${props => props.center ? 'space-around' : ''};
+  justify-content: space-around;
   margin-bottom: ${props => props.bottom ? '120px' : '50px'};
 `
 
@@ -68,7 +68,7 @@ const TextContainer = Description.extend`
 const Header = styled.h3`
   font-weight: normal;
   font-size: 1.7em;
-  margin: 0 0 5px; 0;
+  margin: 0 0 10px; 0;
 `
 
 const Text = styled.p`
@@ -108,7 +108,7 @@ const ProjectView = ({ viewIndex, language, scale }) => {
       </Section>
     <BodyContent column={true}>
 
-      <Section center>
+      <Section>
         <Image>
           <ImageLink href={data.url} target="_blank">
             <ProjectImage imageSource={data.imageSource}/>
@@ -116,7 +116,7 @@ const ProjectView = ({ viewIndex, language, scale }) => {
         </Image>
       </Section>
 
-      <Section center bottom>
+      <Section>
         <TextContainer>
           <Header>Technology</Header>
           <Text>
@@ -144,6 +144,11 @@ const ProjectView = ({ viewIndex, language, scale }) => {
         </TextContainer>
       </Section>
 
+      <Section bottom>
+        <Title>
+          {createTitle(`</${title}>`)}<rect height="50px" />
+        </Title>
+      </Section>
       </BodyContent>
     </BodyContainer>
   )
