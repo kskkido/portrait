@@ -23,6 +23,8 @@ const Container = styled.div`
 
 const BodyRoutes = () => (
   <Route render={({ location }) => {
+    !location.state && (location.state = {isBody: false})
+    console.log(location, 'yolocation')
     return (
       <TransitionGroup>
         <Show
@@ -31,7 +33,7 @@ const BodyRoutes = () => (
           appear={true}
           mountOnEnter={true}
           unmountOnExit={true}
-          once={location.state || {isBody: false}}
+          once={location.state}
         >
           <Switch location={location}>
             <Route path="/about" component={About} />

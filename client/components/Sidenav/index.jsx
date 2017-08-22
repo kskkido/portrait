@@ -127,7 +127,6 @@ const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut,
       <List >
         {children}
       </List>
-        <Overlay />
       </div>
   </Container>
 )
@@ -222,7 +221,7 @@ class LocalContainer extends Component {
         >
           <ListLink
             to={{pathname: path, state: {isBody: false}}}
-            onClick={ this.handleClick(index) }
+            onClick={this.handleClick(index)}
           >
             <LinkBlock
               innerRef={div => this.listRows.push(div)}
