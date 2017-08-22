@@ -22,6 +22,8 @@ const Body = styled.div`
 `
 
 const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
+  console.log(viewIndex, 'viewindex')
+
   return (
     <MainContainer
       innerRef={inputMain}

@@ -57,6 +57,7 @@ const ProjectImage = styled.div.attrs({
 const Description = styled.div`
   text-align: center;
   padding: 0 10px 0 10px;
+  min-height: 100px;
 `
 
 const TextContainer = Description.extend`

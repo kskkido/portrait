@@ -4,12 +4,34 @@ import { viewData } from '../../Shared/Data'
 import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
 import BodyComponent from '../Body'
 
-// import Name from './Name'
-// import Email from './Email'
-// import Message from './Message'
-// import Submit from './Submit'
+import AboutPreview from './About'
+import ContactsPreview from './Contacts'
+import ProjectsPreview from './Projects'
+import WelcomePreview from './Welcome'
 
-const Contact = ({ backgroundColor, navigationList }) => {
+
+// const createAnimation = (target) => {
+//   TweenMax.from(target, 2, {
+//     rotationX: 90,
+//     rotationY: 90,
+//   }, {
+//     rotationX: 0,
+//     rotationY: 0,
+//     rotation: 360,
+//     ease: Power2.easeIn
+//   })
+// }
+
+const list = [
+  <WelcomePreview key="welcome" />,
+  <AboutPreview key="about" />,
+  <ProjectsPreview key="projects" />,
+  <ContactsPreview key="contacts" />
+]
+
+const Body = ({ viewIndex = 0 }) => list[viewIndex]
+
+const Welcome = ({ backgroundColor, navigationList }) => {
 
   return (
     <BodyComponent
@@ -17,7 +39,7 @@ const Contact = ({ backgroundColor, navigationList }) => {
       navigationList={navigationList}
       isCenter={true}
     >
-
+      <Body />
     </BodyComponent>
   )
 }
@@ -25,22 +47,22 @@ const Contact = ({ backgroundColor, navigationList }) => {
 
 class LocalContainer extends Component {
   static get navigationList() {
-    return viewData.contact.navigationList
+    return viewData.projects.navigationList
   }
 
   static get backgroundColor() {
-    return viewData.contact.backgroundColor
+    return viewData.projects.backgroundColor
   }
 
   componentWillMount() {
-    this.props.pathChange(3)
+    this.props.pathChange(2)
     this.props.viewRestart(); this.props.rotationRestart()
   }
 
   render() {
 
     return (
-      <Contact
+      <Welcome
         backgroundColor={LocalContainer.backgroundColor}
         navigationList={LocalContainer.navigationList}
       />

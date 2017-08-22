@@ -4,6 +4,7 @@ const ROTATION_CHANGE = 'ROTATION CHANGE'
 const ROTATION_RESTART = 'ROTATION RESTART'
 const VIEW_CHANGE = 'VIEW CHANGE'
 const VIEW_RESTART = 'VIEW RESTART'
+const VIEW_TOGGLE = 'VIEW TOGGLE'
 const PATH_CHANGE = 'PATH CHANGE'
 
 /* ====== DEFINE ACTION CREATORS ====== */
@@ -12,6 +13,7 @@ export const rotationChange = (rotation) => ({type: ROTATION_CHANGE, rotation})
 export const rotationRestart = () => ({type: ROTATION_RESTART})
 export const viewChange = (viewIndex) => ({type: VIEW_CHANGE, viewIndex})
 export const viewRestart = () => ({type: VIEW_RESTART})
+export const viewToggle = (bool) => ({type: VIEW_TOGGLE, bool})
 export const pathChange = (pathIndex) => ({type: PATH_CHANGE, pathIndex})
 
 /* ====== DEFINE INITIAL STATE ====== */
@@ -19,6 +21,7 @@ const initialState = {
   loaded: false,
   rotation: 0,
   viewIndex: 0,
+  viewToggle: false,
   pathIndex: 0,
 }
 
@@ -39,6 +42,9 @@ export default (state = initialState, action) => {
 
   case VIEW_RESTART:
     return Object.assign({}, state, {viewIndex: 0})
+
+  case VIEW_TOGGLE:
+    return Object.assign({}, state, {viewToggle: action.bool})
 
   case PATH_CHANGE:
     return Object.assign({}, state, {pathIndex: action.pathIndex})

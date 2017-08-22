@@ -12,7 +12,7 @@ const themeColor = {
   '/': [viewData.home.backgroundColor[0], '#e8e5e6'],
   '/about': getFirstTwo(viewData.about.backgroundColor),
   '/projects': getFirstTwo(viewData.projects.backgroundColor),
-  '/contact':  getFirstTwo(viewData.contacts.backgroundColor)
+  '/contact':  getFirstTwo(viewData.contact.backgroundColor)
 }
 
 /* ====== VERTICAL TRANSITION ====== */

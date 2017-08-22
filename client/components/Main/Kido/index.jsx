@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { viewData } from '../../Shared/Data'
-import { viewRestart, rotationRestart } from '../../../reducers/events'
+import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
 import BodyComponent from '../Body'
 
-import AboutPreview from './About'
-import ContactsPreview from './Contacts'
-import ProjectsPreview from './Projects'
-import WelcomePreview from './Welcome'
+import Preview from './Preview'
 
 
 // const createAnimation = (target) => {
@@ -22,15 +19,6 @@ import WelcomePreview from './Welcome'
 //   })
 // }
 
-const list = [
-  <WelcomePreview key="welcome" />,
-  <AboutPreview key="about" />,
-  <ProjectsPreview key="projects" />,
-  <ContactsPreview key="contacts" />
-]
-
-const Body = ({ viewIndex = 0 }) => list[viewIndex]
-
 const Welcome = ({ backgroundColor, navigationList }) => {
 
   return (
@@ -39,7 +27,7 @@ const Welcome = ({ backgroundColor, navigationList }) => {
       navigationList={navigationList}
       isCenter={true}
     >
-      <Body />
+      <Preview />
     </BodyComponent>
   )
 }
@@ -55,6 +43,7 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
+    this.props.pathChange(0)
     this.props.viewRestart(); this.props.rotationRestart()
   }
 
@@ -70,6 +59,7 @@ class LocalContainer extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  pathChange: (index) => dispatch(pathChange(index)),
   viewRestart: () => dispatch(viewRestart()),
   rotationRestart: () => dispatch(rotationRestart())
 })

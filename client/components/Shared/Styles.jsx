@@ -32,7 +32,7 @@ export const BodyContent = styled.div`
 `
 
 export const BodyText = styled.div`
-  width: 70%;
+  width: 100%;
 `
 
 export const Flex1 = styled.div`
@@ -58,7 +58,8 @@ export const Flex5 = styled.div`
 
 export const WelcomeContainer = styled.div`
   position: absolute;
-  max-width: 600px;
+  text-align: center;
+  width: 100%;
   min-height: 200px;
   left: 50%;
   transform: translateX(-50%);

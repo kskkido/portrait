@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import BodyComponent from '../Body'
 import AboutView from './AboutView'
-import { viewRestart, rotationRestart } from '../../../reducers/events'
+import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
 import { viewData } from '../../Shared/Data'
 
 const About = ({ backgroundColor, navigationList, viewIndex }) => {
@@ -26,8 +26,8 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
+    this.props.pathChange(1)
     this.props.viewRestart(); this.props.rotationRestart()
-    console.log('MOUNTING ABOUT', this.props.viewIndex)
   }
 
   render () {
@@ -42,6 +42,7 @@ class LocalContainer extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  pathChange: (index) => dispatch(pathChange(index)),
   viewRestart: () => dispatch(viewRestart()),
   rotationRestart: () => dispatch(rotationRestart())
 })

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ProjectPreview from './ProjectPreview'
 import ProjectView from './ProjectView'
 import { TransitionGroup } from 'react-transition-group'
 import { Slide } from '../../Shared/Transition'
@@ -9,13 +10,17 @@ import { viewData } from '../../Shared/Data'
 
 
 
-const Project = ({ backgroundColor, navigationList, viewIndex }) => {
+const Project = ({ backgroundColor, isBody, navigationList }) => {
   return (
     <BodyComponent
       backgroundColor={backgroundColor}
       navigationList={navigationList}
+      isCenter={!isBody}
     >
-      <ProjectView />
+      {!isBody ?
+        <ProjectPreview /> :
+        <ProjectView />
+      }
     </BodyComponent>
   )
 }
@@ -30,12 +35,13 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.viewRestart(); this.props.rotationRestart()
+    return !this.props.isBody && (this.props.viewRestart(), this.props.rotationRestart())
   }
 
   render () {
     return (
       <Project
+        isBody={this.props.isBody}
         backgroundColor={LocalContainer.backgroundColor}
         navigationList={LocalContainer.navigationList}
       />

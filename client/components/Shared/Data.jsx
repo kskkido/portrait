@@ -28,9 +28,9 @@ export const viewData = {
     navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
     backgroundColor: [red1, red2, red3],
   },
-  contacts: {
-    navigationList: [],
-    backgroundColor: [purple1, purple2]
+  contact: {
+    navigationList: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT'],
+    backgroundColor: [purple1, purple2, grey3, grey4]
   }
 }
 

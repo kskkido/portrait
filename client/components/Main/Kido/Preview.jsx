@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import Button from './Button'
-import { Arrow } from '../../Shared/Assets'
+import Button from '../../Shared/Button'
 import { WelcomeContainer } from '../../Shared/Styles'
+import data from './content'
 
 
-const ProjectsPreview = () => {
+const ProjectsPreview = ({ viewIndex }) => {
+  const { path, text } = data[viewIndex]
 
   return (
     <WelcomeContainer>
-      <p>Take a look at my projects</p>
-      <Button path="/projects" />
+      <p>{text}</p>
+      {path && <Button path={path} />}
     </WelcomeContainer>
   )
 }

@@ -1,0 +1,23 @@
+{
+   "JAPANESE": {
+     "TITLE": "プロジェクト"
+   },
+   "ENGLISH": {
+     "TITLE": "PROJECTS YO"
+   },
+  "0": {
+    "text": "Welcome to my portfolio website. Drag anywhere on the page to rotate the circular navigation. Rotate the circle to the section of your interest to access it. Or you can just open up the side nav by clicking on the button around the top left corner of this page and use that instead... Enjoy!"
+  },
+  "1": {
+    "text": "Learn about me?",
+    "path": "/about"
+  },
+  "2": {
+    "text": "Take a look at my projects",
+    "path": "/projects"
+  },
+  "3": {
+    "text": "Lets get in touch!",
+    "path": "/contact"
+  }
+}

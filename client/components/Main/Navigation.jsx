@@ -80,6 +80,8 @@ class LocalContainer extends Component {
   willSetView(rounded) {
     const ratio = rounded % 1
     if (ratio === 0 && rounded !== this.props.viewIndex) {
+      this.props.callback ?
+      this.props.callback(rounded) :
       this.props.viewChange(rounded)
     }
   }
