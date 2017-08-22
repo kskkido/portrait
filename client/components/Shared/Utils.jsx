@@ -8,7 +8,7 @@ export const once = (fn) => {
   )
 }
 
-export const getFirstTwo = ([first, second]) => [first, second]
+export const getPrimaryAndSecondary = ({ backgroundColor: [first], secondaryColor }) => [first, secondaryColor]
 
 export const convertToAsci = (string, runningValue = []) => (
 	string ?

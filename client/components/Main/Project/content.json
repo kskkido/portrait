@@ -8,13 +8,14 @@
   "0": {
     "title": "Audiosphere",
     "role": "UX/UI, Developer",
-    "objective": "Create a playlist visualizer for my hackathon project at Fullstack Academy of Code",
+    "objective": "Create a playlist visualizer for the 4 day hackathon at Fullstack Academy of Code",
     "idea": "The idea of Audiosphere emerged out of my love for the figurative space that music playlists create. I wanted to amplify this playlist experience by coupling its personal element with a literal space.",
     "technology": "HTML5/Javascript/Node/Spotify API",
     "date": "April 2017",
     "description": "Audiosphere is a music streaming web application that uses Spotify Web API and Three-JS to create a 3d planetary system with your Spotify playlists.",
     "imageSource": "audiosphere-icon.png",
-    "url": "https://audiosphere.herokuapp.com"
+    "url": "https://audiosphere.herokuapp.com",
+    "preview": "Imagine a planetarium for your playlists"
   },
   "1": {
     "title": "StackQuest",
@@ -25,17 +26,19 @@
     "date": "April - May 2017",
     "description": "StackQuest is an in-browser real-time multiplayer adventure game. The multiplayer aspect is powered by Socket IO and the game logic leverages Phaser JS.",
     "imageSource": "stackquest-icon.png",
-    "url": "https://stackquest.herokuapp.com"
+    "url": "https://stackquest.herokuapp.com",
+    "preview": "It's real-time multiplayer game"
   },
   "2": {
     "title": "Portfolio",
     "role": "UX/UI, Developer",
-    "objective": "Develop an interactive website that animates according to the direction of a user's interaction without losing functionality",
-    "idea": "I aimed to create a website that responds to the direction of user interaction and shows that respond in a unique way. By using a circular navigation I thought it would look natural with rotation animations that demonstrates the direction in which the user drags.",
+    "objective": "Develop an interactive portfolio website that animates according to the direction of a user's interaction without losing functionality",
+    "idea": "I aimed to create a website that responds to the direction of user interaction. By using a circular navigation I thought it would look natural with rotation animations that demonstrates the direction in which the user drags.",
     "technology": "HTML5/Styled-Components/GSAP/React/Redux/Node",
     "date": "July 2017",
-    "description": "Meta... This portfolio website was built using react-redux framework coupled with styled-components and gsap for page aesthetics. The ",
+    "description": "Meta... This portfolio website was built using react-redux framework coupled with styled-components and gsap for page aesthetics. I tried to take a different approach with page navigation by taking into account the navigation direction",
     "imageSource": "audiosphere-icon.png",
-    "url": "/"
+    "url": "/",
+    "preview": "Meta"
   }
 }

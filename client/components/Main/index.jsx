@@ -31,6 +31,7 @@ const BodyRoutes = () => (
           appear={true}
           mountOnEnter={true}
           unmountOnExit={true}
+          once={location.state || {isBody: false}}
         >
           <Switch location={location}>
             <Route path="/about" component={About} />

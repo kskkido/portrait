@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import SubList from './SubList'
@@ -108,7 +108,7 @@ const listData = {
   row3: {
     text: ['Projects'],
     path: '/projects',
-    color: '#DD614A',
+    color: viewData.projects,
     subTextList: viewData.projects.navigationList,
     colors: viewData.projects.backgroundColor
   },
@@ -149,9 +149,7 @@ class LocalContainer extends Component {
         rotationY: 40,
         marginTop: '-=50px',
         scale: 0,
-        ease: Back.easeOut,
-        onComplete: console.log,
-        onCompleteParams: ['COMPLETEEEEE']
+        ease: Back.easeOut
       }, 0.1)
       .delay(0.15)
   }
@@ -213,29 +211,28 @@ class LocalContainer extends Component {
     this.hoverAnimations[this.props.pathIndex].play()
   }
 
-  createListItem ({color, text, path, subTextList, colors}, index) {
+  createListItem ({ text, path, children, backgroundColor }, index) {
     const isActive = index === this.props.pathIndex
 
     return (
         <ListRow
           key={text[0]}
-          active={isActive}
           onMouseOver={this.handleOnHover(index)}
           onMouseOut={this.handleOnHoverOff(index)}
         >
           <ListLink
-            to={path}
-            onClick={ isActive ? e => e.preventDefault() : this.handleClick(index) }
+            to={{pathname: path, state: {isBody: false}}}
+            onClick={ this.handleClick(index) }
           >
             <LinkBlock
               innerRef={div => this.listRows.push(div)}
-              themeColor={color}
+              themeColor={backgroundColor[0]}
             >
-              <LinkBackground themeColor={color} />
+              <LinkBackground themeColor={backgroundColor[0]} />
               {text.map(el => <ListText key={el}>{el}</ListText>)}
             </LinkBlock>
           </ListLink>
-          {subTextList.length > 0 &&
+          {children.length > 0 &&
             <UncollapseList
               key={text[0]}
               in={isActive}
@@ -244,8 +241,8 @@ class LocalContainer extends Component {
               unmountOnExit={true}
             >
               <SubList
-                textList={subTextList}
-                colors={colors}
+                textList={children}
+                colors={backgroundColor}
                 path={path}
               />
             </UncollapseList>
@@ -263,16 +260,12 @@ class LocalContainer extends Component {
   }
 
   handleClick(index) {
-    return () => {
-      this.props.pathChange(index)
-    }
+    return () => this.props.pathChange(index)
   }
 
   handleOnHover(index) {
     if (index === this.props.pathIndex) return
-    return () => {
-      return this.hoverAnimations[index].play()
-    }
+    return () => this.hoverAnimations[index].play()
   }
 
   handleOnHoverOff(index) {
@@ -290,7 +283,7 @@ class LocalContainer extends Component {
         onClickSVG={this.handleOnClickSVG.bind(this)}
         inputMain={div => this.container = div}
       >
-        {this.createList(listData)}
+        {this.createList(viewData)}
       </SideNav>
     )
   }
@@ -304,5 +297,5 @@ const mapDispatchToProps = (dispatch) => ({
   viewRestart: () => dispatch(viewRestart()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LocalContainer))
 

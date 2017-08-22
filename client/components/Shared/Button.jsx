@@ -2,23 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { TimelineLite, Back } from 'gsap'
-import { Arrow } from '../../Shared/Assets'
-import { pathChange } from '../../../reducers/events'
+import { TimelineLite, TweenLite, Back } from 'gsap'
+import Draggable from 'gsap/Draggable'
+import { Arrow } from './Assets'
+import { pathChange } from '../../reducers/events'
+import { withRouter } from 'react-router-dom'
 
 const Container = styled.div`
   position: absolute;
-  bottom: 10px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
 `
-
-const hash = {
-  "/": 0,
-  "/about": 1,
-  "/projects": 2,
-  '/contact': 3
-}
 
 class LocalContainer extends Component {
   constructor(props) {
@@ -33,9 +28,9 @@ class LocalContainer extends Component {
   static createSVGHoverAnimation(target) {
     return new TimelineLite({paused: true})
       .to(target, 0.4, {
+        y: '+=20px',
+        scaleY: 1.5,
         rotationY: 180,
-        y: '+=10px',
-        scaleY: 1.6,
         ease: Back.easeOut
       })
   }
@@ -65,8 +60,7 @@ class LocalContainer extends Component {
         onMouseOut={this.onHoverOffHandler.bind(this)}
       >
         <Link
-          to={this.props.path || '/'}
-          onClick={() => this.props.pathChange(hash[this.props.path])}
+          to={this.props.path}
         >
           <Arrow
             scale={0.15}
@@ -82,4 +76,4 @@ const mapDispatchToProps= (dispatch) => ({
   pathChange: (index) => dispatch(pathChange(index))
 })
 
-export default connect(null, mapDispatchToProps)(LocalContainer)
+export default withRouter(connect(null, mapDispatchToProps)(LocalContainer))

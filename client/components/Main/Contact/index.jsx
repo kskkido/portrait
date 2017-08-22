@@ -1,95 +1,87 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
-import Draggable from 'gsap/Draggable'
-import { TweenLite, Power2 } from 'gsap'
+import { connect } from 'react-redux'
+import { viewData } from '../../Shared/Data'
+import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
+import BodyComponent from '../Body'
 
-import { BodyContainer, BodyContent, MainContainer } from '../../Shared/Styles'
+import Name from './Name'
+import Email from './Email'
+import Message from './Message'
+import Submit from './Submit'
 
-const ColumnContainer = styled.div`
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-`
+const list = [
+  <Name />,
+  <Email />,
+  <Message />,
+  <Submit />,
+]
 
-const Column = styled.div.attrs({
-  style: props => ({
-    backgroundColor: props.themeColor
-  })
-})`
-  width: 100%;
-  height: 100%;
-  border: 2px solid;
-  position: absolute;
-`
+const Body = ({ viewIndex }) => list[viewIndex]
 
-const ColumnHeader = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-`
-
-const ContactView = ({ inputRef }) => {
+const Contact = ({ backgroundColor, navigationList }) => {
 
   return (
-    <MainContainer row={true}>
-      <ColumnContainer>
-        <Column innerRef={inputRef} themeColor="#D2CBCB">
-          <ColumnHeader>HOME</ColumnHeader>
-        </Column>
-      </ColumnContainer>
-
-      <ColumnContainer>
-        <Column innerRef={inputRef} themeColor="#65AFFF">
-          <ColumnHeader>ABOUT</ColumnHeader>
-        </Column>
-      </ColumnContainer>
-
-      <ColumnContainer>
-        <Column innerRef={inputRef} themeColor="#DD614A">
-          <ColumnHeader>PROJECT</ColumnHeader>
-        </Column>
-      </ColumnContainer>
-
-      <ColumnContainer>
-        <Column innerRef={inputRef} themeColor="#C09BD8">
-          <ColumnHeader>CONTACT</ColumnHeader>
-        </Column>
-      </ColumnContainer>
-    </MainContainer>
+    <BodyComponent
+      backgroundColor={backgroundColor}
+      navigationList={navigationList}
+      isCenter={true}
+    >
+      <Body />
+    </BodyComponent>
   )
 }
 
+
 class LocalContainer extends Component {
-  static createDraggable (div, index) {
-    return Draggable.create(div, {
-      type: 'y',
-      trigger: div,
-      onDragEnd: function({target}) {
-        console.log('dragend', target.style)
-        TweenLite.to(div, 0.3, {y: 0, ease: Power2.easeIn})
-      }
-    })
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      email: '',
+      message: '',
+    }
+  }
+
+  static get navigationList() {
+    return viewData.contact.navigationList
+  }
+
+  static get backgroundColor() {
+    return viewData.contact.backgroundColor
   }
 
   componentWillMount() {
-    this.columnDiv = []
+    this.props.pathChange(3)
+    this.props.viewRestart(); this.props.rotationRestart()
   }
 
-  componentDidMount() {
-    this.draggables = this.columnDiv.map(LocalContainer.createDraggable)
-    console.log(this.draggables, 'DRAGG IT')
+  onSubmitHandler() {
+
   }
 
-  render () {
+  onNameEnter() {
+
+  }
+
+  onEmailEntry() {
+
+  }
+
+  render() {
 
     return (
-      <ContactView
-        inputRef={div => this.columnDiv.push(div)}
+      <Contact
+        backgroundColor={LocalContainer.backgroundColor}
+        navigationList={LocalContainer.navigationList}
       />
     )
   }
 }
 
-export default LocalContainer
+const mapDispatchToProps = (dispatch) => ({
+  pathChange: (index) => dispatch(pathChange(index)),
+  viewRestart: () => dispatch(viewRestart()),
+  rotationRestart: () => dispatch(rotationRestart())
+})
+
+export default connect(null, mapDispatchToProps)(LocalContainer)

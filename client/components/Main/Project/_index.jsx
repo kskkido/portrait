@@ -4,7 +4,10 @@ import { viewData } from '../../Shared/Data'
 import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
 import BodyComponent from '../Body'
 
-import Preview from './Preview'
+import AboutPreview from './About'
+import ContactsPreview from './Contacts'
+import ProjectsPreview from './Projects'
+import WelcomePreview from './Welcome'
 
 
 // const createAnimation = (target) => {
@@ -19,6 +22,15 @@ import Preview from './Preview'
 //   })
 // }
 
+const list = [
+  <WelcomePreview key="welcome" />,
+  <AboutPreview key="about" />,
+  <ProjectsPreview key="projects" />,
+  <ContactsPreview key="contacts" />
+]
+
+const Body = ({ viewIndex = 0 }) => list[viewIndex]
+
 const Welcome = ({ backgroundColor, navigationList }) => {
 
   return (
@@ -27,7 +39,7 @@ const Welcome = ({ backgroundColor, navigationList }) => {
       navigationList={navigationList}
       isCenter={true}
     >
-      <Preview />
+      <Body />
     </BodyComponent>
   )
 }
@@ -35,15 +47,15 @@ const Welcome = ({ backgroundColor, navigationList }) => {
 
 class LocalContainer extends Component {
   static get navigationList() {
-    return viewData.home.navigationList
+    return viewData.projects.navigationList
   }
 
   static get backgroundColor() {
-    return viewData.home.backgroundColor
+    return viewData.projects.backgroundColor
   }
 
   componentWillMount() {
-    this.props.pathChange(0)
+    this.props.pathChange(2)
     this.props.viewRestart(); this.props.rotationRestart()
   }
 

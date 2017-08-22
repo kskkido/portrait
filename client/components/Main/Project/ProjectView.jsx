@@ -22,7 +22,7 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: ${props => props.center ? 'space-around' : ''};
-  margin-bottom: 70px;
+  margin-bottom: ${props => props.bottom ? '120px' : '50px'};
 `
 
 const Image = styled.div`
@@ -57,10 +57,11 @@ const ProjectImage = styled.div.attrs({
 const Description = styled.div`
   text-align: center;
   padding: 0 10px 0 10px;
+  min-height: 100px;
 `
 
 const TextContainer = Description.extend`
-  margin-top: 50px;
+  margin-top: 10px;
   width: 100%;
 `
 
@@ -115,7 +116,7 @@ const ProjectView = ({ viewIndex, language, scale }) => {
         </Image>
       </Section>
 
-      <Section center>
+      <Section center bottom>
         <TextContainer>
           <Header>Technology</Header>
           <Text>

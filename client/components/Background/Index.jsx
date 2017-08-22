@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
+import { viewData } from  '../Shared/Data'
 
 const BgWrapper = styled.div`
   width: 100%;
@@ -14,13 +15,13 @@ const BgOne = styled.div.attrs({
     width: props.theme.width
   })
 })`
-  background-color: #D2CBCB;
+  background-color: ${viewData.home.backgroundColor[0]};
   position: absolute;
   z-index: -99;
 `
 
 const BgTwo = BgOne.extend`
-  background-color: #FCF6B1;
+  background-color: ${viewData.home.secondaryColor};
   z-index: -100;
 `
 

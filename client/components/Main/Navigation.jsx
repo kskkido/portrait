@@ -7,7 +7,7 @@ import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
 const NavigationDiv = styled.div.attrs({
   style: props => ({
-    top: props.isCenter ? '18vh' : '-250px'
+    top: props.isCenter ? '150px' : '-230px'
   })
 })`
   position: relative;
@@ -37,7 +37,7 @@ const InnerText = styled.span`
 
 const InnerNavigationDiv = styled.div.attrs({
   style: props => ({
-    transform: `rotate(${props.rotation}turn)`,
+    transform: `rotate(${props.spacing}turn)`,
   })
 })`
   position: absolute;
@@ -63,7 +63,7 @@ class LocalContainer extends Component {
   static createNavigationDiv(text, index, { length }) {
     return (
       <InnerNavigationDiv
-        rotation={LocalContainer.calculateRotation(index, length)}
+        spacing={LocalContainer.calculateRotation(index, length)}
         key={text}
         index={index}
       >
@@ -80,12 +80,20 @@ class LocalContainer extends Component {
   willSetView(rounded) {
     const ratio = rounded % 1
     if (ratio === 0 && rounded !== this.props.viewIndex) {
-      this.props.viewChange(rounded)
+      this.props.callback ?
+      this.props.callback(rounded) :
+      this.props.viewChange(Math.abs(rounded))
     }
   }
 
   componentWillMount() {
     this.navDivs = []
+  }
+
+  componentDidMount() {
+    TweenLite.to(this.mainNav, 0, {
+      rotation: this.props.rotation,
+    ease: Back.easeOut})
   }
 
   componentWillReceiveProps({ rotation }) {
@@ -117,6 +125,7 @@ class LocalContainer extends Component {
     return (
       <NavigationDiv
         id="nav"
+
         isCenter={this.props.isCenter || false}
         innerRef={(div) => {
           this.mainNav = div

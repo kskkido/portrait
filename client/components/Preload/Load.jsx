@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import { loadComplete } from '../../reducers/events'
-
+import { viewData } from  '../Shared/Data'
 import { Title3 } from '../Shared/Styles'
 import { createTitle } from '../Shared/Utils'
 import { Fade, Scramble } from '../Shared/Transition'
@@ -22,7 +22,7 @@ const ProgressBar = styled.div.attrs({
   height: 50vh;
   position: absolute;
   bottom: 0;
-  background-color: #D2CBCB;
+  background-color: ${viewData.home.backgroundColor[0]};
   left: 0;
   border-top: 2px solid;
   z-index: 1;

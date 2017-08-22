@@ -1,21 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ProjectView from './ProjectView'
+import Preview from './ProjectPreview'
+import Content from './ProjectView'
 import { TransitionGroup } from 'react-transition-group'
 import { Slide } from '../../Shared/Transition'
 import BodyComponent from '../Body'
-import { viewRestart, rotationRestart } from '../../../reducers/events'
+import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
 import { viewData } from '../../Shared/Data'
 
 
 
-const Project = ({ backgroundColor, navigationList, viewIndex }) => {
+const Project = ({ backgroundColor, isBody, navigationList }) => {
   return (
     <BodyComponent
       backgroundColor={backgroundColor}
       navigationList={navigationList}
+      isCenter={!isBody}
     >
-      <ProjectView />
+      {isBody ?
+        <Content /> :
+        <Preview />
+      }
     </BodyComponent>
   )
 }
@@ -30,7 +35,8 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.viewRestart(); this.props.rotationRestart()
+    this.isBody = this.props.location.state && this.props.location.state.isBody
+    return !this.isBody && (this.props.pathChange(2), this.props.viewRestart(), this.props.rotationRestart())
   }
 
   render () {
@@ -38,12 +44,14 @@ class LocalContainer extends Component {
       <Project
         backgroundColor={LocalContainer.backgroundColor}
         navigationList={LocalContainer.navigationList}
+        isBody={this.isBody}
       />
     )
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  pathChange: (index) => dispatch(pathChange(index)),
   viewRestart: () => dispatch(viewRestart()),
   rotationRestart: () => dispatch(rotationRestart())
 })
