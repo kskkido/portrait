@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../Button'
-import { WelcomeContainer } from '../../Shared/Styles'
+import { PreviewContainer } from '../../Shared/Styles'
 import data from './content'
 
 const ProjectPreview = ({ viewIndex }) => {
@@ -12,10 +12,10 @@ const ProjectPreview = ({ viewIndex }) => {
           state: {isBody: true}
         }
   return (
-    <WelcomeContainer>
+    <PreviewContainer>
       <p>{preview}</p>
       <Button path={location} />
-    </WelcomeContainer>
+    </PreviewContainer>
   )
 }
 

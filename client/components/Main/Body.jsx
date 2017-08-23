@@ -70,7 +70,6 @@ class LocalContainer extends Component {
       return function () {
         const { rotation } = this
             , targetRotation = getRatio ? Math.round(rotation / ratio) * ratio : rotation
-        console.log(rotation, 'ROTATION')
         callback(targetRotation)
       }
     }

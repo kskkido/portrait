@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { viewData } from '../../Shared/Data'
-import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
+import { pathChange, viewChange, viewRestart, rotationChange, rotationRestart } from '../../../reducers/events'
 import BodyComponent from '../Body'
 
 import Name from './Name'
@@ -10,15 +10,25 @@ import Message from './Message'
 import Submit from './Submit'
 
 const list = [
-  <Name />,
-  <Email />,
-  <Message />,
-  <Submit />,
+ {text: 'name', component: <Name />},
+ {text: 'email', component: <Email />},
+ {text: 'message', component: <Message />},
+ {text: 'submit', component: <Submit />},
 ]
 
-const Body = ({ viewIndex }) => list[viewIndex]
+const Body = ({ createInputHandler, createOnEnterHandler, getProps, viewIndex }) => {
+  const { text, component } = list[viewIndex]
 
-const Contact = ({ backgroundColor, navigationList }) => {
+  return (
+    React.cloneElement(component, {
+      value: getProps(text),
+      onChangeHandler: createInputHandler(text),
+      onEnterHandler: createOnEnterHandler((viewIndex + 1) % list.length)
+    })
+  )
+}
+
+const Contact = ({ backgroundColor, navigationList, createInputHandler, createOnEnterHandler, getProps }) => {
 
   return (
     <BodyComponent
@@ -26,7 +36,11 @@ const Contact = ({ backgroundColor, navigationList }) => {
       navigationList={navigationList}
       isCenter={true}
     >
-      <Body />
+      <Body
+        createInputHandler={createInputHandler}
+        createOnEnterHandler={createOnEnterHandler}
+        getProps={getProps}
+      />
     </BodyComponent>
   )
 }
@@ -40,6 +54,14 @@ class LocalContainer extends Component {
       email: '',
       message: '',
     }
+    // need to pass those values down to corresponding
+    this.createInputHandler = this.createInputHandler.bind(this)
+    this.createOnEnterHandler = this.createOnEnterHandler.bind(this)
+    this.getProps = this.getProps.bind(this)
+  }
+
+  static setRotation (length) {
+    return (index) => (360 / length) * index
   }
 
   static get navigationList() {
@@ -53,24 +75,39 @@ class LocalContainer extends Component {
   componentWillMount() {
     this.props.pathChange(3)
     this.props.viewRestart(); this.props.rotationRestart()
+    this.setRotation = LocalContainer.setRotation(list.length)
+  }
+
+  createInputHandler(props) {
+    console.log(props, 'createInput')
+    return (input) => {
+      this.setState(Object.assign({}, ...this.state, {[props]: input}))
+    }
+  }
+
+  createOnEnterHandler(index) {
+    return ({ nativeEvent: {keyCode}}) => (
+      keyCode === 13 ?
+        (this.props.rotationChange(this.setRotation(index)), this.props.viewChange(index)) :
+        null
+    )
+  }
+
+  getProps(props) {
+    return this.state[props]
   }
 
   onSubmitHandler() {
-
-  }
-
-  onNameEnter() {
-
-  }
-
-  onEmailEntry() {
-
+    console.log('submit', this.state)
   }
 
   render() {
 
     return (
       <Contact
+        createInputHandler={this.createInputHandler}
+        createOnEnterHandler={this.createOnEnterHandler}
+        getProps={this.getProps}
         backgroundColor={LocalContainer.backgroundColor}
         navigationList={LocalContainer.navigationList}
       />
@@ -80,7 +117,9 @@ class LocalContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   pathChange: (index) => dispatch(pathChange(index)),
+  viewChange: (index) => dispatch(viewChange(index)),
   viewRestart: () => dispatch(viewRestart()),
+  rotationChange: (rotation) => dispatch(rotationChange(rotation)),
   rotationRestart: () => dispatch(rotationRestart())
 })
 

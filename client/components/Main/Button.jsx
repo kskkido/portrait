@@ -28,7 +28,7 @@ const Container = styled.div`
  const ArrowComponent = ({ path, scale }) => (
   <Link to={path}>
     <HOCButton
-      scale={scale}
+      scale={scale || 0.15}
     />
   </Link>
 )

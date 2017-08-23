@@ -146,7 +146,7 @@ const ProjectView = ({ viewIndex, language, scale }) => {
 
       <Section bottom>
         <Title>
-          {createTitle(`</${title}>`)}<rect height="50px" />
+          {createTitle(`</${title}>`)}<svg style={{position: 'absolute'}}><rect height="30" width="1" /></svg>
         </Title>
       </Section>
       </BodyContent>

@@ -1,13 +1,43 @@
 import React, { Component } from 'react'
-import { WelcomeContainer } from '../../Shared/Styles'
+import { PreviewContainer } from '../../Shared/Styles'
 
 const Submit = () => {
 
   return (
-    <WelcomeContainer>
+    <PreviewContainer>
       <p>Looks like you haven't filled out each section!</p>
-    </WelcomeContainer>
+    </PreviewContainer>
   )
 }
+
+class LocalContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      text: 'Name',
+      entered: false
+    }
+  }
+
+  componentWillMount() {
+    this.onChangeHandler = this.props.createInputHandler('name')
+  }
+
+  componentDidMount() {
+
+  }
+
+  onEnterHandler(letter) {
+
+  }
+
+  render() {
+
+    return (
+      <Name />
+    )
+  }
+}
+
 
 export default Submit

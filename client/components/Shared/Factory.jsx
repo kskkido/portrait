@@ -19,7 +19,6 @@ export const createSVG = function(SVG, Container, hoverAnimation = () => ({play:
     }
 
     componentDidMount() {
-      console.log(this.props.onClick)
       this.svgHoverAnimation = hoverAnimation(this.svg)
       this.onClickCallback = this.onClickWrapper(this.props.onClick, this.svg, this.container)
     }

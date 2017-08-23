@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../Button'
-import { WelcomeContainer } from '../../Shared/Styles'
+import { PreviewContainer } from '../../Shared/Styles'
 import data from './content'
 
 
@@ -8,10 +8,10 @@ const ProjectsPreview = ({ viewIndex }) => {
   const { path, text } = data[viewIndex]
 
   return (
-    <WelcomeContainer>
+    <PreviewContainer>
       <p>{text}</p>
       {path && <Button path={path} />}
-    </WelcomeContainer>
+    </PreviewContainer>
   )
 }
 

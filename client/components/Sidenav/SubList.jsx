@@ -78,8 +78,8 @@ const SideNav = ({ children, inputRef }) => (
 
 
 class LocalContainer extends Component {
-  static setRotation (index, length) {
-    return (360 / length) * index
+  static setRotation (length) {
+    return (index) => (360 / length) * index
   }
 
   static createHoverAnimation({ childNodes: [background, ...text]}) {
@@ -97,6 +97,7 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.listRows = []
+    this.setRotation = LocalContainer.setRotation(this.props.textList.length)
   }
 
   componentDidMount() {
@@ -112,8 +113,8 @@ class LocalContainer extends Component {
     this.hoverAnimations[viewIndex].play()
   }
 
-  createListItem (colors, path) {
-    return (text, index, { length }) => {
+  createListItem (colors) {
+    return (text, index) => {
       const isActive = this.props.viewIndex === index
 
       return (
@@ -125,7 +126,7 @@ class LocalContainer extends Component {
           onMouseOut={this.handleOnHoverOff(index)}
         >
           <ListLink
-            onClick={ isActive ? e => e.preventDefault() : this.handleClick(index, length)}
+            onClick={ isActive ? e => e.preventDefault() : this.handleClick(index)}
           >
             <LinkBlock
               id="sublist"
@@ -144,14 +145,14 @@ class LocalContainer extends Component {
   }
 
 
-  createList ({colors, textList}, path) {
-    return textList.map(this.createListItem(colors, path))
+  createList ({colors, textList}) {
+    return textList.map(this.createListItem(colors))
   }
 
-  handleClick(index, length) {
+  handleClick(index) {
     return () => {
       this.props.viewChange(index)
-      this.props.rotationChange(LocalContainer.setRotation(index, length))
+      this.props.rotationChange(this.setRotation(index))
     }
   }
 
@@ -168,11 +169,10 @@ class LocalContainer extends Component {
   }
 
   render() {
-    const { colors, textList, path } = this.props
 
     return (
       <SideNav inputRef={div => this.mainDiv = div}>
-        {this.createList({colors, textList}, path)}
+        {this.createList(this.props)}
       </SideNav>
     )
   }

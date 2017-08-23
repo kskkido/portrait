@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../Button'
-import { WelcomeContainer } from '../../Shared/Styles'
+import { PreviewContainer } from '../../Shared/Styles'
 import data from './content'
 
 const AboutPreview = ({ viewIndex }) => {
@@ -10,10 +10,10 @@ const AboutPreview = ({ viewIndex }) => {
           state: {isBody: true}
         }
   return (
-    <WelcomeContainer>
+    <PreviewContainer>
       <p>{preview}</p>
       <Button path={location} />
-    </WelcomeContainer>
+    </PreviewContainer>
   )
 }
 
