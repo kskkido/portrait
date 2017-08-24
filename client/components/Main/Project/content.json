@@ -37,7 +37,7 @@
     "technology": "HTML5/Styled-Components/GSAP/React/Redux/Node",
     "date": "July 2017",
     "description": "Meta... This portfolio website was built using react-redux framework coupled with styled-components and gsap for page aesthetics. I tried to take a different approach with page navigation by taking into account the navigation direction",
-    "imageSource": "audiosphere-icon.png",
+    "imageSource": "portfolio.png",
     "url": "/",
     "preview": "Meta"
   }

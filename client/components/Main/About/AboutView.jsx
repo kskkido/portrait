@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Textline from '../Textline'
 import { BodyContainer, Flex1, Title } from '../../Shared/Styles'
 import { createSpans, createTitle } from '../../Shared/Utils'
 import { Scramble } from '../../Shared/Transition'
@@ -26,7 +27,7 @@ import AboutView4 from './AboutView4'
 
 const list = [
   <AboutView1 key="one" />,
-  <AboutView2  key="two"/>,
+  <AboutView2  key="two" />,
   <AboutView3 key="three" />,
    <AboutView4 key="four" />]
 
@@ -46,6 +47,7 @@ const AboutView = ({ navigationList, viewIndex}) => {
       <Flex1>
         <Title>
           {createTitle(`</${title}>`)}
+          <Textline />
         </Title>
       </Flex1>
     </BodyContainer>

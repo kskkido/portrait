@@ -38,7 +38,7 @@ class LocalContainer extends Component {
 
     return (
       <ListBlock>
-        {`${prop}: ${data || 'fill it out!'}`}
+        {`${prop}: fill it out!`}
       </ListBlock>
     )
   }
