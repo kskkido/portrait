@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register --watch-extensions js,jsx tests/**/*.test.js",
+    "build": "webpack",
     "start": "node server",
-    "start-dev": "webpack -w & NODE_ENV=development nodemon ./server --watch server"
+    "start-dev": "webpack -w & NODE_ENV=development nodemon ./server --watch server",
+    "start-prod": "npm run build && npm run start"
   },
   "keywords": [],
   "author": "",
