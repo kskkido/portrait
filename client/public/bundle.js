@@ -59,6 +59,17 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// webpack-livereload-plugin
+/******/ 	(function() {
+/******/ 	  if (typeof window === "undefined") { return };
+/******/ 	  var id = "webpack-livereload-plugin-script";
+/******/ 	  if (document.getElementById(id)) { return; }
+/******/ 	  var el = document.createElement("script");
+/******/ 	  el.id = id;
+/******/ 	  el.async = true;
+/******/ 	  el.src = "http://localhost:35729/livereload.js";
+/******/ 	  document.getElementsByTagName("head")[0].appendChild(el);
+/******/ 	}());
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 131);
 /******/ })
@@ -51490,7 +51501,7 @@ var Name = function Name(_ref) {
     _react2.default.createElement(
       'p',
       null,
-      'If you are interested in getting in touch with me, enter your name below and press enter to navigate to the next section. Once you fill out each section, go to the \'submit\' section to send out your message!'
+      'Interested in getting in touch with me? enter your name below and press enter to navigate to the next section. Once you fill out each section, go to the \'submit\' section to send out your message!'
     ),
     _react2.default.createElement(
       _Styles.PlaceholderContainer,
@@ -51518,8 +51529,7 @@ var LocalContainer = function (_Component) {
     var _this = _possibleConstructorReturn(this, (LocalContainer.__proto__ || Object.getPrototypeOf(LocalContainer)).call(this, props));
 
     _this.state = {
-      localValue: '',
-      entered: false
+      localValue: ''
     };
 
     _this.onChangeHandler = _this.onChangeHandler.bind(_this);

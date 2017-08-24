@@ -4,7 +4,7 @@ const LiveReloadPlugin = require('webpack-livereload-plugin')
 module.exports = {
 	entry: './client/index.jsx',
 	output: {
-		path: path.resolve(__dirname, '/client/public'),
+		path: path.join(__dirname, '/client/public'),
 		filename: 'bundle.js'
 	},
 	devtool: 'source-map',
