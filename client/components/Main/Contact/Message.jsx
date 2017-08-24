@@ -65,10 +65,6 @@ class LocalContainer extends Component {
     this.input.focus()
   }
 
-  componentWillReceiveProps(_, { value }) {
-    console.log(value, 'state')
-  }
-
   componentWillUnmount() {
     this.props.updateText(this.state.localValue)
   }
