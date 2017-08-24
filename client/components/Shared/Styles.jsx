@@ -100,12 +100,32 @@ export const Input = styled.input`
   padding: 6px 14px 5px 33px;
   border-width: 0 0 1px 0;
   border-style: solid;
+  border-color: black;
   background-color: transparent;
   text-align: center;
+  letter-spacing: 1px;
+  font-size: 1em;
 
   &:focus {
     outline-color: 0;
     outline-style: none;
     outline-width: 0;
   }
+`
+
+export const PlaceholderContainer = styled.div.attrs({
+  style: props => ({
+    bottom: props.empty ? '20px' : '40px',
+    fontSize: props.empty ? '1.2em' : '1em'
+  })
+})`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px 5px 33px;
+  letter-spacing: 1px;
+  font-size: 1.2em;
+  color: #424242;
+  opacity: 0.8;
+  transition: bottom 0.2s, font-size 0.2s;
 `

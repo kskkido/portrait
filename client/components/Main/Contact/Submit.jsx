@@ -1,11 +1,27 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import { PreviewContainer } from '../../Shared/Styles'
 
-const Submit = () => {
+const ListContainer = styled.div`
+`
+
+const List = styled.ul`
+  list-style: none;
+`
+
+const ListBlock =styled.li`
+`
+
+const Submit = ({ children }) => {
 
   return (
     <PreviewContainer>
       <p>Looks like you haven't filled out each section!</p>
+      <ListContainer>
+        <List>
+          {children}
+        </List>
+      </ListContainer>
     </PreviewContainer>
   )
 }
@@ -14,30 +30,36 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: 'Name',
       entered: false
     }
   }
 
+  createItems(prop, data) {
+
+    return (
+      <ListBlock>
+        {`${prop}: ${data || 'fill it out!'}`}
+      </ListBlock>
+    )
+  }
+
+  createList(state) {
+    return Object.keys(state).map((prop) => this.createItems(prop, state[prop]))
+  }
+
   componentWillMount() {
-    this.onChangeHandler = this.props.createInputHandler('name')
-  }
-
-  componentDidMount() {
-
-  }
-
-  onEnterHandler(letter) {
-
+    console.log('STATE', this.props.value)
   }
 
   render() {
 
     return (
-      <Name />
+      <Submit>
+        {this.createList(this.props.value)}
+      </Submit>
     )
   }
 }
 
 
-export default Submit
+export default LocalContainer

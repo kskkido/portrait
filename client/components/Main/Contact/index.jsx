@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { viewData } from '../../Shared/Data'
 import { pathChange, viewChange, viewRestart, rotationChange, rotationRestart } from '../../../reducers/events'
 import BodyComponent from '../Body'
+import { initialValue } from './utils'
 
 import Name from './Name'
 import Email from './Email'
@@ -22,7 +23,7 @@ const Body = ({ createInputHandler, createOnEnterHandler, getProps, viewIndex })
   return (
     React.cloneElement(component, {
       value: getProps(text),
-      onChangeHandler: createInputHandler(text),
+      updateText: createInputHandler(text),
       onEnterHandler: createOnEnterHandler((viewIndex + 1) % list.length)
     })
   )
@@ -50,9 +51,9 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      email: '',
-      message: '',
+      name: initialValue,
+      email: initialValue,
+      message: initialValue
     }
     // need to pass those values down to corresponding
     this.createInputHandler = this.createInputHandler.bind(this)
@@ -79,7 +80,6 @@ class LocalContainer extends Component {
   }
 
   createInputHandler(props) {
-    console.log(props, 'createInput')
     return (input) => {
       this.setState(Object.assign({}, ...this.state, {[props]: input}))
     }
@@ -93,12 +93,11 @@ class LocalContainer extends Component {
     )
   }
 
-  getProps(props) {
-    return this.state[props]
+  onSubmitHandler() {
   }
 
-  onSubmitHandler() {
-    console.log('submit', this.state)
+  getProps(props) {
+    return props === 'submit' ? this.state : this.state[props]
   }
 
   render() {

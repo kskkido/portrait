@@ -106,7 +106,7 @@ const verticalSlide = (() => {
 })()
 
 export const Show = (props) => {
-  const [color1, color2] = themeColor[props.pathname || '/']
+  const [primaryColor, secondaryColor] = themeColor[props.pathname || '/']
       , direction = indexHash.getDirection(props.pathname || '/')
       , duration = 1100
 
@@ -114,7 +114,7 @@ export const Show = (props) => {
     <Transition
       {...props}
       timeout={{enter: duration, exit: 300}}
-      onEnter={verticalSlide.onEnter(duration / 1000, color1, color2, direction, props.once.isBody)}
+      onEnter={verticalSlide.onEnter(duration / 1000, primaryColor, secondaryColor, direction, props.once.isBody)}
       onExit={verticalSlide.onExit(direction === 'top' ? 1 : -1)}
     />
   )
