@@ -14,13 +14,20 @@ const Container = styled.div`
   height: 100%;
 `
 
+// const Preload = ({ selected }) => (
+//   <Container>
+//     {!selected ?
+//       <LanguageQuery /> :
+//       <Load />
+//     }
+//   </Container>
+// )
+
 const Preload = ({ selected }) => (
   <Container>
-    {!selected ?
-      <LanguageQuery /> :
-      <Load />
-    }
+    <Load />
   </Container>
 )
+
 
 export default connect(({language}) => ({selected: language.selected}))(Preload)
