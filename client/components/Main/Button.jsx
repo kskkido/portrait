@@ -5,8 +5,6 @@ import { Arrow } from '../shared/Assets'
 import { Link } from 'react-router-dom'
 import { createSVG } from '../Shared/Factory'
 
-
-
 const createSVGHoverAnimation = (target) => {
   return new TimelineLite({paused: true})
     .to(target, 0.4, {

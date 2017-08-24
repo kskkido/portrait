@@ -6,7 +6,7 @@ const Name = ({ value, onChangeHandler, onEnterHandler, inputRef, inputRef2 }) =
   const inputValue = value === initialValue ? '' : value
   return (
     <PreviewContainer>
-      <p>If you are interested in getting in touch with me, enter your name below and press enter to navigate to the next section. Once you fill out each section, go to the 'submit' section to send out your message!</p>
+      <p>Interested in getting in touch with me? enter your name below and press enter to navigate to the next section. Once you fill out each section, go to the 'submit' section to send out your message!</p>
       <PlaceholderContainer empty={inputValue.length === 0}>
         ITS YOUR NAME
       </PlaceholderContainer>
@@ -25,7 +25,6 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       localValue: '',
-      entered: false
     }
 
     this.onChangeHandler = this.onChangeHandler.bind(this)

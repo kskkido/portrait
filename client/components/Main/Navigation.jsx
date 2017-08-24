@@ -90,10 +90,6 @@ class LocalContainer extends Component {
     this.willSetView(LocalContainer.round(rotation, length))
   }
 
-  shouldComponentUpdate({ viewIndex }) {
-    return viewIndex !== this.props.viewIndex
-  }
-
   render() {
     const navigationDivs = this.props.navigationList.map(LocalContainer.createNavigationDiv)
 

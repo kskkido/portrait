@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --watch-extensions js,jsx tests/**/*.test.js",
-    "start-dev": "webpack -w & NODE_ENV=development nodemon ./server --watch server"
+    "build": "webpack",
+    "start": "node server",
+    "start-dev": "webpack -w & NODE_ENV=development nodemon ./server --watch server",
+    "start-prod": "npm run build && npm run start"
   },
   "keywords": [],
   "author": "",
@@ -48,6 +50,7 @@
     "enzyme": "^2.9.1",
     "mocha": "^3.4.2",
     "supertest": "^3.0.0",
-    "webpack": "^3.2.0"
+    "webpack": "^3.2.0",
+    "webpack-livereload-plugin": "^0.11.0"
   }
 }

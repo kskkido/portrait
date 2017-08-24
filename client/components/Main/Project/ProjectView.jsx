@@ -1,7 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { BodyContainer, BodyContent, Flex1, Title} from '../../Shared/Styles'
+import Textline from '../Textline'
+import { BodyContainer, BodyContent, Title} from '../../Shared/Styles'
 import { createSpans, createTitle } from '../../Shared/Utils'
 import { Scramble } from '../../Shared/Transition'
 import ProjectText from './content'
@@ -31,7 +31,6 @@ const Image = styled.div`
   height: 214px;
   background-image: url(leopard.png);
   background-repeat: no-repeat;
-  background-size: contain;
   display: flex;
   flex-direction: column;
 `
@@ -146,7 +145,8 @@ const ProjectView = ({ viewIndex, language, scale }) => {
 
       <Section bottom>
         <Title>
-          {createTitle(`</${title}>`)}<svg style={{position: 'absolute'}}><rect height="30" width="1" /></svg>
+          {createTitle(`</${title}>`)}
+          <Textline />
         </Title>
       </Section>
       </BodyContent>
