@@ -4,9 +4,9 @@ import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import SubList from './SubList'
+import Button from './Button'
 import { viewData } from '../Shared/Data'
 import { UncollapseList } from '../Shared/Transition'
-import Button from './Button'
 import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
@@ -42,11 +42,12 @@ const List = styled.ul`
 const ListRow = styled.li`
   width: 100%;
   color: #F3F2F2;
+  margin-bottom: 10px;
 `
 
 const ListLink = styled(Link)`
   display: block;
-  height: 100px;
+  height: 90px;
   text-decoration: none;
   color: inherit;
 `
@@ -80,15 +81,17 @@ const LinkBackground = styled.div.attrs({
 
 // shadow... box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 
-const ListText = styled.h3`
-  top: 0;
-  bottom: 0;
-  padding-left: 1em;
+const ListTitle = styled.div`
   padding-top: 10px;
-  font-weight: normal;
-  font-size: 0.95em;
-  text-transform: uppercase;
+  padding-left: 1em;
   opacity: 0.6;
+`
+
+const ListText = styled.h3`
+  margin: 0 0 8px 0;
+  font-weight: normal;
+  font-size: 0.9em;
+  text-transform: uppercase;
 `
 
 const listData = {
@@ -127,6 +130,7 @@ const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut,
       <List >
         {children}
       </List>
+      <Overlay />
       </div>
   </Container>
 )
@@ -153,7 +157,7 @@ class LocalContainer extends Component {
       .delay(0.15)
   }
 
-  static createHoverAnimation({ childNodes: [background, ...text] }) {
+  static createHoverAnimation({ childNodes: [background, text] }) {
     return new TimelineLite({paused: true})
         .to(background, 0.4, {
           scaleX: 1,
@@ -189,6 +193,7 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.listRows = []
+    console.log(viewData, 'yoview')
   }
 
   componentDidMount() {
@@ -212,7 +217,7 @@ class LocalContainer extends Component {
 
   createListItem ({ text, path, children, backgroundColor }, index) {
     const isActive = index === this.props.pathIndex
-
+    console.log(text, path, children, backgroundColor)
     return (
         <ListRow
           key={text[0]}
@@ -228,7 +233,7 @@ class LocalContainer extends Component {
               themeColor={backgroundColor[0]}
             >
               <LinkBackground themeColor={backgroundColor[0]} />
-              {text.map(el => <ListText key={el}>{el}</ListText>)}
+              <ListTitle>{text.map(el => <ListText key={el}>{el}</ListText>)}</ListTitle>
             </LinkBlock>
           </ListLink>
           {children.length > 0 &&
@@ -251,6 +256,7 @@ class LocalContainer extends Component {
   }
 
   createList (data) {
+    console.log(data)
     return Object.keys(data).map((row, index) => this.createListItem(data[row], index))
   }
 

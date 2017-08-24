@@ -79,7 +79,7 @@ const verticalSlide = (() => {
   }
 
   return {
-    onEnter: (duration, color1, color2, direction = 'top', isBody) => (target, isAppearing) => {
+    onEnter: (duration, primaryColor, secondaryColor, direction = 'top', isBody) => (target, isAppearing) => {
       running = true
       const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
           , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
@@ -87,18 +87,18 @@ const verticalSlide = (() => {
           , tl = new TimelineLite()
             // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
             // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
-            .set(behind, {backgroundColor: color2})
+            .set(behind, {backgroundColor: secondaryColor})
             .delay(isBody ? 0.65 : 0.4)
 
-      slideVerticalBackground(once(cbAnimation(front, color1)), lastCbAnimation(target), direction)(front, behind, tl, repeat)
+      slideVerticalBackground(once(cbAnimation(front, primaryColor)), lastCbAnimation(target), direction)(front, behind, tl, repeat)
 
 
     },
-    onExit: (target) => {
+    onExit: (multiplier) => (target) => {
       new TimelineLite()
         .to(target, 0.3, {
           autoAlpha: 0,
-          top: '-=200px',
+          y: `${multiplier * 200}px`,
         })
         .delay(0.1)
     }
@@ -106,7 +106,7 @@ const verticalSlide = (() => {
 })()
 
 export const Show = (props) => {
-  const [color1, color2] = themeColor[props.pathname || '/']
+  const [primaryColor, secondaryColor] = themeColor[props.pathname || '/']
       , direction = indexHash.getDirection(props.pathname || '/')
       , duration = 1100
 
@@ -114,8 +114,8 @@ export const Show = (props) => {
     <Transition
       {...props}
       timeout={{enter: duration, exit: 300}}
-      onEnter={verticalSlide.onEnter(duration / 1000, color1, color2, direction, props.once.isBody)}
-      onExit={verticalSlide.onExit}
+      onEnter={verticalSlide.onEnter(duration / 1000, primaryColor, secondaryColor, direction, props.once.isBody)}
+      onExit={verticalSlide.onExit(direction === 'top' ? 1 : -1)}
     />
   )
 }

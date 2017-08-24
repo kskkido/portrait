@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { TweenLite, TimelineLite, Back } from 'gsap'
 
-import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
+import { rotationChange, rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
 const NavigationDiv = styled.div.attrs({
   style: props => ({
@@ -21,18 +21,6 @@ const NavigationDiv = styled.div.attrs({
   border-radius: 50%;
   box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
   perspective: 500px;
-`
-
-const InnerTextContainer = styled.div`
-  position: absolute;
-  height: 300px;
-  width: 300px;
-  text-align: center;
-`
-
-const InnerText = styled.span`
-  line-height: 10em;
-  text-transform: uppercase;
 `
 
 const InnerNavigationDiv = styled.div.attrs({
@@ -102,22 +90,9 @@ class LocalContainer extends Component {
     this.willSetView(LocalContainer.round(rotation, length))
   }
 
-  // onMouseOverHandler({ nativeEvent: { layerX, layerY } }) {
-  //   const ax = (layerY - (this.mainNav.offsetHeight / 2)) / -5
-  //       , ay = (layerX - (this.mainNav.offsetWidth / 2)) / 5
-  //   TweenLite.to(this.mainNav, 0.3, {
-  //     rotationX: ax,
-  //     rotationY: ay,
-  //   })
-  // }
-
-  // OnMouseOutHandler() {
-  //   TweenLite.to(this.mainNav, 0.4, {
-  //     rotationX: 0,
-  //     rotationY: 0,
-  //     ease: Back.easeOut
-  //   })
-  // }
+  shouldComponentUpdate({ viewIndex }) {
+    return viewIndex !== this.props.viewIndex
+  }
 
   render() {
     const navigationDivs = this.props.navigationList.map(LocalContainer.createNavigationDiv)

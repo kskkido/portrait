@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { BodyContainer, Flex1, Title } from '../../Shared/Styles'
-import { createSpans } from '../../Shared/Utils'
+import { createSpans, createTitle } from '../../Shared/Utils'
 import { Scramble } from '../../Shared/Transition'
 
 import AboutView1 from './AboutView1'
@@ -43,6 +43,11 @@ const AboutView = ({ navigationList, viewIndex}) => {
         </Scramble>
       </Flex1>
       {list[viewIndex]}
+      <Flex1>
+        <Title>
+          {createTitle(`</${title}>`)}
+        </Title>
+      </Flex1>
     </BodyContainer>
   )
 }

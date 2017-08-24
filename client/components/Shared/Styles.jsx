@@ -33,6 +33,7 @@ export const BodyContent = styled.div`
 
 export const BodyText = styled.div`
   width: 100%;
+  padding: 0 10px 0 10px;
 `
 
 export const Flex1 = styled.div`
@@ -56,7 +57,7 @@ export const Flex5 = styled.div`
   flex: 5;
 `
 
-export const WelcomeContainer = styled.div`
+export const PreviewContainer = styled.div`
   position: absolute;
   text-align: center;
   width: 100%;
@@ -70,7 +71,7 @@ export const Title = styled.h1`
   text-transform: uppercase;
   font-size: 1.2em;
   min-height: 50px;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 20px;
 `
 
@@ -88,4 +89,43 @@ export const Letter = styled.span`
   display: inline-block;
   text-transform: uppercase;
   font-size: 1.4em;
+`
+
+export const Input = styled.input`
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  padding: 6px 14px 5px 33px;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: black;
+  background-color: transparent;
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 1em;
+
+  &:focus {
+    outline-color: 0;
+    outline-style: none;
+    outline-width: 0;
+  }
+`
+
+export const PlaceholderContainer = styled.div.attrs({
+  style: props => ({
+    bottom: props.empty ? '20px' : '40px',
+    fontSize: props.empty ? '1.2em' : '1em'
+  })
+})`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px 5px 33px;
+  letter-spacing: 1px;
+  font-size: 1.2em;
+  color: #424242;
+  opacity: 0.8;
+  transition: bottom 0.2s, font-size 0.2s;
 `
