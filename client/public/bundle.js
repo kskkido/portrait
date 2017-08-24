@@ -51815,13 +51815,6 @@ var LocalContainer = function (_Component) {
       this.input.focus();
     }
   }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(_, _ref3) {
-      var value = _ref3.value;
-
-      console.log(value, 'state');
-    }
-  }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       this.props.updateText(this.state.localValue);
