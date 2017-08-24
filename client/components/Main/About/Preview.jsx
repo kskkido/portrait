@@ -3,7 +3,8 @@ import Button from '../Button'
 import { PreviewContainer } from '../../Shared/Styles'
 import data from './content'
 
-const AboutPreview = ({ viewIndex }) => {
+const AboutPreview = ({ toggleBody, viewIndex }) => {
+  console.log(toggleBody)
   const { preview } = data[viewIndex]
       , location = {
           pathname: '/about',
@@ -12,7 +13,7 @@ const AboutPreview = ({ viewIndex }) => {
   return (
     <PreviewContainer>
       <p>{preview}</p>
-      <Button path={location} />
+      <Button onClick={toggleBody} />
     </PreviewContainer>
   )
 }

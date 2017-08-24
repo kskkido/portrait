@@ -81,8 +81,8 @@ class LocalContainer extends Component {
 
     return (
       <Message
-        value={this.props.value}
-        onChangeHandler={this.props.updateText}
+        value={this.state.localValue}
+        onChangeHandler={this.onChangeHandler}
         onEnterHandler={this.props.onEnterHandler}
         inputRef={div => this.input = div}
       />

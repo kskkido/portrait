@@ -75,8 +75,12 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.props.pathChange(3)
-    this.props.viewRestart(); this.props.rotationRestart()
+    // this.props.viewRestart(); this.props.rotationRestart()
     this.setRotation = LocalContainer.setRotation(list.length)
+  }
+
+  componentWillUnmount() {
+    this.props.rotationRestart(); this.props.viewRestart()
   }
 
   createInputHandler(props) {

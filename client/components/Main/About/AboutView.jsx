@@ -10,7 +10,6 @@ import AboutView1 from './AboutView1'
 import AboutView2 from './AboutView2'
 import AboutView3 from './AboutView3'
 import AboutView4 from './AboutView4'
-
 // const renderCurrentView = (viewIndex, language) => {
 //   if (viewIndex === 0) {
 //     return <AboutView1 key="one" language={language} />
@@ -31,26 +30,26 @@ const list = [
   <AboutView3 key="three" />,
    <AboutView4 key="four" />]
 
-const AboutView = ({ navigationList, viewIndex}) => {
+const AboutView = ({ navigationList, viewIndex }) => {
   const title = navigationList[viewIndex]
 
   return (
-    <BodyContainer >
-      <Flex1>
-        <Scramble key={title} in={true} appear={true} delay={0.2} text={`<${title}>`}>
-          <Title id="title">
-          {createSpans(title.length + 2)}
+      <BodyContainer >
+        <Flex1>
+          <Scramble key={title} in={true} appear={true} delay={0.2} text={`<${title}>`}>
+            <Title id="title">
+            {createSpans(title.length + 2)}
+            </Title>
+          </Scramble>
+        </Flex1>
+        {list[viewIndex]}
+        <Flex1>
+          <Title bottom>
+            {createTitle(`</${title}>`)}
+            <Textline />
           </Title>
-        </Scramble>
-      </Flex1>
-      {list[viewIndex]}
-      <Flex1>
-        <Title>
-          {createTitle(`</${title}>`)}
-          <Textline />
-        </Title>
-      </Flex1>
-    </BodyContainer>
+        </Flex1>
+      </BodyContainer>
   )
 }
 

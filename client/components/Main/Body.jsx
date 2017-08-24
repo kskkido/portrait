@@ -3,10 +3,9 @@ import { connect } from 'react-redux'
 import { TransitionGroup } from 'react-transition-group'
 import Draggable from 'gsap/Draggable'
 import { TweenLite, Back } from 'gsap'
-
+import { withRouter } from 'react-router-dom'
 import { Slide } from '../Shared/Transition'
-import { MainContainer } from '../Shared/Styles'
-import { rotationChange, rotationRestart, viewRestart } from '../../reducers/events'
+import { rotationChange, rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 import styled from 'styled-components'
 import Navigation from './Navigation'
 
@@ -15,25 +14,38 @@ import Navigation from './Navigation'
     navigationList
   */
 
+const MainContainer = styled.div`
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  cursor: move;
+  position: absolute;
+  top: ${props => props.isBody ? '-220px' : '200px'};
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+`
 
 const Body = styled.div`
   position: relative;
-  top: ${props => props.isCenter ? '450px' : ''};
+  top: 75px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 `
 
-const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain, inputNav, navigationList, onWheel, viewIndex, targetOffset }) => {
+const ContentView = ({ backgroundColor, children, isBody, inputBody, inputMain, inputNav, navigationList, rotation, viewIndex, targetOffset }) => {
 
   return (
     <MainContainer
       innerRef={inputMain}
+      isBody={isBody}
     >
-      <div style={{maxHeight: '100px'}}>
-        <Navigation
-          navigationList={navigationList}
-          isCenter={isCenter}
-          getDom={inputNav}
-        />
-      </div>
+      <Navigation
+        navigationList={navigationList}
+        getDom={inputNav}
+        rotation={rotation}
+      />
       <TransitionGroup>
         <Slide
           key={viewIndex}
@@ -44,7 +56,6 @@ const ContentView = ({ backgroundColor, children, isCenter, inputBody, inputMain
         >
           <Body
             innerRef={inputBody}
-            isCenter={isCenter}
           >
             {children && React.cloneElement(children, {viewIndex})}
            </Body>
@@ -88,6 +99,13 @@ class LocalContainer extends Component {
     }
   }
 
+  static round (length) {
+    return (rotation) => {
+      const rounded = rotation / (360 / length)
+      return rounded < 0 ? (Math.ceil(-(rounded) / length) * length) + rounded : rounded % length
+    }
+  }
+
   static slide(bodyDOM, mainDOM, length) {
     const ratio = (mainDOM.offsetWidth / 2) / (360 / length) // get the half of bodyDOM
         , getOffset = ((rat) => (rotation) => ((rotation * rat) * 0.5))(ratio)
@@ -98,7 +116,7 @@ class LocalContainer extends Component {
       prevRotation -= magnitude
       return LocalContainer.tap(getOffset(prevRotation), slideBodyDOM)
     }
-  } // for gradual <slide></slide>
+  } // for gradua l <slide></slide>
 
   static getRotation (wheelDelta, currentRotation) {
     return wheelDelta < 0 ? currentRotation + 1 : currentRotation - 1
@@ -109,14 +127,28 @@ class LocalContainer extends Component {
     event.stopPropagation()
   }
 
+  willSetView(rounded) {
+    const ratio = rounded % 1
+        , round = Math.round(rounded)
+
+    if (ratio <= 0.1 && round !== this.props.viewIndex) {
+      this.props.viewChange(round)
+    }
+  }
+
+  componentWillMount() {
+    const { length } = this.props.navigationList
+
+    this.roundRotation = LocalContainer.round(length)
+    this.dragCB = (targetRotation) => this.willSetView(this.roundRotation(LocalContainer.tap(targetRotation, this.props.rotationChange)))
+    this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB)
+  }
+
+
   componentDidMount() {
     this.props.getNav && this.props.getNav(this.nav)
 
-    const { length } = this.props.navigationList
-
-    this.slideBody = LocalContainer.slide(this.body, this.mainDiv, length)
-    this.getTargetRotation = LocalContainer.nearest(360 / length, this.props.rotationChange)
-
+    this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
     // DEFINE DRAGGABLE
     Draggable.create(this.nav, {
       type: 'rotation',
@@ -129,7 +161,7 @@ class LocalContainer extends Component {
   componentWillReceiveProps({ rotation }) {
     const magnitude = this.props.rotation - rotation
         , targetOffset = this.slideBody(magnitude) // get magnitude
-    this.setState(Object.assign({}, this.state, {targetOffset}))
+    this.setState(Object.assign({}, ...this.state, {targetOffset}))
   }
 
   shouldComponentUpdate({ viewIndex }) {
@@ -140,6 +172,10 @@ class LocalContainer extends Component {
     this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
   }
 
+  handleToggleBody() {
+    this.toggleBody()
+  }
+
   handleOnWheel ({nativeEvent}) {
     LocalContainer.preventEvent(nativeEvent)
     this.props.rotationChange(
@@ -148,7 +184,6 @@ class LocalContainer extends Component {
   }
 
   render() {
-    console.log(ContentView, 'YOYOY')
 
     return (
         <ContentView // ABOUT OR PROJECT
@@ -170,6 +205,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   rotationChange: (rotation) => dispatch(rotationChange(rotation)),
+  rotationRestart: () => dispatch(rotationRestart()),
+  viewChange: (index) => dispatch(viewChange(index)),
+  viewRestart: () => dispatch(viewRestart())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)

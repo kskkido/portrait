@@ -4,7 +4,9 @@ import Textline from '../Textline'
 import { BodyContainer, BodyContent, Title} from '../../Shared/Styles'
 import { createSpans, createTitle } from '../../Shared/Utils'
 import { Scramble } from '../../Shared/Transition'
-import ProjectText from './content'
+import projectData from './content'
+
+import ProjectPreview from './ProjectPreview'
 
 // const createMetadataItem = (metadata) => (key) => (
 //   <li key={key}>{metadata[key]}</li>
@@ -90,9 +92,12 @@ const Line = styled.hr`
 `
 
 
-const ProjectView = ({ viewIndex, language, scale }) => {
-  const data = ProjectText[viewIndex]
+const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
+  if (!projectData[viewIndex]) return <div />
+
+  const data = projectData[viewIndex]
       , title = data.title
+
   return (
     <BodyContainer key={viewIndex}>
       <Section>
@@ -144,7 +149,7 @@ const ProjectView = ({ viewIndex, language, scale }) => {
       </Section>
 
       <Section bottom>
-        <Title>
+        <Title bottom>
           {createTitle(`</${title}>`)}
           <Textline />
         </Title>

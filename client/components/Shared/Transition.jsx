@@ -64,41 +64,38 @@ const verticalSlide = (() => {
     return curriedSlide
   }
 
-  const fadeInBody = (target, tl) => {
+  const fadeInBody = (target) => (tl) => {
     tl
       .to(target, fadeInDuration, {
         autoAlpha: 1,
-        top: '+=100px',
+        y: '+=200px',
         ease: Back.easeOut,
         onComplete: () => running = false
       })
   }
 
-  const lastCbAnimation = (target) => (tl) => {
-    fadeInBody(target, tl)
-  }
-
   return {
-    onEnter: (duration, primaryColor, secondaryColor, direction = 'top', isBody) => (target, isAppearing) => {
+    onEnter: (duration, primaryColor, secondaryColor, direction = 'top') => (target, isAppearing) => {
       running = true
       const front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne')
           , behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo')
-          , repeat = isAppearing || isBody ? -1 : Math.floor((duration - fadeInDuration) / slideDuration) - 1
+          , repeat = isAppearing ? -1 : Math.floor((duration - fadeInDuration) / slideDuration) - 1
           , tl = new TimelineLite()
             // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
             // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
             .set(behind, {backgroundColor: secondaryColor})
-            .delay(isBody ? 0.65 : 0.4)
+            .set(target, {autoAlpha: 0, y: '-=200px'})
+            .delay(0.4)
 
-      slideVerticalBackground(once(cbAnimation(front, primaryColor)), lastCbAnimation(target), direction)(front, behind, tl, repeat)
+      slideVerticalBackground(once(cbAnimation(front, primaryColor)), fadeInBody(target), direction)(front, behind, tl, repeat)
 
 
     },
-    onExit: (multiplier) => (target) => {
+    onExit: (target) => {
       new TimelineLite()
         .to(target, 0.3, {
           autoAlpha: 0,
-          y: `${multiplier * 200}px`,
+          y: `-200px`,
         })
         .delay(0.1)
     }
@@ -114,8 +111,8 @@ export const Show = (props) => {
     <Transition
       {...props}
       timeout={{enter: duration, exit: 300}}
-      onEnter={verticalSlide.onEnter(duration / 1000, primaryColor, secondaryColor, direction, props.once.isBody)}
-      onExit={verticalSlide.onExit(direction === 'top' ? 1 : -1)}
+      onEnter={verticalSlide.onEnter(duration / 1000, primaryColor, secondaryColor, direction)}
+      onExit={verticalSlide.onExit}
     />
   )
 }
@@ -143,9 +140,10 @@ const horizontalSlide = (() => {
   const slideInContent = (offset, target, tl) => {
     tl
       .from(target, fadeInDuration, {
-      marginLeft: `${offset}px`,
+      left: `${offset}px`,
       autoAlpha: 0,
-      ease: Back.easeOut
+      ease: Back.easeOut,
+      clearProps: 'left'
     }, `-=${slideDuration - 0.2}`)
   }
 
@@ -316,6 +314,48 @@ export const Scramble = (_props) => {
       timeout={650}
       exit={false}
       onEnter={scrambleAnimation.onEnter(0.65, _props.delay, convertToAsci(_props.text || 'bleh'))}
+    />
+  )
+}
+
+const BodyAnimation = (() => {
+  const fadeInDuration = 0.4
+      , fadeOutDuration = 0.3
+
+  const fadeIn = (target) => {
+    console.log(fadeIn, 'YO')
+    return new TimelineLite()
+      .from(target, fadeInDuration, {
+        top: '-=200px',
+        opacity: 0,
+        ease: Back.easeOut
+      })
+      .delay(0.8)
+  }
+
+  const fadeOut = (target) => {
+    return new TimelineLite()
+      .to(target, fadeOutDuration, {
+        opacity: 0,
+        top: '-=200px',
+      })
+      .delay(0.1)
+  }
+
+  return {
+    onEnter: fadeIn,
+    onExit: fadeOut
+  }
+})()
+
+export const BodyFade = (props) => {
+
+  return (
+    <Transition
+      {...props}
+      timeout={{enter: 1200, exit: 400}}
+      onEnter={BodyAnimation.onEnter}
+      onExit={BodyAnimation.onExit}
     />
   )
 }

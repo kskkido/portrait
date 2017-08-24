@@ -37,7 +37,7 @@ class LocalContainer extends Component {
   createItems(prop, data) {
 
     return (
-      <ListBlock>
+      <ListBlock key={prop} >
         {`${prop}: fill it out!`}
       </ListBlock>
     )

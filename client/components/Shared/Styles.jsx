@@ -1,20 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const MainContainer = styled.div`
-  display: flex;
-  height: 100vh;
-  max-width: 800px;
-  cursor: move;
-  flex-direction: ${props => props.row ? 'row' : 'column'};
-  position: absolute;
-  opacity: 0;
-  top: -100px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-`
-
 export const BodyContainer = styled.div`
   position: absolute;
   width: 100%;
@@ -70,8 +56,7 @@ export const Title = styled.h1`
   font-weight: normal;
   text-transform: uppercase;
   font-size: 1.2em;
-  min-height: 50px;
-  margin-top: 30px;
+  margin-top: ${props => props.bottom ? '50px' : '10px'};
   margin-bottom: 20px;
 `
 

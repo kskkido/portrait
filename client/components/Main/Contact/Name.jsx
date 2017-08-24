@@ -35,6 +35,7 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
+    console.log('CALLING FOCUS')
     this.input.focus()
   }
 

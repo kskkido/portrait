@@ -44,7 +44,10 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.props.pathChange(0)
-    this.props.viewRestart(); this.props.rotationRestart()
+  }
+
+    componentWillUnmount() {
+    this.props.rotationRestart(); this.props.viewRestart()
   }
 
   render() {

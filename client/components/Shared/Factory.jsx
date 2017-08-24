@@ -5,7 +5,7 @@ export const createSVG = function(SVG, Container, hoverAnimation = () => ({play:
 
     const ContainerComponent = Container ? Container : styled.div`
       position: absolute;
-      width: inherit;
+      width: 100%;
       height: 120px;
       top: 100px;
     `

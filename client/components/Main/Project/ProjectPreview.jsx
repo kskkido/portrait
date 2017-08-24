@@ -5,7 +5,9 @@ import Button from '../Button'
 import { PreviewContainer } from '../../Shared/Styles'
 import data from './content'
 
-const ProjectPreview = ({ viewIndex }) => {
+const ProjectPreview = ({ toggleBody, viewIndex }) => {
+  if (data[viewIndex] === undefined) return <div />
+
   const { preview } = data[viewIndex]
       , location = {
           pathname: '/projects',
@@ -14,7 +16,7 @@ const ProjectPreview = ({ viewIndex }) => {
   return (
     <PreviewContainer>
       <p>{preview}</p>
-      <Button path={location} />
+      <Button onClick={toggleBody} />
     </PreviewContainer>
   )
 }
