@@ -1,7 +1,10 @@
+const path = require('path')
+const LiveReloadPlugin = require('webpack-livereload-plugin')
+
 module.exports = {
 	entry: './client/index.jsx',
 	output: {
-		path: __dirname + '/client/public',
+		path: path.resolve(__dirname, '/client/public'),
 		filename: 'bundle.js'
 	},
 	devtool: 'source-map',
@@ -22,5 +25,8 @@ module.exports = {
 			exclude: /(node_modules|bower_components)/,
 			loader: 'awesome-typescript-loader'
 		}]
-	}
+	},
+	plugins: [
+		new LiveReloadPlugin({appendScriptTag: true})
+	]
 }

@@ -6,7 +6,6 @@ const { join } = require('path')
 		, session = require('express-session')
 		, SequelizeStore = require('connect-session-sequelize')(session.Store)
 		, dbStore = new SequelizeStore({db})
-		, passport = require('passport')
 
 module.exports = app
 // logging middleware
@@ -23,10 +22,6 @@ module.exports = app
 		resave: false,
 		saveUninitialized: false
 	}))
-
-// define passport
-	.use(passport.initialize())
-	.use(passport.session())
 
 // redirect to api routes
 	.use('/api', require('./api'))
