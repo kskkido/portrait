@@ -46,7 +46,7 @@ export const viewData = {
     text: ['Contact'],
     path: '/contact',
     navigationList: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT'],
-    children: [],
+    children: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT'],
     backgroundColor: [purple1, purple2, purple3, purple4],
     secondaryColor: '#ffa726'
   }

@@ -96,35 +96,6 @@ const ListText = styled.h3`
   text-transform: uppercase;
 `
 
-const listData = {
-  row1: {
-    text: ['Keisuke Kido', 'Developer'],
-    path: '/',
-    color: '#e8e5e6',
-    subTextList: []
-  },
-  row2: {
-    text: ['About'],
-    path: '/about',
-    color: '#65AFFF',
-    subTextList: viewData.about.navigationList,
-    colors: viewData.about.backgroundColor
-  },
-  row3: {
-    text: ['Projects'],
-    path: '/projects',
-    color: viewData.projects,
-    subTextList: viewData.projects.navigationList,
-    colors: viewData.projects.backgroundColor
-  },
-  row4: {
-    text: ['Contact'],
-    path: '/contact',
-    color: '#c1839f',
-    subTextList: [],
-  }
-}
-
 const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut, mouseOver }) => (
   <Container >
     <Button onClick={onClickSVG} />
