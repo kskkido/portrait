@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
-import { Arrow } from '../shared/Assets'
+import { Arrow } from '../shared/SvgAssets'
 import { Link } from 'react-router-dom'
-import { createSVG } from '../Shared/Factory'
+import { createSVG } from '../shared/Factory'
 
 const createSVGHoverAnimation = (target) => {
   return new TimelineLite({paused: true})
@@ -20,15 +20,16 @@ const Container = styled.div`
     width: 100%;
     left: 50%;
     transform: translateX(-50%);
+    cursor: pointer;
   `
     , HOCButton = createSVG(Arrow, Container, createSVGHoverAnimation)
 
- const ArrowComponent = ({ path, scale }) => (
-  <Link to={path}>
+ const ArrowComponent = ({ onClick, scale }) => (
     <HOCButton
       scale={scale || 0.15}
+      onClick={onClick}
     />
-  </Link>
+
 )
 
 export default ArrowComponent

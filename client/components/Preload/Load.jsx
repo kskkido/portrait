@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import { loadComplete } from '../../reducers/events'
-import { viewData } from  '../Shared/Data'
-import { Title3 } from '../Shared/Styles'
-import { createTitle } from '../Shared/Utils'
-import { Fade, Scramble } from '../Shared/Transition'
+import { viewData } from  '../shared/Data'
+import { Title3 } from '../shared/Styles'
+import { createTitle } from '../shared/Utils'
+import { Fade, Scramble } from '../shared/Transition'
 
 const Container = styled.div`
   position: relative;

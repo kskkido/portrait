@@ -1,20 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const MainContainer = styled.div`
-  display: flex;
-  height: 100vh;
-  max-width: 800px;
-  cursor: move;
-  flex-direction: ${props => props.row ? 'row' : 'column'};
-  position: absolute;
-  opacity: 0;
-  top: -100px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-`
-
 export const BodyContainer = styled.div`
   position: absolute;
   width: 100%;
@@ -70,8 +56,7 @@ export const Title = styled.h1`
   font-weight: normal;
   text-transform: uppercase;
   font-size: 1.2em;
-  min-height: 50px;
-  margin-top: 30px;
+  margin-top: ${props => props.bottom ? '50px' : '10px'};
   margin-bottom: 20px;
 `
 
@@ -91,7 +76,11 @@ export const Letter = styled.span`
   font-size: 1.4em;
 `
 
-export const Input = styled.input`
+export const Input = styled.input.attrs({
+  style: props => props.valid ?
+    {} :
+    {color: 'red', borderColor: 'red'}
+})`
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -105,6 +94,7 @@ export const Input = styled.input`
   text-align: center;
   letter-spacing: 1px;
   font-size: 1em;
+  transition: color 0.2s, background-color 0.2s;
 
   &:focus {
     outline-color: 0;
@@ -116,7 +106,8 @@ export const Input = styled.input`
 export const PlaceholderContainer = styled.div.attrs({
   style: props => ({
     bottom: props.empty ? '20px' : '40px',
-    fontSize: props.empty ? '1.2em' : '1em'
+    fontSize: props.empty ? '1.2em' : '1em',
+    color: props.valid ? '' : 'red',
   })
 })`
   position: absolute;
@@ -127,5 +118,5 @@ export const PlaceholderContainer = styled.div.attrs({
   font-size: 1.2em;
   color: #424242;
   opacity: 0.8;
-  transition: bottom 0.2s, font-size 0.2s;
+  transition: bottom 0.2s, font-size 0.2s, color 0.2s;
 `

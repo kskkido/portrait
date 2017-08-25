@@ -1,19 +1,33 @@
 import React, { Component } from 'react'
-import { Input, PlaceholderContainer, PreviewContainer } from '../../Shared/Styles'
+import { Input, PlaceholderContainer, PreviewContainer } from '../../shared/Styles'
 import { initialValue } from './utils'
 
-const Email = ({ value, onChangeHandler, onEnterHandler, inputRef }) => {
+const EmailInput = Input.extend.attrs({
+  style: props => props.valid ?
+    {} :
+    {color: 'red', borderColor: 'red'}
+})``
+
+const validateEmail = (email) => {
+  return /^\w[a-zA-Z0-9_.-]*@{1}[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/i.test(email)
+}
+
+const Email = ({ isValid, value, onChangeHandler, onEnterHandler, inputRef }) => {
   const inputValue = value === initialValue ? '' : value
 
   return (
     <PreviewContainer>
       <p>Enter your email!</p>
-      <PlaceholderContainer empty={inputValue.length === 0}>
-        ITS YOUR EMAIL
+      <PlaceholderContainer
+        empty={inputValue.length === 0}
+        valid={isValid}
+      >
+        Enter your cool email
       </PlaceholderContainer>
-      <Input
+      <EmailInput
+        valid={isValid}
         value={inputValue}
-        onChange={({target: { value }}) => onChangeHandler(value)}
+        onChange={({target: { value }}) => onChangeHandler(value, validateEmail(value))}
         onKeyPress={onEnterHandler}
         innerRef={inputRef}
       />
@@ -26,14 +40,17 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       localValue: '',
-      entered: false
+      isValid: false,
     }
 
     this.onChangeHandler = this.onChangeHandler.bind(this)
   }
 
   componentWillMount() {
-    this.setState(Object.assign({}, ...this.state, {localValue: this.props.value}))
+  const { value } = this.props
+      , isValid = value === initialValue || validateEmail(value)
+
+    this.setState(Object.assign({}, ...this.state, {localValue: value, isValid}))
   }
 
   componentDidMount() {
@@ -41,22 +58,26 @@ class LocalContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.props.updateText(this.state.localValue)
+    const { localValue, isValid } = this.state
+
+    this.props.updateText(localValue, localValue !== initialValue && isValid)
   }
 
   componentDidUpdate() {
     this.input.focus()
   }
 
-  onChangeHandler(value) {
-    this.setState(Object.assign({}, ...this.state, {localValue: value}))
+  onChangeHandler(value, isValid) {
+    this.setState(Object.assign({}, ...this.state, {localValue: value, isValid}))
   }
 
   render() {
+    const { isValid, localValue } = this.state
 
     return (
       <Email
-        value={this.state.localValue}
+        isValid={isValid}
+        value={localValue}
         onChangeHandler={this.onChangeHandler}
         onEnterHandler={this.props.onEnterHandler}
         inputRef={div => this.input = div}

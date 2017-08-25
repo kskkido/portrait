@@ -1,44 +1,25 @@
 import React, { Component } from 'react'
-import { Input, PlaceholderContainer, PreviewContainer } from '../../Shared/Styles'
+import { Input, PlaceholderContainer, PreviewContainer } from '../../shared/Styles'
 import { initialValue } from './utils'
 import styled from 'styled-components'
 
-const TextArea = styled.textarea`
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70%;
-  padding: 6px 14px 5px 33px;
-  border-width: 0 0 1px 0;
-  border-style: solid;
-  background-color: transparent;
-  text-align: center;
-  letter-spacing: 1px;
-  font-size: 1em;
-  resize: none;
-  overflow-x: scroll;
-
-  &:focus {
-    outline-color: 0;
-    outline-style: none;
-    outline-width: 0;
-  }
-`
-
-const Message = ({ value, onChangeHandler, onEnterHandler, inputRef }) => {
-  const inputValue = value === initialValue ? '' : value
+const Message = ({ isValid, value, onChangeHandler, onEnterHandler, inputRef }) => {
+    const inputValue = value === initialValue ? '' : value
 
   return (
     <PreviewContainer>
-      <p>Fill out the box below to send me a sweet message</p>
-      <PlaceholderContainer empty={inputValue.length === 0}>
-        GIVE ME YOUR MESSAGE
+      <p>Fill out the box below with any message you want to send me  </p>
+      <PlaceholderContainer
+        empty={inputValue.length === 0}
+        valid={isValid}
+      >
+        Enter your lovely message
       </PlaceholderContainer>
       <Input
+        valid={isValid}
         type="text"
         value={inputValue}
-        onChange={({target: { value }}) => onChangeHandler(value)}
+        onChange={({target: { value }}) => onChangeHandler(value, value.length > 1)}
         onKeyPress={onEnterHandler}
         innerRef={inputRef}
       />
@@ -51,38 +32,45 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       localValue: '',
-      entered: false
+      isValid: false
     }
 
     this.onChangeHandler = this.onChangeHandler.bind(this)
   }
 
   componentWillMount() {
-    this.setState(Object.assign({}, ...this.state, {localValue: this.props.value}))
+    const { value } = this.props
+        , isValid = value === initialValue || value.length > 1
+
+    this.setState(Object.assign({}, ...this.state, {localValue: value, isValid}))
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     this.input.focus()
   }
 
   componentWillUnmount() {
-    this.props.updateText(this.state.localValue)
+    const { localValue, isValid } = this.state
+
+    this.props.updateText(localValue, localValue !== initialValue && isValid)
   }
 
   componentDidUpdate() {
     this.input.focus()
   }
 
-  onChangeHandler(value) {
-    this.setState(Object.assign({}, ...this.state, {localValue: value}))
+  onChangeHandler(value, isValid) {
+    this.setState(Object.assign({}, ...this.state, {localValue: value, isValid}))
   }
 
   render() {
+    const { isValid, localValue } = this.state
 
     return (
       <Message
-        value={this.props.value}
-        onChangeHandler={this.props.updateText}
+        isValid={isValid}
+        value={localValue}
+        onChangeHandler={this.onChangeHandler}
         onEnterHandler={this.props.onEnterHandler}
         inputRef={div => this.input = div}
       />

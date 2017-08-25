@@ -5,13 +5,14 @@ import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import SubList from './SubList'
 import Button from './Button'
-import { viewData } from '../Shared/Data'
-import { UncollapseList } from '../Shared/Transition'
+import { viewData } from '../shared/Data'
+import { UncollapseList } from '../shared/Transition'
 import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
   min-width: 325px;
+  height: 100vh;
   position: fixed;
   left: 0;
   z-index: 100;
@@ -37,6 +38,8 @@ const List = styled.ul`
   top: 80px;
   padding: 0;
   z-index: 100;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `
 
 const ListRow = styled.li`
@@ -94,39 +97,10 @@ const ListText = styled.h3`
   text-transform: uppercase;
 `
 
-const listData = {
-  row1: {
-    text: ['Keisuke Kido', 'Developer'],
-    path: '/',
-    color: '#e8e5e6',
-    subTextList: []
-  },
-  row2: {
-    text: ['About'],
-    path: '/about',
-    color: '#65AFFF',
-    subTextList: viewData.about.navigationList,
-    colors: viewData.about.backgroundColor
-  },
-  row3: {
-    text: ['Projects'],
-    path: '/projects',
-    color: viewData.projects,
-    subTextList: viewData.projects.navigationList,
-    colors: viewData.projects.backgroundColor
-  },
-  row4: {
-    text: ['Contact'],
-    path: '/contact',
-    color: '#c1839f',
-    subTextList: [],
-  }
-}
-
 const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut, mouseOver }) => (
   <Container >
     <Button onClick={onClickSVG} />
-    <div id="sideNav" ref={inputMain} style={{height: '100%'}}>
+    <div id="sidenav" ref={inputMain} style={{height: '100%'}}>
       <List >
         {children}
       </List>
@@ -217,7 +191,7 @@ class LocalContainer extends Component {
 
   createListItem ({ text, path, children, backgroundColor }, index) {
     const isActive = index === this.props.pathIndex
-    console.log(text, path, children, backgroundColor)
+
     return (
         <ListRow
           key={text[0]}
@@ -294,7 +268,10 @@ class LocalContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ events }) => ({pathIndex: events.pathIndex})
+const mapStateToProps = ({ events }) => ({
+  pathIndex: events.pathIndex,
+  backgroundTransition: events.backgroundTransition
+})
 
 const mapDispatchToProps = (dispatch) => ({
   pathChange: (index) => dispatch(pathChange(index)),

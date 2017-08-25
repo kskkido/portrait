@@ -5,15 +5,15 @@ import { TweenLite, TimelineLite, Back } from 'gsap'
 
 import { rotationChange, rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
-const NavigationDiv = styled.div.attrs({
-  style: props => ({
-    top: props.isCenter ? '150px' : '-230px'
-  })
-})`
+const Container = styled.div`
+  width: 100%;
+`
+
+const NavigationDiv = styled.div`
   position: relative;
+  top: 0px;
   margin-left: auto;
   margin-right: auto;
-  left: 0;
   right: 0;
   height: 300px;
   width: 300px;
@@ -60,51 +60,34 @@ class LocalContainer extends Component {
     )
   }
 
-  static round (rotation, length) {
-    const rounded = (rotation % 360 / (360 / length))
-    return rounded < 0 ? length + rounded : rounded
-  }
-
-  willSetView(rounded) {
-    const ratio = rounded % 1
-    if (ratio === 0 && rounded !== this.props.viewIndex) {
-      this.props.callback ?
-      this.props.callback(rounded) :
-      this.props.viewChange(Math.abs(rounded))
-    }
-  }
-
   componentWillMount() {
     this.navDivs = []
   }
 
   componentDidMount() {
-    TweenLite.to(this.mainNav, 0, {
-      rotation: this.props.rotation,
-    ease: Back.easeOut})
+    TweenLite.set(this.mainNav, {rotation: this.props.rotation})
   }
 
   componentWillReceiveProps({ rotation }) {
-    const { length } = this.props.navigationList
     TweenLite.to(this.mainNav, 0.7, {rotation, ease: Back.easeOut})
-    this.willSetView(LocalContainer.round(rotation, length))
   }
 
   render() {
     const navigationDivs = this.props.navigationList.map(LocalContainer.createNavigationDiv)
 
     return (
-      <NavigationDiv
-        id="nav"
+      <Container>
+        <NavigationDiv
+          id="nav"
+          innerRef={(div) => {
+            this.mainNav = div
+            this.props.getDom && this.props.getDom(div)
+          }}
+        >
+          {navigationDivs}
+        </NavigationDiv>
+      </Container>
 
-        isCenter={this.props.isCenter || false}
-        innerRef={(div) => {
-          this.mainNav = div
-          this.props.getDom && this.props.getDom(div)
-        }}
-      >
-        {navigationDivs}
-      </NavigationDiv>
     )
   }
 }

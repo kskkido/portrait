@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { viewData } from '../../Shared/Data'
+import { viewData } from '../../shared/Data'
 import { pathChange, viewChange, viewRestart, rotationChange, rotationRestart } from '../../../reducers/events'
 import BodyComponent from '../Body'
 import { initialValue } from './utils'
@@ -9,12 +9,14 @@ import Name from './Name'
 import Email from './Email'
 import Message from './Message'
 import Submit from './Submit'
+import Social from './SocialMedia'
 
 const list = [
  {text: 'name', component: <Name />},
  {text: 'email', component: <Email />},
  {text: 'message', component: <Message />},
  {text: 'submit', component: <Submit />},
+ {text: 'social', component: <Social />}
 ]
 
 const Body = ({ createInputHandler, createOnEnterHandler, getProps, viewIndex }) => {
@@ -22,7 +24,7 @@ const Body = ({ createInputHandler, createOnEnterHandler, getProps, viewIndex })
 
   return (
     React.cloneElement(component, {
-      value: getProps(text),
+      value: text !== 'social' && getProps(text),
       updateText: createInputHandler(text),
       onEnterHandler: createOnEnterHandler((viewIndex + 1) % list.length)
     })
@@ -51,9 +53,18 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: initialValue,
-      email: initialValue,
-      message: initialValue
+      name: {
+        value: initialValue,
+        isValid: false,
+      },
+      email: {
+        value: initialValue,
+        isValid: false
+      },
+      message: {
+        value: initialValue,
+        isValid: false
+      }
     }
     // need to pass those values down to corresponding
     this.createInputHandler = this.createInputHandler.bind(this)
@@ -75,13 +86,18 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.props.pathChange(3)
-    this.props.viewRestart(); this.props.rotationRestart()
+    // this.props.viewRestart(); this.props.rotationRestart()
     this.setRotation = LocalContainer.setRotation(list.length)
   }
 
   createInputHandler(props) {
-    return (input) => {
-      this.setState(Object.assign({}, ...this.state, {[props]: input}))
+    return (input, isValid) => {
+      this.setState(() => ({
+        [props]: {
+          value: input,
+          isValid
+        }
+      }))
     }
   }
 
@@ -93,11 +109,9 @@ class LocalContainer extends Component {
     )
   }
 
-  onSubmitHandler() {
-  }
 
   getProps(props) {
-    return props === 'submit' ? this.state : this.state[props]
+    return props === 'submit' ? this.state : this.state[props].value
   }
 
   render() {
