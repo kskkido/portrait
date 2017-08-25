@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
-import { Show } from '../Shared/Transition'
+import { Show } from '../shared/Transition'
 
 import Preload from '../Preload'
 import About from './About'

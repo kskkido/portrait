@@ -1,12 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import Textline from '../Textline'
-import { BodyContainer, BodyContent, Title} from '../../Shared/Styles'
-import { createSpans, createTitle } from '../../Shared/Utils'
-import { Scramble } from '../../Shared/Transition'
+import { BodyContainer, BodyContent, Title} from '../../shared/Styles'
+import { createSpans, createTitle } from '../../shared/Utils'
+import { Scramble } from '../../shared/Transition'
 import projectData from './content'
-
-import ProjectPreview from './ProjectPreview'
 
 // const createMetadataItem = (metadata) => (key) => (
 //   <li key={key}>{metadata[key]}</li>
@@ -114,8 +112,8 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
 
       <Section>
         <Image>
-          <ImageLink href={data.url} target="_blank">
-            <ProjectImage imageSource={data.imageSource}/>
+          <ImageLink href={data.url} target="_blank" rel="noopener noreferrer" >
+            <ProjectImage imageSource={data.imageSource} />
           </ImageLink>
         </Image>
       </Section>

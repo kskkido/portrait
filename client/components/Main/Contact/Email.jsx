@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, PlaceholderContainer, PreviewContainer } from '../../Shared/Styles'
+import { Input, PlaceholderContainer, PreviewContainer } from '../../shared/Styles'
 import { initialValue } from './utils'
 
 const EmailInput = Input.extend.attrs({
@@ -9,7 +9,7 @@ const EmailInput = Input.extend.attrs({
 })``
 
 const validateEmail = (email) => {
-  return /^[a-zA-Z0-9_.-]{2,}@{1}[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/i.test(email)
+  return /^\w[a-zA-Z0-9_.-]*@{1}[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/i.test(email)
 }
 
 const Email = ({ isValid, value, onChangeHandler, onEnterHandler, inputRef }) => {

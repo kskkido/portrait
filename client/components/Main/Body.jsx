@@ -4,7 +4,7 @@ import { TransitionGroup } from 'react-transition-group'
 import Draggable from 'gsap/Draggable'
 import { TweenLite, Back } from 'gsap'
 import { withRouter } from 'react-router-dom'
-import { Slide } from '../Shared/Transition'
+import { Slide } from '../shared/Transition'
 import { rotationChange, rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 import styled from 'styled-components'
 import Navigation from './Navigation'
@@ -20,7 +20,7 @@ const MainContainer = styled.div`
   width: 100%;
   cursor: move;
   position: absolute;
-  top: ${props => props.isBody ? '-220px' : '180px'};
+  top: ${props => props.isBody ? '-220px' : '150px'};
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -127,6 +127,10 @@ class LocalContainer extends Component {
     event.stopPropagation()
   }
 
+  static changingPath ({location, history}) {
+    return location.pathname !== history.location.pathname
+  }
+
   willSetView(rounded) {
     const ratio = rounded % 1
         , round = Math.round(rounded)
@@ -137,9 +141,9 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-    console.log('MOUNTING DUDE')
     const { length } = this.props.navigationList
-
+    console.log('MOUNTING BODY')
+    this.hackyMountCheck = true
     this.roundRotation = LocalContainer.round(length)
     this.dragCB = (targetRotation) => this.willSetView(this.roundRotation(LocalContainer.tap(targetRotation, this.props.rotationChange)))
     this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB)
@@ -159,9 +163,10 @@ class LocalContainer extends Component {
     })
   }
 
-  componentWillReceiveProps({ rotation }) {
+  componentWillReceiveProps({rotation}) {
     const magnitude = this.props.rotation - rotation
-        , targetOffset = this.slideBody(magnitude) // get magnitude
+        , targetOffset = this.slideBody(magnitude % 360)
+
     this.setState(Object.assign({}, ...this.state, {targetOffset}))
   }
 
@@ -171,6 +176,10 @@ class LocalContainer extends Component {
 
   componentDidUpdate() {
     this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
+  }
+
+  componentWillUnmount() {
+    return LocalContainer.changingPath(this.props) && (this.props.rotationRestart(), this.props.viewRestart())
   }
 
   handleToggleBody() {
@@ -211,4 +220,4 @@ const mapDispatchToProps = (dispatch) => ({
   viewRestart: () => dispatch(viewRestart())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LocalContainer))

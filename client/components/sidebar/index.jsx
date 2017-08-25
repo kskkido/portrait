@@ -5,8 +5,8 @@ import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import SubList from './SubList'
 import Button from './Button'
-import { viewData } from '../Shared/Data'
-import { UncollapseList } from '../Shared/Transition'
+import { viewData } from '../shared/Data'
+import { UncollapseList } from '../shared/Transition'
 import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
@@ -39,6 +39,7 @@ const List = styled.ul`
   padding: 0;
   z-index: 100;
   overflow-y: scroll;
+  overflow-x: hidden;
 `
 
 const ListRow = styled.li`
@@ -99,7 +100,7 @@ const ListText = styled.h3`
 const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut, mouseOver }) => (
   <Container >
     <Button onClick={onClickSVG} />
-    <div id="sideNav" ref={inputMain} style={{height: '100%'}}>
+    <div id="sidenav" ref={inputMain} style={{height: '100%'}}>
       <List >
         {children}
       </List>
@@ -190,7 +191,7 @@ class LocalContainer extends Component {
 
   createListItem ({ text, path, children, backgroundColor }, index) {
     const isActive = index === this.props.pathIndex
-    console.log(text, path, children, backgroundColor)
+
     return (
         <ListRow
           key={text[0]}
@@ -267,7 +268,10 @@ class LocalContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ events }) => ({pathIndex: events.pathIndex})
+const mapStateToProps = ({ events }) => ({
+  pathIndex: events.pathIndex,
+  backgroundTransition: events.backgroundTransition
+})
 
 const mapDispatchToProps = (dispatch) => ({
   pathChange: (index) => dispatch(pathChange(index)),

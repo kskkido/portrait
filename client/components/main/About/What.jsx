@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BodyText,  BodyContent } from '../../Shared/Styles'
+import { BodyText,  BodyContent } from '../../shared/Styles'
 import HomeText from './content'
 
 const Content = ({ language }) => (

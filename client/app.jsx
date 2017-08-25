@@ -4,10 +4,10 @@ import { BrowserRouter } from 'react-router-dom'
 import styled, { injectGlobal } from 'styled-components'
 
 import { fadeIn } from './components/Shared/Styles'
-import Background from './components/Background'
-import Sidenav from './components/Sidenav'
-import Main from './components/Main'
-import Preload from './components/Preload'
+import Background from './components/background'
+import Sidebar from './components/sidebar'
+import Main from './components/main'
+import Preload from './components/preload'
 
 injectGlobal`
   body {
@@ -26,7 +26,7 @@ const Container = styled.main`
 
 const Loaded = () => (
     <Container>
-        <Sidenav />
+        <Sidebar />
         <Main />
     </Container>
 )

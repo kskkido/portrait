@@ -1,9 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Transition } from 'react-transition-group'
 import { TimelineLite, Back, Power2 } from 'gsap'
 
 import { viewData } from './Data'
 import { convertToAsci, getPrimaryAndSecondary, once } from './Utils'
+import { backgroundTransition } from '../../reducers/events'
 
 let toggle = false
   , running = false
@@ -83,8 +85,8 @@ const verticalSlide = (() => {
           , tl = new TimelineLite()
             // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
             // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
-            .set(behind, {backgroundColor: secondaryColor})
-            .set(target, {autoAlpha: 0, y: '-=200px'})
+            .set(behind, {backgroundColor: secondaryColor, height: '100vh'})
+            .set(target, {autoAlpha: 0, y: '-=200px', height: '100vh;'})
             .delay(0.4)
 
       slideVerticalBackground(once(cbAnimation(front, primaryColor)), fadeInBody(target), direction)(front, behind, tl, repeat)

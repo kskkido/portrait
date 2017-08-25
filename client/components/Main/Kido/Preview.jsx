@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import Button from '../Button'
-import { PreviewContainer } from '../../Shared/Styles'
+import { PreviewContainer } from '../../shared/Styles'
 import data from './content'
 
 const ProjectsPreview = ({ history, viewIndex }) => {
+   if (!data[viewIndex]) return <div />
+
   const { path, text } = data[viewIndex]
 
   return (

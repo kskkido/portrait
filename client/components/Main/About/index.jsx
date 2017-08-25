@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import BodyComponent from '../Body'
-import Content from './AboutView'
+import Content from './ContentView'
 import Preview from './Preview'
 import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
-import { viewData } from '../../Shared/Data'
-import { BodyFade } from '../../Shared/Transition'
+import { viewData } from '../../shared/Data'
+import { BodyFade } from '../../shared/Transition'
 import { TransitionGroup } from 'react-transition-group'
 
 const About = ({ isBody, toggleBody, backgroundColor, navigationList }) => {
@@ -45,10 +45,6 @@ class LocalContainer extends Component {
     this.props.pathChange(1)
     // this.isBody = this.props.location.state && this.props.location.state.isBody
     // return !this.isBody && (this.props.pathChange(1), this.props.viewRestart(), this.props.rotationRestart())
-  }
-
-  componentWillUnmount() {
-    this.props.viewRestart(); this.props.rotationRestart()
   }
 
   toggleBody() {

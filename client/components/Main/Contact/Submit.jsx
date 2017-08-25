@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { PreviewContainer } from '../../Shared/Styles'
+import { PreviewContainer } from '../../shared/Styles'
 import { viewChange, rotationChange } from '../../../reducers/events'
-import { TimelineLite, Power4 } from 'gsap'
+import { TimelineLite } from 'gsap'
 
 const ListContainer = styled.div`
   position: relative;
@@ -51,20 +51,29 @@ class LocalContainer extends Component {
     }
   }
 
-  static createHoverAnimation(target) {
-    return new TimelineLite({paused: true})
-      .to(target, 0.2, {
-        scale: 1.1,
-        ease: Power4.easeOut
-      })
-  }
-
   static tap (value, fn) {
     return (fn(value), value)
   }
 
   static setRotation (length) {
     return (index) => (360 / length) * index
+  }
+
+  static truncate (string) {
+    return string.length > 15 ?
+    `${string.slice(0, 15)}...` :
+    string
+  }
+
+  static isEveryPropValid(state) {
+    return Object.keys(state).every((prop) => state[prop].isValid)
+  }
+
+  static createHoverAnimation(target) {
+    return new TimelineLite({paused: true})
+      .to(target, 0.2, {
+        scale: 1.1,
+      })
   }
 
  createItems(prop, { value, isValid }, index) {
@@ -77,7 +86,7 @@ class LocalContainer extends Component {
         onMouseOut={this.onHoverOffHandler(index)}
         innerRef={div => this.listRef.push(div)}
       >
-        {`${prop.toUpperCase()}: ${isValid ? value : 'Needs some work!'}`}
+        {`${prop.toUpperCase()}: ${isValid ? LocalContainer.truncate(value) : 'Needs some work!'}`}
       </ListBlock>
     )
   }
@@ -88,13 +97,9 @@ class LocalContainer extends Component {
     return Object.keys(state).map((prop, index) => this.createItems(prop, state[prop], index))
   }
 
-  static isEveryPropValid(state) {
-    return Object.keys(state).every((prop) => state[prop].isValid)
-  }
-
   componentWillMount() {
     this.listRef = []
-    this.setRotation = LocalContainer.setRotation(4) // fix this
+    this.setRotation = LocalContainer.setRotation(5) // fix this
   }
 
   componentDidMount() {

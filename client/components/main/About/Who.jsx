@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BodyContent, BodyText } from '../../Shared/Styles'
+import { BodyContent, BodyText } from '../../shared/Styles'
 import HomeText from './content'
 
 const Content = () => (

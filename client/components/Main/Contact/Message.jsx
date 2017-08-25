@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, PlaceholderContainer, PreviewContainer } from '../../Shared/Styles'
+import { Input, PlaceholderContainer, PreviewContainer } from '../../shared/Styles'
 import { initialValue } from './utils'
 import styled from 'styled-components'
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, PlaceholderContainer, PreviewContainer } from '../../Shared/Styles'
+import { Input, PlaceholderContainer, PreviewContainer } from '../../shared/Styles'
 import { initialValue } from './utils'
 
 const Name = ({ isValid, value, onChangeHandler, onEnterHandler, inputRef, inputRef2 }) => {
@@ -58,7 +58,7 @@ class LocalContainer extends Component {
   }
 
   onChangeHandler(value, isValid) {
-    this.setState(Object.assign({}, ...this.state, {localValue: value, isValid}))
+    this.setState(Object.assign({}, ...this.state, {localValue: value.trim(), isValid}))
   }
 
   render() {

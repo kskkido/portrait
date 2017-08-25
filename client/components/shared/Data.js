@@ -16,6 +16,7 @@ const purple1 = '#ffb74d'
     , purple2 = '#ffcc80'
     , purple3 = '#ffd54f'
     , purple4 = '#ffca28'
+    , purple5 = '#ffb300'
 
 export const viewData = {
   home: {
@@ -45,9 +46,9 @@ export const viewData = {
   contact: {
     text: ['Contact'],
     path: '/contact',
-    navigationList: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT'],
-    children: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT'],
-    backgroundColor: [purple1, purple2, purple3, purple4],
+    navigationList: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT', 'SOCIAL'],
+    children: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT', 'SOCIAL'],
+    backgroundColor: [purple1, purple2, purple3, purple4, purple5],
     secondaryColor: '#ffa726'
   }
 }

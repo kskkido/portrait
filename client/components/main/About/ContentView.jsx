@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Textline from '../Textline'
-import { BodyContainer, Flex1, Title } from '../../Shared/Styles'
-import { createSpans, createTitle } from '../../Shared/Utils'
-import { Scramble } from '../../Shared/Transition'
+import { BodyContainer, Flex1, Title } from '../../shared/Styles'
+import { createSpans, createTitle } from '../../shared/Utils'
+import { Scramble } from '../../shared/Transition'
 
-import AboutView1 from './AboutView1'
-import AboutView2 from './AboutView2'
-import AboutView3 from './AboutView3'
-import AboutView4 from './AboutView4'
+import Who from './Who'
+import What from './What'
+import Where from './Where'
+import When from './When'
 // const renderCurrentView = (viewIndex, language) => {
 //   if (viewIndex === 0) {
 //     return <AboutView1 key="one" language={language} />
@@ -25,12 +25,14 @@ import AboutView4 from './AboutView4'
 // }
 
 const list = [
-  <AboutView1 key="one" />,
-  <AboutView2  key="two" />,
-  <AboutView3 key="three" />,
-   <AboutView4 key="four" />]
+  <Who key="one" />,
+  <What  key="two" />,
+  <Where key="three" />,
+  <When key="four" />]
 
 const AboutView = ({ navigationList, viewIndex }) => {
+  if (!navigationList[viewIndex]) return <div />
+
   const title = navigationList[viewIndex]
 
   return (

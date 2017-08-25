@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { BodyText,  BodyContent } from '../../Shared/Styles'
+import { BodyText,  BodyContent } from '../../shared/Styles'
 import HomeText from './content'
 
 const Content = ({ language }) => (
     <BodyContent>
       <BodyText>
       <p>
-        I started programming very recently...
+       I live in Tokyo, Japan right now...
       </p>
       </BodyText>
     </BodyContent>

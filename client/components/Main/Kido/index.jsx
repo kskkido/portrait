@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { viewData } from '../../Shared/Data'
+import { viewData } from '../../shared/Data'
 import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
 import BodyComponent from '../Body'
 
@@ -44,10 +44,6 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.props.pathChange(0)
-  }
-
-    componentWillUnmount() {
-    this.props.rotationRestart(); this.props.viewRestart()
   }
 
   render() {

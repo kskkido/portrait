@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-export const createSVG = function(SVG, Container, hoverAnimation = () => ({play: () => {}, reverse: () => {}})) {
+export const createSVG = function(SVG, Container, hoverAnimation = () => ({play: () => {}, reverse: () => {}}), hoverOffAnimation = () => {}) {
 
     const ContainerComponent = Container ? Container : styled.div`
       position: absolute;
@@ -19,7 +19,7 @@ export const createSVG = function(SVG, Container, hoverAnimation = () => ({play:
     }
 
     componentDidMount() {
-      this.svgHoverAnimation = hoverAnimation(this.svg)
+      this.svgHoverAnimation = hoverAnimation(this.svg, this.container)
       this.onClickCallback = this.onClickWrapper(this.props.onClick, this.svg, this.container)
     }
 
@@ -31,15 +31,16 @@ export const createSVG = function(SVG, Container, hoverAnimation = () => ({play:
       return this.onClickCallback()
     }
 
-    onHoverHandler() {
-      return this.svgHoverAnimation.play()
+    onHoverHandler(e) {
+      return (this.svgHoverAnimation && this.svgHoverAnimation.play()) || hoverAnimation(e)
     }
 
-    onHoverOffHandler() {
-      return this.svgHoverAnimation.reverse()
+    onHoverOffHandler(e) {
+      return (this.svgHoverAnimation && this.svgHoverAnimation.reverse()) || hoverOffAnimation(e)
     }
 
     render() {
+
       return (
         <ContainerComponent
           innerRef={div => this.container = div}
