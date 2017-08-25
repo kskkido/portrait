@@ -59,17 +59,6 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
-/******/ 	// webpack-livereload-plugin
-/******/ 	(function() {
-/******/ 	  if (typeof window === "undefined") { return };
-/******/ 	  var id = "webpack-livereload-plugin-script";
-/******/ 	  if (document.getElementById(id)) { return; }
-/******/ 	  var el = document.createElement("script");
-/******/ 	  el.id = id;
-/******/ 	  el.async = true;
-/******/ 	  el.src = "http://localhost:35729/livereload.js";
-/******/ 	  document.getElementsByTagName("head")[0].appendChild(el);
-/******/ 	}());
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 135);
 /******/ })
@@ -11858,7 +11847,6 @@ var BodyAnimation = function () {
       fadeOutDuration = 0.3;
 
   var fadeIn = function fadeIn(target) {
-    console.log(fadeIn, 'YO');
     return new _gsap.TimelineLite().from(target, fadeInDuration, {
       top: '-=200px',
       opacity: 0,
@@ -16004,8 +15992,7 @@ var LocalContainer = function (_Component) {
 
       var length = this.props.navigationList.length;
 
-      console.log('MOUNTING BODY');
-      this.hackyMountCheck = true;
+
       this.roundRotation = LocalContainer.round(length);
       this.dragCB = function (targetRotation) {
         return _this2.willSetView(_this2.roundRotation(LocalContainer.tap(targetRotation, _this2.props.rotationChange)));
@@ -16137,8 +16124,7 @@ var LocalContainer = function (_Component) {
         prevRotation -= magnitude;
         return LocalContainer.tap(getOffset(prevRotation), slideBodyDOM);
       };
-    } // for gradua l <slide></slide>
-
+    }
   }, {
     key: 'getRotation',
     value: function getRotation(wheelDelta, currentRotation) {
@@ -26796,7 +26782,6 @@ var BodyAnimation = function () {
       fadeOutDuration = 0.3;
 
   var fadeIn = function fadeIn(target) {
-    console.log(fadeIn, 'YO');
     return new _gsap.TimelineLite().from(target, fadeInDuration, {
       top: '-=200px',
       opacity: 0,

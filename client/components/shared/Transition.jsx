@@ -327,7 +327,6 @@ const BodyAnimation = (() => {
       , fadeOutDuration = 0.3
 
   const fadeIn = (target) => {
-    console.log(fadeIn, 'YO')
     return new TimelineLite()
       .from(target, fadeInDuration, {
         top: '-=200px',

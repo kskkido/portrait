@@ -116,7 +116,7 @@ class LocalContainer extends Component {
       prevRotation -= magnitude
       return LocalContainer.tap(getOffset(prevRotation), slideBodyDOM)
     }
-  } // for gradua l <slide></slide>
+  }
 
   static getRotation (wheelDelta, currentRotation) {
     return wheelDelta < 0 ? currentRotation + 1 : currentRotation - 1
@@ -142,8 +142,7 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     const { length } = this.props.navigationList
-    console.log('MOUNTING BODY')
-    this.hackyMountCheck = true
+
     this.roundRotation = LocalContainer.round(length)
     this.dragCB = (targetRotation) => this.willSetView(this.roundRotation(LocalContainer.tap(targetRotation, this.props.rotationChange)))
     this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB)
