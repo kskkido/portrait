@@ -6,19 +6,6 @@ import BodyComponent from '../Body'
 
 import Preview from './Preview'
 
-
-// const createAnimation = (target) => {
-//   TweenMax.from(target, 2, {
-//     rotationX: 90,
-//     rotationY: 90,
-//   }, {
-//     rotationX: 0,
-//     rotationY: 0,
-//     rotation: 360,
-//     ease: Power2.easeIn
-//   })
-// }
-
 const Welcome = ({ backgroundColor, navigationList }) => {
 
   return (

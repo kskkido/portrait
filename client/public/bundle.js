@@ -59,6 +59,17 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// webpack-livereload-plugin
+/******/ 	(function() {
+/******/ 	  if (typeof window === "undefined") { return };
+/******/ 	  var id = "webpack-livereload-plugin-script";
+/******/ 	  if (document.getElementById(id)) { return; }
+/******/ 	  var el = document.createElement("script");
+/******/ 	  el.id = id;
+/******/ 	  el.async = true;
+/******/ 	  el.src = "http://localhost:35729/livereload.js";
+/******/ 	  document.getElementsByTagName("head")[0].appendChild(el);
+/******/ 	}());
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 135);
 /******/ })
@@ -11615,19 +11626,20 @@ var verticalSlide = function () {
     onEnter: function onEnter(duration, primaryColor, secondaryColor) {
       var direction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'top';
       return function (target, isAppearing) {
-        running = true;
+        running = !isAppearing;
         var front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne'),
             behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo'),
             repeat = isAppearing ? -1 : Math.floor((duration - fadeInDuration) / slideDuration) - 1,
             tl = new _gsap.TimelineLite()
         // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
         // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
-        .set(behind, { backgroundColor: secondaryColor, height: '100vh' }).set(target, { autoAlpha: 0, y: '-=200px', height: '100vh;' }).delay(0.4);
+        .set(behind, { backgroundColor: secondaryColor, height: '100vh' }).set(target, { autoAlpha: 0, y: '-=200px' }).delay(0.4);
 
         slideVerticalBackground((0, _Utils.once)(cbAnimation(front, primaryColor)), fadeInBody(target), direction)(front, behind, tl, repeat);
       };
     },
     onExit: function onExit(target) {
+      console.log(target, 'yo what the fuck');
       new _gsap.TimelineLite().to(target, 0.3, {
         autoAlpha: 0,
         y: '-200px'
@@ -26557,7 +26569,7 @@ var verticalSlide = function () {
             tl = new _gsap.TimelineLite()
         // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
         // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
-        .set(behind, { backgroundColor: secondaryColor, height: '100vh' }).set(target, { autoAlpha: 0, y: '-=200px', height: '100vh;' }).delay(0.4);
+        .set(behind, { backgroundColor: secondaryColor, height: '100vh' }).set(target, { autoAlpha: 0, y: '-=200px', height: '100vh' }).delay(0.4);
 
         slideVerticalBackground((0, _Utils.once)(cbAnimation(front, primaryColor)), fadeInBody(target), direction)(front, behind, tl, repeat);
       };
@@ -53968,18 +53980,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// const createAnimation = (target) => {
-//   TweenMax.from(target, 2, {
-//     rotationX: 90,
-//     rotationY: 90,
-//   }, {
-//     rotationX: 0,
-//     rotationY: 0,
-//     rotation: 360,
-//     ease: Power2.easeIn
-//   })
-// }
 
 var Welcome = function Welcome(_ref) {
   var backgroundColor = _ref.backgroundColor,
