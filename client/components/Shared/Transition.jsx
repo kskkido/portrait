@@ -42,6 +42,7 @@ const verticalSlide = (() => {
   const cbAnimation = (_bgBehind, secondColor) => {
     return (_tl) => {
       _tl.set(_bgBehind, {backgroundColor: secondColor})
+      running = false
     }
   }
 
@@ -71,8 +72,7 @@ const verticalSlide = (() => {
       .to(target, fadeInDuration, {
         autoAlpha: 1,
         y: '+=200px',
-        ease: Back.easeOut,
-        onComplete: () => running = false
+        ease: Back.easeOut
       })
   }
 
@@ -189,8 +189,9 @@ const collapseAnimation = (() => {
 
   const collapse = ({ childNodes: [main] }) => {
     new TimelineLite()
-      .from(main, 0.3, {
-        height: '0px',
+      .from(main, 0.9, {
+        height: '0',
+        ease: Back.easeOut,
       })
       .staggerFrom(main.childNodes, 0.6, {
         autoAlpha: 0,
@@ -198,12 +199,12 @@ const collapseAnimation = (() => {
         rotationX: '45',
         rotationY: '45',
         ease: Back.easeOut,
-      }, 0.1)
+      }, 0.15)
   }
 
   const uncollapse = ({ childNodes: [main] }) => {
     new TimelineLite()
-      .to(main, 0.2, {
+      .to(main, 0.3, {
         autoAlpha: 0,
       })
       .to(main, 0.3, {
@@ -222,6 +223,7 @@ export const UncollapseList = (props) => {
   return (
     <Transition
       {...props}
+      timeout={{enter: 1150, exit: 600}}
       onEntering={collapseAnimation.onEnter}
       onExit={collapseAnimation.onExit}
     />
