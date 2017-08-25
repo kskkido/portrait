@@ -5,7 +5,7 @@ import styled, { injectGlobal } from 'styled-components'
 
 import { fadeIn } from './components/Shared/Styles'
 import Background from './components/background'
-import Sidebar from './components/sidebar'
+import Sidebar from './components/sidenav'
 import Main from './components/main'
 import Preload from './components/preload'
 
