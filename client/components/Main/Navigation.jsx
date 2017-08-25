@@ -65,10 +65,7 @@ class LocalContainer extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.rotation)
-    TweenLite.to(this.mainNav, 0, {
-      rotation: this.props.rotation,
-    ease: Back.easeOut})
+    TweenLite.set(this.mainNav, {rotation: this.props.rotation})
   }
 
   componentWillReceiveProps({ rotation }) {

@@ -1,9 +1,11 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
 import { Show } from '../Shared/Transition'
 
+import Preload from '../Preload'
 import About from './About'
 import Contact from './Contact'
 import Project from './Project'
@@ -21,10 +23,12 @@ const Container = styled.div`
 
 /* ====== utils ====== */
 
-const BodyRoutes = () => (
+const BodyRoutes = ({ loaded }) => (
   <Route render={({ location }) => {
-    !location.state && (location.state = {isBody: false})
-    console.log(location, 'yolocation')
+    if (!loaded) {
+      return <Preload />
+    }
+
     return (
       <TransitionGroup>
         <Show
@@ -33,7 +37,6 @@ const BodyRoutes = () => (
           appear={true}
           mountOnEnter={true}
           unmountOnExit={true}
-          once={location.state}
         >
           <Switch location={location}>
             <Route path="/about" component={About} />
@@ -61,15 +64,19 @@ const BodyRoutes = () => (
 //   />
 // )
 
-const Main = () => {
+const Main = ({ loaded }) => {
   return (
     <ThemeProvider theme={theme}>
       <Container id="bodyContainer">
-        <BodyRoutes  />
+        <BodyRoutes  loaded={loaded} />
       </Container>
     </ThemeProvider>
   )
 }
 
+const mapStateToProps = ({ events }) => ({
+  loaded: events.loaded
+})
 
-export default Main
+
+export default withRouter(connect(mapStateToProps)(Main))

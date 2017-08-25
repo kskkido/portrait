@@ -12,6 +12,7 @@ import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
 
 const Container = styled.div`
   min-width: 325px;
+  height: 100vh;
   position: fixed;
   left: 0;
   z-index: 100;
@@ -37,6 +38,7 @@ const List = styled.ul`
   top: 80px;
   padding: 0;
   z-index: 100;
+  overflow-y: scroll;
 `
 
 const ListRow = styled.li`

@@ -20,7 +20,7 @@ const MainContainer = styled.div`
   width: 100%;
   cursor: move;
   position: absolute;
-  top: ${props => props.isBody ? '-220px' : '200px'};
+  top: ${props => props.isBody ? '-220px' : '180px'};
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -137,6 +137,7 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
+    console.log('MOUNTING DUDE')
     const { length } = this.props.navigationList
 
     this.roundRotation = LocalContainer.round(length)

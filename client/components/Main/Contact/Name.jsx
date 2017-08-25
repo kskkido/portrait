@@ -2,17 +2,22 @@ import React, { Component } from 'react'
 import { Input, PlaceholderContainer, PreviewContainer } from '../../Shared/Styles'
 import { initialValue } from './utils'
 
-const Name = ({ value, onChangeHandler, onEnterHandler, inputRef, inputRef2 }) => {
+const Name = ({ isValid, value, onChangeHandler, onEnterHandler, inputRef, inputRef2 }) => {
   const inputValue = value === initialValue ? '' : value
+
   return (
     <PreviewContainer>
       <p>Interested in getting in touch with me? enter your name below and press enter to navigate to the next section. Once you fill out each section, go to the 'submit' section to send out your message!</p>
-      <PlaceholderContainer empty={inputValue.length === 0}>
-        ITS YOUR NAME
+      <PlaceholderContainer
+        empty={inputValue.length === 0}
+        valid={isValid}
+      >
+        Enter your name
       </PlaceholderContainer>
       <Input
+        valid={isValid}
         value={inputValue}
-        onChange={({target: { value }}) => onChangeHandler(value)}
+        onChange={({target: { value }}) => onChangeHandler(value, value.length > 1)}
         onKeyPress={onEnterHandler}
         innerRef={inputRef}
       />
@@ -25,36 +30,42 @@ class LocalContainer extends Component {
     super(props)
     this.state = {
       localValue: '',
+      isValid: false
     }
 
     this.onChangeHandler = this.onChangeHandler.bind(this)
   }
 
   componentWillMount() {
-    this.setState(Object.assign({}, ...this.state, {localValue: this.props.value}))
+  const { value } = this.props
+      , isValid = value === initialValue || value.length > 1
+
+    this.setState(Object.assign({}, ...this.state, {localValue: value, isValid: isValid}))
   }
 
   componentDidMount() {
-    console.log('CALLING FOCUS')
     this.input.focus()
   }
 
   componentWillUnmount() {
-    this.props.updateText(this.state.localValue)
+    const { localValue, isValid } = this.state
+
+    this.props.updateText(localValue, localValue !== initialValue && isValid)
   }
 
   componentDidUpdate() {
     this.input.focus()
   }
 
-  onChangeHandler(value) {
-    this.setState(Object.assign({}, ...this.state, {localValue: value}))
+  onChangeHandler(value, isValid) {
+    this.setState(Object.assign({}, ...this.state, {localValue: value, isValid}))
   }
 
   render() {
 
     return (
       <Name
+        isValid={this.state.isValid}
         value={this.state.localValue}
         onChangeHandler={this.onChangeHandler}
         onEnterHandler={this.props.onEnterHandler}

@@ -51,9 +51,18 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: initialValue,
-      email: initialValue,
-      message: initialValue
+      name: {
+        value: initialValue,
+        isValid: false,
+      },
+      email: {
+        value: initialValue,
+        isValid: false
+      },
+      message: {
+        value: initialValue,
+        isValid: false
+      }
     }
     // need to pass those values down to corresponding
     this.createInputHandler = this.createInputHandler.bind(this)
@@ -84,8 +93,13 @@ class LocalContainer extends Component {
   }
 
   createInputHandler(props) {
-    return (input) => {
-      this.setState(Object.assign({}, ...this.state, {[props]: input}))
+    return (input, isValid) => {
+      this.setState(() => ({
+        [props]: {
+          value: input,
+          isValid
+        }
+      }))
     }
   }
 
@@ -97,11 +111,9 @@ class LocalContainer extends Component {
     )
   }
 
-  onSubmitHandler() {
-  }
 
   getProps(props) {
-    return props === 'submit' ? this.state : this.state[props]
+    return props === 'submit' ? this.state : this.state[props].value
   }
 
   render() {

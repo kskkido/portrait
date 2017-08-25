@@ -76,7 +76,11 @@ export const Letter = styled.span`
   font-size: 1.4em;
 `
 
-export const Input = styled.input`
+export const Input = styled.input.attrs({
+  style: props => props.valid ?
+    {} :
+    {color: 'red', borderColor: 'red'}
+})`
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -90,6 +94,7 @@ export const Input = styled.input`
   text-align: center;
   letter-spacing: 1px;
   font-size: 1em;
+  transition: color 0.2s, background-color 0.2s;
 
   &:focus {
     outline-color: 0;
@@ -101,7 +106,8 @@ export const Input = styled.input`
 export const PlaceholderContainer = styled.div.attrs({
   style: props => ({
     bottom: props.empty ? '20px' : '40px',
-    fontSize: props.empty ? '1.2em' : '1em'
+    fontSize: props.empty ? '1.2em' : '1em',
+    color: props.valid ? '' : 'red',
   })
 })`
   position: absolute;
@@ -112,5 +118,5 @@ export const PlaceholderContainer = styled.div.attrs({
   font-size: 1.2em;
   color: #424242;
   opacity: 0.8;
-  transition: bottom 0.2s, font-size 0.2s;
+  transition: bottom 0.2s, font-size 0.2s, color 0.2s;
 `
