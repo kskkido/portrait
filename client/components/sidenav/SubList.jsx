@@ -109,7 +109,6 @@ class LocalContainer extends Component {
   }
 
   componentWillReceiveProps({viewIndex}) {
-    console.log(viewIndex, 'index')
     this.hoverAnimations[this.props.viewIndex] && this.hoverAnimations[this.props.viewIndex].reverse()
     this.hoverAnimations[viewIndex] && this.hoverAnimations[viewIndex].play()
   }

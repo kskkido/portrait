@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 export const MacIcon = ({ imageSource, url, scale = 1 }) => {
-  console.log(imageSource, 'IMAGE')
 
   const height = 300.0010070800781 * scale
       , width = 384 * scale

@@ -16,6 +16,9 @@ injectGlobal`
     font-size: 1em;
     overflow-x: hidden;
   }
+  a {
+    text-decoration: none;
+  }
   * {
     box-sizing: border-box;
   }

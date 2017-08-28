@@ -67,7 +67,6 @@ class LocalContainer extends Component {
   }
 
   onHover() {
-    console.log('mouse over')
     this.hoverAnimation.play()
   }
 

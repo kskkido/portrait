@@ -167,7 +167,6 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.listRows = []
-    console.log(viewData, 'yoview')
   }
 
   componentDidMount() {
@@ -230,7 +229,6 @@ class LocalContainer extends Component {
   }
 
   createList (data) {
-    console.log(data)
     return Object.keys(data).map((row, index) => this.createListItem(data[row], index))
   }
 

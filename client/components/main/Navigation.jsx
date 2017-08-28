@@ -44,7 +44,6 @@ const NavigationText = styled.span`
 
 class LocalContainer extends Component {
   static calculateRotation (index, length) {
-    // console.log((Math.abs(rotation) * 360 % 360) / 360, 'ITS THE ROTATION')
     return -((1 / length) * index + 1)
   }
 

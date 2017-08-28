@@ -95,7 +95,6 @@ const verticalSlide = (() => {
 
     },
     onExit: (target) => {
-      console.log(target, 'yo what the fuck')
       new TimelineLite()
         .to(target, 0.3, {
           autoAlpha: 0,

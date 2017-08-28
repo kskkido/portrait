@@ -11698,7 +11698,6 @@ var verticalSlide = function () {
       };
     },
     onExit: function onExit(target) {
-      console.log(target, 'yo what the fuck');
       new _gsap.TimelineLite().to(target, 0.3, {
         autoAlpha: 0,
         y: '-200px'
@@ -14718,7 +14717,6 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'onHover',
     value: function onHover() {
-      console.log('mouse over');
       this.hoverAnimation.play();
     }
   }, {
@@ -20857,7 +20855,6 @@ var MacIcon = exports.MacIcon = function MacIcon(_ref) {
       _ref$scale = _ref.scale,
       scale = _ref$scale === undefined ? 1 : _ref$scale;
 
-  console.log(imageSource, 'IMAGE');
 
   var height = 300.0010070800781 * scale,
       width = 384 * scale;
@@ -43520,7 +43517,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  body {\n    background: #E1E5EE;\n    letter-spacing: 4px;\n    font-size: 1em;\n    overflow-x: hidden;\n  }\n  * {\n    box-sizing: border-box;\n  }\n'], ['\n  body {\n    background: #E1E5EE;\n    letter-spacing: 4px;\n    font-size: 1em;\n    overflow-x: hidden;\n  }\n  * {\n    box-sizing: border-box;\n  }\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  body {\n    background: #E1E5EE;\n    letter-spacing: 4px;\n    font-size: 1em;\n    overflow-x: hidden;\n  }\n  a {\n    text-decoration: none;\n  }\n  * {\n    box-sizing: border-box;\n  }\n'], ['\n  body {\n    background: #E1E5EE;\n    letter-spacing: 4px;\n    font-size: 1em;\n    overflow-x: hidden;\n  }\n  a {\n    text-decoration: none;\n  }\n  * {\n    box-sizing: border-box;\n  }\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n'], ['\n']);
 
 var _react = __webpack_require__(1);
@@ -47635,7 +47632,6 @@ var LocalContainer = function (_Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.listRows = [];
-      console.log(_Data.viewData, 'yoview');
     }
   }, {
     key: 'componentDidMount',
@@ -47731,7 +47727,6 @@ var LocalContainer = function (_Component) {
     value: function createList(data) {
       var _this3 = this;
 
-      console.log(data);
       return Object.keys(data).map(function (row, index) {
         return _this3.createListItem(data[row], index);
       });
@@ -47992,7 +47987,6 @@ var LocalContainer = function (_Component) {
     value: function componentWillReceiveProps(_ref2) {
       var viewIndex = _ref2.viewIndex;
 
-      console.log(viewIndex, 'index');
       this.hoverAnimations[this.props.viewIndex] && this.hoverAnimations[this.props.viewIndex].reverse();
       this.hoverAnimations[viewIndex] && this.hoverAnimations[viewIndex].play();
     }
@@ -52318,7 +52312,6 @@ var LocalContainer = function (_Component) {
   }], [{
     key: 'calculateRotation',
     value: function calculateRotation(index, length) {
-      // console.log((Math.abs(rotation) * 360 % 360) / 360, 'ITS THE ROTATION')
       return -(1 / length * index + 1);
     }
   }, {
@@ -52953,6 +52946,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: black;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.1;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n'], ['\n  position: relative;\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: black;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.1;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  color: #424242;\n  transition: color 0.3s;\n  &:hover {\n    color: #8f8f8f;\n  }\n'], ['\n  color: #424242;\n  transition: color 0.3s;\n  &:hover {\n    color: #8f8f8f;\n  }\n']);
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -52960,6 +52956,10 @@ var _react2 = _interopRequireDefault(_react);
 var _Styles = __webpack_require__(10);
 
 var _utils = __webpack_require__(55);
+
+var _styledComponents = __webpack_require__(5);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52970,6 +52970,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var EmailContainer = _styledComponents2.default.span(_templateObject);
+
+var Email = _styledComponents2.default.a(_templateObject2);
 
 var Name = function Name(_ref) {
   var isValid = _ref.isValid,
@@ -52987,7 +52993,16 @@ var Name = function Name(_ref) {
     _react2.default.createElement(
       'p',
       null,
-      'Interested in getting in touch with me? enter your name below and press enter to navigate to the next section. Once you fill out each section, go to the \'submit\' section to send out your message!'
+      'Interested in getting in touch with me? Enter your name below and press enter to navigate to the next section. Once you fill out each section, go to the \'submit\' section to send out your message! Or send me a message at',
+      _react2.default.createElement(
+        EmailContainer,
+        null,
+        _react2.default.createElement(
+          Email,
+          { href: 'mailto:kskkido@gmail.com?Subject=Hello%20nice%20to%20meet%20you', target: '_top' },
+          ' kskkido@gmail.com'
+        )
+      )
     ),
     _react2.default.createElement(
       _Styles.PlaceholderContainer,
@@ -54790,7 +54805,7 @@ var LocalContainer = function (_Component) {
       var _this3 = this;
 
       return clearInterval(interval), LocalContainer.letterAnimation(this.letters, function () {
-        return _this3.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(_this3.state), [{ loaded: true }])), console.log('complete'));
+        return _this3.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(_this3.state), [{ loaded: true }])));
       });
     }
   }, {
