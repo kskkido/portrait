@@ -142,11 +142,11 @@ const horizontalSlide = (() => {
   const slideInContent = (direction, target, tl) => {
     tl
       .from(target, fadeInDuration, {
-      [direction]: '-250px',
+      [direction]: '-300px',
       autoAlpha: 0,
       ease: Back.easeOut,
-      clearProps: [direction]
-    }, `-=${slideDuration - 0.25}`)
+      clearProps: direction
+    }, `-=${slideDuration - 0.2}`)
   }
 
   return {

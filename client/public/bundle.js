@@ -11736,7 +11736,7 @@ var horizontalSlide = function () {
   var slideInContent = function slideInContent(direction, target, tl) {
     var _tl$from;
 
-    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '-250px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', [direction]), _tl$from), '-=' + (slideDuration - 0.25));
+    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '-300px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', direction), _tl$from), '-=' + (slideDuration - 0.2));
   };
 
   return {
@@ -20933,7 +20933,9 @@ var Arrow = exports.Arrow = function Arrow(_props) {
 
 var Facebook = exports.Facebook = function Facebook(_props) {
   var props = Object.assign({}, _props);
-  delete props.scale;delete props.innerRef;
+  delete props.scale;
+  delete props.innerRef;
+  delete props.pointUp;
 
   return _react2.default.createElement(
     'svg',
@@ -20944,7 +20946,9 @@ var Facebook = exports.Facebook = function Facebook(_props) {
 
 var Github = exports.Github = function Github(_props) {
   var props = Object.assign({}, _props);
-  delete props.scale;delete props.innerRef;
+  delete props.scale;
+  delete props.innerRef;
+  delete props.pointUp;
 
   return _react2.default.createElement(
     'svg',
@@ -20955,7 +20959,9 @@ var Github = exports.Github = function Github(_props) {
 
 var Linkedin = exports.Linkedin = function Linkedin(_props) {
   var props = Object.assign({}, _props);
-  delete props.scale;delete props.innerRef;
+  delete props.scale;
+  delete props.innerRef;
+  delete props.pointUp;
 
   return _react2.default.createElement(
     'svg',
@@ -26779,7 +26785,7 @@ var horizontalSlide = function () {
   var slideInContent = function slideInContent(direction, target, tl) {
     var _tl$from;
 
-    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '200px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', 'margin-left'), _tl$from), '-=' + (slideDuration - 0.2));
+    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '410px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', [direction]), _tl$from), '-=' + (slideDuration - 0.25));
   };
 
   return {

@@ -76,7 +76,9 @@ export const Arrow = (_props) => {
 
 export const Facebook = (_props) => {
   const props = Object.assign({}, _props)
-  delete props.scale; delete props.innerRef
+  delete props.scale
+  delete props.innerRef
+  delete props.pointUp
 
   return (
     <svg {...props} ref={_props.innerRef} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width={`${(_props.scale || 1) * 150}`} height={`${(_props.scale || 1) * 150}`} fillRule="evenodd" clipRule="evenodd" strokeLinejoin="round" strokeMiterlimit="1.414">
@@ -87,7 +89,9 @@ export const Facebook = (_props) => {
 
 export const Github = (_props) => {
   const props = Object.assign({}, _props)
-  delete props.scale; delete props.innerRef
+  delete props.scale
+  delete props.innerRef
+  delete props.pointUp
 
   return (
     <svg {...props} ref={_props.innerRef} role="img" xmlns="http://www.w3.org/2000/svg" width={`${(_props.scale || 1) * 150}`} height={`${(_props.scale || 1) * 150}`} viewBox="0 0 24 24" fillRule="evenodd" clipRule="evenodd" strokeLinejoin="round" strokeMiterlimit="1.414">
@@ -98,7 +102,9 @@ export const Github = (_props) => {
 
 export const Linkedin = (_props) => {
   const props = Object.assign({}, _props)
-  delete props.scale; delete props.innerRef
+  delete props.scale
+  delete props.innerRef
+  delete props.pointUp
 
   return (
     <svg {...props} ref={_props.innerRef} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width={`${(_props.scale || 1) * 150}`} height={`${(_props.scale || 1) * 150}`}  fillRule="evenodd" clipRule="evenodd" strokeLinejoin="round" strokeMiterlimit="1.414">
