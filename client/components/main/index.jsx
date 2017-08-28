@@ -18,7 +18,6 @@ const theme = {
 
 const Container = styled.div`
   position: relative;
-  margin-left: 325px;
 `
 
 /* ====== utils ====== */
@@ -30,13 +29,14 @@ const BodyRoutes = ({ loaded }) => (
     }
 
     return (
-      <TransitionGroup>
+      <TransitionGroup
+        appear={true}
+        mountOnEnter={true}
+        unmountOnExit={true}
+      >
         <Show
           key={location.key}
           pathname={location.pathname}
-          appear={true}
-          mountOnEnter={true}
-          unmountOnExit={true}
         >
           <Switch location={location}>
             <Route path="/about" component={About} />
@@ -50,19 +50,6 @@ const BodyRoutes = ({ loaded }) => (
   }}
   />
 )
-
-// const BodyRoutes = () => (
-//   <Route render={({ location }) => {
-//     return (
-//       <Switch location={location}>
-//         <Route path="/about" component={About} />
-//         <Route path="/projects" component={Project} />
-//         <Route exact path="/" component={Kido} />
-//       </Switch>
-//     )
-//   }}
-//   />
-// )
 
 const Main = ({ loaded }) => {
   return (

@@ -4,12 +4,14 @@ import { viewData } from '../../shared/Data'
 import { pathChange, viewChange, viewRestart, rotationChange, rotationRestart } from '../../../reducers/events'
 import BodyComponent from '../Body'
 import { initialValue } from './utils'
-
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 import Name from './Name'
 import Email from './Email'
 import Message from './Message'
 import Submit from './Submit'
 import Social from './SocialMedia'
+import Return from '../Return'
 
 const list = [
  {text: 'name', component: <Name />},
@@ -34,6 +36,9 @@ const Body = ({ createInputHandler, createOnEnterHandler, getProps, viewIndex })
 const Contact = ({ backgroundColor, navigationList, createInputHandler, createOnEnterHandler, getProps }) => {
 
   return (
+  <div>
+    <Return />
+
     <BodyComponent
       backgroundColor={backgroundColor}
       navigationList={navigationList}
@@ -45,6 +50,7 @@ const Contact = ({ backgroundColor, navigationList, createInputHandler, createOn
         getProps={getProps}
       />
     </BodyComponent>
+  </div>
   )
 }
 

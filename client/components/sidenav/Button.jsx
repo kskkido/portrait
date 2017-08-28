@@ -21,8 +21,13 @@ const Container = styled.div`
   z-index: 1001;
   cursor: pointer;
 `
-    , HOCButton = createSVG(Cross, Container, createSVGHoverAnimation)
+    , HOCButton = createSVG(Cross, Container)
 
-const CrossComponent = (props) => <HOCButton {...props} />
+const CrossComponent = (props) => (
+  <HOCButton
+    {...props}
+    hoverAnimation={createSVGHoverAnimation}
+  />
+)
 
 export default CrossComponent

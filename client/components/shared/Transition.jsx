@@ -86,6 +86,7 @@ const verticalSlide = (() => {
             // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
             // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
             .set(behind, {backgroundColor: secondaryColor, height: '100vh'})
+            .set(front, {height: '100vh'})
             .set(target, {autoAlpha: 0, y: '-=200px' })
             .delay(0.4)
 
@@ -146,7 +147,7 @@ const horizontalSlide = (() => {
       left: `${offset}px`,
       autoAlpha: 0,
       ease: Back.easeOut,
-      clearProps: 'left'
+      clearProps: 'margin-left'
     }, `-=${slideDuration - 0.2}`)
   }
 
@@ -329,7 +330,7 @@ const BodyAnimation = (() => {
 
   const fadeIn = (target) => {
     return new TimelineLite()
-      .from(target, fadeInDuration, {
+      .from(target.childNodes, fadeInDuration, {
         top: '-=200px',
         opacity: 0,
         ease: Back.easeOut
@@ -339,7 +340,7 @@ const BodyAnimation = (() => {
 
   const fadeOut = (target) => {
     return new TimelineLite()
-      .to(target, fadeOutDuration, {
+      .to(target.childNodes, fadeOutDuration, {
         opacity: 0,
         top: '-=200px',
       })

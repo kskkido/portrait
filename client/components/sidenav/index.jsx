@@ -31,20 +31,20 @@ const Overlay = styled.div`
 
 const List = styled.ul`
   height: 80%;
-  width: 265px;
+  width: 275px;
   position: absolute;
   list-style: none;
-  left: 60px;
+  left: 50px;
   top: 80px;
   padding: 0;
   z-index: 100;
   overflow-y: scroll;
-  overflow-x: hidden;
 `
 
 const ListRow = styled.li`
-  width: 100%;
+  width: 96%;
   color: #F3F2F2;
+  margin-left: 10px;
   margin-bottom: 10px;
 `
 
@@ -100,7 +100,7 @@ const ListText = styled.h3`
 const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut, mouseOver }) => (
   <Container >
     <Button onClick={onClickSVG} />
-    <div id="sidenav" ref={inputMain} style={{height: '100%'}}>
+    <div id="sidenav" ref={inputMain} style={{height: '100%', transform: 'translateX(-100%)'}}>
       <List >
         {children}
       </List>
@@ -119,7 +119,7 @@ class LocalContainer extends Component {
   }
 
   static enterAnimation(list) {
-    return new TimelineLite()
+    return new TimelineLite({paused: true})
       .staggerFrom(list, 0.6, {
         autoAlpha: 0,
         rotationX: 40,
@@ -147,11 +147,11 @@ class LocalContainer extends Component {
   static createSVGCLickAnimation(sidenav) {
     return new TimelineLite({paused: true})
       .to(sidenav, 0.4, {
-        x: '-=100%',
+        x: '+=325px',
         ease: Back.easeOut,
       })
       .to(document.getElementById('bodyContainer'), 0.4, {
-        marginLeft: '-=325px',
+        marginLeft: '+=325px',
         ease: Back.easeOut,
       }, '-=0.4')
   }
@@ -253,7 +253,7 @@ class LocalContainer extends Component {
   }
 
   handleOnClickSVG(toggle) {
-      return (toggle ? (this.svgClickAnimation.reverse(), setTimeout((tl) => tl.restart(), 200, this.enterAnimation)) : this.svgClickAnimation.play())
+      return (!toggle ? (this.svgClickAnimation.play(), setTimeout((tl) => tl.restart(), 0, this.enterAnimation)) : this.svgClickAnimation.reverse())
   }
 
   render() {

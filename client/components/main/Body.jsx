@@ -20,10 +20,10 @@ const MainContainer = styled.div`
   width: 100%;
   cursor: move;
   position: absolute;
-  top: ${props => props.isBody ? '-220px' : '150px'};
+  top: ${props => props.isBody ? '-220px' : '200px'};
   left: 0;
   right: 0;
-  margin: 0 auto;
+  z-index: 100
 `
 
 const Body = styled.div`
@@ -93,7 +93,7 @@ class LocalContainer extends Component {
   static slideDOM(bodyDOM) {
     return (targetOffset) => {
       TweenLite.to(bodyDOM, 0.7, {
-        right: `${targetOffset}px`,
+        left: `${-targetOffset}px`,
         ease: Back.easeOut
       })
     }

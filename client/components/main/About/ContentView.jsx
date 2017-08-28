@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import styled from 'styled-components'
 import Textline from '../Textline'
 import { BodyContainer, Flex1, Title } from '../../shared/Styles'
 import { createSpans, createTitle } from '../../shared/Utils'
 import { Scramble } from '../../shared/Transition'
 
+import Return from '../Return'
 import Who from './Who'
 import What from './What'
 import Where from './Where'
@@ -30,7 +32,7 @@ const list = [
   <Where key="three" />,
   <When key="four" />]
 
-const AboutView = ({ navigationList, viewIndex }) => {
+const AboutView = ({ navigationList, viewIndex, toggleBody }) => {
   if (!navigationList[viewIndex]) return <div />
 
   const title = navigationList[viewIndex]
@@ -51,6 +53,10 @@ const AboutView = ({ navigationList, viewIndex }) => {
             <Textline />
           </Title>
         </Flex1>
+        <Return
+          text={'Back to About Index'}
+          toggleBody={toggleBody}
+        />
       </BodyContainer>
   )
 }

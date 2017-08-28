@@ -19,7 +19,7 @@ const List = styled.ul`
 `
 
 const ListBlock = styled.li`
-  margin-top: 15px;
+  margin-top: 10px;
   text-align: left;
   color: ${props => props.valid ? '' : 'red'};
 `
