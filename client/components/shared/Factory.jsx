@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-export const createSVG = function(SVG, Container) {
+export const createSVG = function(SVG, Container, createHoverAnimation) {
 
     const ContainerComponent = ((styledContainer) => styledContainer.extend`
         top: ${props => props.clearTop && '50%'};
@@ -22,7 +22,7 @@ export const createSVG = function(SVG, Container) {
     }
 
     componentDidMount() {
-      this.svgHoverAnimation = this.props.hoverAnimation && this.props.hoverAnimation(this.svg, this.container)
+      this.svgHoverAnimation = createHoverAnimation && createHoverAnimation(this.svg, this.container) || this.props.hoverAnimation(this.svg, this.container)
       this.onClickCallback = this.onClickWrapper(this.props.onClick, this.svg, this.container)
     }
 
