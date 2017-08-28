@@ -5,7 +5,6 @@ import { TimelineLite, Back, Power2 } from 'gsap'
 
 import { viewData } from './Data'
 import { convertToAsci, getPrimaryAndSecondary, once } from './Utils'
-import { backgroundTransition } from '../../reducers/events'
 
 let toggle = false
   , running = false
@@ -140,14 +139,14 @@ const horizontalSlide = (() => {
       })
   }
 
-  const slideInContent = (offset, target, tl) => {
+  const slideInContent = (direction, target, tl) => {
     tl
       .from(target, fadeInDuration, {
-      left: `${offset}px`,
+      [direction]: '-250px',
       autoAlpha: 0,
       ease: Back.easeOut,
-      clearProps: 'margin-left'
-    }, `-=${slideDuration - 0.2}`)
+      clearProps: [direction]
+    }, `-=${slideDuration - 0.25}`)
   }
 
   return {
@@ -159,7 +158,7 @@ const horizontalSlide = (() => {
           , direction = offset > 0 ? 'right' : 'left'
           , tl = new TimelineLite()
             .set(behind, {backgroundColor: color})
-      slideHorizontalBackground(front, behind, tl, direction); slideInContent(offset, target, tl)
+      slideHorizontalBackground(front, behind, tl, direction); slideInContent(direction, target, tl)
       toggle = !toggle
     },
     onExit: (target) => {

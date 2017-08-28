@@ -353,7 +353,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -10933,91 +10933,6 @@ if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); } //necessary in case Tween
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/* ====== DEFINE ACTION TYPES ====== */
-var LOAD_COMPLETE = 'LOAD COMPLETE';
-var ROTATION_CHANGE = 'ROTATION CHANGE';
-var ROTATION_RESTART = 'ROTATION RESTART';
-var VIEW_CHANGE = 'VIEW CHANGE';
-var VIEW_RESTART = 'VIEW RESTART';
-var VIEW_TOGGLE = 'VIEW TOGGLE';
-var PATH_CHANGE = 'PATH CHANGE';
-
-/* ====== DEFINE ACTION CREATORS ====== */
-var loadComplete = exports.loadComplete = function loadComplete() {
-  return { type: LOAD_COMPLETE };
-};
-var rotationChange = exports.rotationChange = function rotationChange(rotation) {
-  return { type: ROTATION_CHANGE, rotation: rotation };
-};
-var rotationRestart = exports.rotationRestart = function rotationRestart() {
-  return { type: ROTATION_RESTART };
-};
-var viewChange = exports.viewChange = function viewChange(viewIndex) {
-  return { type: VIEW_CHANGE, viewIndex: viewIndex };
-};
-var viewRestart = exports.viewRestart = function viewRestart() {
-  return { type: VIEW_RESTART };
-};
-var viewToggle = exports.viewToggle = function viewToggle(bool) {
-  return { type: VIEW_TOGGLE, bool: bool };
-};
-var pathChange = exports.pathChange = function pathChange(pathIndex) {
-  return { type: PATH_CHANGE, pathIndex: pathIndex };
-};
-
-/* ====== DEFINE INITIAL STATE ====== */
-var initialState = {
-  loaded: false,
-  rotation: 0,
-  viewIndex: 0,
-  viewToggle: false,
-  pathIndex: 0
-
-  /* ====== DEFINE REDUCER ====== */
-};
-exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case LOAD_COMPLETE:
-      return Object.assign({}, state, { loaded: true });
-
-    case ROTATION_CHANGE:
-      return Object.assign({}, state, { rotation: action.rotation }); // patch it up
-
-    case ROTATION_RESTART:
-      return Object.assign({}, state, { rotation: 0 });
-
-    case VIEW_CHANGE:
-      return Object.assign({}, state, { viewIndex: action.viewIndex });
-
-    case VIEW_RESTART:
-      return Object.assign({}, state, { viewIndex: 0 });
-
-    case VIEW_TOGGLE:
-      return Object.assign({}, state, { viewToggle: action.bool });
-
-    case PATH_CHANGE:
-      return Object.assign({}, state, { pathIndex: action.pathIndex });
-
-    default:
-      return state;
-  }
-};
-
-/* ====== DEFINE DISPATCHERS ====== */
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -11399,7 +11314,7 @@ module.exports = ReactComponentTreeHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11443,7 +11358,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11471,6 +11386,91 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = { debugTool: debugTool };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* ====== DEFINE ACTION TYPES ====== */
+var LOAD_COMPLETE = 'LOAD COMPLETE';
+var ROTATION_CHANGE = 'ROTATION CHANGE';
+var ROTATION_RESTART = 'ROTATION RESTART';
+var VIEW_CHANGE = 'VIEW CHANGE';
+var VIEW_RESTART = 'VIEW RESTART';
+var VIEW_TOGGLE = 'VIEW TOGGLE';
+var PATH_CHANGE = 'PATH CHANGE';
+
+/* ====== DEFINE ACTION CREATORS ====== */
+var loadComplete = exports.loadComplete = function loadComplete() {
+  return { type: LOAD_COMPLETE };
+};
+var rotationChange = exports.rotationChange = function rotationChange(rotation) {
+  return { type: ROTATION_CHANGE, rotation: rotation };
+};
+var rotationRestart = exports.rotationRestart = function rotationRestart() {
+  return { type: ROTATION_RESTART };
+};
+var viewChange = exports.viewChange = function viewChange(viewIndex) {
+  return { type: VIEW_CHANGE, viewIndex: viewIndex };
+};
+var viewRestart = exports.viewRestart = function viewRestart() {
+  return { type: VIEW_RESTART };
+};
+var viewToggle = exports.viewToggle = function viewToggle(bool) {
+  return { type: VIEW_TOGGLE, bool: bool };
+};
+var pathChange = exports.pathChange = function pathChange(pathIndex) {
+  return { type: PATH_CHANGE, pathIndex: pathIndex };
+};
+
+/* ====== DEFINE INITIAL STATE ====== */
+var initialState = {
+  loaded: false,
+  rotation: 0,
+  viewIndex: 0,
+  viewToggle: false,
+  pathIndex: 0
+
+  /* ====== DEFINE REDUCER ====== */
+};
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case LOAD_COMPLETE:
+      return Object.assign({}, state, { loaded: true });
+
+    case ROTATION_CHANGE:
+      return Object.assign({}, state, { rotation: action.rotation }); // patch it up
+
+    case ROTATION_RESTART:
+      return Object.assign({}, state, { rotation: 0 });
+
+    case VIEW_CHANGE:
+      return Object.assign({}, state, { viewIndex: action.viewIndex });
+
+    case VIEW_RESTART:
+      return Object.assign({}, state, { viewIndex: 0 });
+
+    case VIEW_TOGGLE:
+      return Object.assign({}, state, { viewToggle: action.bool });
+
+    case PATH_CHANGE:
+      return Object.assign({}, state, { pathIndex: action.pathIndex });
+
+    default:
+      return state;
+  }
+};
+
+/* ====== DEFINE DISPATCHERS ====== */
 
 /***/ }),
 /* 17 */
@@ -11603,8 +11603,6 @@ var _Data = __webpack_require__(24);
 
 var _Utils = __webpack_require__(40);
 
-var _events = __webpack_require__(13);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -11735,13 +11733,10 @@ var horizontalSlide = function () {
     tl.set(bgBehind, { zIndex: behindIndex }).set(bgFront, { zIndex: frontIndex }).from(bgFront, slideDuration, (_tl$set$set$from2 = {}, _defineProperty(_tl$set$set$from2, direction, 0), _defineProperty(_tl$set$set$from2, 'width', 0), _defineProperty(_tl$set$set$from2, 'clearProps', direction), _tl$set$set$from2));
   };
 
-  var slideInContent = function slideInContent(offset, target, tl) {
-    tl.from(target, fadeInDuration, {
-      left: offset + 'px',
-      autoAlpha: 0,
-      ease: _gsap.Back.easeOut,
-      clearProps: 'margin-left'
-    }, '-=' + (slideDuration - 0.2));
+  var slideInContent = function slideInContent(direction, target, tl) {
+    var _tl$from;
+
+    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '-250px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', [direction]), _tl$from), '-=' + (slideDuration - 0.25));
   };
 
   return {
@@ -11753,7 +11748,7 @@ var horizontalSlide = function () {
             behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo'),
             direction = offset > 0 ? 'right' : 'left',
             tl = new _gsap.TimelineLite().set(behind, { backgroundColor: color });
-        slideHorizontalBackground(front, behind, tl, direction);slideInContent(offset, target, tl);
+        slideHorizontalBackground(front, behind, tl, direction);slideInContent(direction, target, tl);
         toggle = !toggle;
       };
     },
@@ -12258,7 +12253,7 @@ var _assign = __webpack_require__(6);
 
 var PooledClass = __webpack_require__(27);
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 var warning = __webpack_require__(3);
 
 var didWarnForAddedNewProperty = false;
@@ -13593,7 +13588,7 @@ module.exports = reactProdInvariant;
 
 
 var ReactRef = __webpack_require__(159);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 
 var warning = __webpack_require__(3);
 
@@ -16049,7 +16044,7 @@ var _reactRouterDom = __webpack_require__(18);
 
 var _Transition = __webpack_require__(19);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 var _styledComponents = __webpack_require__(4);
 
@@ -18941,7 +18936,7 @@ module.exports = getEventModifierState;
 var DOMLazyTree = __webpack_require__(33);
 var Danger = __webpack_require__(170);
 var ReactDOMComponentTree = __webpack_require__(7);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(65);
 var setInnerHTML = __webpack_require__(48);
@@ -19614,7 +19609,7 @@ var _prodInvariant = __webpack_require__(5);
 
 var ReactCurrentOwner = __webpack_require__(20);
 var ReactInstanceMap = __webpack_require__(37);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 var ReactUpdates = __webpack_require__(21);
 
 var invariant = __webpack_require__(2);
@@ -19852,7 +19847,7 @@ module.exports = ReactUpdateQueue;
 
 var _assign = __webpack_require__(6);
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 var warning = __webpack_require__(3);
 
 var validateDOMNesting = emptyFunction;
@@ -21438,7 +21433,7 @@ module.exports = getIteratorFn;
 
 
 var ReactCurrentOwner = __webpack_require__(20);
-var ReactComponentTreeHook = __webpack_require__(14);
+var ReactComponentTreeHook = __webpack_require__(13);
 var ReactElement = __webpack_require__(26);
 
 var checkReactTypeSpec = __webpack_require__(142);
@@ -21718,7 +21713,7 @@ module.exports = function(isValidElement) {
 
 
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 var invariant = __webpack_require__(2);
 var warning = __webpack_require__(3);
 
@@ -23026,7 +23021,7 @@ module.exports = CSSProperty;
 
 var DOMProperty = __webpack_require__(23);
 var ReactDOMComponentTree = __webpack_require__(7);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 
 var quoteAttributeValueForBrowser = __webpack_require__(184);
 var warning = __webpack_require__(3);
@@ -23973,7 +23968,7 @@ module.exports = traverseAllChildren;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -24239,7 +24234,7 @@ var ReactDOMContainerInfo = __webpack_require__(226);
 var ReactDOMFeatureFlags = __webpack_require__(227);
 var ReactFeatureFlags = __webpack_require__(97);
 var ReactInstanceMap = __webpack_require__(37);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 var ReactMarkupChecksum = __webpack_require__(228);
 var ReactReconciler = __webpack_require__(32);
 var ReactUpdateQueue = __webpack_require__(71);
@@ -26651,8 +26646,6 @@ var _Data = __webpack_require__(129);
 
 var _Utils = __webpack_require__(309);
 
-var _events = __webpack_require__(13);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -26783,13 +26776,10 @@ var horizontalSlide = function () {
     tl.set(bgBehind, { zIndex: behindIndex }).set(bgFront, { zIndex: frontIndex }).from(bgFront, slideDuration, (_tl$set$set$from2 = {}, _defineProperty(_tl$set$set$from2, direction, 0), _defineProperty(_tl$set$set$from2, 'width', 0), _defineProperty(_tl$set$set$from2, 'clearProps', direction), _tl$set$set$from2));
   };
 
-  var slideInContent = function slideInContent(offset, target, tl) {
-    tl.from(target, fadeInDuration, {
-      left: offset + 'px',
-      autoAlpha: 0,
-      ease: _gsap.Back.easeOut,
-      clearProps: 'margin-left'
-    }, '-=' + (slideDuration - 0.2));
+  var slideInContent = function slideInContent(direction, target, tl) {
+    var _tl$from;
+
+    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '200px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', 'margin-left'), _tl$from), '-=' + (slideDuration - 0.2));
   };
 
   return {
@@ -26801,7 +26791,7 @@ var horizontalSlide = function () {
             behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo'),
             direction = offset > 0 ? 'right' : 'left',
             tl = new _gsap.TimelineLite().set(behind, { backgroundColor: color });
-        slideHorizontalBackground(front, behind, tl, direction);slideInContent(offset, target, tl);
+        slideHorizontalBackground(front, behind, tl, direction);slideInContent(direction, target, tl);
         toggle = !toggle;
       };
     },
@@ -26817,7 +26807,7 @@ var Slide = exports.Slide = function Slide(_props) {
   var props = Object.assign({}, _props);
   delete props.targetOffset;delete props.color;
   return _react2.default.createElement(_reactTransitionGroup.Transition, _extends({}, props, {
-    timeout: 600,
+    timeout: { enter: 800, exit: 200 },
     onEntering: horizontalSlide.onEnter(props.duration || 0.8, _props.targetOffset * 2 % 300, _props.color || '#ecf0f1'),
     onExiting: horizontalSlide.onExit
   }));
@@ -30089,7 +30079,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var PooledClass = __webpack_require__(138);
 var ReactElement = __webpack_require__(26);
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 var traverseAllChildren = __webpack_require__(139);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
@@ -30837,7 +30827,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(14);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 var loggedTypeFailures = {};
@@ -30879,7 +30869,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (process.env.NODE_ENV !== 'production') {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(14);
+            ReactComponentTreeHook = __webpack_require__(13);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -32118,7 +32108,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactInstrumentation = __webpack_require__(16);
+  var ReactInstrumentation = __webpack_require__(15);
   var ReactDOMUnknownPropertyHook = __webpack_require__(233);
   var ReactDOMNullInputValuePropHook = __webpack_require__(234);
   var ReactDOMInvalidARIAHook = __webpack_require__(235);
@@ -33403,7 +33393,7 @@ module.exports = ReactOwner;
 
 var ReactInvalidSetStateWarningHook = __webpack_require__(162);
 var ReactHostOperationHistoryHook = __webpack_require__(163);
-var ReactComponentTreeHook = __webpack_require__(14);
+var ReactComponentTreeHook = __webpack_require__(13);
 var ExecutionEnvironment = __webpack_require__(11);
 
 var performanceNow = __webpack_require__(164);
@@ -34330,7 +34320,7 @@ var DOMLazyTree = __webpack_require__(33);
 var ExecutionEnvironment = __webpack_require__(11);
 
 var createNodesFromMarkup = __webpack_require__(171);
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 var invariant = __webpack_require__(2);
 
 var Danger = {
@@ -34758,11 +34748,11 @@ var ReactDOMInput = __webpack_require__(187);
 var ReactDOMOption = __webpack_require__(188);
 var ReactDOMSelect = __webpack_require__(106);
 var ReactDOMTextarea = __webpack_require__(189);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 var ReactMultiChild = __webpack_require__(190);
 var ReactServerRenderingTransaction = __webpack_require__(199);
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 var escapeTextContentForBrowser = __webpack_require__(49);
 var invariant = __webpack_require__(2);
 var isEventSupported = __webpack_require__(61);
@@ -35785,7 +35775,7 @@ module.exports = AutoFocusUtils;
 
 var CSSProperty = __webpack_require__(103);
 var ExecutionEnvironment = __webpack_require__(11);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 
 var camelizeStyleName = __webpack_require__(178);
 var dangerousStyleValue = __webpack_require__(180);
@@ -37053,13 +37043,13 @@ var _prodInvariant = __webpack_require__(5);
 
 var ReactComponentEnvironment = __webpack_require__(67);
 var ReactInstanceMap = __webpack_require__(37);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 
 var ReactCurrentOwner = __webpack_require__(20);
 var ReactReconciler = __webpack_require__(32);
 var ReactChildReconciler = __webpack_require__(191);
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 var flattenChildren = __webpack_require__(198);
 var invariant = __webpack_require__(2);
 
@@ -37517,7 +37507,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(14);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 function instantiateChild(childInstances, child, name, selfDebugID) {
@@ -37525,7 +37515,7 @@ function instantiateChild(childInstances, child, name, selfDebugID) {
   var keyUnique = childInstances[name] === undefined;
   if (process.env.NODE_ENV !== 'production') {
     if (!ReactComponentTreeHook) {
-      ReactComponentTreeHook = __webpack_require__(14);
+      ReactComponentTreeHook = __webpack_require__(13);
     }
     if (!keyUnique) {
       process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -37668,7 +37658,7 @@ var ReactComponentEnvironment = __webpack_require__(67);
 var ReactCurrentOwner = __webpack_require__(20);
 var ReactErrorUtils = __webpack_require__(59);
 var ReactInstanceMap = __webpack_require__(37);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 var ReactNodeTypes = __webpack_require__(108);
 var ReactReconciler = __webpack_require__(32);
 
@@ -38582,7 +38572,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(14);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 var loggedTypeFailures = {};
@@ -38624,7 +38614,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (process.env.NODE_ENV !== 'production') {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(14);
+            ReactComponentTreeHook = __webpack_require__(13);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -38800,7 +38790,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(14);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 /**
@@ -38816,7 +38806,7 @@ function flattenSingleChildIntoContext(traverseContext, child, name, selfDebugID
     var keyUnique = result[name] === undefined;
     if (process.env.NODE_ENV !== 'production') {
       if (!ReactComponentTreeHook) {
-        ReactComponentTreeHook = __webpack_require__(14);
+        ReactComponentTreeHook = __webpack_require__(13);
       }
       if (!keyUnique) {
         process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -38873,7 +38863,7 @@ var _assign = __webpack_require__(6);
 
 var PooledClass = __webpack_require__(27);
 var Transaction = __webpack_require__(46);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 var ReactServerUpdateQueue = __webpack_require__(200);
 
 /**
@@ -39490,7 +39480,7 @@ var _assign = __webpack_require__(6);
 var ReactUpdates = __webpack_require__(21);
 var Transaction = __webpack_require__(46);
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
@@ -39807,7 +39797,7 @@ var CallbackQueue = __webpack_require__(96);
 var PooledClass = __webpack_require__(27);
 var ReactBrowserEventEmitter = __webpack_require__(50);
 var ReactInputSelection = __webpack_require__(113);
-var ReactInstrumentation = __webpack_require__(16);
+var ReactInstrumentation = __webpack_require__(15);
 var Transaction = __webpack_require__(46);
 var ReactUpdateQueue = __webpack_require__(71);
 
@@ -40904,7 +40894,7 @@ var SyntheticTransitionEvent = __webpack_require__(224);
 var SyntheticUIEvent = __webpack_require__(36);
 var SyntheticWheelEvent = __webpack_require__(225);
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 var getEventCharCode = __webpack_require__(73);
 var invariant = __webpack_require__(2);
 
@@ -41918,7 +41908,7 @@ module.exports = ReactMount.renderSubtreeIntoContainer;
 
 var DOMProperty = __webpack_require__(23);
 var EventPluginRegistry = __webpack_require__(45);
-var ReactComponentTreeHook = __webpack_require__(14);
+var ReactComponentTreeHook = __webpack_require__(13);
 
 var warning = __webpack_require__(3);
 
@@ -42034,7 +42024,7 @@ module.exports = ReactDOMUnknownPropertyHook;
 
 
 
-var ReactComponentTreeHook = __webpack_require__(14);
+var ReactComponentTreeHook = __webpack_require__(13);
 
 var warning = __webpack_require__(3);
 
@@ -42084,7 +42074,7 @@ module.exports = ReactDOMNullInputValuePropHook;
 
 
 var DOMProperty = __webpack_require__(23);
-var ReactComponentTreeHook = __webpack_require__(14);
+var ReactComponentTreeHook = __webpack_require__(13);
 
 var warning = __webpack_require__(3);
 
@@ -42268,7 +42258,7 @@ function createProvider() {
 
 
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(14);
 var invariant = __webpack_require__(2);
 var ReactPropTypesSecret = __webpack_require__(57);
 
@@ -43496,7 +43486,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(51);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 var _events2 = _interopRequireDefault(_events);
 
@@ -47548,7 +47538,7 @@ var _Data = __webpack_require__(24);
 
 var _Transition = __webpack_require__(19);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47904,7 +47894,7 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _gsap = __webpack_require__(12);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49430,7 +49420,7 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _gsap = __webpack_require__(12);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 var _Data = __webpack_require__(24);
 
@@ -49622,7 +49612,7 @@ var _Preview = __webpack_require__(319);
 
 var _Preview2 = _interopRequireDefault(_Preview);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 var _Data = __webpack_require__(24);
 
@@ -52239,7 +52229,7 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _gsap = __webpack_require__(12);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52723,7 +52713,7 @@ var _reactRedux = __webpack_require__(8);
 
 var _Data = __webpack_require__(24);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 var _Body = __webpack_require__(52);
 
@@ -53449,7 +53439,7 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _Styles = __webpack_require__(10);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 var _gsap = __webpack_require__(12);
 
@@ -53795,7 +53785,7 @@ var _Body = __webpack_require__(52);
 
 var _Body2 = _interopRequireDefault(_Body);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 var _Data = __webpack_require__(24);
 
@@ -54224,7 +54214,7 @@ var _reactRedux = __webpack_require__(8);
 
 var _Data = __webpack_require__(24);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 var _Body = __webpack_require__(52);
 
@@ -54703,7 +54693,7 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _gsap = __webpack_require__(12);
 
-var _events = __webpack_require__(13);
+var _events = __webpack_require__(16);
 
 var _Data = __webpack_require__(24);
 
