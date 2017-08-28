@@ -177,7 +177,7 @@ export const Slide = (_props) => {
   return (
     <Transition
       {...props}
-      timeout={600}
+      timeout={{enter: 800, exit: 200}}
       onEntering={horizontalSlide.onEnter(props.duration || 0.8, ( _props.targetOffset * 2) % 300, _props.color || '#ecf0f1')}
       onExiting={horizontalSlide.onExit}
     />

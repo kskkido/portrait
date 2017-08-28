@@ -5,8 +5,10 @@ import Button from './Button'
 import { TimelineLite, Back } from 'gsap'
 
 const ReturnContainer = styled.div`
-  position: relative;
+  position: ${props => props.isBody ? 'relative' : 'absolute'};
   margin-bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
 `
 
 const ButtonContainer = styled.div`
@@ -23,9 +25,11 @@ const HomeTextContainer = styled.div`
   scale: 0;
 `
 
-const Return = ({ text, onClick, onHover, onHoverOff, inputButton, inputText }) => (
+const Return = ({ isBody, text, onClick, onHover, onHoverOff, inputButton, inputText }) => (
 
-  <ReturnContainer>
+  <ReturnContainer
+    isBody={isBody}
+  >
     <ButtonContainer
       onClick={onClick}
       onMouseOver={onHover}
@@ -82,6 +86,7 @@ class LocalContainer extends Component {
 
     return (
       <Return
+        isBody={!!this.props.toggleBody}
         text={this.props.text}
         onClick={this.onClick}
         onHover={this.onHover}

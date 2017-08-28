@@ -4,7 +4,7 @@ const { join } = require('path')
 		, app = express()
 		, port = require('../').port
 
-module.exports = app
+app
 // logging middleware
 	.use(require('morgan')('dev'))
 
@@ -13,10 +13,10 @@ module.exports = app
 	.use(bodyParser.json())
 
 // redirect to api routes
-	.use(express.static(join(__dirname, '../client/public')))
+	.use(express.static(join(__dirname, '..', '/client/public')))
 
-	.get('*', (req, res, next) => {
-		res.sendFile(join(__dirname, '../client/public'))
+	.get('/*', (req, res, next) => {
+		res.sendFile(join(__dirname, '..', '/client/public'))
 	})
 
 // error handling middlware

@@ -91,13 +91,6 @@ const Line = styled.hr`
 `
 
 
-const ButtonContainer = styled.div`
-  position: relative;
-  height: 30px;
-  margin-bottom: 120px;
-`
-
-
 const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
   if (!projectData[viewIndex]) return <div />
 
@@ -158,11 +151,11 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
           <Textline />
         </Title>
       </Section>
-      <Return
-        text={'Back to Project Index'}
-        toggleBody={toggleBody}
-      />
       </BodyContent>
+        <Return
+          text={'Back to Project Index'}
+          toggleBody={toggleBody}
+        />
     </BodyContainer>
   )
 }

@@ -32,11 +32,11 @@
   "2": {
     "title": "Portfolio",
     "role": "UX/UI, Developer",
-    "objective": "Develop an interactive portfolio website that animates according to the direction of a user's interaction without losing functionality",
-    "idea": "I aimed to create a website that responds to the direction of user interaction. By using a circular navigation I thought it would look natural with rotation animations that demonstrates the direction in which the user drags.",
+    "objective": "Develop an interactive web portfolio that has a little bit of a twist to it",
+    "idea": "I aimed to create a website that responds to the direction of user interaction. By using a circular navigation I thought it would look natural with rotation animations that seemed like an intuitive way to show direction of interaction without sacrificing usability. Also hand-spinners",
     "technology": "HTML5/Styled-Components/GSAP/React/Redux/Node",
     "date": "July 2017",
-    "description": "Meta... This portfolio website was built using react-redux framework coupled with styled-components and gsap for page aesthetics. I tried to take a different approach with page navigation by taking into account the navigation direction",
+    "description": "Meta... This portfolio website was built using react-redux framework coupled with styled-components and gsap for page aesthetics. I tried to take a different approach with page navigation by taking into account navigation direction",
     "imageSource": "portfolio.png",
     "url": "/",
     "preview": "Meta"

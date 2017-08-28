@@ -411,50 +411,6 @@ module.exports = warning;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * 
- */
-
-
-/**
- * WARNING: DO NOT manually require this module.
- * This is a replacement for `invariant(...)` used by the error code system
- * and will _only_ be required by the corresponding babel pass.
- * It always throws.
- */
-
-function reactProdInvariant(code) {
-  var argCount = arguments.length - 1;
-
-  var message = 'Minified React error #' + code + '; visit ' + 'http://facebook.github.io/react/docs/error-decoder.html?invariant=' + code;
-
-  for (var argIdx = 0; argIdx < argCount; argIdx++) {
-    message += '&args[]=' + encodeURIComponent(arguments[argIdx + 1]);
-  }
-
-  message += ' for the full message or use the non-minified dev environment' + ' for full errors and additional helpful warnings.';
-
-  var error = new Error(message);
-  error.name = 'Invariant Violation';
-  error.framesToPop = 1; // we don't care about reactProdInvariant's own frame
-
-  throw error;
-}
-
-module.exports = reactProdInvariant;
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2514,6 +2470,50 @@ var styled = _styled(StyledComponent, constructWithOptions);
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * 
+ */
+
+
+/**
+ * WARNING: DO NOT manually require this module.
+ * This is a replacement for `invariant(...)` used by the error code system
+ * and will _only_ be required by the corresponding babel pass.
+ * It always throws.
+ */
+
+function reactProdInvariant(code) {
+  var argCount = arguments.length - 1;
+
+  var message = 'Minified React error #' + code + '; visit ' + 'http://facebook.github.io/react/docs/error-decoder.html?invariant=' + code;
+
+  for (var argIdx = 0; argIdx < argCount; argIdx++) {
+    message += '&args[]=' + encodeURIComponent(arguments[argIdx + 1]);
+  }
+
+  message += ' for the full message or use the non-minified dev environment' + ' for full errors and additional helpful warnings.';
+
+  var error = new Error(message);
+  error.name = 'Invariant Violation';
+  error.framesToPop = 1; // we don't care about reactProdInvariant's own frame
+
+  throw error;
+}
+
+module.exports = reactProdInvariant;
+
+/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2627,7 +2627,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var DOMProperty = __webpack_require__(23);
 var ReactDOMComponentFlags = __webpack_require__(92);
@@ -2899,7 +2899,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -11769,7 +11769,7 @@ var Slide = exports.Slide = function Slide(_props) {
   var props = Object.assign({}, _props);
   delete props.targetOffset;delete props.color;
   return _react2.default.createElement(_reactTransitionGroup.Transition, _extends({}, props, {
-    timeout: 600,
+    timeout: { enter: 800, exit: 200 },
     onEntering: horizontalSlide.onEnter(props.duration || 0.8, _props.targetOffset * 2 % 300, _props.color || '#ecf0f1'),
     onExiting: horizontalSlide.onExit
   }));
@@ -11997,7 +11997,7 @@ module.exports = ReactCurrentOwner;
 
 
 
-var _prodInvariant = __webpack_require__(4),
+var _prodInvariant = __webpack_require__(5),
     _assign = __webpack_require__(6);
 
 var CallbackQueue = __webpack_require__(96);
@@ -12526,7 +12526,7 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var invariant = __webpack_require__(2);
 
@@ -13198,7 +13198,7 @@ module.exports = ReactElement;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var invariant = __webpack_require__(2);
 
@@ -14027,7 +14027,7 @@ module.exports = EventPropagators;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var EventPluginRegistry = __webpack_require__(45);
 var EventPluginUtils = __webpack_require__(58);
@@ -14623,7 +14623,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  margin-bottom: 30px;\n'], ['\n  position: relative;\n  margin-bottom: 30px;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  position: ', ';\n  margin-bottom: 30px;\n  left: 50%;\n  transform: translateX(-50%);\n'], ['\n  position: ', ';\n  margin-bottom: 30px;\n  left: 50%;\n  transform: translateX(-50%);\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 100px;\n'], ['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 100px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n'], ['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n']);
 
@@ -14631,7 +14631,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -14653,14 +14653,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ReturnContainer = _styledComponents2.default.div(_templateObject);
+var ReturnContainer = _styledComponents2.default.div(_templateObject, function (props) {
+  return props.isBody ? 'relative' : 'absolute';
+});
 
 var ButtonContainer = _styledComponents2.default.div(_templateObject2);
 
 var HomeTextContainer = _styledComponents2.default.div(_templateObject3);
 
 var Return = function Return(_ref) {
-  var text = _ref.text,
+  var isBody = _ref.isBody,
+      text = _ref.text,
       onClick = _ref.onClick,
       onHover = _ref.onHover,
       onHoverOff = _ref.onHoverOff,
@@ -14668,7 +14671,9 @@ var Return = function Return(_ref) {
       inputText = _ref.inputText;
   return _react2.default.createElement(
     ReturnContainer,
-    null,
+    {
+      isBody: isBody
+    },
     _react2.default.createElement(
       ButtonContainer,
       {
@@ -14735,6 +14740,7 @@ var LocalContainer = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(Return, {
+        isBody: !!this.props.toggleBody,
         text: this.props.text,
         onClick: this.onClick,
         onHover: this.onHover,
@@ -14859,7 +14865,7 @@ module.exports = emptyObject;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var invariant = __webpack_require__(2);
 
@@ -15118,7 +15124,7 @@ module.exports = EventPluginRegistry;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var invariant = __webpack_require__(2);
 
@@ -16045,7 +16051,7 @@ var _Transition = __webpack_require__(19);
 
 var _events = __webpack_require__(13);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -18294,7 +18300,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -18465,7 +18471,7 @@ module.exports = ReactPropTypesSecret;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var ReactErrorUtils = __webpack_require__(59);
 
@@ -19226,7 +19232,7 @@ module.exports = createMicrosoftUnsafeLocalFunction;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var ReactPropTypesSecret = __webpack_require__(105);
 var propTypesFactory = __webpack_require__(89);
@@ -19371,7 +19377,7 @@ module.exports = LinkedValueUtils;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var invariant = __webpack_require__(2);
 
@@ -19604,7 +19610,7 @@ module.exports = KeyEscapeUtils;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var ReactCurrentOwner = __webpack_require__(20);
 var ReactInstanceMap = __webpack_require__(37);
@@ -20843,7 +20849,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -20984,7 +20990,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -22267,7 +22273,7 @@ module.exports = ReactDOMComponentFlags;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var invariant = __webpack_require__(2);
 
@@ -22405,7 +22411,7 @@ module.exports = getTextContentAccessor;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -23487,7 +23493,7 @@ module.exports = ReactDOMSelect;
 
 
 
-var _prodInvariant = __webpack_require__(4),
+var _prodInvariant = __webpack_require__(5),
     _assign = __webpack_require__(6);
 
 var ReactCompositeComponent = __webpack_require__(192);
@@ -23623,7 +23629,7 @@ module.exports = instantiateReactComponent;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var React = __webpack_require__(30);
 
@@ -23703,7 +23709,7 @@ module.exports = ReactEmptyComponent;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var invariant = __webpack_require__(2);
 
@@ -23777,7 +23783,7 @@ module.exports = ReactHostComponent;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var ReactCurrentOwner = __webpack_require__(20);
 var REACT_ELEMENT_TYPE = __webpack_require__(196);
@@ -24221,7 +24227,7 @@ module.exports = getActiveElement;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var DOMLazyTree = __webpack_require__(33);
 var DOMProperty = __webpack_require__(23);
@@ -25870,7 +25876,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -26740,7 +26746,6 @@ var verticalSlide = function () {
       };
     },
     onExit: function onExit(target) {
-      console.log(target, 'yo what the fuck');
       new _gsap.TimelineLite().to(target, 0.3, {
         autoAlpha: 0,
         y: '-200px'
@@ -30016,11 +30021,11 @@ module.exports = {
 	"2": {
 		"title": "Portfolio",
 		"role": "UX/UI, Developer",
-		"objective": "Develop an interactive portfolio website that animates according to the direction of a user's interaction without losing functionality",
-		"idea": "I aimed to create a website that responds to the direction of user interaction. By using a circular navigation I thought it would look natural with rotation animations that demonstrates the direction in which the user drags.",
+		"objective": "Develop an interactive web portfolio that has a little bit of a twist to it",
+		"idea": "I aimed to create a website that responds to the direction of user interaction. By using a circular navigation I thought it would look natural with rotation animations that seemed like an intuitive way to show direction of interaction without sacrificing usability. Also hand-spinners",
 		"technology": "HTML5/Styled-Components/GSAP/React/Redux/Node",
 		"date": "July 2017",
-		"description": "Meta... This portfolio website was built using react-redux framework coupled with styled-components and gsap for page aesthetics. I tried to take a different approach with page navigation by taking into account the navigation direction",
+		"description": "Meta... This portfolio website was built using react-redux framework coupled with styled-components and gsap for page aesthetics. I tried to take a different approach with page navigation by taking into account navigation direction",
 		"imageSource": "portfolio.png",
 		"url": "/",
 		"preview": "Meta"
@@ -33297,7 +33302,7 @@ module.exports = ReactRef;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var invariant = __webpack_require__(2);
 
@@ -34319,7 +34324,7 @@ module.exports = ReactComponentBrowserEnvironment;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var DOMLazyTree = __webpack_require__(33);
 var ExecutionEnvironment = __webpack_require__(11);
@@ -34735,7 +34740,7 @@ module.exports = ReactDOMIDOperations;
 
 
 
-var _prodInvariant = __webpack_require__(4),
+var _prodInvariant = __webpack_require__(5),
     _assign = __webpack_require__(6);
 
 var AutoFocusUtils = __webpack_require__(176);
@@ -36457,7 +36462,7 @@ module.exports = getVendorPrefixedEventName;
 
 
 
-var _prodInvariant = __webpack_require__(4),
+var _prodInvariant = __webpack_require__(5),
     _assign = __webpack_require__(6);
 
 var DOMPropertyOperations = __webpack_require__(104);
@@ -36878,7 +36883,7 @@ module.exports = ReactDOMOption;
 
 
 
-var _prodInvariant = __webpack_require__(4),
+var _prodInvariant = __webpack_require__(5),
     _assign = __webpack_require__(6);
 
 var LinkedValueUtils = __webpack_require__(66);
@@ -37044,7 +37049,7 @@ module.exports = ReactDOMTextarea;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var ReactComponentEnvironment = __webpack_require__(67);
 var ReactInstanceMap = __webpack_require__(37);
@@ -37655,7 +37660,7 @@ module.exports = ReactChildReconciler;
 
 
 
-var _prodInvariant = __webpack_require__(4),
+var _prodInvariant = __webpack_require__(5),
     _assign = __webpack_require__(6);
 
 var React = __webpack_require__(30);
@@ -38561,7 +38566,7 @@ module.exports = ReactCompositeComponent;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var ReactPropTypeLocationNames = __webpack_require__(194);
 var ReactPropTypesSecret = __webpack_require__(105);
@@ -39170,7 +39175,7 @@ module.exports = ReactDOMEmptyComponent;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var invariant = __webpack_require__(2);
 
@@ -39312,7 +39317,7 @@ module.exports = {
 
 
 
-var _prodInvariant = __webpack_require__(4),
+var _prodInvariant = __webpack_require__(5),
     _assign = __webpack_require__(6);
 
 var DOMChildrenOperations = __webpack_require__(63);
@@ -40882,7 +40887,7 @@ module.exports = SelectEventPlugin;
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var EventListener = __webpack_require__(112);
 var EventPropagators = __webpack_require__(34);
@@ -41824,7 +41829,7 @@ module.exports = '15.6.1';
 
 
 
-var _prodInvariant = __webpack_require__(4);
+var _prodInvariant = __webpack_require__(5);
 
 var ReactCurrentOwner = __webpack_require__(20);
 var ReactDOMComponentTree = __webpack_require__(7);
@@ -43528,7 +43533,7 @@ var _reactRedux = __webpack_require__(8);
 
 var _reactRouterDom = __webpack_require__(18);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -47395,7 +47400,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -47525,7 +47530,7 @@ var _reactRedux = __webpack_require__(8);
 
 var _reactRouterDom = __webpack_require__(18);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -47893,7 +47898,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -48152,7 +48157,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -48967,7 +48972,7 @@ var _reactRedux = __webpack_require__(8);
 
 var _reactRouterDom = __webpack_require__(18);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -49086,7 +49091,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -49156,7 +49161,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -49419,7 +49424,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -49529,7 +49534,7 @@ var LocalContainer = function (_Component) {
       var _this3 = this;
 
       return clearInterval(interval), LocalContainer.letterAnimation(this.letters, function () {
-        return _this3.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(_this3.state), [{ loaded: true }])), console.log('complete'));
+        return _this3.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(_this3.state), [{ loaded: true }])));
       });
     }
   }, {
@@ -49629,7 +49634,7 @@ var _Return = __webpack_require__(41);
 
 var _Return2 = _interopRequireDefault(_Return);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -52228,7 +52233,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -52380,7 +52385,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -52728,7 +52733,7 @@ var _utils = __webpack_require__(55);
 
 var _reactRouterDom = __webpack_require__(18);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -52957,7 +52962,7 @@ var _Styles = __webpack_require__(10);
 
 var _utils = __webpack_require__(55);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -53284,7 +53289,7 @@ var _Styles = __webpack_require__(10);
 
 var _utils = __webpack_require__(55);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -53438,7 +53443,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -53657,7 +53662,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -53723,7 +53728,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -53798,7 +53803,7 @@ var _Return = __webpack_require__(41);
 
 var _Return2 = _interopRequireDefault(_Return);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -53936,7 +53941,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(18);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -53998,14 +54003,13 @@ var _templateObject = _taggedTemplateLiteral(['\n  flex: 1;\n  display: flex;\n 
     _templateObject7 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  font-size: 1.7em;\n  margin: 0 0 10px; 0;\n'], ['\n  font-weight: normal;\n  font-size: 1.7em;\n  margin: 0 0 10px; 0;\n']),
     _templateObject8 = _taggedTemplateLiteral(['\n  margin: 0;\n  text-align: center;\n'], ['\n  margin: 0;\n  text-align: center;\n']),
     _templateObject9 = _taggedTemplateLiteral(['\n  font-size: 1em;\n'], ['\n  font-size: 1em;\n']),
-    _templateObject10 = _taggedTemplateLiteral(['\n  display: block;\n  height: 1px;\n  width: 100%;\n  background-color: black;\n  position: relative;\n  border: 0;\n  margin: .5em 0 1em;\n'], ['\n  display: block;\n  height: 1px;\n  width: 100%;\n  background-color: black;\n  position: relative;\n  border: 0;\n  margin: .5em 0 1em;\n']),
-    _templateObject11 = _taggedTemplateLiteral(['\n  position: relative;\n  height: 30px;\n  margin-bottom: 120px;\n'], ['\n  position: relative;\n  height: 30px;\n  margin-bottom: 120px;\n']);
+    _templateObject10 = _taggedTemplateLiteral(['\n  display: block;\n  height: 1px;\n  width: 100%;\n  background-color: black;\n  position: relative;\n  border: 0;\n  margin: .5em 0 1em;\n'], ['\n  display: block;\n  height: 1px;\n  width: 100%;\n  background-color: black;\n  position: relative;\n  border: 0;\n  margin: .5em 0 1em;\n']);
 
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -54067,8 +54071,6 @@ var Text = _styledComponents2.default.p(_templateObject8);
 var SubText = _styledComponents2.default.span(_templateObject9);
 
 var Line = _styledComponents2.default.hr(_templateObject10);
-
-var ButtonContainer = _styledComponents2.default.div(_templateObject11);
 
 var ProjectView = function ProjectView(_ref) {
   var isBody = _ref.isBody,
@@ -54190,12 +54192,12 @@ var ProjectView = function ProjectView(_ref) {
           (0, _Utils.createTitle)('</' + title + '>'),
           _react2.default.createElement(_Textline2.default, null)
         )
-      ),
-      _react2.default.createElement(_Return2.default, {
-        text: 'Back to Project Index',
-        toggleBody: toggleBody
-      })
-    )
+      )
+    ),
+    _react2.default.createElement(_Return2.default, {
+      text: 'Back to Project Index',
+      toggleBody: toggleBody
+    })
   );
 };
 
@@ -54441,7 +54443,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -54511,7 +54513,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -54695,7 +54697,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _styledComponents = __webpack_require__(5);
+var _styledComponents = __webpack_require__(4);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
