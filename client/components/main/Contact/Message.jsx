@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Input, PlaceholderContainer, PreviewContainer } from '../../shared/Styles'
 import { initialValue } from './utils'
-import styled from 'styled-components'
 
-const Message = ({ isValid, value, onChangeHandler, onEnterHandler, inputRef }) => {
-    const inputValue = value === initialValue ? '' : value
+const Message = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef }) => {
+    const isInitial = value === initialValue
+        , inputValue = isInitial ? '' : value
+        , isValid = isInitial ? true : _isValid
 
   return (
     <PreviewContainer>
@@ -39,8 +40,7 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-    const { value } = this.props
-        , isValid = value === initialValue || value.length > 1
+    const { value, isValid } = this.props.value
 
     this.setState(Object.assign({}, ...this.state, {localValue: value, isValid}))
   }
@@ -51,8 +51,7 @@ class LocalContainer extends Component {
 
   componentWillUnmount() {
     const { localValue, isValid } = this.state
-
-    this.props.updateText(localValue, localValue !== initialValue && isValid)
+    this.props.updateText(localValue, isValid)
   }
 
   componentDidUpdate() {
@@ -68,7 +67,7 @@ class LocalContainer extends Component {
 
     return (
       <Message
-        isValid={isValid}
+        _isValid={isValid}
         value={localValue}
         onChangeHandler={this.onChangeHandler}
         onEnterHandler={this.props.onEnterHandler}
