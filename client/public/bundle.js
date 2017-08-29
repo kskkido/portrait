@@ -12729,10 +12729,7 @@ module.exports = DOMProperty;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var grey2 = '#D2CBCB',
-    grey1 = '#e8e5e6',
-    grey3 = '#e3e1dd',
-    grey4 = '#ecf0f1';
+var grey1 = '#e8e5e6';
 
 var blue1 = '#29b6f6',
     blue2 = '#4fc3f7',
@@ -16024,7 +16021,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  height: 100%;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100\n'], ['\n  display: inline-block;\n  height: 100%;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 75px;\n  max-width: 800px;\n  margin-left: auto;\n  margin-right: auto;\n'], ['\n  position: relative;\n  top: 75px;\n  max-width: 800px;\n  margin-left: auto;\n  margin-right: auto;\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 55px;\n  max-width: 800px;\n  margin-left: auto;\n  margin-right: auto;\n'], ['\n  position: relative;\n  top: 55px;\n  max-width: 800px;\n  margin-left: auto;\n  margin-right: auto;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -18289,7 +18286,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    position: absolute;\n    top: 100px;\n    width: inherit;\n    left: 50%;\n    transform: translateX(-50%);\n    cursor: pointer;\n  '], ['\n    position: absolute;\n    top: 100px;\n    width: inherit;\n    left: 50%;\n    transform: translateX(-50%);\n    cursor: pointer;\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    position: absolute;\n    top: 100px;\n    width: inherit;\n    left: 50%;\n    transform: translateX(-50%) ', ';\n    transform-origin: center;\n    cursor: pointer;\n  '], ['\n    position: absolute;\n    top: 100px;\n    width: inherit;\n    left: 50%;\n    transform: translateX(-50%) ', ';\n    transform-origin: center;\n    cursor: pointer;\n  ']);
 
 var _react = __webpack_require__(1);
 
@@ -18315,14 +18312,16 @@ var createSVGHoverAnimation = function createSVGHoverAnimation() {
   var isUp = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
   return function (target) {
     return new _gsap.TimelineLite({ paused: true }).to(target, 0.4, {
-      y: isUp ? '-=20px' : '+=20px',
+      y: '+=20px',
       scaleY: 1.5,
       rotationY: 180,
       ease: _gsap.Back.easeOut
     });
   };
 };
-var Container = _styledComponents2.default.div(_templateObject),
+var Container = _styledComponents2.default.div(_templateObject, function (props) {
+  return props.pointUp && 'rotate(180deg)';
+}),
     HOCButton = (0, _Factory.createSVG)(_SvgAssets.Arrow, Container);
 
 var ArrowComponent = function ArrowComponent(_ref) {
@@ -20913,21 +20912,26 @@ var Cross = exports.Cross = function Cross(_props) {
 
   return _react2.default.createElement(
     'svg',
-    _extends({}, props, { ref: _props.innerRef, viewBox: '1.0000416040420532 0.9999443888664246 198.51658630371094 197.80990600585938', width: '' + (_props.scale || 1) * 198.51658630371094, height: '' + (_props.scale || 1) * 197.80990600585938, xmlns: 'http://www.w3.org/2000/svg' }),
-    _react2.default.createElement('path', { d: 'M 164.706 184.284 H 177.451 V 451.284 H 164.706 V 184.284 Z', style: { fill: 'black', strokeWidth: 2 }, transform: 'matrix(0.7071080207824707, 0.7071050405502319, -0.7071070075035095, 0.7071070075035095, 204.34811401367188, -245.77272033691406)' }),
-    _react2.default.createElement('path', { d: 'M 164.706 184.283 H 177.451 V 451.283 H 164.706 V 184.283 Z', style: { fill: 'black', strokeWidth: 2 }, transform: 'matrix(0.7071080207824707, -0.7071050405502319, 0.7071070075035095, 0.7071070075035095, -245.77268981933594, -3.8313610553741455)' })
+    _extends({}, props, { ref: _props.innerRef, width: '40', height: '40', xmlns: 'http://www.w3.org/2000/svg' }),
+    _react2.default.createElement('rect', { height: '2', width: '40', x: '3', y: '7' }),
+    _react2.default.createElement('rect', { height: '2', width: '40', x: '3', y: '20' }),
+    _react2.default.createElement('rect', { height: '2', width: '40', x: '3', y: '33' })
   );
 };
 
 var Arrow = exports.Arrow = function Arrow(_props) {
   var props = Object.assign({}, _props);
-  delete props.scale;delete props.innerRef;
+  delete props.scale;
+  delete props.innerRef;
   delete props.pointUp;
+
+  var width = (_props.scale || 1) * 158.49600219726562,
+      height = (_props.scale || 1) * 219.49998474121094 * 1.5;
 
   return _react2.default.createElement(
     'svg',
-    _extends({}, props, { ref: _props.innerRef, transform: _props.pointUp && 'rotate(180)', viewBox: '0 0 158.49600219726562 219.49998474121094', width: '' + (_props.scale || 1) * 158.49600219726562, height: '' + (_props.scale || 1) * 219.49998474121094 * 1.5, xmlns: 'http://www.w3.org/2000/svg' }),
-    _react2.default.createElement('path', { d: 'M 146.711 137 L 158.496 148.785 L 87.785 219.496 L 87.667 219.378 L 87.667 219.5 L 71 219.5 L 71 219.207 L 70.711 219.496 L 0 148.785 L 11.785 137 L 71 196.215 L 71 0 L 87.667 0 L 87.667 196.044 Z', style: { fill: 'rgb(5, 5, 5)' }, transform: 'matrix(1, 0, 0, 1, 0, 0)' })
+    _extends({}, props, { ref: _props.innerRef, viewBox: '0 0 ' + 158.49600219726562 + ' ' + 219.49998474121094, width: width, height: height, xmlns: 'http://www.w3.org/2000/svg' }),
+    _react2.default.createElement('path', { d: 'M 146.711 137 L 158.496 148.785 L 87.785 219.496 L 87.667 219.378 L 87.667 219.5 L 71 219.5 L 71 219.207 L 70.711 219.496 L 0 148.785 L 11.785 137 L 71 196.215 L 71 0 L 87.667 0 L 87.667 196.044 Z', style: { fill: 'rgb(5, 5, 5)' } })
   );
 };
 
@@ -21031,6 +21035,7 @@ var createSVG = exports.createSVG = function createSVG(SVG, Container, createHov
       key: 'componentDidMount',
       value: function componentDidMount() {
         this.svgHoverAnimation = createHoverAnimation && createHoverAnimation(this.svg, this.container) || this.props.hoverAnimation(this.svg, this.container);
+        this.onClickTransform = this.props.onClickTransform && this.props.onClickTransform(this.svg);
         this.onClickCallback = this.onClickWrapper(this.props.onClick, this.svg, this.container);
       }
     }, {
@@ -21040,11 +21045,16 @@ var createSVG = exports.createSVG = function createSVG(SVG, Container, createHov
 
         var _this2 = this;
 
-        var target = arguments[1];
+        var svg = arguments[1];
         var container = arguments[2];
 
         return function () {
-          return fn(_this2.state.active, target, container), _this2.setState({ active: !_this2.state.active });
+          return fn(_this2.state.active, svg, container), _this2.setState(function (_ref) {
+            var active = _ref.active;
+
+            _this2.onClickTransform && (active ? _this2.onClickTransform.reverse() : _this2.onClickTransform.play());
+            return { active: !active };
+          });
         };
       }
     }, {
@@ -21070,6 +21080,7 @@ var createSVG = exports.createSVG = function createSVG(SVG, Container, createHov
         return _react2.default.createElement(
           ContainerComponent,
           {
+            pointUp: this.props.pointUp,
             clearTop: this.props.clearTop,
             innerRef: function innerRef(div) {
               return _this3.container = div;
@@ -21082,8 +21093,7 @@ var createSVG = exports.createSVG = function createSVG(SVG, Container, createHov
             scale: this.props.scale || 0.1,
             innerRef: function innerRef(div) {
               return _this3.svg = div;
-            },
-            pointUp: this.props.pointUp
+            }
           })
         );
       }
@@ -26785,7 +26795,7 @@ var horizontalSlide = function () {
   var slideInContent = function slideInContent(direction, target, tl) {
     var _tl$from;
 
-    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '410px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', [direction]), _tl$from), '-=' + (slideDuration - 0.25));
+    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '-300px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', direction), _tl$from), '-=' + (slideDuration - 0.2));
   };
 
   return {
@@ -47510,8 +47520,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  min-width: 325px;\n  height: 100vh;\n  position: fixed;\n  left: 0;\n  z-index: 100;\n'], ['\n  min-width: 325px;\n  height: 100vh;\n  position: fixed;\n  left: 0;\n  z-index: 100;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  height: 100vh;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  z-index: 99;\n  background-color: #D3D3D3;\n  opacity: 0.2;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n'], ['\n  height: 100vh;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  z-index: 99;\n  background-color: #D3D3D3;\n  opacity: 0.2;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  height: 80%;\n  width: 275px;\n  position: absolute;\n  list-style: none;\n  left: 50px;\n  top: 80px;\n  padding: 0;\n  z-index: 100;\n  overflow-y: scroll;\n'], ['\n  height: 80%;\n  width: 275px;\n  position: absolute;\n  list-style: none;\n  left: 50px;\n  top: 80px;\n  padding: 0;\n  z-index: 100;\n  overflow-y: scroll;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  width: 96%;\n  color: #F3F2F2;\n  margin-left: 10px;\n  margin-bottom: 10px;\n'], ['\n  width: 96%;\n  color: #F3F2F2;\n  margin-left: 10px;\n  margin-bottom: 10px;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  height: 80%;\n  width: 305px;\n  position: absolute;\n  list-style: none;\n  left: 20px;\n  top: 80px;\n  padding: 0;\n  z-index: 100;\n  overflow-y: scroll;\n  overflow-x: hidden;\n'], ['\n  height: 80%;\n  width: 305px;\n  position: absolute;\n  list-style: none;\n  left: 20px;\n  top: 80px;\n  padding: 0;\n  z-index: 100;\n  overflow-y: scroll;\n  overflow-x: hidden;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  width: 88%;\n  color: #F3F2F2;\n  margin-left: 35px;\n  margin-bottom: 10px;\n'], ['\n  width: 88%;\n  color: #F3F2F2;\n  margin-left: 35px;\n  margin-bottom: 10px;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  display: block;\n  height: 90px;\n  text-decoration: none;\n  color: inherit;\n'], ['\n  display: block;\n  height: 90px;\n  text-decoration: none;\n  color: inherit;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  height: inherit;\n  position: relative;\n'], ['\n  height: inherit;\n  position: relative;\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  height: 100%;\n  width: 95%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n'], ['\n  height: 100%;\n  width: 95%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n']),
@@ -47769,9 +47779,7 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'handleOnClickSVG',
     value: function handleOnClickSVG(toggle) {
-      return !toggle ? (this.svgClickAnimation.play(), setTimeout(function (tl) {
-        return tl.restart();
-      }, 0, this.enterAnimation)) : this.svgClickAnimation.reverse();
+      return !toggle ? (this.svgClickAnimation.play(), this.enterAnimation.restart()) : this.svgClickAnimation.reverse();
     }
   }, {
     key: 'render',
@@ -47792,14 +47800,14 @@ var LocalContainer = function (_Component) {
   }], [{
     key: 'enterAnimation',
     value: function enterAnimation(list) {
-      return new _gsap.TimelineLite({ paused: true }).staggerFrom(list, 0.6, {
+      return new _gsap.TimelineLite({ paused: true }).staggerFrom(list, 0.7, {
         autoAlpha: 0,
         rotationX: 40,
         rotationY: 40,
         marginTop: '-=50px',
         scale: 0,
         ease: _gsap.Back.easeOut
-      }, 0.1).delay(0.15);
+      }, 0.12).delay(0.2);
     }
   }, {
     key: 'createHoverAnimation',
@@ -47821,11 +47829,9 @@ var LocalContainer = function (_Component) {
     key: 'createSVGCLickAnimation',
     value: function createSVGCLickAnimation(sidenav) {
       return new _gsap.TimelineLite({ paused: true }).to(sidenav, 0.4, {
-        x: '+=325px',
-        ease: _gsap.Back.easeOut
+        x: '+=325px'
       }).to(document.getElementById('bodyContainer'), 0.4, {
-        marginLeft: '+=325px',
-        ease: _gsap.Back.easeOut
+        marginLeft: '+=325px'
       }, '-=0.4');
     }
   }, {
@@ -48147,7 +48153,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: fixed;\n  left: 60px;\n  top: 20px;\n  z-index: 1001;\n  cursor: pointer;\n'], ['\n  position: fixed;\n  left: 60px;\n  top: 20px;\n  z-index: 1001;\n  cursor: pointer;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  position: fixed;\n  left: 45px;\n  top: 20px;\n  z-index: 1001;\n  cursor: pointer;\n'], ['\n  position: fixed;\n  left: 45px;\n  top: 20px;\n  z-index: 1001;\n  cursor: pointer;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -48168,11 +48174,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var createSVGHoverAnimation = function createSVGHoverAnimation(target) {
-  return new _gsap.TimelineLite({ paused: true }).to(target, 0.4, {
-    scale: 1.2,
-    rotation: 90,
-    ease: _gsap.Back.easeOut
+  return new _gsap.TimelineLite({ paused: true }).to(target, 0.2, {
+    scale: 1.05,
+    fill: '#BDBDBD'
   });
+};
+
+var createSVGClickAnimation = function createSVGClickAnimation(_ref) {
+  var childNodes = _ref.childNodes;
+
+  return new _gsap.TimelineLite({ paused: true }).to(childNodes[0], 0.15, {
+    y: '+=13'
+  }).to(childNodes[2], 0.15, {
+    y: '-=13'
+  }, '-=0.15').to(childNodes[1], 0.15, {
+    opacity: 0
+  }).to(childNodes[0], 0.15, {
+    rotation: 45,
+    transformOrigin: 'center',
+    ease: _gsap.Back.easeOut
+  }).to(childNodes[2], 0.15, {
+    rotation: -45,
+    transformOrigin: 'center',
+    ease: _gsap.Back.easeOut
+  }, '-=0.15');
 };
 
 var Container = _styledComponents2.default.div(_templateObject),
@@ -48180,6 +48205,7 @@ var Container = _styledComponents2.default.div(_templateObject),
 
 var CrossComponent = function CrossComponent(props) {
   return _react2.default.createElement(HOCButton, _extends({}, props, {
+    onClickTransform: createSVGClickAnimation,
     hoverAnimation: createSVGHoverAnimation
   }));
 };

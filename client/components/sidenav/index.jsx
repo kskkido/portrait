@@ -31,20 +31,21 @@ const Overlay = styled.div`
 
 const List = styled.ul`
   height: 80%;
-  width: 275px;
+  width: 305px;
   position: absolute;
   list-style: none;
-  left: 50px;
+  left: 20px;
   top: 80px;
   padding: 0;
   z-index: 100;
   overflow-y: scroll;
+  overflow-x: hidden;
 `
 
 const ListRow = styled.li`
-  width: 96%;
+  width: 88%;
   color: #F3F2F2;
-  margin-left: 10px;
+  margin-left: 35px;
   margin-bottom: 10px;
 `
 
@@ -120,15 +121,15 @@ class LocalContainer extends Component {
 
   static enterAnimation(list) {
     return new TimelineLite({paused: true})
-      .staggerFrom(list, 0.6, {
+      .staggerFrom(list, 0.7, {
         autoAlpha: 0,
         rotationX: 40,
         rotationY: 40,
         marginTop: '-=50px',
         scale: 0,
         ease: Back.easeOut
-      }, 0.1)
-      .delay(0.15)
+      }, 0.12)
+      .delay(0.2)
   }
 
   static createHoverAnimation({ childNodes: [background, text] }) {
@@ -148,11 +149,9 @@ class LocalContainer extends Component {
     return new TimelineLite({paused: true})
       .to(sidenav, 0.4, {
         x: '+=325px',
-        ease: Back.easeOut,
       })
       .to(document.getElementById('bodyContainer'), 0.4, {
         marginLeft: '+=325px',
-        ease: Back.easeOut,
       }, '-=0.4')
   }
 
@@ -251,7 +250,7 @@ class LocalContainer extends Component {
   }
 
   handleOnClickSVG(toggle) {
-      return (!toggle ? (this.svgClickAnimation.play(), setTimeout((tl) => tl.restart(), 0, this.enterAnimation)) : this.svgClickAnimation.reverse())
+      return (!toggle ? (this.svgClickAnimation.play(), this.enterAnimation.restart()) : this.svgClickAnimation.reverse())
   }
 
   render() {

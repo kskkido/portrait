@@ -28,7 +28,7 @@ const MainContainer = styled.div`
 
 const Body = styled.div`
   position: relative;
-  top: 75px;
+  top: 55px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;

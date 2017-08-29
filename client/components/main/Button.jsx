@@ -8,7 +8,7 @@ import { createSVG } from '../shared/Factory'
 const createSVGHoverAnimation = (isUp = false) => (target) => {
   return new TimelineLite({paused: true})
     .to(target, 0.4, {
-        y: isUp ? '-=20px' : '+=20px',
+        y: '+=20px',
         scaleY: 1.5,
         rotationY: 180,
         ease: Back.easeOut
@@ -19,7 +19,8 @@ const Container = styled.div`
     top: 100px;
     width: inherit;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) ${props => props.pointUp && 'rotate(180deg)'};
+    transform-origin: center;
     cursor: pointer;
   `
     , HOCButton = createSVG(Arrow, Container)

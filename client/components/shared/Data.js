@@ -1,7 +1,4 @@
-const grey2 = '#D2CBCB'
-    , grey1 = '#e8e5e6'
-    , grey3 = '#e3e1dd'
-    , grey4 = '#ecf0f1'
+const grey1 = '#e8e5e6'
 
 const blue1 = '#29b6f6'
     , blue2 = '#4fc3f7'

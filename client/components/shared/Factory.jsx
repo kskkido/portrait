@@ -23,11 +23,15 @@ export const createSVG = function(SVG, Container, createHoverAnimation) {
 
     componentDidMount() {
       this.svgHoverAnimation = createHoverAnimation && createHoverAnimation(this.svg, this.container) || this.props.hoverAnimation(this.svg, this.container)
+      this.onClickTransform = this.props.onClickTransform && this.props.onClickTransform(this.svg)
       this.onClickCallback = this.onClickWrapper(this.props.onClick, this.svg, this.container)
     }
 
-    onClickWrapper(fn = () => {}, target, container) {
-      return () => (fn(this.state.active, target, container), this.setState({active: !this.state.active}))
+    onClickWrapper(fn = () => {}, svg, container) {
+      return () => (fn(this.state.active, svg, container), this.setState(({ active }) => {
+        this.onClickTransform && (active ? this.onClickTransform.reverse() : this.onClickTransform.play())
+        return {active: !active}
+      }))
     }
 
     onClickHandler() {
@@ -46,6 +50,7 @@ export const createSVG = function(SVG, Container, createHoverAnimation) {
 
       return (
         <ContainerComponent
+          pointUp={this.props.pointUp}
           clearTop={this.props.clearTop}
           innerRef={div => this.container = div}
           onMouseOver={this.onHoverHandler.bind(this)}
@@ -55,7 +60,6 @@ export const createSVG = function(SVG, Container, createHoverAnimation) {
           <SVG
             scale={this.props.scale || 0.1}
             innerRef={div => this.svg = div}
-            pointUp={this.props.pointUp}
           />
         </ContainerComponent>
       )
