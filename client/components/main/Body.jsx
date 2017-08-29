@@ -70,7 +70,7 @@ class LocalContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      targetOffset: 50, //arbitrary
+      targetOffset: 0
     }
 
     this.handleOnWheel = this.handleOnWheel.bind(this)
@@ -99,10 +99,10 @@ class LocalContainer extends Component {
     }
   }
 
-  static round (length) {
+  static flattenRotation (length) {
     return (rotation) => {
-      const rounded = rotation / (360 / length)
-      return rounded < 0 ? (Math.ceil(-(rounded) / length) * length) + rounded : rounded % length
+      const flattened = rotation / (360 / length)
+      return flattened < 0 ? (Math.ceil(-(flattened) / length) * length) + flattened : flattened % length
     }
   }
 
@@ -131,20 +131,20 @@ class LocalContainer extends Component {
     return location.pathname !== history.location.pathname
   }
 
-  willSetView(rounded) {
-    const ratio = rounded % 1
-        , round = Math.round(rounded)
+  willSetView(flattened) {
+    const ratio = flattened % 1
+        , rounded = Math.round(flattened)
 
-    if (ratio <= 0.1 && round !== this.props.viewIndex) {
-      this.props.viewChange(round)
+    if (ratio <= 0.1 && rounded !== this.props.viewIndex) {
+      this.props.viewChange(rounded)
     }
   }
 
   componentWillMount() {
     const { length } = this.props.navigationList
 
-    this.roundRotation = LocalContainer.round(length)
-    this.dragCB = (targetRotation) => this.willSetView(this.roundRotation(LocalContainer.tap(targetRotation, this.props.rotationChange)))
+    this.flattenRotation = LocalContainer.flattenRotation(length)
+    this.dragCB = (targetRotation) => this.willSetView(this.flattenRotation(LocalContainer.tap(targetRotation, this.props.rotationChange)))
     this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB)
   }
 

@@ -16131,7 +16131,7 @@ var LocalContainer = function (_Component) {
     var _this = _possibleConstructorReturn(this, (LocalContainer.__proto__ || Object.getPrototypeOf(LocalContainer)).call(this, props));
 
     _this.state = {
-      targetOffset: 50 //arbitrary
+      targetOffset: 0
     };
 
     _this.handleOnWheel = _this.handleOnWheel.bind(_this);
@@ -16140,12 +16140,12 @@ var LocalContainer = function (_Component) {
 
   _createClass(LocalContainer, [{
     key: 'willSetView',
-    value: function willSetView(rounded) {
-      var ratio = rounded % 1,
-          round = Math.round(rounded);
+    value: function willSetView(flattened) {
+      var ratio = flattened % 1,
+          rounded = Math.round(flattened);
 
-      if (ratio <= 0.1 && round !== this.props.viewIndex) {
-        this.props.viewChange(round);
+      if (ratio <= 0.1 && rounded !== this.props.viewIndex) {
+        this.props.viewChange(rounded);
       }
     }
   }, {
@@ -16156,9 +16156,9 @@ var LocalContainer = function (_Component) {
       var length = this.props.navigationList.length;
 
 
-      this.roundRotation = LocalContainer.round(length);
+      this.flattenRotation = LocalContainer.flattenRotation(length);
       this.dragCB = function (targetRotation) {
-        return _this2.willSetView(_this2.roundRotation(LocalContainer.tap(targetRotation, _this2.props.rotationChange)));
+        return _this2.willSetView(_this2.flattenRotation(LocalContainer.tap(targetRotation, _this2.props.rotationChange)));
       };
       this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB);
     }
@@ -16263,11 +16263,11 @@ var LocalContainer = function (_Component) {
       };
     }
   }, {
-    key: 'round',
-    value: function round(length) {
+    key: 'flattenRotation',
+    value: function flattenRotation(length) {
       return function (rotation) {
-        var rounded = rotation / (360 / length);
-        return rounded < 0 ? Math.ceil(-rounded / length) * length + rounded : rounded % length;
+        var flattened = rotation / (360 / length);
+        return flattened < 0 ? Math.ceil(-flattened / length) * length + flattened : flattened % length;
       };
     }
   }, {
@@ -25953,10 +25953,7 @@ var PlaceholderContainer = exports.PlaceholderContainer = _styledComponents2.def
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var grey2 = '#D2CBCB',
-    grey1 = '#e8e5e6',
-    grey3 = '#e3e1dd',
-    grey4 = '#ecf0f1';
+var grey1 = '#e8e5e6';
 
 var blue1 = '#29b6f6',
     blue2 = '#4fc3f7',
