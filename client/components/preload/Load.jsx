@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import { loadComplete } from '../../reducers/events'
+import { asyncFormFetch } from '../../reducers/form'
 import { viewData } from  '../shared/Data'
 import { Title3 } from '../shared/Styles'
 import { createTitle } from '../shared/Utils'
@@ -104,6 +105,11 @@ class LocalContainer extends Component {
     return (clearInterval(interval), LocalContainer.letterAnimation(this.letters, () => this.setState(Object.assign({}, ...this.state, {loaded: true}))))
   }
 
+  componentWillMount() {
+    this.props.formFetch()
+      .then(console.log.bind(null, 'fetched'))
+  }
+
   componentDidMount() {
     setTimeout((self) => {
       self.progressInterval = setInterval(self.updateProgressBar.bind(this), 5)
@@ -125,7 +131,8 @@ class LocalContainer extends Component {
 }
 
 const mapStateToDispatch = (dispatch) => ({
-  loaded: () => dispatch(loadComplete())
+  loaded: () => dispatch(loadComplete()),
+  formFetch: () => dispatch(asyncFormFetch())
 })
 
 export default connect(null, mapStateToDispatch)(LocalContainer)

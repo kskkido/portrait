@@ -12,8 +12,10 @@ const validateEmail = (email) => {
   return /^\w[a-zA-Z0-9_.-]*@{1}[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/i.test(email)
 }
 
-const Email = ({ isValid, value, onChangeHandler, onEnterHandler, inputRef }) => {
-  const inputValue = value === initialValue ? '' : value
+const Email = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef }) => {
+  const isInitial = value === initialValue
+      , inputValue = isInitial ? '' : value
+      , isValid = isInitial ? true : _isValid
 
   return (
     <PreviewContainer>
@@ -47,9 +49,7 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-  const { value } = this.props
-      , isValid = value === initialValue || validateEmail(value)
-
+    const { value, isValid } = this.props.value
     this.setState(Object.assign({}, ...this.state, {localValue: value, isValid}))
   }
 
@@ -59,8 +59,7 @@ class LocalContainer extends Component {
 
   componentWillUnmount() {
     const { localValue, isValid } = this.state
-
-    this.props.updateText(localValue, localValue !== initialValue && isValid)
+    this.props.updateText(localValue, isValid)
   }
 
   componentDidUpdate() {
@@ -76,7 +75,7 @@ class LocalContainer extends Component {
 
     return (
       <Email
-        isValid={isValid}
+        _isValid={isValid}
         value={localValue}
         onChangeHandler={this.onChangeHandler}
         onEnterHandler={this.props.onEnterHandler}

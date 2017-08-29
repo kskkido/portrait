@@ -29,8 +29,10 @@ const Email = styled.a`
   }
 `
 
-const Name = ({ isValid, value, onChangeHandler, onEnterHandler, inputRef, inputRef2 }) => {
-  const inputValue = value === initialValue ? '' : value
+const Name = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef, inputRef2 }) => {
+  const isInitial = value === initialValue
+      , inputValue = isInitial ? '' : value
+      , isValid = isInitial ? true : _isValid
 
   return (
     <PreviewContainer>
@@ -66,9 +68,7 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-  const { value } = this.props
-      , isValid = value === initialValue || value.length > 1
-
+  const { value, isValid } = this.props.value
     this.setState(Object.assign({}, ...this.state, {localValue: value, isValid: isValid}))
   }
 
@@ -78,8 +78,7 @@ class LocalContainer extends Component {
 
   componentWillUnmount() {
     const { localValue, isValid } = this.state
-
-    this.props.updateText(localValue, localValue !== initialValue && isValid)
+    this.props.updateText(localValue, isValid)
   }
 
   componentDidUpdate() {
@@ -94,7 +93,7 @@ class LocalContainer extends Component {
 
     return (
       <Name
-        isValid={this.state.isValid}
+        _isValid={this.state.isValid}
         value={this.state.localValue}
         onChangeHandler={this.onChangeHandler}
         onEnterHandler={this.props.onEnterHandler}

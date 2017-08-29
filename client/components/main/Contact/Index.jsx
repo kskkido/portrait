@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { viewData } from '../../shared/Data'
-import { pathChange, viewChange, viewRestart, rotationChange, rotationRestart } from '../../../reducers/events'
+import { pathChange, viewChange, rotationChange } from '../../../reducers/events'
+import { asyncFormRestart, formUpdate } from '../../../reducers/form'
+import { asyncFormPut } from './utils'
 import BodyComponent from '../Body'
-import { initialValue } from './utils'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import Name from './Name'
 import Email from './Email'
 import Message from './Message'
@@ -21,20 +20,20 @@ const list = [
  {text: 'social', component: <Social />}
 ]
 
-const Body = ({ createInputHandler, createOnEnterHandler, getProps, viewIndex }) => {
+const Body = ({ getProps, viewIndex, onSubmitHandler, createInputHandler, createOnEnterHandler, setRotation}) => {
   const { text, component } = list[viewIndex]
 
   return (
     React.cloneElement(component, {
       value: text !== 'social' && getProps(text),
       updateText: createInputHandler(text),
-      onEnterHandler: createOnEnterHandler((viewIndex + 1) % list.length)
+      onEnterHandler: text === 'submit' ? onSubmitHandler : createOnEnterHandler((viewIndex + 1) % list.length),
+      setRotation: setRotation
     })
   )
 }
 
-const Contact = ({ backgroundColor, navigationList, createInputHandler, createOnEnterHandler, getProps }) => {
-
+const Contact = ({ getProps, backgroundColor, navigationList, onSubmitHandler, createInputHandler, createOnEnterHandler, setRotation }) => {
   return (
   <div>
     <Return />
@@ -45,9 +44,11 @@ const Contact = ({ backgroundColor, navigationList, createInputHandler, createOn
       isCenter={true}
     >
       <Body
+        getProps={getProps}
+        onSubmitHandler={onSubmitHandler}
         createInputHandler={createInputHandler}
         createOnEnterHandler={createOnEnterHandler}
-        getProps={getProps}
+        setRotation={setRotation}
       />
     </BodyComponent>
   </div>
@@ -58,23 +59,10 @@ const Contact = ({ backgroundColor, navigationList, createInputHandler, createOn
 class LocalContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      name: {
-        value: initialValue,
-        isValid: false,
-      },
-      email: {
-        value: initialValue,
-        isValid: false
-      },
-      message: {
-        value: initialValue,
-        isValid: false
-      }
-    }
     // need to pass those values down to corresponding
     this.createInputHandler = this.createInputHandler.bind(this)
     this.createOnEnterHandler = this.createOnEnterHandler.bind(this)
+    this.onSubmitHandler = this.onSubmitHandler.bind(this)
     this.getProps = this.getProps.bind(this)
   }
 
@@ -92,54 +80,63 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.props.pathChange(3)
-    // this.props.viewRestart(); this.props.rotationRestart()
     this.setRotation = LocalContainer.setRotation(list.length)
   }
 
+  componentWillUnmount() {
+    asyncFormPut(this.props.form)
+  }
+
+  changeView(index) {
+    return (this.props.rotationChange(this.setRotation(index)), this.props.viewChange(index))
+  }
+
   createInputHandler(props) {
-    return (input, isValid) => {
-      this.setState(() => ({
-        [props]: {
-          value: input,
-          isValid
-        }
-      }))
-    }
+    return (value, isValid) => (
+      this.props.formUpdate(props, {value, isValid})
+    )
   }
 
   createOnEnterHandler(index) {
     return ({ nativeEvent: {keyCode}}) => (
-      keyCode === 13 ?
-        (this.props.rotationChange(this.setRotation(index)), this.props.viewChange(index)) :
+      keyCode === 13 || keyCode === 9 ?
+        this.changeView(index) :
         null
     )
   }
 
+  onSubmitHandler() {
+    return (this.changeView(LocalContainer.navigationList.length - 1), this.props.formRestart())
+  }
 
   getProps(props) {
-    return props === 'submit' ? this.state : this.state[props].value
+    return props === 'submit' ? this.props.form : this.props.form[props]
   }
 
   render() {
 
     return (
       <Contact
-        createInputHandler={this.createInputHandler}
-        createOnEnterHandler={this.createOnEnterHandler}
         getProps={this.getProps}
         backgroundColor={LocalContainer.backgroundColor}
         navigationList={LocalContainer.navigationList}
+        createInputHandler={this.createInputHandler}
+        createOnEnterHandler={this.createOnEnterHandler}
+        onSubmitHandler={this.onSubmitHandler}
+        setRotation={this.setRotation}
       />
     )
   }
 }
 
+const mapStateToProps = ({ form }) => ({ form })
+
 const mapDispatchToProps = (dispatch) => ({
   pathChange: (index) => dispatch(pathChange(index)),
   viewChange: (index) => dispatch(viewChange(index)),
-  viewRestart: () => dispatch(viewRestart()),
   rotationChange: (rotation) => dispatch(rotationChange(rotation)),
-  rotationRestart: () => dispatch(rotationRestart())
+  formRestart: () => dispatch(asyncFormRestart()),
+  formUpdate: (props, payload) => dispatch(formUpdate(props, payload))
 })
 
-export default connect(null, mapDispatchToProps)(LocalContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)
