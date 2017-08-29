@@ -150,7 +150,7 @@ class LocalContainer extends Component {
       .to(sidenav, 0.4, {
         x: '+=325px',
       })
-      .to(document.getElementById('bodyContainer'), 0.4, {
+      .to(document.getElementById('bodyContainer'), 0.3, {
         marginLeft: '+=325px',
       }, '-=0.4')
   }

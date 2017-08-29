@@ -15057,8 +15057,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: ', ';\n  margin-bottom: 30px;\n  left: 50%;\n  transform: translateX(-50%);\n'], ['\n  position: ', ';\n  margin-bottom: 30px;\n  left: 50%;\n  transform: translateX(-50%);\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 100px;\n'], ['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 100px;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  position: ', ';\n  left: 50%;\n  transform: translateX(-50%);\n'], ['\n  position: ', ';\n  left: 50%;\n  transform: translateX(-50%);\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n'], ['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n'], ['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n']);
 
 var _react = __webpack_require__(1);
@@ -16511,7 +16511,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 */
 
 var MainContainer = _styledComponents2.default.div(_templateObject, function (props) {
-  return props.isBody ? '-220px' : '200px';
+  return props.isBody ? '-220px' : '190px';
 });
 
 var Body = _styledComponents2.default.div(_templateObject2);
@@ -49501,7 +49501,7 @@ var LocalContainer = function (_Component) {
     value: function createSVGCLickAnimation(sidenav) {
       return new _gsap.TimelineLite({ paused: true }).to(sidenav, 0.4, {
         x: '+=325px'
-      }).to(document.getElementById('bodyContainer'), 0.4, {
+      }).to(document.getElementById('bodyContainer'), 0.3, {
         marginLeft: '+=325px'
       }, '-=0.4');
     }
@@ -49845,9 +49845,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var createSVGHoverAnimation = function createSVGHoverAnimation(target) {
-  return new _gsap.TimelineLite({ paused: true }).to(target, 0.2, {
-    scale: 1.05,
-    fill: '#BDBDBD'
+  return new _gsap.TimelineLite({ paused: true }).to(target, 0.1, {
+    scale: 1.1
   });
 };
 

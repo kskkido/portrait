@@ -20,7 +20,7 @@ const MainContainer = styled.div`
   width: 100%;
   cursor: move;
   position: absolute;
-  top: ${props => props.isBody ? '-220px' : '200px'};
+  top: ${props => props.isBody ? '-220px' : '190px'};
   left: 0;
   right: 0;
   z-index: 100

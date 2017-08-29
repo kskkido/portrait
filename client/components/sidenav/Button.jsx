@@ -6,9 +6,8 @@ import { createSVG } from '../shared/Factory'
 
 const createSVGHoverAnimation = (target) => {
   return new TimelineLite({paused: true})
-    .to(target, 0.2, {
-      scale: 1.05,
-      fill: '#BDBDBD'
+    .to(target, 0.1, {
+      scale: 1.1
     })
 }
 

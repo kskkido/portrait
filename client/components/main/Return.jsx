@@ -6,7 +6,6 @@ import { TimelineLite, Back } from 'gsap'
 
 const ReturnContainer = styled.div`
   position: ${props => props.isBody ? 'relative' : 'absolute'};
-  margin-bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
 `
@@ -16,7 +15,7 @@ const ButtonContainer = styled.div`
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  height: 100px;
+  height: 110px;
 `
 
 const HomeTextContainer = styled.div`
