@@ -69,7 +69,7 @@ class LocalContainer extends Component {
 
   componentWillMount() {
   const { value, isValid } = this.props.value
-    this.setState(Object.assign({}, ...this.state, {localValue: value, isValid: isValid}))
+    this.setState(Object.assign({}, {localValue: value, isValid: isValid}))
   }
 
   componentDidMount() {
@@ -86,7 +86,7 @@ class LocalContainer extends Component {
   }
 
   onChangeHandler(value, isValid) {
-    this.setState(Object.assign({}, ...this.state, {localValue: value.trim(), isValid}))
+    this.setState(Object.assign({}, {localValue: value.trim(), isValid}))
   }
 
   render() {

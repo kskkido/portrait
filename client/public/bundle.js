@@ -16526,8 +16526,6 @@ var _Navigation2 = _interopRequireDefault(_Navigation);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -16657,7 +16655,7 @@ var LocalContainer = function (_Component) {
       var magnitude = this.props.rotation - rotation,
           targetOffset = this.slideBody(magnitude % 360);
 
-      this.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(this.state), [{ targetOffset: targetOffset }])));
+      this.setState(Object.assign({}, { targetOffset: targetOffset }));
     }
   }, {
     key: 'shouldComponentUpdate',
@@ -45308,67 +45306,6 @@ exports.default = (0, _reactRedux.connect)(function (_ref2) {
   return { loaded: events.loaded };
 })(App);
 
-/* ==== DEFINE ROUTES ====
-  PATH: /
-   +-- Language Query Component
-   +-- Loading Component  <-- SVG animation that completes with name
-   +-- Home Component  <-- circular nav with links to projects
-    +-- Circular nav component
-  PATH: /projects/:name
-   +-- Project Components <-- Image or preview of project. Project metadata
-    +-- Audiosphere
-    +-- StackQuest
-    +-- Portfolio
-  PATH: /bio
-   +-- Bio Component <-- Incorporate three js? Aframe? As interactive timeline of my life
-    +--
-  PATH: /contact
-   +-- link card <-- github, linkedin, anything else?
-  PATH: /share
-   +-- oauth
-*/
-
-/* ==== KEY FUNCTIONALITY/TECHNOLOGY TO DEMONSTRATE
-  ANIMATIONS: Transitions, Static, loading animations, on hover animations, prompts
-    +-- Anime JS
-    +-- GSAP
-    +-- CSS3
-  LAYOUT DESIGN:
-    +-- CSS3
-    +-- FLEXBOX
-    +-- React Components
-
-*/
-
-/* ====== DEFINE CONTENT ======
-  GENERAL LAYOUT:
-    Color Theme:
-
-
-    Content:
-      Circular navigation at the top to navigate through components within current side nav option
-      Side nav to navigate to different categories below
-
-    Animation:
-      Transition animation for loading screen after language is selected
-
-  HOME:
-    Content:
-      Landing Component -> brief welcome, maybe instruction to scroll to activate circular nav
-      Bio 1 -> Brief explanation of my developer background and my base location
-        -> Pin my locations on a global map or animate my movement on a map
-      Bio 2 ->
-
-  PROJECT:
-
-  CONTACT:
-
-  PRELOAD:
-  +-- Language Query
-    Content: English or Japanese Button
-    Animation:
-*/
-
 /***/ }),
 /* 294 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -54689,8 +54626,6 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -54777,7 +54712,7 @@ var LocalContainer = function (_Component) {
           value = _props$value.value,
           isValid = _props$value.isValid;
 
-      this.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(this.state), [{ localValue: value, isValid: isValid }])));
+      this.setState(Object.assign({}, { localValue: value, isValid: isValid }));
     }
   }, {
     key: 'componentDidMount',
@@ -54801,7 +54736,7 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'onChangeHandler',
     value: function onChangeHandler(value, isValid) {
-      this.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(this.state), [{ localValue: value.trim(), isValid: isValid }])));
+      this.setState(Object.assign({}, { localValue: value.trim(), isValid: isValid }));
     }
   }, {
     key: 'render',
@@ -54852,8 +54787,6 @@ var _Styles = __webpack_require__(10);
 var _utils = __webpack_require__(41);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -54938,7 +54871,8 @@ var LocalContainer = function (_Component) {
           value = _props$value.value,
           isValid = _props$value.isValid;
 
-      this.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(this.state), [{ localValue: value, isValid: isValid }])));
+
+      this.setState(Object.assign({}, { localValue: value, isValid: isValid }));
     }
   }, {
     key: 'componentDidMount',
@@ -54962,7 +54896,7 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'onChangeHandler',
     value: function onChangeHandler(value, isValid) {
-      this.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(this.state), [{ localValue: value, isValid: isValid }])));
+      this.setState(Object.assign({}, { localValue: value, isValid: isValid }));
     }
   }, {
     key: 'render',
@@ -55013,8 +54947,6 @@ var _Styles = __webpack_require__(10);
 var _utils = __webpack_require__(41);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -55088,7 +55020,7 @@ var LocalContainer = function (_Component) {
           isValid = _props$value.isValid;
 
 
-      this.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(this.state), [{ localValue: value, isValid: isValid }])));
+      this.setState(Object.assign({}, { localValue: value, isValid: isValid }));
     }
   }, {
     key: 'componentDidMount',
@@ -55112,7 +55044,7 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'onChangeHandler',
     value: function onChangeHandler(value, isValid) {
-      this.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(this.state), [{ localValue: value, isValid: isValid }])));
+      this.setState(Object.assign({}, { localValue: value, isValid: isValid }));
     }
   }, {
     key: 'render',
@@ -56456,8 +56388,6 @@ var _Transition = __webpack_require__(19);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -56548,13 +56478,13 @@ var LocalContainer = function (_Component) {
       var _this3 = this;
 
       return clearInterval(interval), LocalContainer.letterAnimation(this.letters, function () {
-        return _this3.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(_this3.state), [{ loaded: true }])));
+        return _this3.setState(Object.assign({}, _this3.state, { loaded: true }));
       });
     }
   }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.props.formFetch().then(console.log.bind(null, 'fetched'));
+      this.props.formFetch();
     }
   }, {
     key: 'componentDidMount',

@@ -102,12 +102,11 @@ class LocalContainer extends Component {
   }
 
   clearIntervalAndToggle(interval) {
-    return (clearInterval(interval), LocalContainer.letterAnimation(this.letters, () => this.setState(Object.assign({}, ...this.state, {loaded: true}))))
+    return (clearInterval(interval), LocalContainer.letterAnimation(this.letters, () => this.setState(Object.assign({}, this.state, {loaded: true}))))
   }
 
   componentWillMount() {
     this.props.formFetch()
-      .then(console.log.bind(null, 'fetched'))
   }
 
   componentDidMount() {

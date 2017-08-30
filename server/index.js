@@ -36,7 +36,6 @@ app
 
 	.get('*', (req, res, next) => {
 		res.sendFile(join(__dirname, '..', '/client/public/index.html'))
-		console.log('get request')
 	})
 
 // error handling middlware
@@ -46,5 +45,5 @@ app
 	})
 
 	.listen(port, () => {
-		console.log('litening on port number: ', port)
+		console.log('listening on port number: ', port)
 	})
