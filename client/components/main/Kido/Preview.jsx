@@ -17,14 +17,4 @@ const ProjectsPreview = ({ history, viewIndex }) => {
   )
 }
 
-class LocalContainer extends Component {
-
-  render() {
-
-    return (
-      <ProjectsPreview />
-    )
-  }
-}
-
 export default withRouter(ProjectsPreview)

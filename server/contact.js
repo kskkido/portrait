@@ -2,6 +2,7 @@ const api = module.exports = require('express').Router()
     , { initialProp } = require('./constant')
 api
   .get('/', (req, res, next) => {
+    console.log(req.session.contact)
     res.send(req.session.contact)
   })
 
@@ -10,13 +11,7 @@ api
     res.sendStatus(200)
   })
 
-  .put('/', ({ session, body }, res, next) => {
-
-    for (const prop in body.contact) {
-      if (body.contact.hasOwnProperty(prop)) {
-        session.contact[prop] = body.contact[prop]
-      }
-    }
-
+  .put('/:props', ({ params: {props}, session, body }, res, next) => {
+    session.contact[props] = body.contact
     res.sendStatus(200)
   })

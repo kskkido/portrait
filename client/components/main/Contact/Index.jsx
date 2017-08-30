@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { viewData } from '../../shared/Data'
 import { pathChange, viewChange, rotationChange } from '../../../reducers/events'
 import { asyncFormRestart, formUpdate } from '../../../reducers/form'
-import { asyncFormPut } from './utils'
+import { asyncFormPut, tap } from './utils'
 import BodyComponent from '../Body'
 import Name from './Name'
 import Email from './Email'
@@ -83,10 +83,6 @@ class LocalContainer extends Component {
     this.setRotation = LocalContainer.setRotation(list.length)
   }
 
-  componentWillUnmount() {
-    asyncFormPut(this.props.form)
-  }
-
   changeView(index) {
     return (this.props.rotationChange(this.setRotation(index)), this.props.viewChange(index))
   }
@@ -136,7 +132,7 @@ const mapDispatchToProps = (dispatch) => ({
   viewChange: (index) => dispatch(viewChange(index)),
   rotationChange: (rotation) => dispatch(rotationChange(rotation)),
   formRestart: () => dispatch(asyncFormRestart()),
-  formUpdate: (props, payload) => dispatch(formUpdate(props, payload))
+  formUpdate: (props, payload) => dispatch(formUpdate(...tap(asyncFormPut, props, payload)))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalContainer)

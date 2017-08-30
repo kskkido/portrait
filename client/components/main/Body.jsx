@@ -99,10 +99,10 @@ class LocalContainer extends Component {
     }
   }
 
-  static flattenRotation (length) {
+  static normalize (length) {
     return (rotation) => {
-      const flattened = rotation / (360 / length)
-      return flattened < 0 ? (Math.ceil(-(flattened) / length) * length) + flattened : flattened % length
+      const normalized = rotation / (360 / length)
+      return normalized < 0 ? (Math.ceil(-(normalized) / length) * length) + normalized : normalized % length
     }
   }
 
@@ -131,11 +131,11 @@ class LocalContainer extends Component {
     return location.pathname !== history.location.pathname
   }
 
-  willSetView(flattened) {
-    const ratio = flattened % 1
-        , rounded = Math.round(flattened)
+  willSetView(normalized) {
+    const ratio = normalized % 1
+        , rounded = Math.round(normalized)
 
-    if (ratio <= 0.1 && rounded !== this.props.viewIndex) {
+    if (ratio <= 0.05 && rounded !== this.props.viewIndex) {
       this.props.viewChange(rounded)
     }
   }
@@ -143,8 +143,8 @@ class LocalContainer extends Component {
   componentWillMount() {
     const { length } = this.props.navigationList
 
-    this.flattenRotation = LocalContainer.flattenRotation(length)
-    this.dragCB = (targetRotation) => this.willSetView(this.flattenRotation(LocalContainer.tap(targetRotation, this.props.rotationChange)))
+    this.normalize = LocalContainer.normalize(length)
+    this.dragCB = (targetRotation) => this.willSetView(this.normalize(LocalContainer.tap(targetRotation, this.props.rotationChange)))
     this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB)
   }
 

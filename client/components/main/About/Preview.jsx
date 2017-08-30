@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Button from '../Button'
 import { PreviewContainer } from '../../shared/Styles'
 import data from './content'

@@ -15,7 +15,7 @@ const BgOne = styled.div.attrs({
     width: props.theme.width
   })
 })`
-  background-color: ${viewData.home.backgroundColor[0]};
+  background-color: ${viewData.home.secondaryColor};
   position: absolute;
   z-index: -99;
 `

@@ -267,7 +267,6 @@ class LocalContainer extends Component {
 
 const mapStateToProps = ({ events }) => ({
   pathIndex: events.pathIndex,
-  backgroundTransition: events.backgroundTransition
 })
 
 const mapDispatchToProps = (dispatch) => ({

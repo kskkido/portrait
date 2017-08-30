@@ -23,7 +23,7 @@ const ProgressBar = styled.div.attrs({
   height: 50vh;
   position: absolute;
   bottom: 0;
-  background-color: ${viewData.home.backgroundColor[0]};
+  background-color: ${viewData.home.secondaryColor};
   left: 0;
   border-top: 2px solid;
   z-index: 1;

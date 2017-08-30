@@ -8,7 +8,7 @@ export const once = (fn) => {
   )
 }
 
-export const getPrimaryAndSecondary = ({ backgroundColor: [first], secondaryColor }) => [first, secondaryColor]
+export const getPrimaryAndSecondary = ({ backgroundColor, secondaryColor }, index = 0) => [backgroundColor[index], secondaryColor]
 
 export const convertToAsci = (string, runningValue = []) => (
 	string ?
@@ -40,3 +40,6 @@ export const createSpans = (length, LetterComponent = Letter) => {
   }
   return spanList
 }
+
+const isEven = n => n % 2 === 0
+export const getPair = (n, [front, back]) => isEven(n) ? [front, back] : [back, front]

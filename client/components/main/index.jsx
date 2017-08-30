@@ -22,11 +22,8 @@ const Container = styled.div`
 
 /* ====== utils ====== */
 
-const BodyRoutes = ({ loaded }) => (
+const BodyRoutes = ({ viewIndex }) => (
   <Route render={({ location }) => {
-    if (!loaded) {
-      return <Preload />
-    }
 
     return (
       <TransitionGroup
@@ -37,6 +34,7 @@ const BodyRoutes = ({ loaded }) => (
         <Show
           key={location.key}
           pathname={location.pathname}
+          viewIndex={viewIndex}
         >
           <Switch location={location}>
             <Route path="/about" component={About} />
@@ -51,18 +49,18 @@ const BodyRoutes = ({ loaded }) => (
   />
 )
 
-const Main = ({ loaded }) => {
+const Main = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <Container id="bodyContainer">
-        <BodyRoutes  loaded={loaded} />
+        <BodyRoutes  {...props} />
       </Container>
     </ThemeProvider>
   )
 }
 
 const mapStateToProps = ({ events }) => ({
-  loaded: events.loaded
+  viewIndex: events.viewIndex
 })
 
 

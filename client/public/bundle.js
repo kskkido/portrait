@@ -11862,10 +11862,18 @@ var toggle = false,
     running = false;
 
 var themeColor = {
-  '/': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.home),
-  '/about': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.about),
-  '/projects': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.projects),
-  '/contact': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.contact)
+  '/': function _(index) {
+    return (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.home, index);
+  },
+  '/about': function about(index) {
+    return (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.about, index);
+  },
+  '/projects': function projects(index) {
+    return (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.projects, index);
+  },
+  '/contact': function contact(index) {
+    return (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.contact, index);
+  }
 };
 
 var indexHash = {
@@ -11906,6 +11914,7 @@ var verticalSlide = function () {
       } else {
         var _tl$set$set$from;
 
+        toggle = !toggle;
         tl.set(bgBehind, { zIndex: behindIndex }) // push current front to back
         .set(bgFront, { zIndex: frontIndex }) // push current back to front, does not appear, since height will be tweened from 0
         .from(bgFront, slideDuration, (_tl$set$set$from = {}, _defineProperty(_tl$set$set$from, direction, 0), _defineProperty(_tl$set$set$from, 'height', 0), _defineProperty(_tl$set$set$from, 'ease', _gsap.Power2.easeIn), _defineProperty(_tl$set$set$from, 'onComplete', function onComplete() {
@@ -11913,7 +11922,7 @@ var verticalSlide = function () {
             args[_key] = arguments[_key];
           }
 
-          return toggle = !toggle, cb && cb.call(undefined, args[2]), curriedSlide.apply(undefined, args);
+          return cb && cb.call(undefined, args[2]), curriedSlide.apply(undefined, args);
         }), _defineProperty(_tl$set$set$from, 'onCompleteParams', [bgFront, bgBehind, tl, repeat - 1]), _defineProperty(_tl$set$set$from, 'clearProps', direction), _tl$set$set$from)); // tween new front to fill background
       }
     };
@@ -11930,20 +11939,25 @@ var verticalSlide = function () {
     };
   };
 
+  //horizontalSlide
+
   return {
-    onEnter: function onEnter(duration, primaryColor, secondaryColor) {
-      var direction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'top';
+    onEnter: function onEnter(duration) {
+      var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';
+      var colors = arguments[2];
       return function (target, isAppearing) {
         running = !isAppearing;
+
         var front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne'),
             behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo'),
-            repeat = isAppearing ? -1 : Math.floor((duration - fadeInDuration) / slideDuration) - 1,
-            tl = new _gsap.TimelineLite()
-        // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
-        // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
-        .set(behind, { backgroundColor: secondaryColor, height: '100vh' }).set(front, { height: '100vh' }).set(target, { autoAlpha: 0, y: '-=200px' }).delay(0.4);
+            repeat = isAppearing ? 0 : Math.floor((duration - fadeInDuration) / slideDuration) - 1,
+            _getPair = (0, _Utils.getPair)(repeat, colors),
+            _getPair2 = _slicedToArray(_getPair, 2),
+            frontColor = _getPair2[0],
+            backColor = _getPair2[1],
+            tl = new _gsap.TimelineLite().set(target, { autoAlpha: 0, y: '-=200px' }).set(front, { height: '100vh' }).set(behind, { backgroundColor: frontColor, height: '100vh' }).delay(0.4);
 
-        slideVerticalBackground((0, _Utils.once)(cbAnimation(front, primaryColor)), fadeInBody(target), direction)(front, behind, tl, repeat);
+        slideVerticalBackground((0, _Utils.once)(cbAnimation(front, backColor)), fadeInBody(target), direction)(front, behind, tl, repeat);
       };
     },
     onExit: function onExit(target) {
@@ -11956,15 +11970,13 @@ var verticalSlide = function () {
 }();
 
 var Show = exports.Show = function Show(props) {
-  var _themeColor = _slicedToArray(themeColor[props.pathname || '/'], 2),
-      primaryColor = _themeColor[0],
-      secondaryColor = _themeColor[1],
-      direction = indexHash.getDirection(props.pathname || '/'),
+  var colorPair = indexHash.prev === indexHash[props.pathname] ? themeColor[props.pathname](props.viewIndex) : themeColor[props.pathname](),
+      direction = indexHash.getDirection(props.pathname),
       duration = 1100;
 
   return _react2.default.createElement(_reactTransitionGroup.Transition, _extends({}, props, {
     timeout: { enter: duration, exit: 300 },
-    onEnter: verticalSlide.onEnter(duration / 1000, primaryColor, secondaryColor, direction),
+    onEnter: verticalSlide.onEnter(duration / 1000, direction, colorPair),
     onExit: verticalSlide.onExit
   }));
 };
@@ -11991,14 +12003,14 @@ var horizontalSlide = function () {
   };
 
   return {
-    onEnter: function onEnter(duration, offset, color) {
+    onEnter: function onEnter(duration, direction, color) {
       return function (target) {
         if (running) return; // hacky
 
         var front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne'),
             behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo'),
-            direction = offset > 0 ? 'right' : 'left',
             tl = new _gsap.TimelineLite().set(behind, { backgroundColor: color });
+
         slideHorizontalBackground(front, behind, tl, direction);slideInContent(direction, target, tl);
         toggle = !toggle;
       };
@@ -12012,11 +12024,12 @@ var horizontalSlide = function () {
 }();
 
 var Slide = exports.Slide = function Slide(_props) {
-  var props = Object.assign({}, _props);
+  var direction = _props.targetOffset > 0 ? 'right' : 'left',
+      props = Object.assign({}, _props);
   delete props.targetOffset;delete props.color;
   return _react2.default.createElement(_reactTransitionGroup.Transition, _extends({}, props, {
     timeout: { enter: 800, exit: 200 },
-    onEntering: horizontalSlide.onEnter(props.duration || 0.8, _props.targetOffset * 2 % 300, _props.color || '#ecf0f1'),
+    onEntering: horizontalSlide.onEnter(props.duration || 0.8, direction, _props.color || '#ecf0f1'),
     onExiting: horizontalSlide.onExit
   }));
 };
@@ -14878,7 +14891,7 @@ var asyncFormRestart = exports.asyncFormRestart = function asyncFormRestart() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.asyncFormPut = exports.secretProperty = exports.validateEmail = exports.initialValue = undefined;
+exports.tap = exports.asyncFormPut = exports.secretProperty = exports.validateEmail = exports.initialValue = undefined;
 
 var _axios = __webpack_require__(128);
 
@@ -14892,10 +14905,18 @@ var validateEmail = exports.validateEmail = function validateEmail(email) {
   );
 };
 var secretProperty = exports.secretProperty = Symbol('fetched');
-var asyncFormPut = exports.asyncFormPut = function asyncFormPut(data) {
-  return _axios2.default.put('/api', {
+var asyncFormPut = exports.asyncFormPut = function asyncFormPut(prop, data) {
+  return _axios2.default.put('/api/' + prop, {
     contact: data
   });
+};
+
+var tap = exports.tap = function tap(fn) {
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
+  return fn.apply(undefined, args), args;
 };
 
 /***/ }),
@@ -14975,7 +14996,7 @@ var createPath = exports.createPath = function createPath(location) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createSpans = exports.createTitle = exports.convertToString = exports.convertToAsci = exports.getPrimaryAndSecondary = exports.once = undefined;
+exports.getPair = exports.createSpans = exports.createTitle = exports.convertToString = exports.convertToAsci = exports.getPrimaryAndSecondary = exports.once = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -15001,11 +15022,10 @@ var once = exports.once = function once(fn) {
 };
 
 var getPrimaryAndSecondary = exports.getPrimaryAndSecondary = function getPrimaryAndSecondary(_ref) {
-  var _ref$backgroundColor = _slicedToArray(_ref.backgroundColor, 1),
-      first = _ref$backgroundColor[0],
+  var backgroundColor = _ref.backgroundColor,
       secondaryColor = _ref.secondaryColor;
-
-  return [first, secondaryColor];
+  var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  return [backgroundColor[index], secondaryColor];
 };
 
 var convertToAsci = exports.convertToAsci = function convertToAsci(string) {
@@ -15042,6 +15062,17 @@ var createSpans = exports.createSpans = function createSpans(length) {
     spanList.push(_react2.default.createElement(LetterComponent, { key: 'index_' + i }));
   }
   return spanList;
+};
+
+var isEven = function isEven(n) {
+  return n % 2 === 0;
+};
+var getPair = exports.getPair = function getPair(n, _ref2) {
+  var _ref3 = _slicedToArray(_ref2, 2),
+      front = _ref3[0],
+      back = _ref3[1];
+
+  return isEven(n) ? [front, back] : [back, front];
 };
 
 /***/ }),
@@ -16582,11 +16613,11 @@ var LocalContainer = function (_Component) {
 
   _createClass(LocalContainer, [{
     key: 'willSetView',
-    value: function willSetView(flattened) {
-      var ratio = flattened % 1,
-          rounded = Math.round(flattened);
+    value: function willSetView(normalized) {
+      var ratio = normalized % 1,
+          rounded = Math.round(normalized);
 
-      if (ratio <= 0.1 && rounded !== this.props.viewIndex) {
+      if (ratio <= 0.05 && rounded !== this.props.viewIndex) {
         this.props.viewChange(rounded);
       }
     }
@@ -16598,9 +16629,9 @@ var LocalContainer = function (_Component) {
       var length = this.props.navigationList.length;
 
 
-      this.flattenRotation = LocalContainer.flattenRotation(length);
+      this.normalize = LocalContainer.normalize(length);
       this.dragCB = function (targetRotation) {
-        return _this2.willSetView(_this2.flattenRotation(LocalContainer.tap(targetRotation, _this2.props.rotationChange)));
+        return _this2.willSetView(_this2.normalize(LocalContainer.tap(targetRotation, _this2.props.rotationChange)));
       };
       this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB);
     }
@@ -16705,11 +16736,11 @@ var LocalContainer = function (_Component) {
       };
     }
   }, {
-    key: 'flattenRotation',
-    value: function flattenRotation(length) {
+    key: 'normalize',
+    value: function normalize(length) {
       return function (rotation) {
-        var flattened = rotation / (360 / length);
-        return flattened < 0 ? Math.ceil(-flattened / length) * length + flattened : flattened % length;
+        var normalized = rotation / (360 / length);
+        return normalized < 0 ? Math.ceil(-normalized / length) * length + normalized : normalized % length;
       };
     }
   }, {
@@ -27467,11 +27498,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var toggle = false,
     running = false;
 
-var themeColor = {
-  '/': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.home),
-  '/about': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.about),
-  '/projects': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.projects),
-  '/contact': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.contact)
+var themeColor = function themeColor(index) {
+  return {
+    '/': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.home, index),
+    '/about': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.about, index),
+    '/projects': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.projects, index),
+    '/contact': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.contact, index)
+  };
 };
 
 var indexHash = {
@@ -27512,6 +27545,7 @@ var verticalSlide = function () {
       } else {
         var _tl$set$set$from;
 
+        toggle = !toggle;
         tl.set(bgBehind, { zIndex: behindIndex }) // push current front to back
         .set(bgFront, { zIndex: frontIndex }) // push current back to front, does not appear, since height will be tweened from 0
         .from(bgFront, slideDuration, (_tl$set$set$from = {}, _defineProperty(_tl$set$set$from, direction, 0), _defineProperty(_tl$set$set$from, 'height', 0), _defineProperty(_tl$set$set$from, 'ease', _gsap.Power2.easeIn), _defineProperty(_tl$set$set$from, 'onComplete', function onComplete() {
@@ -27519,7 +27553,7 @@ var verticalSlide = function () {
             args[_key] = arguments[_key];
           }
 
-          return toggle = !toggle, cb && cb.call(undefined, args[2]), curriedSlide.apply(undefined, args);
+          return cb && cb.call(undefined, args[2]), curriedSlide.apply(undefined, args);
         }), _defineProperty(_tl$set$set$from, 'onCompleteParams', [bgFront, bgBehind, tl, repeat - 1]), _defineProperty(_tl$set$set$from, 'clearProps', direction), _tl$set$set$from)); // tween new front to fill background
       }
     };
@@ -27536,19 +27570,21 @@ var verticalSlide = function () {
     };
   };
 
+  //horizontalSlide
+
   return {
     onEnter: function onEnter(duration, primaryColor, secondaryColor) {
       var direction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'top';
       return function (target, isAppearing) {
-        running = !isAppearing;
+        if (isAppearing) {
+          return horizontalSlide.onEnter(duration, 'left', primaryColor, 0.4)(target);
+        }
+        running = true;
+
         var front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne'),
             behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo'),
-            repeat = isAppearing ? -1 : Math.floor((duration - fadeInDuration) / slideDuration) - 1,
-            tl = new _gsap.TimelineLite()
-        // .set([target, ...sideNav], {autoAlpha: 0, top: '-=100px'})
-        // .set(sideNav, {scale: 0, marginTop: '+=20px'}) // get rid of eventually with hideanimation
-        .set(behind, { backgroundColor: secondaryColor, height: '100vh' }).set(front, { height: '100vh' }).set(target, { autoAlpha: 0, y: '-=200px' }).delay(0.4);
-
+            repeat = Math.floor((duration - fadeInDuration) / slideDuration) - 1,
+            tl = new _gsap.TimelineLite().set(target, { autoAlpha: 0, y: '-=200px' }).set(front, { height: '100vh' }).set(behind, { backgroundColor: secondaryColor, height: '100vh' }).delay(0.4);
         slideVerticalBackground((0, _Utils.once)(cbAnimation(front, primaryColor)), fadeInBody(target), direction)(front, behind, tl, repeat);
       };
     },
@@ -27562,11 +27598,14 @@ var verticalSlide = function () {
 }();
 
 var Show = exports.Show = function Show(props) {
-  var _themeColor = _slicedToArray(themeColor[props.pathname || '/'], 2),
-      primaryColor = _themeColor[0],
-      secondaryColor = _themeColor[1],
-      direction = indexHash.getDirection(props.pathname || '/'),
+  var _ref = indexHash.prev === indexHash[props.pathname] ? themeColor(props.viewIndex)[props.pathname] : themeColor()[props.pathname],
+      _ref2 = _slicedToArray(_ref, 2),
+      primaryColor = _ref2[0],
+      secondaryColor = _ref2[1],
+      direction = indexHash.getDirection(props.pathname),
       duration = 1100;
+
+  console.log(primaryColor, secondaryColor, 'YO SHOW');
 
   return _react2.default.createElement(_reactTransitionGroup.Transition, _extends({}, props, {
     timeout: { enter: duration, exit: 300 },
@@ -27597,14 +27636,14 @@ var horizontalSlide = function () {
   };
 
   return {
-    onEnter: function onEnter(duration, offset, color) {
+    onEnter: function onEnter(duration, direction, color) {
+      var delay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       return function (target) {
         if (running) return; // hacky
 
         var front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne'),
             behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo'),
-            direction = offset > 0 ? 'right' : 'left',
-            tl = new _gsap.TimelineLite().set(behind, { backgroundColor: color });
+            tl = new _gsap.TimelineLite().set(behind, { backgroundColor: color }).delay(delay);
         slideHorizontalBackground(front, behind, tl, direction);slideInContent(direction, target, tl);
         toggle = !toggle;
       };
@@ -27618,11 +27657,12 @@ var horizontalSlide = function () {
 }();
 
 var Slide = exports.Slide = function Slide(_props) {
-  var props = Object.assign({}, _props);
+  var direction = _props.targetOffset > 0 ? 'right' : 'left',
+      props = Object.assign({}, _props);
   delete props.targetOffset;delete props.color;
   return _react2.default.createElement(_reactTransitionGroup.Transition, _extends({}, props, {
     timeout: { enter: 800, exit: 200 },
-    onEntering: horizontalSlide.onEnter(props.duration || 0.8, _props.targetOffset * 2 % 300, _props.color || '#ecf0f1'),
+    onEntering: horizontalSlide.onEnter(props.duration || 0.8, direction, _props.color || '#ecf0f1'),
     onExiting: horizontalSlide.onExit
   }));
 };
@@ -27631,9 +27671,9 @@ var Slide = exports.Slide = function Slide(_props) {
 
 var collapseAnimation = function () {
 
-  var collapse = function collapse(_ref) {
-    var _ref$childNodes = _slicedToArray(_ref.childNodes, 1),
-        main = _ref$childNodes[0];
+  var collapse = function collapse(_ref3) {
+    var _ref3$childNodes = _slicedToArray(_ref3.childNodes, 1),
+        main = _ref3$childNodes[0];
 
     new _gsap.TimelineLite().from(main, 0.9, {
       height: '0',
@@ -27647,9 +27687,9 @@ var collapseAnimation = function () {
     }, 0.15);
   };
 
-  var uncollapse = function uncollapse(_ref2) {
-    var _ref2$childNodes = _slicedToArray(_ref2.childNodes, 1),
-        main = _ref2$childNodes[0];
+  var uncollapse = function uncollapse(_ref4) {
+    var _ref4$childNodes = _slicedToArray(_ref4.childNodes, 1),
+        main = _ref4$childNodes[0];
 
     new _gsap.TimelineLite().to(main, 0.3, {
       autoAlpha: 0
@@ -27732,8 +27772,8 @@ var scrambleAnimation = function () {
   };
 
   var onEnter = function onEnter(duration, delay, asciList) {
-    return function (_ref3) {
-      var childNodes = _ref3.childNodes;
+    return function (_ref5) {
+      var childNodes = _ref5.childNodes;
 
       var letterDuration = duration / asciList.length,
           tl = new _gsap.TimelineLite().delay(delay);
@@ -49102,7 +49142,7 @@ var BgOne = _styledComponents2.default.div.attrs({
       width: props.theme.width
     };
   }
-})(_templateObject2, _Data.viewData.home.backgroundColor[0]);
+})(_templateObject2, _Data.viewData.home.secondaryColor);
 
 var BgTwo = BgOne.extend(_templateObject3, _Data.viewData.home.secondaryColor);
 
@@ -49522,8 +49562,7 @@ var LocalContainer = function (_Component) {
 var mapStateToProps = function mapStateToProps(_ref5) {
   var events = _ref5.events;
   return {
-    pathIndex: events.pathIndex,
-    backgroundTransition: events.backgroundTransition
+    pathIndex: events.pathIndex
   };
 };
 
@@ -50706,13 +50745,10 @@ var Container = _styledComponents2.default.div(_templateObject);
 /* ====== utils ====== */
 
 var BodyRoutes = function BodyRoutes(_ref) {
-  var loaded = _ref.loaded;
+  var viewIndex = _ref.viewIndex;
   return _react2.default.createElement(_reactRouterDom.Route, { render: function render(_ref2) {
       var location = _ref2.location;
 
-      if (!loaded) {
-        return _react2.default.createElement(_Preload2.default, null);
-      }
 
       return _react2.default.createElement(
         _reactTransitionGroup.TransitionGroup,
@@ -50725,7 +50761,8 @@ var BodyRoutes = function BodyRoutes(_ref) {
           _Transition.Show,
           {
             key: location.key,
-            pathname: location.pathname
+            pathname: location.pathname,
+            viewIndex: viewIndex
           },
           _react2.default.createElement(
             _reactRouterDom.Switch,
@@ -50741,24 +50778,22 @@ var BodyRoutes = function BodyRoutes(_ref) {
   });
 };
 
-var Main = function Main(_ref3) {
-  var loaded = _ref3.loaded;
-
+var Main = function Main(props) {
   return _react2.default.createElement(
     _styledComponents.ThemeProvider,
     { theme: theme },
     _react2.default.createElement(
       Container,
       { id: 'bodyContainer' },
-      _react2.default.createElement(BodyRoutes, { loaded: loaded })
+      _react2.default.createElement(BodyRoutes, props)
     )
   );
 };
 
-var mapStateToProps = function mapStateToProps(_ref4) {
-  var events = _ref4.events;
+var mapStateToProps = function mapStateToProps(_ref3) {
+  var events = _ref3.events;
   return {
-    loaded: events.loaded
+    viewIndex: events.viewIndex
   };
 };
 
@@ -51022,8 +51057,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createSpans = exports.createTitle = exports.convertToString = exports.convertToAsci = exports.getPrimaryAndSecondary = exports.once = undefined;
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -51046,11 +51079,10 @@ var once = exports.once = function once(fn) {
 };
 
 var getPrimaryAndSecondary = exports.getPrimaryAndSecondary = function getPrimaryAndSecondary(_ref) {
-  var _ref$backgroundColor = _slicedToArray(_ref.backgroundColor, 1),
-      first = _ref$backgroundColor[0],
+  var backgroundColor = _ref.backgroundColor,
       secondaryColor = _ref.secondaryColor;
-
-  return [first, secondaryColor];
+  var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  return [backgroundColor[index], secondaryColor];
 };
 
 var convertToAsci = exports.convertToAsci = function convertToAsci(string) {
@@ -54447,6 +54479,8 @@ var _Return2 = _interopRequireDefault(_Return);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -54527,11 +54561,6 @@ var LocalContainer = function (_Component) {
     value: function componentWillMount() {
       this.props.pathChange(3);
       this.setRotation = LocalContainer.setRotation(list.length);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      (0, _utils.asyncFormPut)(this.props.form);
     }
   }, {
     key: 'changeView',
@@ -54623,7 +54652,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch((0, _form.asyncFormRestart)());
     },
     formUpdate: function formUpdate(props, payload) {
-      return dispatch((0, _form.formUpdate)(props, payload));
+      return dispatch(_form.formUpdate.apply(undefined, _toConsumableArray((0, _utils.tap)(_utils.asyncFormPut, props, payload))));
     }
   };
 };
@@ -56061,8 +56090,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -56080,12 +56107,6 @@ var _content = __webpack_require__(359);
 var _content2 = _interopRequireDefault(_content);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var ProjectsPreview = function ProjectsPreview(_ref) {
   var history = _ref.history,
@@ -56111,26 +56132,6 @@ var ProjectsPreview = function ProjectsPreview(_ref) {
       } })
   );
 };
-
-var LocalContainer = function (_Component) {
-  _inherits(LocalContainer, _Component);
-
-  function LocalContainer() {
-    _classCallCheck(this, LocalContainer);
-
-    return _possibleConstructorReturn(this, (LocalContainer.__proto__ || Object.getPrototypeOf(LocalContainer)).apply(this, arguments));
-  }
-
-  _createClass(LocalContainer, [{
-    key: 'render',
-    value: function render() {
-
-      return _react2.default.createElement(ProjectsPreview, null);
-    }
-  }]);
-
-  return LocalContainer;
-}(_react.Component);
 
 exports.default = (0, _reactRouterDom.withRouter)(ProjectsPreview);
 
@@ -56473,7 +56474,7 @@ var ProgressBar = _styledComponents2.default.div.attrs({
       width: props.loadProgress + '%'
     };
   }
-})(_templateObject2, _Data.viewData.home.backgroundColor[0]);
+})(_templateObject2, _Data.viewData.home.secondaryColor);
 
 var LoadingText = _Styles.Title3.extend(_templateObject3);
 
