@@ -27496,13 +27496,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var toggle = false,
     running = false;
 
-var themeColor = function themeColor(index) {
-  return {
-    '/': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.home, index),
-    '/about': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.about, index),
-    '/projects': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.projects, index),
-    '/contact': (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.contact, index)
-  };
+var themeColor = {
+  '/': function _(index) {
+    return (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.home, index);
+  },
+  '/about': function about(index) {
+    return (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.about, index);
+  },
+  '/projects': function projects(index) {
+    return (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.projects, index);
+  },
+  '/contact': function contact(index) {
+    return (0, _Utils.getPrimaryAndSecondary)(_Data.viewData.contact, index);
+  }
 };
 
 var indexHash = {
@@ -27571,19 +27577,22 @@ var verticalSlide = function () {
   //horizontalSlide
 
   return {
-    onEnter: function onEnter(duration, primaryColor, secondaryColor) {
-      var direction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'top';
+    onEnter: function onEnter(duration) {
+      var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';
+      var colors = arguments[2];
       return function (target, isAppearing) {
-        if (isAppearing) {
-          return horizontalSlide.onEnter(duration, 'left', primaryColor, 0.4)(target);
-        }
-        running = true;
+        running = !isAppearing;
 
         var front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne'),
             behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo'),
-            repeat = Math.floor((duration - fadeInDuration) / slideDuration) - 1,
-            tl = new _gsap.TimelineLite().set(target, { autoAlpha: 0, y: '-=200px' }).set(front, { height: '100vh' }).set(behind, { backgroundColor: secondaryColor, height: '100vh' }).delay(0.4);
-        slideVerticalBackground((0, _Utils.once)(cbAnimation(front, primaryColor)), fadeInBody(target), direction)(front, behind, tl, repeat);
+            repeat = isAppearing ? 0 : Math.floor((duration - fadeInDuration) / slideDuration) - 1,
+            _getPair = (0, _Utils.getPair)(repeat, colors),
+            _getPair2 = _slicedToArray(_getPair, 2),
+            frontColor = _getPair2[0],
+            backColor = _getPair2[1],
+            tl = new _gsap.TimelineLite().set(target, { autoAlpha: 0, y: '-=200px' }).set(front, { height: '100vh' }).set(behind, { backgroundColor: frontColor, height: '100vh' }).delay(0.4);
+
+        slideVerticalBackground((0, _Utils.once)(cbAnimation(front, backColor)), fadeInBody(target), direction)(front, behind, tl, repeat);
       };
     },
     onExit: function onExit(target) {
@@ -27596,18 +27605,13 @@ var verticalSlide = function () {
 }();
 
 var Show = exports.Show = function Show(props) {
-  var _ref = indexHash.prev === indexHash[props.pathname] ? themeColor(props.viewIndex)[props.pathname] : themeColor()[props.pathname],
-      _ref2 = _slicedToArray(_ref, 2),
-      primaryColor = _ref2[0],
-      secondaryColor = _ref2[1],
+  var colorPair = indexHash.prev === indexHash[props.pathname] ? themeColor[props.pathname](props.viewIndex) : themeColor[props.pathname](),
       direction = indexHash.getDirection(props.pathname),
       duration = 1100;
 
-  console.log(primaryColor, secondaryColor, 'YO SHOW');
-
   return _react2.default.createElement(_reactTransitionGroup.Transition, _extends({}, props, {
     timeout: { enter: duration, exit: 300 },
-    onEnter: verticalSlide.onEnter(duration / 1000, primaryColor, secondaryColor, direction),
+    onEnter: verticalSlide.onEnter(duration / 1000, direction, colorPair),
     onExit: verticalSlide.onExit
   }));
 };
@@ -27635,13 +27639,13 @@ var horizontalSlide = function () {
 
   return {
     onEnter: function onEnter(duration, direction, color) {
-      var delay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       return function (target) {
         if (running) return; // hacky
 
         var front = toggle ? document.getElementById('bgTwo') : document.getElementById('bgOne'),
             behind = toggle ? document.getElementById('bgOne') : document.getElementById('bgTwo'),
-            tl = new _gsap.TimelineLite().set(behind, { backgroundColor: color }).delay(delay);
+            tl = new _gsap.TimelineLite().set(behind, { backgroundColor: color });
+
         slideHorizontalBackground(front, behind, tl, direction);slideInContent(direction, target, tl);
         toggle = !toggle;
       };
@@ -27669,9 +27673,9 @@ var Slide = exports.Slide = function Slide(_props) {
 
 var collapseAnimation = function () {
 
-  var collapse = function collapse(_ref3) {
-    var _ref3$childNodes = _slicedToArray(_ref3.childNodes, 1),
-        main = _ref3$childNodes[0];
+  var collapse = function collapse(_ref) {
+    var _ref$childNodes = _slicedToArray(_ref.childNodes, 1),
+        main = _ref$childNodes[0];
 
     new _gsap.TimelineLite().from(main, 0.9, {
       height: '0',
@@ -27685,9 +27689,9 @@ var collapseAnimation = function () {
     }, 0.15);
   };
 
-  var uncollapse = function uncollapse(_ref4) {
-    var _ref4$childNodes = _slicedToArray(_ref4.childNodes, 1),
-        main = _ref4$childNodes[0];
+  var uncollapse = function uncollapse(_ref2) {
+    var _ref2$childNodes = _slicedToArray(_ref2.childNodes, 1),
+        main = _ref2$childNodes[0];
 
     new _gsap.TimelineLite().to(main, 0.3, {
       autoAlpha: 0
@@ -27770,8 +27774,8 @@ var scrambleAnimation = function () {
   };
 
   var onEnter = function onEnter(duration, delay, asciList) {
-    return function (_ref5) {
-      var childNodes = _ref5.childNodes;
+    return function (_ref3) {
+      var childNodes = _ref3.childNodes;
 
       var letterDuration = duration / asciList.length,
           tl = new _gsap.TimelineLite().delay(delay);
@@ -50992,7 +50996,9 @@ exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(LocalContai
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createSpans = exports.createTitle = exports.convertToString = exports.convertToAsci = exports.getPrimaryAndSecondary = exports.once = undefined;
+exports.getPair = exports.createSpans = exports.createTitle = exports.convertToString = exports.convertToAsci = exports.getPrimaryAndSecondary = exports.once = undefined;
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _react = __webpack_require__(1);
 
@@ -51058,6 +51064,17 @@ var createSpans = exports.createSpans = function createSpans(length) {
   return spanList;
 };
 
+var isEven = function isEven(n) {
+  return n % 2 === 0;
+};
+var getPair = exports.getPair = function getPair(n, _ref2) {
+  var _ref3 = _slicedToArray(_ref2, 2),
+      front = _ref3[0],
+      back = _ref3[1];
+
+  return isEven(n) ? [front, back] : [back, front];
+};
+
 /***/ }),
 /* 337 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -51105,8 +51122,6 @@ var _Transition = __webpack_require__(19);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -51123,7 +51138,7 @@ var ProgressBar = _styledComponents2.default.div.attrs({
       width: props.loadProgress + '%'
     };
   }
-})(_templateObject2, _Data.viewData.home.backgroundColor[0]);
+})(_templateObject2, _Data.viewData.home.secondaryColor);
 
 var LoadingText = _Styles.Title3.extend(_templateObject3);
 
@@ -51197,13 +51212,13 @@ var LocalContainer = function (_Component) {
       var _this3 = this;
 
       return clearInterval(interval), LocalContainer.letterAnimation(this.letters, function () {
-        return _this3.setState(Object.assign.apply(Object, [{}].concat(_toConsumableArray(_this3.state), [{ loaded: true }])));
+        return _this3.setState(Object.assign({}, _this3.state, { loaded: true }));
       });
     }
   }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.props.formFetch().then(console.log.bind(null, 'fetched'));
+      this.props.formFetch();
     }
   }, {
     key: 'componentDidMount',
