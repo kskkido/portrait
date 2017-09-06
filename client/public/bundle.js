@@ -54188,7 +54188,7 @@ var Content = function Content() {
       _react2.default.createElement(
         'p',
         null,
-        'Hi, my name is Keisuke Kido. I used to be in the music industry, but now I am a fullstack web developer who recently graduated Fullstack Academy of Code in New York 2017 May. I\'m still new to the game, but so far I\'m loving every step of the process.'
+        'Hi there, my name is Keisuke Kido. I used to pursue a career in the music industry, but now I am a fullstack web developer who recently graduated Fullstack Academy of Code in New York 2017 May. I\'m still new to the field, but so far I\'m loving every step of the process. I currently live in Tokyo, Japan, so if you happen to be in town and love programming, lets get in touch!'
       )
     )
   );
@@ -54230,7 +54230,7 @@ var Content = function Content(_ref) {
       _react2.default.createElement(
         'p',
         null,
-        'I do fullstack Javascript web development using the NERP (NODE, EXPRESS, REACT, POSTGRES) stack.'
+        'There are many things I can do like most people, but there are few activities I truly enjoy. Music, cooking, working out, and of course programming. As a graduate of Fullstack Academy of Code, I am most comfortable with Javascript web development using the NERP (Node, Express, React, Postgres) stack.'
       )
     )
   );
@@ -54274,7 +54274,7 @@ var Content = function Content(_ref) {
       _react2.default.createElement(
         'p',
         null,
-        'I live in Tokyo, Japan right now...'
+        'I was born and raised in Tokyo, Japan and called it my home until 2012 when I moved to Boston for college and a year of post graduation field experience in New York. As of June 2017, I\'m back in Tokyo to make use of what I learned over my period overseas. If you\'re in town, let me know!'
       )
     )
   );
@@ -54316,7 +54316,7 @@ var Content = function Content(_ref) {
       _react2.default.createElement(
         'p',
         null,
-        'I started programming very recently...'
+        'From late 2016 - early 2017, during the first half of the year following my college graduation, I spent my time in the New York music industry to get myself familiar with the affairs of the American music scene. The experience was educational, but to my concerns and perhaps to many in the industry, majority of the tasks was work that could be automated. So, pushed by my mixed intention to reform workspace and laziness towards work, I started off teaching myself how to code and found myself enjoying the experience. To accelerate my learning speed, I joined the 2017 February cohort of Fullstack Academy of Code in New York. There I met invaluable friends and mentors, gained practical and hollistic understanding of Javascript development, and now I feel comfortable and confident to take on new challenges as a developer. I currently reside in Japan where I work on personal projects and continue building my programming chops.'
       )
     )
   );

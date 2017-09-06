@@ -7,7 +7,7 @@ const Content = ({ language }) => (
     <BodyContent>
       <BodyText>
       <p>
-        I do fullstack Javascript web development using the NERP (NODE, EXPRESS, REACT, POSTGRES) stack.
+        There are many things I can do like most people, but there are few activities I truly enjoy. Music, cooking, working out, and of course programming. As a graduate of Fullstack Academy of Code, I am most comfortable with Javascript web development using the NERP (Node, Express, React, Postgres) stack.
       </p>
       </BodyText>
     </BodyContent>
