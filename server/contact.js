@@ -2,7 +2,6 @@ const api = module.exports = require('express').Router()
     , { initialProp } = require('./constant')
 api
   .get('/', (req, res, next) => {
-    console.log(req.session.contact)
     res.send(req.session.contact)
   })
 
