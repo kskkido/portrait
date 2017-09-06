@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import Textline from '../Textline'
 import { BodyContainer, BodyContent, Title} from '../../shared/Styles'
-import { createSpans, createTitle } from '../../shared/Utils'
 import { Scramble } from '../../shared/Transition'
+import { createSpans, createTitle } from '../../shared/Utils'
 import projectData from './content'
+
 import Return from '../Return'
+import Textline from '../Textline'
 
 // const createMetadataItem = (metadata) => (key) => (
 //   <li key={key}>{metadata[key]}</li>

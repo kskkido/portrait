@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { TweenLite, TimelineLite, Back } from 'gsap'
-
-import { rotationChange, rotationRestart, viewChange, viewRestart } from '../../reducers/events'
+import { TweenLite, Back } from 'gsap'
+import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
 
 const Container = styled.div`
   width: 100%;

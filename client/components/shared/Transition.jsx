@@ -58,7 +58,7 @@ const verticalSlide = (() => {
             [direction]: 0,
             height: 0,
             ease: Power2.easeIn,
-            onComplete: (...args) => (cb && cb.call(this, args[2]), curriedSlide.apply(this, args)),
+            onComplete: (...args) => (cb && cb.call(this, tl), curriedSlide.apply(this, args)),
             onCompleteParams: [bgFront, bgBehind, tl, repeat - 1],
             clearProps: direction
           }) // tween new front to fill background
@@ -145,7 +145,7 @@ const horizontalSlide = (() => {
   const slideInContent = (direction, target, tl) => {
     tl
       .from(target, fadeInDuration, {
-      [direction]: '-300px',
+      [direction]: '-250px',
       autoAlpha: 0,
       ease: Back.easeOut,
       clearProps: direction

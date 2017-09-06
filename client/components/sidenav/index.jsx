@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
-import SubList from './SubList'
-import Button from './Button'
+import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
 import { viewData } from '../shared/Data'
 import { UncollapseList } from '../shared/Transition'
-import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
+
+import Button from './Button'
+import SubList from './SubList'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`

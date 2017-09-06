@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
-import { Cross } from '../shared/SvgAssets'
 import { createSVG } from '../shared/Factory'
+import { Cross } from '../shared/SvgAssets'
 
 const createSVGHoverAnimation = (target) => {
   return new TimelineLite({paused: true})

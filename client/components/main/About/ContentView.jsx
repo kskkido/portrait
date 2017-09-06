@@ -1,11 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import styled from 'styled-components'
-import Textline from '../Textline'
 import { BodyContainer, Flex1, Title } from '../../shared/Styles'
 import { createSpans, createTitle } from '../../shared/Utils'
 import { Scramble } from '../../shared/Transition'
+import Textline from '../Textline'
 
 import Return from '../Return'
 import Who from './Who'

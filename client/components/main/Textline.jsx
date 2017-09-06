@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TimelineMax, Power2 } from 'gsap'
+import { TimelineMax } from 'gsap'
 
 class LocalContainer extends Component {
   static createAnimation(target) {

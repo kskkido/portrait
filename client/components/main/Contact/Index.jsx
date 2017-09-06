@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { viewData } from '../../shared/Data'
 import { pathChange, viewChange, rotationChange } from '../../../reducers/events'
 import { asyncFormRestart, formUpdate } from '../../../reducers/form'
+import { viewData } from '../../shared/Data'
 import { asyncFormPut, tap } from './utils'
+
 import BodyComponent from '../Body'
 import Name from './Name'
 import Email from './Email'
@@ -21,6 +22,7 @@ const list = [
 ]
 
 const Body = ({ getProps, viewIndex, onSubmitHandler, createInputHandler, createOnEnterHandler, setRotation}) => {
+  console.log(viewIndex, 'what')
   const { text, component } = list[viewIndex]
 
   return (

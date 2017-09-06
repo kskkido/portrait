@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
+import styled, { ThemeProvider } from 'styled-components'
 import { Show } from '../shared/Transition'
 
-import Preload from '../Preload'
 import About from './About'
 import Contact from './Contact'
 import Project from './Project'
