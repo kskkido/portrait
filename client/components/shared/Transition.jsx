@@ -238,9 +238,9 @@ export const UncollapseList = (props) => {
 
 const fadeAnimation = (() => {
 
-  const fadeIn = (delay = 0) => (target) => {
+  const fadeIn = (delay = 0, duration = 0.6) => (target) => {
     new TimelineLite()
-      .from(target, 0.6, {
+      .from(target, duration, {
         autoAlpha: 0,
         ease: Back.easeIn
       })
@@ -276,11 +276,12 @@ export const Fade = (_props) => {
     delete props.onEnterDelay
     delete props.onExitDelay
     delete props.slideOut
+    delete props.onEnterDuration
   return (
     <Transition
       {...props}
       timeout={{enter: 600, exit: 300}}
-      onEnter={fadeAnimation.onEnter(_props.onEnterDelay)}
+      onEnter={fadeAnimation.onEnter(_props.onEnterDelay, _props.onEnterDuration)}
       onExit={_props.slideOut ? fadeAnimation.onExitSlide(_props.onExitDelay) : fadeAnimation.onExit(_props.onExitDelay)}
     />
   )

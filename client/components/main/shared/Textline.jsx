@@ -23,7 +23,7 @@ class LocalContainer extends Component {
         ref={div => this.svg = div}
         style={{position: 'absolute', opacity: 0}}
       >
-        <rect height="30" width="1" />
+        <rect height={this.props.height || '30'} width="1" />
       </svg>
     )
   }

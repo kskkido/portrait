@@ -9,7 +9,9 @@ const FORM_SENDING = 'FORM SENDING'
 export const formFetch = (data) => ({type: FORM_FETCH, data})
 export const formUpdate = (prop, payload) => ({type: FORM_UPDATE, data: {prop, payload}})
 export const formRestart = () => ({type: FORM_RESTART})
-export const formSending = (bool) => ({type: FORM_RESTART, bool})
+export const formSending = (bool) => ({type: FORM_SENDING, bool})
+
+export const sending = Symbol('sending')
 
 const initialState = {
   name: {
@@ -23,7 +25,8 @@ const initialState = {
   message: {
     value: initialValue,
     isValid: false,
-  }
+  },
+  [sending]: false
 }
 
 export default (state = initialState, action) => {
@@ -38,7 +41,7 @@ export default (state = initialState, action) => {
       return Object.assign({}, initialState)
 
     case FORM_SENDING:
-      return Object.assign({}, action.bool)
+      return Object.assign({}, state, {[sending]: action.bool})
 
     default:
       return state
@@ -59,8 +62,13 @@ export const asyncFormFetch = () => dispatch => (
     .then(({ data }) => dispatch(formFetch(migrateProps(data, (val) => val, initialValue))))
 )
 
+const pendingSubmit = (dispatch) => {
+  dispatch(formSending(true))
+  setTimeout(() => dispatch(formSending(false)) && dispatch(formRestart()), 1600)
+}
+
 export const asyncFormRestart = () => (dispatch, getState) => (
   (axios.post('/api', {
     contact: getState().form
-  }), dispatch(formRestart()))
+  }), pendingSubmit(dispatch))
 )

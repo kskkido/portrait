@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 import styled, { ThemeProvider } from 'styled-components'
-import { Show } from '../shared/Transition'
+import { sending } from '../../reducers/form'
+import { Fade, Show } from '../shared/Transition'
 
 import About from './About'
 import Contact from './Contact'
 import Project from './Project'
 import Kido from './Kido'
+import Overlay from './Overlay'
 
 const theme = {
   bg: '#E1F4CB',
@@ -52,13 +54,15 @@ const Main = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <Container id="bodyContainer">
+          <Overlay visible={props.sending} status={props.sending} />
         <BodyRoutes  {...props} />
       </Container>
     </ThemeProvider>
   )
 }
 
-const mapStateToProps = ({ events }) => ({
+const mapStateToProps = ({ events, form }) => ({
+  sending: form[sending],
   viewIndex: events.viewIndex
 })
 
