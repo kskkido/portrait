@@ -55931,7 +55931,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  background:rgba(0, 0, 255,0.2);\n  transition: opacity 0.4s, z-index 0.6s;\n'], ['\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  background:rgba(0, 0, 255,0.2);\n  transition: opacity 0.4s, z-index 0.6s;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: 125px;\n  width: 250px;\n  left: 50%;\n  top: 50%;\n  transform: translateX(-50%) translateY(-50%);\n  background-color: white;\n  text-align: center;\n  border-radius: 5%;\n  z-index: 2001;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n'], ['\n  position: absolute;\n  height: 125px;\n  width: 250px;\n  left: 50%;\n  top: 50%;\n  transform: translateX(-50%) translateY(-50%);\n  background-color: white;\n  text-align: center;\n  border-radius: 5%;\n  z-index: 2001;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: 125px;\n  width: 250px;\n  left: 50%;\n  top: 50%;\n  transform: translateX(-50%) translateY(-50%);\n  background-color: #F5F5F5;\n  text-align: center;\n  border-radius: 5%;\n  z-index: 2001;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n'], ['\n  position: absolute;\n  height: 125px;\n  width: 250px;\n  left: 50%;\n  top: 50%;\n  transform: translateX(-50%) translateY(-50%);\n  background-color: #F5F5F5;\n  text-align: center;\n  border-radius: 5%;\n  z-index: 2001;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  padding-top: 40px;\n  font-size: 1em;\n'], ['\n  padding-top: 40px;\n  font-size: 1em;\n']);
 
 var _react = __webpack_require__(1);
@@ -55974,7 +55974,7 @@ var Message = _styledComponents2.default.p(_templateObject3);
 var Sending = function Sending(_ref) {
   var status = _ref.status;
 
-  console.log(status, 'whahhahah');
+
   return _react2.default.createElement(
     Overlay,
     { status: status },

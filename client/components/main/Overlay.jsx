@@ -26,7 +26,7 @@ const MessageCard = styled.div`
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  background-color: white;
+  background-color: #F5F5F5;
   text-align: center;
   border-radius: 5%;
   z-index: 2001;
@@ -39,7 +39,7 @@ const Message = styled.p`
 `
 
 const Sending = ({ status }) => {
-  console.log(status, 'whahhahah')
+
   return (
     <Overlay status={status}>
       <MessageCard>
