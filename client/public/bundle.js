@@ -54138,7 +54138,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: black;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.1;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n'], ['\n  position: relative;\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: black;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.1;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  color: #424242;\n  transition: color 0.3s;\n  &:hover {\n    color: #8f8f8f;\n  }\n'], ['\n  color: #424242;\n  transition: color 0.3s;\n  &:hover {\n    color: #8f8f8f;\n  }\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  color: #CFD8DC;\n  transition: color 0.3s;\n  &:hover {\n    color: #EEEEEE;\n  }\n'], ['\n  color: #CFD8DC;\n  transition: color 0.3s;\n  &:hover {\n    color: #EEEEEE;\n  }\n']);
 
 var _react = __webpack_require__(1);
 
