@@ -22,7 +22,6 @@ const list = [
 ]
 
 const Body = ({ getProps, viewIndex, onSubmitHandler, createInputHandler, createOnEnterHandler, setRotation}) => {
-  console.log(viewIndex, 'what')
   const { text, component } = list[viewIndex]
 
   return (

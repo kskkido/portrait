@@ -21,8 +21,8 @@ const Overlay = styled.div.attrs({
 
 const MessageCard = styled.div`
   position: absolute;
-  height: 125px;
-  width: 250px;
+  height: 100px;
+  width: 225px;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
@@ -34,7 +34,7 @@ const MessageCard = styled.div`
 `
 
 const Message = styled.p`
-  padding-top: 40px;
+  padding-top: 30px;
   font-size: 1em;
 `
 
@@ -44,7 +44,7 @@ const Sending = ({ status }) => {
     <Overlay status={status}>
       <MessageCard>
         <Message>
-          Sending...<Textline height={'1.2em'} />
+          Sending...<Textline height={'1.1em'} />
         </Message>
       </MessageCard>
     </Overlay>

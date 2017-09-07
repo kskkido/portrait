@@ -2929,7 +2929,7 @@ var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width:
     _templateObject7 = _taggedTemplateLiteral(['\n  flex: 4;\n'], ['\n  flex: 4;\n']),
     _templateObject8 = _taggedTemplateLiteral(['\n  flex: 5;\n'], ['\n  flex: 5;\n']),
     _templateObject9 = _taggedTemplateLiteral(['\n  position: absolute;\n  text-align: center;\n  width: 100%;\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n'], ['\n  position: absolute;\n  text-align: center;\n  width: 100%;\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n']),
-    _templateObject10 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  margin-top: ', ';\n  margin-bottom: 20px;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  margin-top: ', ';\n  margin-bottom: 20px;\n']),
+    _templateObject10 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n']),
     _templateObject11 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n']),
     _templateObject12 = _taggedTemplateLiteral(['\n  min-height: 60px;\n'], ['\n  min-height: 60px;\n']),
     _templateObject13 = _taggedTemplateLiteral(['\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 1.4em;\n'], ['\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 1.4em;\n']),
@@ -12662,7 +12662,8 @@ var fadeAnimation = function () {
     var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
     return function (target) {
       new _gsap.TimelineLite().to(target, 0.3, {
-        autoAlpha: 0
+        opacity: 0,
+        clearProps: 'opacity'
       }).delay(delay);
     };
   };
@@ -12703,20 +12704,29 @@ var scrambleAnimation = function () {
     targetDom.textContent = String.fromCharCode(Math.floor(this.target.value));
   };
 
-  var onEnter = function onEnter(duration, delay, asciList) {
-    return function (_ref3) {
+  var onEnter = function onEnter(duration) {
+    var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var asciList = arguments[2];
+    var tailText = arguments[3];
+    return function scramble(_ref3) {
       var childNodes = _ref3.childNodes;
 
       var letterDuration = duration / asciList.length,
+          tail = tailText && document.getElementById('tail'),
           tl = new _gsap.TimelineLite().delay(delay);
-      asciList.forEach(function (asci, i) {
-        tl.to({ value: Math.floor(Math.random() * 93) + 33 }, letterDuration, {
-          value: asci,
-          onUpdate: writeHtml,
-          onUpdateParams: [childNodes[i]],
-          ease: _gsap.Back.easeOut
+      new Promise(function (res) {
+        return asciList.forEach(function (asci, i, _ref4) {
+          var _tl$to;
+
+          var length = _ref4.length;
+
+          tl.to({ value: Math.floor(Math.random() * 93) + 33 }, letterDuration, (_tl$to = {
+            value: asci,
+            onUpdate: writeHtml,
+            onUpdateParams: [childNodes[i]]
+          }, _defineProperty(_tl$to, i === length - 1 && 'onComplete', res), _defineProperty(_tl$to, 'ease', _gsap.Back.easeOut), _tl$to));
         });
-      });
+      }).then(tail && onEnter(duration, duration, (0, _Utils.convertToAsci)(tailText))(tail));
     };
   };
 
@@ -12728,11 +12738,13 @@ var scrambleAnimation = function () {
 var Scramble = exports.Scramble = function Scramble(_props) {
   var props = Object.assign({}, _props);
   delete props.text;delete props.delay;
+  delete props.tail;
+  delete props.tailText;
 
   return _react2.default.createElement(_reactTransitionGroup.Transition, _extends({}, props, {
     timeout: 650,
     exit: false,
-    onEnter: scrambleAnimation.onEnter(0.65, _props.delay, (0, _Utils.convertToAsci)(_props.text || 'bleh'))
+    onEnter: scrambleAnimation.onEnter(0.65, _props.delay, (0, _Utils.convertToAsci)(_props.text || 'bleh'), _props.tailText)
   }));
 };
 
@@ -16395,7 +16407,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100\n'], ['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100;\n'], ['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 55px;\n  max-width: 800px;\n  margin-left: auto;\n  margin-right: auto;\n'], ['\n  position: relative;\n  top: 55px;\n  max-width: 800px;\n  margin-left: auto;\n  margin-right: auto;\n']);
 
 var _react = __webpack_require__(1);
@@ -30476,7 +30488,7 @@ var LocalContainer = function (_Component) {
   _createClass(LocalContainer, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.animation = LocalContainer.createAnimation(this.svg);
+      this.animation = LocalContainer.createAnimation(this.svg, this.props.delay);
     }
   }, {
     key: 'componentWillUnmount',
@@ -30502,7 +30514,9 @@ var LocalContainer = function (_Component) {
   }], [{
     key: 'createAnimation',
     value: function createAnimation(target) {
-      return new _gsap.TimelineMax({ repeat: -1, repeatDelay: 0.3 }).to(target, 0.2, { opacity: 1 }).to(target, 0.2, { opacity: 0 }, '+=0.5');
+      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      return new _gsap.TimelineMax({ repeat: -1, repeatDelay: 0.3 }).to(target, 0.2, { opacity: 1 }).to(target, 0.2, { opacity: 0 }, '+=0.5').delay(delay);
     }
   }]);
 
@@ -48866,17 +48880,17 @@ var _gsap = __webpack_require__(12);
 
 var _events = __webpack_require__(18);
 
-var _Data = __webpack_require__(28);
-
 var _Transition = __webpack_require__(22);
 
-var _Button = __webpack_require__(331);
-
-var _Button2 = _interopRequireDefault(_Button);
+var _Data = __webpack_require__(28);
 
 var _SubList = __webpack_require__(332);
 
 var _SubList2 = _interopRequireDefault(_SubList);
+
+var _Button = __webpack_require__(331);
+
+var _Button2 = _interopRequireDefault(_Button);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49111,6 +49125,7 @@ var LocalContainer = function (_Component) {
       return _react2.default.createElement(
         SideNav,
         {
+          visible: this.state.toggle,
           onClickSVG: this.handleOnClickSVG.bind(this),
           inputMain: function inputMain(div) {
             return _this7.container = div;
@@ -50304,6 +50319,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  width: inherit;\n  height: inherit;\n'], ['\n  position: relative;\n  width: inherit;\n  height: inherit;\n']);
 
 var _react = __webpack_require__(1);
@@ -50345,6 +50364,12 @@ var _Overlay = __webpack_require__(361);
 var _Overlay2 = _interopRequireDefault(_Overlay);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -50392,17 +50417,51 @@ var BodyRoutes = function BodyRoutes(_ref) {
 };
 
 var Main = function Main(props) {
+  console.log('dude', props.toggle);
   return _react2.default.createElement(
     _styledComponents.ThemeProvider,
     { theme: theme },
     _react2.default.createElement(
       Container,
       { id: 'bodyContainer' },
-      _react2.default.createElement(_Overlay2.default, { visible: props.sending, status: props.sending }),
+      _react2.default.createElement(_Overlay2.default, { status: props.sending }),
       _react2.default.createElement(BodyRoutes, props)
     )
   );
 };
+
+var LocalContainer = function (_Component) {
+  _inherits(LocalContainer, _Component);
+
+  function LocalContainer(props) {
+    _classCallCheck(this, LocalContainer);
+
+    var _this = _possibleConstructorReturn(this, (LocalContainer.__proto__ || Object.getPrototypeOf(LocalContainer)).call(this, props));
+
+    _this.state = {
+      toggle: false
+    };
+
+    _this.onClickHandler = _this.onClickHandler.bind(_this);
+    return _this;
+  }
+
+  _createClass(LocalContainer, [{
+    key: 'onClickHandler',
+    value: function onClickHandler() {
+      this.setState({ toggle: !this.state.toggle });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(Main, _extends({}, this.props, this.state, {
+        onClickHandler: this.onClickHandler
+      }));
+    }
+  }]);
+
+  return LocalContainer;
+}(_react.Component);
 
 var mapStateToProps = function mapStateToProps(_ref3) {
   var events = _ref3.events,
@@ -50413,7 +50472,7 @@ var mapStateToProps = function mapStateToProps(_ref3) {
   };
 };
 
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Main));
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(LocalContainer));
 
 /***/ }),
 /* 334 */
@@ -53249,7 +53308,7 @@ var AboutView = function AboutView(_ref) {
       null,
       _react2.default.createElement(
         _Transition.Scramble,
-        { key: title, 'in': true, appear: true, delay: 0.2, text: '<' + title + '>' },
+        { key: title, 'in': true, tail: 'tail', appear: true, delay: 0.2, text: '<' + title + '>', tailText: '</' + title + '>' },
         _react2.default.createElement(
           _Styles.Title,
           { id: 'title' },
@@ -53263,9 +53322,9 @@ var AboutView = function AboutView(_ref) {
       null,
       _react2.default.createElement(
         _Styles.Title,
-        { bottom: true },
-        (0, _Utils.createTitle)('</' + title + '>'),
-        _react2.default.createElement(_Textline2.default, null)
+        { id: 'tail' },
+        (0, _Utils.createSpans)(title.length + 3),
+        _react2.default.createElement(_Textline2.default, { delay: 0.8 })
       )
     ),
     _react2.default.createElement(_Return2.default, {
@@ -53590,8 +53649,6 @@ var Body = function Body(_ref) {
       createInputHandler = _ref.createInputHandler,
       createOnEnterHandler = _ref.createOnEnterHandler,
       setRotation = _ref.setRotation;
-
-  console.log(viewIndex, 'what');
   var _list$viewIndex = list[viewIndex],
       text = _list$viewIndex.text,
       component = _list$viewIndex.component;
@@ -54620,7 +54677,15 @@ var ProjectView = function ProjectView(_ref) {
       null,
       _react2.default.createElement(
         _Transition.Scramble,
-        { key: title, 'in': true, appear: true, delay: 0.2, text: '<' + title + '>' },
+        {
+          key: title,
+          'in': true,
+          appear: true,
+          delay: 0.2,
+          text: '<' + title + '>',
+          tail: 'tail',
+          tailText: '</' + title + '>'
+        },
         _react2.default.createElement(
           _Styles.Title,
           null,
@@ -54718,9 +54783,9 @@ var ProjectView = function ProjectView(_ref) {
         { bottom: true },
         _react2.default.createElement(
           _Styles.Title,
-          null,
-          (0, _Utils.createTitle)('</' + title + '>'),
-          _react2.default.createElement(_Textline2.default, null)
+          { id: 'tail' },
+          (0, _Utils.createSpans)(title.length + 3),
+          _react2.default.createElement(_Textline2.default, { delay: 0.8 })
         )
       )
     ),
@@ -55928,8 +55993,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  background:rgba(0, 0, 255,0.2);\n  transition: opacity 0.4s, z-index 0.6s;\n'], ['\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  background:rgba(0, 0, 255,0.2);\n  transition: opacity 0.4s, z-index 0.6s;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: 125px;\n  width: 250px;\n  left: 50%;\n  top: 50%;\n  transform: translateX(-50%) translateY(-50%);\n  background-color: #F5F5F5;\n  text-align: center;\n  border-radius: 5%;\n  z-index: 2001;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n'], ['\n  position: absolute;\n  height: 125px;\n  width: 250px;\n  left: 50%;\n  top: 50%;\n  transform: translateX(-50%) translateY(-50%);\n  background-color: #F5F5F5;\n  text-align: center;\n  border-radius: 5%;\n  z-index: 2001;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  padding-top: 40px;\n  font-size: 1em;\n'], ['\n  padding-top: 40px;\n  font-size: 1em;\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: 100px;\n  width: 225px;\n  left: 50%;\n  top: 50%;\n  transform: translateX(-50%) translateY(-50%);\n  background-color: #F5F5F5;\n  text-align: center;\n  border-radius: 5%;\n  z-index: 2001;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n'], ['\n  position: absolute;\n  height: 100px;\n  width: 225px;\n  left: 50%;\n  top: 50%;\n  transform: translateX(-50%) translateY(-50%);\n  background-color: #F5F5F5;\n  text-align: center;\n  border-radius: 5%;\n  z-index: 2001;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  padding-top: 30px;\n  font-size: 1em;\n'], ['\n  padding-top: 30px;\n  font-size: 1em;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -55982,7 +56047,7 @@ var Sending = function Sending(_ref) {
         Message,
         null,
         'Sending...',
-        _react2.default.createElement(_Textline2.default, { height: '1.2em' })
+        _react2.default.createElement(_Textline2.default, { height: '1.1em' })
       )
     )
   );

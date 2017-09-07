@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import { TimelineMax } from 'gsap'
 
 class LocalContainer extends Component {
-  static createAnimation(target) {
+  static createAnimation(target, delay = 0) {
     return new TimelineMax({repeat: -1, repeatDelay: 0.3})
       .to(target, 0.2, {opacity: 1})
       .to(target, 0.2, {opacity: 0}, '+=0.5')
+      .delay(delay)
   }
 
   componentDidMount() {
-    this.animation = LocalContainer.createAnimation(this.svg)
+    this.animation = LocalContainer.createAnimation(this.svg, this.props.delay)
   }
 
   componentWillUnmount() {

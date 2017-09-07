@@ -56,6 +56,7 @@ export const Title = styled.h1`
   font-weight: normal;
   text-transform: uppercase;
   font-size: 1.2em;
+  height: 25px;
   margin-top: ${props => props.bottom ? '50px' : '10px'};
   margin-bottom: 20px;
 `

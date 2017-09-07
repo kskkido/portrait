@@ -24,7 +24,7 @@ const AboutView = ({ navigationList, viewIndex, toggleBody }) => {
   return (
       <BodyContainer >
         <Flex1>
-          <Scramble key={title} in={true} appear={true} delay={0.2} text={`<${title}>`}>
+          <Scramble key={title} in={true} tail="tail" appear={true} delay={0.2} text={`<${title}>`} tailText={`</${title}>`} >
             <Title id="title">
             {createSpans(title.length + 2)}
             </Title>
@@ -32,9 +32,8 @@ const AboutView = ({ navigationList, viewIndex, toggleBody }) => {
         </Flex1>
         {list[viewIndex]}
         <Flex1>
-          <Title bottom>
-            {createTitle(`</${title}>`)}
-            <Textline />
+          <Title id="tail">
+            {createSpans(title.length + 3)}<Textline delay={0.8} />
           </Title>
         </Flex1>
         <Return

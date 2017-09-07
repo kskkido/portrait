@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 import styled, { ThemeProvider } from 'styled-components'
 import { sending } from '../../reducers/form'
-import { Fade, Show } from '../shared/Transition'
+import { Show } from '../shared/Transition'
 
 import About from './About'
 import Contact from './Contact'
@@ -53,14 +53,40 @@ const BodyRoutes = ({ viewIndex }) => (
 )
 
 const Main = (props) => {
+  console.log('dude', props.toggle)
   return (
     <ThemeProvider theme={theme}>
       <Container id="bodyContainer">
-          <Overlay visible={props.sending} status={props.sending} />
+        <Overlay status={props.sending} />
         <BodyRoutes  {...props} />
       </Container>
     </ThemeProvider>
   )
+}
+
+class LocalContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      toggle: false
+    }
+
+    this.onClickHandler = this.onClickHandler.bind(this)
+  }
+
+  onClickHandler() {
+    this.setState({toggle: !this.state.toggle})
+  }
+
+  render() {
+    return (
+      <Main
+        {...this.props}
+        {...this.state}
+        onClickHandler={this.onClickHandler}
+      />
+    )
+  }
 }
 
 const mapStateToProps = ({ events, form }) => ({
@@ -69,4 +95,4 @@ const mapStateToProps = ({ events, form }) => ({
 })
 
 
-export default withRouter(connect(mapStateToProps)(Main))
+export default withRouter(connect(mapStateToProps)(LocalContainer))

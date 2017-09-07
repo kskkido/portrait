@@ -4,11 +4,11 @@ import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
-import { viewData } from '../shared/Data'
 import { UncollapseList } from '../shared/Transition'
+import { viewData } from '../shared/Data'
 
-import Button from './Button'
 import SubList from './SubList'
+import Button from './Button'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
@@ -99,8 +99,8 @@ const ListText = styled.h3`
   text-transform: uppercase;
 `
 
-const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut, mouseOver }) => (
-  <Container >
+const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut, mouseOver,  }) => (
+  <Container>
     <Button onClick={onClickSVG} />
     <div id="sidenav" ref={inputMain} style={{height: '100%', transform: 'translateX(-100%)'}}>
       <List >
@@ -251,12 +251,15 @@ class LocalContainer extends Component {
   }
 
   handleOnClickSVG(toggle) {
-      return (!toggle ? (this.svgClickAnimation.play(), this.enterAnimation.restart()) : this.svgClickAnimation.reverse())
+    return (!toggle ? (this.svgClickAnimation.play(), this.enterAnimation.restart()) : this.svgClickAnimation.reverse())
   }
 
+
   render() {
+
     return (
       <SideNav
+        visible={this.state.toggle}
         onClickSVG={this.handleOnClickSVG.bind(this)}
         inputMain={div => this.container = div}
       >

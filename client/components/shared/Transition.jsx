@@ -250,7 +250,8 @@ const fadeAnimation = (() => {
   const fadeOut = (delay = 0) => (target) => {
     new TimelineLite()
       .to(target, 0.3, {
-        autoAlpha: 0,
+        opacity: 0,
+        clearProps: 'opacity'
       })
       .delay(delay)
   }
@@ -293,20 +294,24 @@ const scrambleAnimation = (() => {
     targetDom.textContent = String.fromCharCode(Math.floor(this.target.value))
   }
 
-  const onEnter = (duration, delay, asciList) => ({ childNodes }) => {
-    const letterDuration = duration / asciList.length
-        , tl = new TimelineLite()
-        .delay(delay)
-    asciList.forEach((asci, i) => {
-      tl.
-        to({value: Math.floor(Math.random() * 93) + 33}, letterDuration, {
-          value: asci,
-          onUpdate: writeHtml,
-          onUpdateParams: [childNodes[i]],
-          ease: Back.easeOut
-        })
-    })
-  }
+  const onEnter = (duration, delay = 0, asciList, tailText) =>
+    function scramble ({childNodes}) {
+      const letterDuration = duration / asciList.length
+          , tail = tailText && document.getElementById('tail')
+          , tl = new TimelineLite()
+          .delay(delay)
+      new Promise(res => asciList.forEach((asci, i, { length }) => {
+        tl.
+          to({value: Math.floor(Math.random() * 93) + 33}, letterDuration, {
+            value: asci,
+            onUpdate: writeHtml,
+            onUpdateParams: [childNodes[i]],
+            [i === length - 1 && 'onComplete']: res,
+            ease: Back.easeOut
+          })
+      }))
+      .then(tail && onEnter(duration, duration, convertToAsci(tailText))(tail))
+    }
 
   return {
     onEnter
@@ -316,13 +321,15 @@ const scrambleAnimation = (() => {
 export const Scramble = (_props) => {
   const props = Object.assign({}, _props)
   delete props.text; delete props.delay
+  delete props.tail
+  delete props.tailText
 
   return (
     <Transition
       {...props}
       timeout={650}
       exit={false}
-      onEnter={scrambleAnimation.onEnter(0.65, _props.delay, convertToAsci(_props.text || 'bleh'))}
+      onEnter={scrambleAnimation.onEnter(0.65, _props.delay, convertToAsci(_props.text || 'bleh'), _props.tailText)}
     />
   )
 }

@@ -22,7 +22,7 @@ const MainContainer = styled.div`
   top: ${props => props.isBody ? '-220px' : '190px'};
   left: 0;
   right: 0;
-  z-index: 100
+  z-index: 100;
 `
 
 const Body = styled.div`
