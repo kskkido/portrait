@@ -4,10 +4,12 @@ import { initialValue } from '../components/main/Contact/utils'
 const FORM_FETCH = 'FORM FETCH'
 const FORM_UPDATE = 'FORM UPDATE'
 const FORM_RESTART = 'FORM RESTART'
+const FORM_SENDING = 'FORM SENDING'
 
 export const formFetch = (data) => ({type: FORM_FETCH, data})
 export const formUpdate = (prop, payload) => ({type: FORM_UPDATE, data: {prop, payload}})
 export const formRestart = () => ({type: FORM_RESTART})
+export const formSending = (bool) => ({type: FORM_RESTART, bool})
 
 const initialState = {
   name: {
@@ -34,6 +36,9 @@ export default (state = initialState, action) => {
 
     case FORM_RESTART:
       return Object.assign({}, initialState)
+
+    case FORM_SENDING:
+      return Object.assign({}, action.bool)
 
     default:
       return state

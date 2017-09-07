@@ -8,7 +8,7 @@ import { viewData } from '../../shared/Data'
 import BodyComponent from '../Body'
 import Content from './ContentView'
 import Preview from './Preview'
-import Return from '../Return'
+import Return from '../shared/Return'
 
 
 const About = ({ isBody, toggleBody, backgroundColor, navigationList }) => {

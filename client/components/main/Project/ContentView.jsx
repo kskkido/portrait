@@ -5,8 +5,8 @@ import { Scramble } from '../../shared/Transition'
 import { createSpans, createTitle } from '../../shared/Utils'
 import projectData from './content'
 
-import Return from '../Return'
-import Textline from '../Textline'
+import Return from '../shared/Return'
+import Textline from '../shared/Textline'
 
 // const createMetadataItem = (metadata) => (key) => (
 //   <li key={key}>{metadata[key]}</li>

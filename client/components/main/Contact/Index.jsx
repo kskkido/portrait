@@ -11,7 +11,7 @@ import Email from './Email'
 import Message from './Message'
 import Submit from './Submit'
 import Social from './SocialMedia'
-import Return from '../Return'
+import Return from '../shared/Return'
 
 const list = [
  {text: 'name', component: <Name />},

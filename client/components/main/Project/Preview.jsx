@@ -2,7 +2,7 @@ import React from 'react'
 import { PreviewContainer } from '../../shared/Styles'
 import data from './content'
 
-import Button from '../Button'
+import Button from '../shared/Button'
 
 const ProjectPreview = ({ toggleBody, viewIndex }) => {
   if (data[viewIndex] === undefined) return <div />
