@@ -15,7 +15,7 @@ import Navigation from './Navigation'
 
 const MainContainer = styled.div`
   display: inline-block;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   cursor: move;
   position: absolute;

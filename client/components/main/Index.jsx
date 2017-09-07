@@ -19,6 +19,8 @@ const theme = {
 
 const Container = styled.div`
   position: relative;
+  width: inherit;
+  height: inherit;
 `
 
 /* ====== utils ====== */

@@ -16395,7 +16395,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  height: 100%;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100\n'], ['\n  display: inline-block;\n  height: 100%;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100\n'], ['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  left: 0;\n  right: 0;\n  z-index: 100\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 55px;\n  max-width: 800px;\n  margin-left: auto;\n  margin-right: auto;\n'], ['\n  position: relative;\n  top: 55px;\n  max-width: 800px;\n  margin-left: auto;\n  margin-right: auto;\n']);
 
 var _react = __webpack_require__(1);
@@ -44917,8 +44917,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  body {\n    background: #E1E5EE;\n    letter-spacing: 4px;\n    font-size: 1em;\n    overflow-x: hidden;\n  }\n  a {\n    text-decoration: none;\n  }\n  * {\n    box-sizing: border-box;\n  }\n'], ['\n  body {\n    background: #E1E5EE;\n    letter-spacing: 4px;\n    font-size: 1em;\n    overflow-x: hidden;\n  }\n  a {\n    text-decoration: none;\n  }\n  * {\n    box-sizing: border-box;\n  }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n'], ['\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  body {\n    background: #E1E5EE;\n    letter-spacing: 4px;\n    font-size: 1em;\n    overflow-x: hidden;\n  }\n  a {\n    text-decoration: none;\n  }\n  * {\n    box-sizing: border-box;\n  }\n'], ['\n  body {\n    background: #E1E5EE;\n    letter-spacing: 4px;\n    font-size: 1em;\n    overflow-x: hidden;\n  }\n  a {\n    text-decoration: none;\n  }\n  * {\n    box-sizing: border-box;\n  }\n']);
 
 var _react = __webpack_require__(1);
 
@@ -44956,11 +44955,9 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 (0, _styledComponents.injectGlobal)(_templateObject);
 
-var Container = _styledComponents2.default.main(_templateObject2);
-
 var Loaded = function Loaded() {
   return _react2.default.createElement(
-    Container,
+    'div',
     null,
     _react2.default.createElement(_sidenav2.default, null),
     _react2.default.createElement(_main2.default, null)
@@ -50307,7 +50304,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n'], ['\n  position: relative;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  width: inherit;\n  height: inherit;\n'], ['\n  position: relative;\n  width: inherit;\n  height: inherit;\n']);
 
 var _react = __webpack_require__(1);
 
