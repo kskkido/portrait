@@ -26734,22 +26734,22 @@ var PlaceholderContainer = exports.PlaceholderContainer = _styledComponents2.def
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var grey1 = '#e8e5e6';
+var home = '#e8e5e6';
 
-var blue1 = '#29b6f6',
-    blue2 = '#4fc3f7',
-    blue3 = '#4dd0e1',
-    blue4 = '#26c6da';
+var ABOUT1 = '#29b6f6',
+    ABOUT2 = '#4fc3f7',
+    ABOUT3 = '#4dd0e1',
+    ABOUT4 = '#26c6da';
 
-var red3 = '#ffbcaf',
-    red2 = '#ef9a9a',
-    red1 = '#ff8a80';
+var PROJECTS3 = '#ffbcaf',
+    PROJECTS2 = '#ef9a9a',
+    PROJECTS1 = '#ff8a80';
 
-var purple1 = '#ffb74d',
-    purple2 = '#ffcc80',
-    purple3 = '#ffd54f',
-    purple4 = '#ffca28',
-    purple5 = '#ffb300';
+var CONTACT1 = '#ffb74d',
+    CONTACT2 = '#ffcc80',
+    CONTACT3 = '#ffd54f',
+    CONTACT4 = '#ffca28',
+    CONTACT5 = '#ffb300';
 
 var viewData = exports.viewData = {
   home: {
@@ -26757,7 +26757,7 @@ var viewData = exports.viewData = {
     path: '/',
     navigationList: ['WELCOME', 'ABOUT', 'PROJECTS', 'CONTACT'],
     children: [],
-    backgroundColor: [grey1, blue1, red1, purple1],
+    backgroundColor: [home, ABOUT1, PROJECTS1, CONTACT1],
     secondaryColor: '#BDBDBD'
   },
   about: {
@@ -26765,7 +26765,7 @@ var viewData = exports.viewData = {
     path: '/about',
     navigationList: ['WHO', 'WHAT', 'WHERE', 'WHEN'],
     children: ['WHO', 'WHAT', 'WHERE', 'WHEN'],
-    backgroundColor: [blue1, blue2, blue3, blue4],
+    backgroundColor: [ABOUT1, ABOUT2, ABOUT3, ABOUT4],
     secondaryColor: '#2196f3'
   },
   projects: {
@@ -26773,7 +26773,7 @@ var viewData = exports.viewData = {
     path: '/projects',
     navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
     children: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
-    backgroundColor: [red1, red2, red3],
+    backgroundColor: [PROJECTS1, PROJECTS2, PROJECTS3],
     secondaryColor: '#e57373'
   },
   contact: {
@@ -26781,26 +26781,9 @@ var viewData = exports.viewData = {
     path: '/contact',
     navigationList: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT', 'SOCIAL'],
     children: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT', 'SOCIAL'],
-    backgroundColor: [purple1, purple2, purple3, purple4, purple5],
+    backgroundColor: [CONTACT1, CONTACT2, CONTACT3, CONTACT4, CONTACT5],
     secondaryColor: '#ffa726'
   }
-
-  // const cyan = '#66D7D1'
-  //     , orange = '#FC7753'
-  //     , blue = '#42CAFD'
-  //     , skyBlue = '#2EC4B6'
-  //     , rouge = '#FDF5BF'
-  //     , green = '#C2EFB3'
-  //     , yellow = '#F7F052'
-  //     , purple = '#9DACFF'
-  //     , lightGreen = '#94E8B4'
-  //     , slimeGreen = '#7DDF64'
-  //     , red = '#E3170A'
-  //     , cyanLight = '#A9E5BB'
-  //     , skin = '#FCF6B1'
-  //     , yellowLight = '#F7B32B'
-  //     , cloud = '#e8e5e6'
-
 };
 
 /***/ }),
@@ -27508,7 +27491,7 @@ var verticalSlide = function () {
             args[_key] = arguments[_key];
           }
 
-          return cb && cb.call(undefined, args[2]), curriedSlide.apply(undefined, args);
+          return cb && cb.call(undefined, tl), curriedSlide.apply(undefined, args);
         }), _defineProperty(_tl$set$set$from, 'onCompleteParams', [bgFront, bgBehind, tl, repeat - 1]), _defineProperty(_tl$set$set$from, 'clearProps', direction), _tl$set$set$from)); // tween new front to fill background
       }
     };
@@ -27585,7 +27568,7 @@ var horizontalSlide = function () {
   var slideInContent = function slideInContent(direction, target, tl) {
     var _tl$from;
 
-    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '-300px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', direction), _tl$from), '-=' + (slideDuration - 0.2));
+    tl.from(target, fadeInDuration, (_tl$from = {}, _defineProperty(_tl$from, direction, '-250px'), _defineProperty(_tl$from, 'autoAlpha', 0), _defineProperty(_tl$from, 'ease', _gsap.Back.easeOut), _defineProperty(_tl$from, 'clearProps', direction), _tl$from), '-=' + (slideDuration - 0.2));
   };
 
   return {
@@ -50696,7 +50679,7 @@ exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapSt
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPair = exports.createSpans = exports.createTitle = exports.convertToString = exports.convertToAsci = exports.getPrimaryAndSecondary = exports.once = undefined;
+exports.getPair = exports.createSpans = exports.createTitle = exports.convertToString = exports.convertToAsci = exports.getPrimaryAndSecondary = exports.memoize = exports.once = exports.tap = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -50710,6 +50693,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+// decorators
+
+var tap = exports.tap = function tap(fn, value) {
+  var curried = function curried(val) {
+    return fn(val), val;
+  };
+
+  return value === undefined ? curried : curried(value);
+};
+
 var once = exports.once = function once(fn) {
   var done = false;
   return function () {
@@ -50717,9 +50710,27 @@ var once = exports.once = function once(fn) {
       args[_key] = arguments[_key];
     }
 
-    return done ? null : (done = true, fn.apply(undefined, args));
+    return done ? null : (done = true, fn.apply(this, args));
   };
 };
+
+var memoize = exports.memoize = function memoize(fn, context) {
+  var hash = {};
+
+  return function () {
+    console.log(hash, 'whahwha');
+
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    var key = JSON.stringify(args);
+
+    return hash[key] || (hash[key] = fn.apply(context || this, args));
+  };
+};
+
+// specific uses
 
 var getPrimaryAndSecondary = exports.getPrimaryAndSecondary = function getPrimaryAndSecondary(_ref) {
   var backgroundColor = _ref.backgroundColor,
@@ -50733,7 +50744,6 @@ var convertToAsci = exports.convertToAsci = function convertToAsci(string) {
   return string ? convertToAsci(string.slice(1), [].concat(_toConsumableArray(runningValue), [string[0].charCodeAt(0)])) : runningValue;
 };
 
-// arr -> string
 var convertToString = exports.convertToString = function convertToString(arr) {
   return arr.reduce(function (acc, el) {
     return acc + ('' + String.fromCharCode(el));
@@ -53650,17 +53660,26 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _templateObject = _taggedTemplateLiteral(['\nposition: relative;\n&::before {\n  position: absolute;\n  left: 0;\n  content: \'\';\n  background-color: black;\n  width: 0;\n  height: 1.1em;\n  opacity: 0.1;\n  transition: width 0.3s;\n  z-index: -1;\n}\n&:hover::before {\n  width: 100%;\n}\n'], ['\nposition: relative;\n&::before {\n  position: absolute;\n  left: 0;\n  content: \'\';\n  background-color: black;\n  width: 0;\n  height: 1.1em;\n  opacity: 0.1;\n  transition: width 0.3s;\n  z-index: -1;\n}\n&:hover::before {\n  width: 100%;\n}\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\ncolor: #CFD8DC;\ntransition: color 0.3s;\n&:hover {\n  color: #EEEEEE;\n}\n'], ['\ncolor: #CFD8DC;\ntransition: color 0.3s;\n&:hover {\n  color: #EEEEEE;\n}\n']);
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _styledComponents = __webpack_require__(5);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
 var _Styles = __webpack_require__(10);
 
-var _content = __webpack_require__(45);
-
-var _content2 = _interopRequireDefault(_content);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var ResumeContainer = _styledComponents2.default.span(_templateObject);
+
+var Resume = _styledComponents2.default.a(_templateObject2);
 
 var Content = function Content() {
   return _react2.default.createElement(
@@ -53672,7 +53691,17 @@ var Content = function Content() {
       _react2.default.createElement(
         'p',
         null,
-        'Hi there, my name is Keisuke Kido. I used to pursue a career in the music industry, but now I am a fullstack web developer who recently graduated Fullstack Academy of Code in New York 2017 May. I\'m still new to the field, but so far I\'m loving every step of the process. I currently live in Tokyo, Japan, so if you happen to be in town and love programming, lets get in touch!'
+        'Hi there, my name is Keisuke Kido. I used to pursue a career in the music industry, but now I am a fullstack web developer who recently graduated Fullstack Academy of Code in New York 2017 May. I\'m still new to the field, but so far I\'m loving every step of the process. I currently live in Tokyo, Japan, so if you happen to be in town and love programming, lets get in touch! Also, here\'s',
+        _react2.default.createElement(
+          ResumeContainer,
+          null,
+          _react2.default.createElement(
+            Resume,
+            { target: '_self', href: 'resume' },
+            ' my resume '
+          )
+        ),
+        'for your interest.'
       )
     )
   );

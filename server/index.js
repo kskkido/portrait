@@ -1,4 +1,5 @@
 const { join } = require('path')
+		, fs = require('fs')
 		, bodyParser = require('body-parser')
 		, express = require('express')
 		, app = express()
@@ -33,6 +34,22 @@ app
 
 // redirect to api routes
 	.use(express.static(join(__dirname, '..', '/client/public')))
+
+	.get('/resume', (req, res, next) => {
+		const file = fs.createReadStream(join(__dirname, '..', '/client/public/kido_resume.pdf'))
+		const stat = fs.statSync(file.path)
+
+		console.log('FILE', file)
+		console.log('STATE', stat)
+
+		res.writeHead(200, {
+			'Content-Type': 'application/pdf',
+			'Content-Length': stat.size,
+			'Content-Disposition': 'attachment; filename="kido_resume.pdf'
+		})
+
+		file.pipe(res)
+	})
 
 	.get('*', (req, res, next) => {
 		res.sendFile(join(__dirname, '..', '/client/public/index.html'))
