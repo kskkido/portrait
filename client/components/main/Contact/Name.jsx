@@ -23,10 +23,10 @@ const EmailContainer = styled.span`
 `
 
 const Email = styled.a`
-  color: #CFD8DC;
+  color: #DCE775;
   transition: color 0.3s;
   &:hover {
-    color: #EEEEEE;
+    color: #F0F4C3;
   }
 `
 

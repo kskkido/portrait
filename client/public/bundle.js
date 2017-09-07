@@ -53972,7 +53972,8 @@ var Body = function Body(_ref) {
     value: text !== 'social' && getProps(text),
     updateText: createInputHandler(text),
     onEnterHandler: text === 'submit' ? onSubmitHandler : createOnEnterHandler((viewIndex + 1) % list.length),
-    setRotation: setRotation
+    setRotation: setRotation,
+    shouldTrim: text !== 'message'
   });
 };
 
@@ -54138,7 +54139,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: black;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.1;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n'], ['\n  position: relative;\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: black;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.1;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  color: #CFD8DC;\n  transition: color 0.3s;\n  &:hover {\n    color: #EEEEEE;\n  }\n'], ['\n  color: #CFD8DC;\n  transition: color 0.3s;\n  &:hover {\n    color: #EEEEEE;\n  }\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  color: #DCE775;\n  transition: color 0.3s;\n  &:hover {\n    color: #F0F4C3;\n  }\n'], ['\n  color: #DCE775;\n  transition: color 0.3s;\n  &:hover {\n    color: #F0F4C3;\n  }\n']);
 
 var _react = __webpack_require__(1);
 
@@ -55845,6 +55846,12 @@ var forwardProps = function forwardProps(Comp) {
             value = _props$value.value,
             isValid = _props$value.isValid;
 
+
+        this.trim = this.props.shouldTrim ? function (val) {
+          return val.trim();
+        } : function (val) {
+          return val;
+        };
         this.setState(Object.assign({}, { localValue: value, isValid: isValid }));
       }
     }, {
@@ -55869,7 +55876,7 @@ var forwardProps = function forwardProps(Comp) {
     }, {
       key: 'onChangeHandler',
       value: function onChangeHandler(value, isValid) {
-        this.setState(Object.assign({}, { localValue: value.trim(), isValid: isValid }));
+        this.setState(Object.assign({}, { localValue: this.trim(value), isValid: isValid }));
       }
     }, {
       key: 'render',

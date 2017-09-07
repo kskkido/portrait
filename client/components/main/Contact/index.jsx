@@ -30,7 +30,8 @@ const Body = ({ getProps, viewIndex, onSubmitHandler, createInputHandler, create
       value: text !== 'social' && getProps(text),
       updateText: createInputHandler(text),
       onEnterHandler: text === 'submit' ? onSubmitHandler : createOnEnterHandler((viewIndex + 1) % list.length),
-      setRotation: setRotation
+      setRotation: setRotation,
+      shouldTrim: text !== 'message',
     })
   )
 }

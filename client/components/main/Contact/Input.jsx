@@ -14,7 +14,9 @@ const forwardProps = (Comp) => (
 
     componentWillMount() {
     const { value, isValid } = this.props.value
-      this.setState(Object.assign({}, {localValue: value, isValid: isValid}))
+
+    this.trim = this.props.shouldTrim ? (val) => val.trim() : (val) => val
+    this.setState(Object.assign({}, {localValue: value, isValid: isValid}))
     }
 
     componentDidMount() {
@@ -31,7 +33,7 @@ const forwardProps = (Comp) => (
     }
 
     onChangeHandler(value, isValid) {
-      this.setState(Object.assign({}, {localValue: value.trim(), isValid}))
+      this.setState(Object.assign({}, {localValue: this.trim(value), isValid}))
     }
 
     render() {
