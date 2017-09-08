@@ -5,7 +5,7 @@ const { join } = require('path')
 		, app = express()
 		, port = require('../').port
 		, session = require('express-session')
-		, { initialProp } = require('./constant')
+		, { initialProp } = require('./util')
 
 app
 // logging middleware

@@ -321,7 +321,6 @@ const scrambleAnimation = (() => {
 export const Scramble = (_props) => {
   const props = Object.assign({}, _props)
   delete props.text; delete props.delay
-  delete props.tail
   delete props.tailText
 
   return (

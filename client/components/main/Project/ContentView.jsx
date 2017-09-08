@@ -107,7 +107,6 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
           appear={true}
           delay={0.2}
           text={`<${title}>`}
-          tail={'tail'}
           tailText={`</${title}>`}
         >
           <Title>
