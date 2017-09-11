@@ -53148,9 +53148,9 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n'], ['\n  width: 100%;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: 300px;\n  width: 300px;\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n'], ['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: 300px;\n  width: 300px;\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n'], ['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n    height: 150px;\n    width: 150px;\n  '], ['\n    height: 150px;\n    width: 150px;\n  ']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: 300px;\n  width: 300px;\n  ', '\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n'], ['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: 300px;\n  width: 300px;\n  ', '\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    height: 150px;\n    width: 150px;\n  '], ['\n    height: 150px;\n    width: 150px;\n  ']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n'], ['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n'], ['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n    line-height: 20em;\n  '], ['\n    line-height: 20em;\n  ']);
 
@@ -53182,7 +53182,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var Container = _styledComponents2.default.div(_templateObject);
 
-var NavigationDiv = _styledComponents2.default.div(_templateObject2);
+var NavigationDiv = _styledComponents2.default.div(_templateObject2, _Styles.media.phone(_templateObject3));
 
 var InnerNavigationDiv = _styledComponents2.default.div.attrs({
   style: function style(props) {
@@ -53190,7 +53190,7 @@ var InnerNavigationDiv = _styledComponents2.default.div.attrs({
       transform: 'rotate(' + props.spacing + 'turn)'
     };
   }
-})(_templateObject3, _Styles.media.phone(_templateObject4));
+})(_templateObject4, _Styles.media.phone(_templateObject3));
 
 var NavigationText = _styledComponents2.default.span(_templateObject5, _Styles.media.phone(_templateObject6));
 
