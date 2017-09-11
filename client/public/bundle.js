@@ -53149,10 +53149,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n'], ['\n  width: 100%;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: 300px;\n  width: 300px;\n  ', '\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n'], ['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: 300px;\n  width: 300px;\n  ', '\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    height: 150px;\n    width: 150px;\n  '], ['\n    height: 150px;\n    width: 150px;\n  ']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    height: 200px;\n    width: 200px;\n  '], ['\n    height: 200px;\n    width: 200px;\n  ']),
     _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n'], ['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n'], ['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n    line-height: 20em;\n  '], ['\n    line-height: 20em;\n  ']);
+    _templateObject6 = _taggedTemplateLiteral(['\n    line-height: 30em;\n  '], ['\n    line-height: 30em;\n  ']);
 
 var _react = __webpack_require__(1);
 

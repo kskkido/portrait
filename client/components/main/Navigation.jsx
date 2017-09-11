@@ -18,8 +18,8 @@ const NavigationDiv = styled.div`
   height: 300px;
   width: 300px;
   ${media.phone`
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
   `}
   border: 2px solid;
   border-radius: 50%;
@@ -36,8 +36,8 @@ const InnerNavigationDiv = styled.div.attrs({
   height: 300px;
   width: 300px;
   ${media.phone`
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
   `}
   text-align: center;
   border-radius: 50%;
@@ -47,7 +47,7 @@ const InnerNavigationDiv = styled.div.attrs({
 const NavigationText = styled.span`
   line-height: 40em;
   ${media.phone`
-    line-height: 20em;
+    line-height: 30em;
   `}
   padding: 5px;
   text-transform: uppercase;
