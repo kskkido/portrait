@@ -149,16 +149,16 @@ class LocalContainer extends Component {
         }, '-=0.4')
   }
 
-  static createSVGCLickAnimation(sidenav) {
-    console.log(window.getComputedStyle(sidenav).width)
-    return new TimelineLite({paused: true})
-      .to(sidenav, 0.4, {
-        x: `+=${window.getComputedStyle(sidenav).width}`,
-      })
-      .to(document.getElementById('bodyContainer'), 0.3, {
-        x: `+=${window.getComputedStyle(sidenav).width}`,
-      }, '-=0.4')
-  }
+  // static createSVGCLickAnimation(sidenav) {
+  //   console.log(window.getComputedStyle(sidenav).width)
+  //   return new TimelineLite({paused: true})
+  //     .to(sidenav, 0.4, {
+  //       x: `+=${window.getComputedStyle(sidenav).width}`,
+  //     })
+  //     .to(document.getElementById('bodyContainer'), 0.3, {
+  //       x: `+=${window.getComputedStyle(sidenav).width}`,
+  //     }, '-=0.4')
+  // }
 
   static createSVGHoverAnimation(target) {
     return new TimelineLite({paused: true})
@@ -181,7 +181,7 @@ class LocalContainer extends Component {
         ease: Power2.easeOut,
       })
       .to(body, 0.3, {
-        marginLeft: `+=${width === SIDENAV_WIDTH ? width : '800px'}`,
+        marginLeft: `+=${width === SIDENAV_WIDTH ? width : '900px'}`,
       }, '-=0.4') :
 
       new TimelineLite()
@@ -200,7 +200,7 @@ class LocalContainer extends Component {
 
   componentDidMount() {
     this.enterAnimation = LocalContainer.enterAnimation(this.listRows)
-    this.svgClickAnimation = LocalContainer.createSVGCLickAnimation(this.container)
+    // this.svgClickAnimation = LocalContainer.createSVGCLickAnimation(this.container)
     this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation)
     this.hoverAnimations[this.props.pathIndex || 0].play()
   }

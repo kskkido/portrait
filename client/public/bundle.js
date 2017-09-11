@@ -49008,7 +49008,7 @@ var LocalContainer = function (_Component) {
         x: '0px',
         ease: _gsap.Power2.easeOut
       }).to(body, 0.3, {
-        marginLeft: '+=' + (width === _Styles.SIDENAV_WIDTH ? width : '800px')
+        marginLeft: '+=' + (width === _Styles.SIDENAV_WIDTH ? width : '900px')
       }, '-=0.4') : new _gsap.TimelineLite().to(this.container, 0.6, {
         x: '-2000px',
         ease: _gsap.Power2.easeIn
@@ -49025,7 +49025,7 @@ var LocalContainer = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.enterAnimation = LocalContainer.enterAnimation(this.listRows);
-      this.svgClickAnimation = LocalContainer.createSVGCLickAnimation(this.container);
+      // this.svgClickAnimation = LocalContainer.createSVGCLickAnimation(this.container)
       this.hoverAnimations = this.listRows.map(LocalContainer.createHoverAnimation);
       this.hoverAnimations[this.props.pathIndex || 0].play();
     }
@@ -49205,16 +49205,18 @@ var LocalContainer = function (_Component) {
         ease: _gsap.Back.easeOut
       }, '-=0.4');
     }
-  }, {
-    key: 'createSVGCLickAnimation',
-    value: function createSVGCLickAnimation(sidenav) {
-      console.log(window.getComputedStyle(sidenav).width);
-      return new _gsap.TimelineLite({ paused: true }).to(sidenav, 0.4, {
-        x: '+=' + window.getComputedStyle(sidenav).width
-      }).to(document.getElementById('bodyContainer'), 0.3, {
-        x: '+=' + window.getComputedStyle(sidenav).width
-      }, '-=0.4');
-    }
+
+    // static createSVGCLickAnimation(sidenav) {
+    //   console.log(window.getComputedStyle(sidenav).width)
+    //   return new TimelineLite({paused: true})
+    //     .to(sidenav, 0.4, {
+    //       x: `+=${window.getComputedStyle(sidenav).width}`,
+    //     })
+    //     .to(document.getElementById('bodyContainer'), 0.3, {
+    //       x: `+=${window.getComputedStyle(sidenav).width}`,
+    //     }, '-=0.4')
+    // }
+
   }, {
     key: 'createSVGHoverAnimation',
     value: function createSVGHoverAnimation(target) {
