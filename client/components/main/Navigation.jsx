@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { TweenLite, Back } from 'gsap'
 import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
+import { media } from '../shared/Styles'
 
 const Container = styled.div`
   width: 100%;
@@ -30,6 +31,10 @@ const InnerNavigationDiv = styled.div.attrs({
   position: absolute;
   height: 300px;
   width: 300px;
+  ${media.phone`
+    height: 150px;
+    width: 150px;
+  `}
   text-align: center;
   border-radius: 50%;
   transform-style: preserve-3d;
@@ -37,6 +42,9 @@ const InnerNavigationDiv = styled.div.attrs({
 
 const NavigationText = styled.span`
   line-height: 40em;
+  ${media.phone`
+    line-height: 20em;
+  `}
   padding: 5px;
   text-transform: uppercase;
 `

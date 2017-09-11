@@ -53149,8 +53149,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n'], ['\n  width: 100%;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: 300px;\n  width: 300px;\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n'], ['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: 300px;\n  width: 300px;\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n'], ['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  line-height: 40em;\n  padding: 5px;\n  text-transform: uppercase;\n'], ['\n  line-height: 40em;\n  padding: 5px;\n  text-transform: uppercase;\n']);
+    _templateObject3 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n'], ['\n  position: absolute;\n  height: 300px;\n  width: 300px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    height: 150px;\n    width: 150px;\n  '], ['\n    height: 150px;\n    width: 150px;\n  ']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n'], ['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n    line-height: 20em;\n  '], ['\n    line-height: 20em;\n  ']);
 
 var _react = __webpack_require__(1);
 
@@ -53165,6 +53167,8 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 var _gsap = __webpack_require__(12);
 
 var _events = __webpack_require__(18);
+
+var _Styles = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53186,9 +53190,9 @@ var InnerNavigationDiv = _styledComponents2.default.div.attrs({
       transform: 'rotate(' + props.spacing + 'turn)'
     };
   }
-})(_templateObject3);
+})(_templateObject3, _Styles.media.phone(_templateObject4));
 
-var NavigationText = _styledComponents2.default.span(_templateObject4);
+var NavigationText = _styledComponents2.default.span(_templateObject5, _Styles.media.phone(_templateObject6));
 
 var LocalContainer = function (_Component) {
   _inherits(LocalContainer, _Component);
