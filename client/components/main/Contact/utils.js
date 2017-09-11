@@ -11,8 +11,7 @@ export const asyncFormPut = (prop, data) => (
   })
 )
 
-export const tap = (fn, ...args) => {
-  console.log(args, 'console args')
+export const tap = function (fn, ...args) {
   return (fn.apply(this, args), args)
 }
 

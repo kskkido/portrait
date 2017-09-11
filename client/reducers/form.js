@@ -48,10 +48,10 @@ export default (state = initialState, action) => {
   }
 }
 
-const migrateProps = (data, valueFilter = () => true, fallback) => (
+const migrateProps = (data, fallback) => (
   Object.keys(data).reduce((acc, prop) => (
     Object.assign({}, acc, {[prop]: {
-      value: valueFilter(data[prop].value) ? data[prop].value : fallback,
+      value: data[prop].value === undefined ? fallback : data[prop].value,
       isValid: data[prop].isValid
     }})
   ), {})
@@ -59,7 +59,7 @@ const migrateProps = (data, valueFilter = () => true, fallback) => (
 
 export const asyncFormFetch = () => dispatch => (
   axios.get('/api')
-    .then(({ data }) => dispatch(formFetch(migrateProps(data, (val) => val, initialValue))))
+    .then(({ data }) => dispatch(formFetch(migrateProps(data, initialValue))))
 )
 
 const pendingSubmit = (dispatch) => {

@@ -145,8 +145,8 @@ const horizontalSlide = (() => {
   const slideInContent = (direction, target, tl) => {
     tl
       .from(target, fadeInDuration, {
-      [direction]: '-250px',
-      autoAlpha: 0,
+      marginLeft: direction,
+      opacity: 0,
       ease: Back.easeOut,
       clearProps: direction
     }, `-=${slideDuration - 0.2}`)
@@ -161,7 +161,7 @@ const horizontalSlide = (() => {
           , tl = new TimelineLite()
             .set(behind, {backgroundColor: color})
 
-      slideHorizontalBackground(front, behind, tl, direction); slideInContent(direction, target, tl)
+      slideHorizontalBackground(front, behind, tl, direction); slideInContent(direction === 'right' ? '250px' : '-250px', target, tl)
       toggle = !toggle
     },
     onExit: (target) => {

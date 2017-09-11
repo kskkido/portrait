@@ -23,40 +23,46 @@ const Container = styled.div`
   height: inherit;
 `
 
+const RouteContainer = styled.div`
+  position: relative;
+`
+
 /* ====== utils ====== */
 
 const BodyRoutes = ({ viewIndex }) => (
-  <Route render={({ location }) => {
+  <RouteContainer id="bodyContainer">
+    <Route render={({ location }) => {
 
-    return (
-      <TransitionGroup
-        appear={true}
-        mountOnEnter={true}
-        unmountOnExit={true}
-      >
-        <Show
-          key={location.key}
-          pathname={location.pathname}
-          viewIndex={viewIndex}
+      return (
+        <TransitionGroup
+          appear={true}
+          mountOnEnter={true}
+          unmountOnExit={true}
         >
-          <Switch location={location}>
-            <Route path="/about" component={About} />
-            <Route path="/projects" component={Project} />
-            <Route path="/contact" component={Contact} />
-            <Route exact path="/" component={Kido} />
-          </Switch>
-        </Show>
-      </TransitionGroup>
-    )
-  }}
-  />
+          <Show
+            key={location.key}
+            pathname={location.pathname}
+            viewIndex={viewIndex}
+          >
+            <Switch location={location}>
+              <Route path="/about" component={About} />
+              <Route path="/projects" component={Project} />
+              <Route path="/contact" component={Contact} />
+              <Route exact path="/" component={Kido} />
+            </Switch>
+          </Show>
+        </TransitionGroup>
+      )
+    }}
+    />
+  </RouteContainer>
 )
 
 const Main = (props) => {
   console.log('dude', props.toggle)
   return (
     <ThemeProvider theme={theme}>
-      <Container id="bodyContainer">
+      <Container>
         <Overlay status={props.sending} />
         <BodyRoutes  {...props} />
       </Container>

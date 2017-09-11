@@ -37,7 +37,7 @@ const Name = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef }) =>
 
   return (
     <PreviewContainer>
-      <p>Interested in getting in touch with me? Enter your name below and press enter to navigate to the next section. Once you fill out each section, go to the 'submit' section to send out your message! Or send me a message at
+      <p>Lets get in touch! Fill out each section and go to the 'submit' section to send out your message! Or email me a message at
         <EmailContainer><Email href="mailto:kskkido@gmail.com?Subject=Hello%20nice%20to%20meet%20you" target="_top"> kskkido@gmail.com</Email></EmailContainer>
       </p>
       <PlaceholderContainer

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-import { TimelineLite, Back } from 'gsap'
+import { TimelineLite, Back, Power2 } from 'gsap'
 import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
+import { media, SIDENAV_WIDTH } from '../shared/Styles'
 import { UncollapseList } from '../shared/Transition'
 import { viewData } from '../shared/Data'
 
@@ -12,11 +13,13 @@ import Button from './Button'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
-  min-width: 325px;
+  min-width: ${SIDENAV_WIDTH};
+  ${media.tablet`min-width: 100%`};
   height: 100vh;
   position: fixed;
   left: 0;
   z-index: 100;
+  transform: translateX(-2000px);
 `
 
 const Overlay = styled.div`
@@ -32,10 +35,10 @@ const Overlay = styled.div`
 
 const List = styled.ul`
   height: 80%;
-  width: 305px;
+  width: 93%;
   position: absolute;
   list-style: none;
-  left: 20px;
+  left: 6%;
   top: 80px;
   padding: 0;
   z-index: 100;
@@ -99,16 +102,16 @@ const ListText = styled.h3`
   text-transform: uppercase;
 `
 
-const SideNav = ({ children, onClickSVG, inputMain, inputSVG, onClick, mouseOut, mouseOver,  }) => (
-  <Container>
+const SideNav = ({ children, onClickSVG, inputMain }) => (
+  <div>
     <Button onClick={onClickSVG} />
-    <div id="sidenav" ref={inputMain} style={{height: '100%', transform: 'translateX(-100%)'}}>
+    <Container id="sidenav" innerRef={inputMain}>
       <List >
         {children}
       </List>
       <Overlay />
-      </div>
-  </Container>
+      </Container>
+  </div>
 )
 
 
@@ -147,12 +150,13 @@ class LocalContainer extends Component {
   }
 
   static createSVGCLickAnimation(sidenav) {
+    console.log(window.getComputedStyle(sidenav).width)
     return new TimelineLite({paused: true})
       .to(sidenav, 0.4, {
-        x: '+=325px',
+        x: `+=${window.getComputedStyle(sidenav).width}`,
       })
       .to(document.getElementById('bodyContainer'), 0.3, {
-        marginLeft: '+=325px',
+        x: `+=${window.getComputedStyle(sidenav).width}`,
       }, '-=0.4')
   }
 
@@ -163,6 +167,31 @@ class LocalContainer extends Component {
         rotation: 90,
         ease: Back.easeOut
       })
+  }
+
+  newClickSvg(toggle) {
+    const body = document.getElementById('bodyContainer')
+        , width = window.getComputedStyle(this.container).width
+
+    return !toggle ?
+
+      new TimelineLite()
+      .to(this.container, 0.4, {
+        x: `0px`,
+        ease: Power2.easeOut,
+      })
+      .to(body, 0.3, {
+        marginLeft: `+=${width === SIDENAV_WIDTH ? width : '800px'}`,
+      }, '-=0.4') :
+
+      new TimelineLite()
+      .to(this.container, 0.6, {
+        x: `-2000px`,
+        ease: Power2.easeIn,
+      })
+      .to(body, 0.4, {
+        marginLeft: `0px`,
+      }, '-=0.42')
   }
 
   componentWillMount() {
@@ -251,7 +280,9 @@ class LocalContainer extends Component {
   }
 
   handleOnClickSVG(toggle) {
-    return (!toggle ? (this.svgClickAnimation.play(), this.enterAnimation.restart()) : this.svgClickAnimation.reverse())
+    this.newClickSvg(toggle)
+    !toggle && this.enterAnimation.restart()
+    // return (!toggle ? (this.svgClickAnimation.play(), this.enterAnimation.restart()) : this.svgClickAnimation.reverse())
   }
 
 
