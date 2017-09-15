@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { viewData } from '../../shared/Data'
 import { pathChange, viewChange, rotationChange } from '../../../reducers/events'
 import { asyncFormRestart, formUpdate } from '../../../reducers/form'
+import { viewData } from '../../shared/Data'
 import { asyncFormPut, tap } from './utils'
+
 import BodyComponent from '../Body'
 import Name from './Name'
 import Email from './Email'
 import Message from './Message'
 import Submit from './Submit'
 import Social from './SocialMedia'
-import Return from '../Return'
+import Return from '../shared/Return'
 
 const list = [
  {text: 'name', component: <Name />},
@@ -28,7 +29,8 @@ const Body = ({ getProps, viewIndex, onSubmitHandler, createInputHandler, create
       value: text !== 'social' && getProps(text),
       updateText: createInputHandler(text),
       onEnterHandler: text === 'submit' ? onSubmitHandler : createOnEnterHandler((viewIndex + 1) % list.length),
-      setRotation: setRotation
+      setRotation: setRotation,
+      shouldTrim: text !== 'message',
     })
   )
 }

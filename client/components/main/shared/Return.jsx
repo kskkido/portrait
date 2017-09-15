@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-import { Link, withRouter } from 'react-router-dom'
-import Button from './Button'
 import { TimelineLite, Back } from 'gsap'
+
+import Button from './Button'
 
 const ReturnContainer = styled.div`
   position: ${props => props.isBody ? 'relative' : 'absolute'};

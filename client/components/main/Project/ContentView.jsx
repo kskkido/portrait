@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import Textline from '../Textline'
 import { BodyContainer, BodyContent, Title} from '../../shared/Styles'
-import { createSpans, createTitle } from '../../shared/Utils'
 import { Scramble } from '../../shared/Transition'
+import { createSpans, createTitle } from '../../shared/Utils'
 import projectData from './content'
-import Return from '../Return'
+
+import Return from '../shared/Return'
+import Textline from '../shared/Textline'
 
 // const createMetadataItem = (metadata) => (key) => (
 //   <li key={key}>{metadata[key]}</li>
@@ -56,7 +57,7 @@ const ProjectImage = styled.div.attrs({
 
 const Description = styled.div`
   text-align: center;
-  padding: 0 10px 0 10px;
+  padding: 0 30px;
   min-height: 100px;
 `
 
@@ -100,7 +101,14 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
   return (
     <BodyContainer key={viewIndex}>
       <Section>
-        <Scramble key={title} in={true} appear={true} delay={0.2} text={`<${title}>`}>
+        <Scramble
+          key={title}
+          in={true}
+          appear={true}
+          delay={0.2}
+          text={`<${title}>`}
+          tailText={`</${title}>`}
+        >
           <Title>
             {createSpans(title.length + 2)}
           </Title>
@@ -146,10 +154,9 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
         </TextContainer>
       </Section>
       <Section bottom>
-        <Title>
-          {createTitle(`</${title}>`)}
-          <Textline />
-        </Title>
+      <Title id="tail">
+        {createSpans(title.length + 3)}<Textline delay={0.8} />
+      </Title>
       </Section>
       </BodyContent>
         <Return

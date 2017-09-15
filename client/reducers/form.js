@@ -4,10 +4,14 @@ import { initialValue } from '../components/main/Contact/utils'
 const FORM_FETCH = 'FORM FETCH'
 const FORM_UPDATE = 'FORM UPDATE'
 const FORM_RESTART = 'FORM RESTART'
+const FORM_SENDING = 'FORM SENDING'
 
 export const formFetch = (data) => ({type: FORM_FETCH, data})
 export const formUpdate = (prop, payload) => ({type: FORM_UPDATE, data: {prop, payload}})
 export const formRestart = () => ({type: FORM_RESTART})
+export const formSending = (bool) => ({type: FORM_SENDING, bool})
+
+export const sending = Symbol('sending')
 
 const initialState = {
   name: {
@@ -21,7 +25,8 @@ const initialState = {
   message: {
     value: initialValue,
     isValid: false,
-  }
+  },
+  [sending]: false
 }
 
 export default (state = initialState, action) => {
@@ -35,15 +40,18 @@ export default (state = initialState, action) => {
     case FORM_RESTART:
       return Object.assign({}, initialState)
 
+    case FORM_SENDING:
+      return Object.assign({}, state, {[sending]: action.bool})
+
     default:
       return state
   }
 }
 
-const migrateProps = (data, valueFilter = () => true, fallback) => (
+const migrateProps = (data, fallback) => (
   Object.keys(data).reduce((acc, prop) => (
     Object.assign({}, acc, {[prop]: {
-      value: valueFilter(data[prop].value) ? data[prop].value : fallback,
+      value: data[prop].value === undefined ? fallback : data[prop].value,
       isValid: data[prop].isValid
     }})
   ), {})
@@ -51,11 +59,16 @@ const migrateProps = (data, valueFilter = () => true, fallback) => (
 
 export const asyncFormFetch = () => dispatch => (
   axios.get('/api')
-    .then(({ data }) => dispatch(formFetch(migrateProps(data, (val) => val, initialValue))))
+    .then(({ data }) => dispatch(formFetch(migrateProps(data, initialValue))))
 )
+
+const pendingSubmit = (dispatch) => {
+  dispatch(formSending(true))
+  setTimeout(() => dispatch(formSending(false)) && dispatch(formRestart()), 1600)
+}
 
 export const asyncFormRestart = () => (dispatch, getState) => (
   (axios.post('/api', {
     contact: getState().form
-  }), dispatch(formRestart()))
+  }), pendingSubmit(dispatch))
 )

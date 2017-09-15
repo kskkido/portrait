@@ -1,19 +1,19 @@
-const grey1 = '#e8e5e6'
+const home = '#e8e5e6'
 
-const blue1 = '#29b6f6'
-    , blue2 = '#4fc3f7'
-    , blue3 = '#4dd0e1'
-    , blue4 = '#26c6da'
+const ABOUT1 = '#29b6f6'
+    , ABOUT2 = '#4fc3f7'
+    , ABOUT3 = '#4dd0e1'
+    , ABOUT4 = '#26c6da'
 
-const red3 = '#ffbcaf'
-    , red2 = '#ef9a9a'
-    , red1 = '#ff8a80'
+const PROJECTS3 = '#ffbcaf'
+    , PROJECTS2 = '#ef9a9a'
+    , PROJECTS1 = '#ff8a80'
 
-const purple1 = '#ffb74d'
-    , purple2 = '#ffcc80'
-    , purple3 = '#ffd54f'
-    , purple4 = '#ffca28'
-    , purple5 = '#ffb300'
+const CONTACT1 = '#ffb74d'
+    , CONTACT2 = '#ffcc80'
+    , CONTACT3 = '#ffd54f'
+    , CONTACT4 = '#ffca28'
+    , CONTACT5 = '#ffb300'
 
 export const viewData = {
   home: {
@@ -21,7 +21,7 @@ export const viewData = {
     path: '/',
     navigationList: ['WELCOME', 'ABOUT', 'PROJECTS', 'CONTACT'],
     children: [],
-    backgroundColor: [grey1, blue1, red1, purple1],
+    backgroundColor: [home, ABOUT1, PROJECTS1, CONTACT1],
     secondaryColor: '#BDBDBD'
   },
   about: {
@@ -29,7 +29,7 @@ export const viewData = {
     path: '/about',
     navigationList: ['WHO', 'WHAT', 'WHERE', 'WHEN'],
     children: ['WHO', 'WHAT', 'WHERE', 'WHEN'],
-    backgroundColor: [blue1, blue2, blue3, blue4],
+    backgroundColor: [ABOUT1, ABOUT2, ABOUT3, ABOUT4],
     secondaryColor: '#2196f3'
   },
   projects: {
@@ -37,7 +37,7 @@ export const viewData = {
     path: '/projects',
     navigationList: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
     children: ['AUDIOSPHERE', 'STACKQUEST', 'PORTFOLIO'],
-    backgroundColor: [red1, red2, red3],
+    backgroundColor: [PROJECTS1, PROJECTS2, PROJECTS3],
     secondaryColor: '#e57373'
   },
   contact: {
@@ -45,24 +45,7 @@ export const viewData = {
     path: '/contact',
     navigationList: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT', 'SOCIAL'],
     children: ['NAME', 'EMAIL', 'MESSAGE', 'SUBMIT', 'SOCIAL'],
-    backgroundColor: [purple1, purple2, purple3, purple4, purple5],
+    backgroundColor: [CONTACT1, CONTACT2, CONTACT3, CONTACT4, CONTACT5],
     secondaryColor: '#ffa726'
   }
 }
-
-
-// const cyan = '#66D7D1'
-//     , orange = '#FC7753'
-//     , blue = '#42CAFD'
-//     , skyBlue = '#2EC4B6'
-//     , rouge = '#FDF5BF'
-//     , green = '#C2EFB3'
-//     , yellow = '#F7F052'
-//     , purple = '#9DACFF'
-//     , lightGreen = '#94E8B4'
-//     , slimeGreen = '#7DDF64'
-//     , red = '#E3170A'
-//     , cyanLight = '#A9E5BB'
-//     , skin = '#FCF6B1'
-//     , yellowLight = '#F7B32B'
-//     , cloud = '#e8e5e6'

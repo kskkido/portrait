@@ -5,9 +5,9 @@ import { TimelineLite, Back } from 'gsap'
 import { loadComplete } from '../../reducers/events'
 import { asyncFormFetch } from '../../reducers/form'
 import { viewData } from  '../shared/Data'
-import { Title3 } from '../shared/Styles'
-import { createTitle } from '../shared/Utils'
+import { Title3, media } from '../shared/Styles'
 import { Fade, Scramble } from '../shared/Transition'
+import { createTitle } from '../shared/Utils'
 
 const Container = styled.div`
   position: relative;

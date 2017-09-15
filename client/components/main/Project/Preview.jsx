@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import Button from '../Button'
+import React from 'react'
 import { PreviewContainer } from '../../shared/Styles'
 import data from './content'
+
+import Button from '../shared/Button'
 
 const ProjectPreview = ({ toggleBody, viewIndex }) => {
   if (data[viewIndex] === undefined) return <div />

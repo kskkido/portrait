@@ -1,13 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import styled from 'styled-components'
-import Textline from '../Textline'
 import { BodyContainer, Flex1, Title } from '../../shared/Styles'
 import { createSpans, createTitle } from '../../shared/Utils'
 import { Scramble } from '../../shared/Transition'
 
-import Return from '../Return'
+import Return from '../shared/Return'
+import Textline from '../shared/Textline'
 import Who from './Who'
 import What from './What'
 import Where from './Where'
@@ -27,7 +24,7 @@ const AboutView = ({ navigationList, viewIndex, toggleBody }) => {
   return (
       <BodyContainer >
         <Flex1>
-          <Scramble key={title} in={true} appear={true} delay={0.2} text={`<${title}>`}>
+          <Scramble key={title} in={true} tail="tail" appear={true} delay={0.2} text={`<${title}>`} tailText={`</${title}>`} >
             <Title id="title">
             {createSpans(title.length + 2)}
             </Title>
@@ -35,9 +32,8 @@ const AboutView = ({ navigationList, viewIndex, toggleBody }) => {
         </Flex1>
         {list[viewIndex]}
         <Flex1>
-          <Title bottom>
-            {createTitle(`</${title}>`)}
-            <Textline />
+          <Title id="tail">
+            {createSpans(title.length + 3)}<Textline delay={0.8} />
           </Title>
         </Flex1>
         <Return

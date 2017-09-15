@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import Button from '../Button'
 import { PreviewContainer } from '../../shared/Styles'
 import data from './content'
+
+import Button from '../shared/Button'
 
 const ProjectsPreview = ({ history, viewIndex }) => {
    if (!data[viewIndex]) return <div />

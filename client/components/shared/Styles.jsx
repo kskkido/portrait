@@ -1,12 +1,41 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+// media query
+const mediaSizes = {
+  giant: 1170,
+  desktop: 992,
+  tablet: 768,
+  phone: 376
+}
+
+export const media = Object.keys(mediaSizes).reduce((acc, label) => {
+  const emSize = mediaSizes[label] / 16
+
+  acc[label] = (...args) => css`
+    @media (max-width: ${emSize}em) {
+      ${css(...args)}
+    }
+  `
+
+  return css
+}, {})
+
+// constants
+
+export const SIDENAV_WIDTH = '325px'
+
+// styles
 
 export const BodyContainer = styled.div`
   position: absolute;
-  width: 100%;
+  width: 700px;
+  ${media.tablet`width: 100%`}
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: ${props => props.row ? 'row' : 'column'};
-  justify-content: flex-start;
+  justify-content: center;
 `
 
 export const BodyContent = styled.div`
@@ -19,7 +48,12 @@ export const BodyContent = styled.div`
 
 export const BodyText = styled.div`
   width: 100%;
-  padding: 0 10px 0 10px;
+  padding: 0 20px;
+  margin: 20px 0px;
+`
+
+export const Text = styled.p`
+  margin: 0;
 `
 
 export const Flex1 = styled.div`
@@ -46,7 +80,8 @@ export const Flex5 = styled.div`
 export const PreviewContainer = styled.div`
   position: absolute;
   text-align: center;
-  width: 100%;
+  width: 700px;
+  ${media.tablet`width: 100%`}
   min-height: 200px;
   left: 50%;
   transform: translateX(-50%);
@@ -56,6 +91,7 @@ export const Title = styled.h1`
   font-weight: normal;
   text-transform: uppercase;
   font-size: 1.2em;
+  height: 25px;
   margin-top: ${props => props.bottom ? '50px' : '10px'};
   margin-bottom: 20px;
 `
@@ -114,8 +150,8 @@ export const PlaceholderContainer = styled.div.attrs({
   left: 50%;
   transform: translateX(-50%);
   padding: 6px 14px 5px 33px;
+  white-space: nowrap;
   letter-spacing: 1px;
-  font-size: 1.2em;
   color: #424242;
   opacity: 0.8;
   transition: bottom 0.2s, font-size 0.2s, color 0.2s;

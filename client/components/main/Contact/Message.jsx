@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Input, PlaceholderContainer, PreviewContainer } from '../../shared/Styles'
 import { initialValue } from './utils'
+import forwardProps from './Input'
 
 const Message = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef }) => {
     const isInitial = value === initialValue
@@ -28,53 +29,4 @@ const Message = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef })
   )
 }
 
-class LocalContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      localValue: '',
-      isValid: false
-    }
-
-    this.onChangeHandler = this.onChangeHandler.bind(this)
-  }
-
-  componentWillMount() {
-    const { value, isValid } = this.props.value
-
-    this.setState(Object.assign({}, {localValue: value, isValid}))
-  }
-
-  componentDidMount() {
-    this.input.focus()
-  }
-
-  componentWillUnmount() {
-    const { localValue, isValid } = this.state
-    this.props.updateText(localValue, isValid)
-  }
-
-  componentDidUpdate() {
-    this.input.focus()
-  }
-
-  onChangeHandler(value, isValid) {
-    this.setState(Object.assign({}, {localValue: value, isValid}))
-  }
-
-  render() {
-    const { isValid, localValue } = this.state
-
-    return (
-      <Message
-        _isValid={isValid}
-        value={localValue}
-        onChangeHandler={this.onChangeHandler}
-        onEnterHandler={this.props.onEnterHandler}
-        inputRef={div => this.input = div}
-      />
-    )
-  }
-}
-
-export default LocalContainer
+export default forwardProps(Message)

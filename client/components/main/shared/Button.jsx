@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
-import { Arrow } from '../shared/SvgAssets'
-import { Link } from 'react-router-dom'
-import { createSVG } from '../shared/Factory'
+import { Arrow } from '../../shared/SvgAssets'
+import { createSVG } from '../../shared/Factory'
 
 const createSVGHoverAnimation = (isUp = false) => (target) => {
   return new TimelineLite({paused: true})

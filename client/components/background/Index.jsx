@@ -25,31 +25,12 @@ const BgTwo = BgOne.extend`
   z-index: -100;
 `
 
-const BgDiv = styled.div`
-  background-color: inherit;
-  float: left;
-  top: 0;
-  width: 25%;
-  height: 100%;
-  z-index: inherit;
-`
-
 const Background = () => {
 
   return (
     <BgWrapper id="bgWrapper">
-      <BgOne id="bgOne">
-        {/* <BgDiv />
-        <BgDiv />
-        <BgDiv />
-        <BgDiv /> */}
-      </BgOne>
-      <BgTwo id="bgTwo">
-        {/* <BgDiv />
-        <BgDiv />
-        <BgDiv />
-        <BgDiv /> */}
-      </BgTwo>
+      <BgOne id="bgOne" />
+      <BgTwo id="bgTwo" />
     </BgWrapper>
   )
 }

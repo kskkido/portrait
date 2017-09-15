@@ -58,7 +58,7 @@ const verticalSlide = (() => {
             [direction]: 0,
             height: 0,
             ease: Power2.easeIn,
-            onComplete: (...args) => (cb && cb.call(this, args[2]), curriedSlide.apply(this, args)),
+            onComplete: (...args) => (cb && cb.call(this, tl), curriedSlide.apply(this, args)),
             onCompleteParams: [bgFront, bgBehind, tl, repeat - 1],
             clearProps: direction
           }) // tween new front to fill background
@@ -145,8 +145,8 @@ const horizontalSlide = (() => {
   const slideInContent = (direction, target, tl) => {
     tl
       .from(target, fadeInDuration, {
-      [direction]: '-300px',
-      autoAlpha: 0,
+      marginLeft: direction,
+      opacity: 0,
       ease: Back.easeOut,
       clearProps: direction
     }, `-=${slideDuration - 0.2}`)
@@ -161,7 +161,7 @@ const horizontalSlide = (() => {
           , tl = new TimelineLite()
             .set(behind, {backgroundColor: color})
 
-      slideHorizontalBackground(front, behind, tl, direction); slideInContent(direction, target, tl)
+      slideHorizontalBackground(front, behind, tl, direction); slideInContent(direction === 'right' ? '250px' : '-250px', target, tl)
       toggle = !toggle
     },
     onExit: (target) => {
@@ -238,9 +238,9 @@ export const UncollapseList = (props) => {
 
 const fadeAnimation = (() => {
 
-  const fadeIn = (delay = 0) => (target) => {
+  const fadeIn = (delay = 0, duration = 0.6) => (target) => {
     new TimelineLite()
-      .from(target, 0.6, {
+      .from(target, duration, {
         autoAlpha: 0,
         ease: Back.easeIn
       })
@@ -250,7 +250,8 @@ const fadeAnimation = (() => {
   const fadeOut = (delay = 0) => (target) => {
     new TimelineLite()
       .to(target, 0.3, {
-        autoAlpha: 0,
+        opacity: 0,
+        clearProps: 'opacity'
       })
       .delay(delay)
   }
@@ -276,11 +277,12 @@ export const Fade = (_props) => {
     delete props.onEnterDelay
     delete props.onExitDelay
     delete props.slideOut
+    delete props.onEnterDuration
   return (
     <Transition
       {...props}
       timeout={{enter: 600, exit: 300}}
-      onEnter={fadeAnimation.onEnter(_props.onEnterDelay)}
+      onEnter={fadeAnimation.onEnter(_props.onEnterDelay, _props.onEnterDuration)}
       onExit={_props.slideOut ? fadeAnimation.onExitSlide(_props.onExitDelay) : fadeAnimation.onExit(_props.onExitDelay)}
     />
   )
@@ -292,20 +294,24 @@ const scrambleAnimation = (() => {
     targetDom.textContent = String.fromCharCode(Math.floor(this.target.value))
   }
 
-  const onEnter = (duration, delay, asciList) => ({ childNodes }) => {
-    const letterDuration = duration / asciList.length
-        , tl = new TimelineLite()
-        .delay(delay)
-    asciList.forEach((asci, i) => {
-      tl.
-        to({value: Math.floor(Math.random() * 93) + 33}, letterDuration, {
-          value: asci,
-          onUpdate: writeHtml,
-          onUpdateParams: [childNodes[i]],
-          ease: Back.easeOut
-        })
-    })
-  }
+  const onEnter = (duration, delay = 0, asciList, tailText) =>
+    function scramble ({childNodes}) {
+      const letterDuration = duration / asciList.length
+          , tail = tailText && document.getElementById('tail')
+          , tl = new TimelineLite()
+          .delay(delay)
+      new Promise(res => asciList.forEach((asci, i, { length }) => {
+        tl.
+          to({value: Math.floor(Math.random() * 93) + 33}, letterDuration, {
+            value: asci,
+            onUpdate: writeHtml,
+            onUpdateParams: [childNodes[i]],
+            [i === length - 1 && 'onComplete']: res,
+            ease: Back.easeOut
+          })
+      }))
+      .then(tail && onEnter(duration, duration, convertToAsci(tailText))(tail))
+    }
 
   return {
     onEnter
@@ -315,13 +321,14 @@ const scrambleAnimation = (() => {
 export const Scramble = (_props) => {
   const props = Object.assign({}, _props)
   delete props.text; delete props.delay
+  delete props.tailText
 
   return (
     <Transition
       {...props}
       timeout={650}
       exit={false}
-      onEnter={scrambleAnimation.onEnter(0.65, _props.delay, convertToAsci(_props.text || 'bleh'))}
+      onEnter={scrambleAnimation.onEnter(0.65, _props.delay, convertToAsci(_props.text || 'bleh'), _props.tailText)}
     />
   )
 }

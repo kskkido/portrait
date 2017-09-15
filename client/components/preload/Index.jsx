@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { TransitionGroup } from 'react-transition-group'
-import { fadeIn } from '../shared/Styles'
-import { Fade } from  '../shared/Transition'
+
 import LanguageQuery from './Language'
 import Load from './Load'
 
