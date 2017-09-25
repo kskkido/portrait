@@ -9,7 +9,7 @@ const DIAMETER = 300
 
 const Container = styled.div`
   width: 100%;
-  ${media.phone`display: ${props.isBody && 'none'}`}
+  ${media.phone`display: ${props => props.isBody && 'none'}`}
 `
 
 const NavigationDiv = styled.div`

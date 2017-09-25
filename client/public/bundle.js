@@ -53247,7 +53247,9 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var DIAMETER = 300;
 
-var Container = _styledComponents2.default.div(_templateObject, _Styles.media.phone(_templateObject2, props.isBody && 'none'));
+var Container = _styledComponents2.default.div(_templateObject, _Styles.media.phone(_templateObject2, function (props) {
+  return props.isBody && 'none';
+}));
 
 var NavigationDiv = _styledComponents2.default.div(_templateObject3, DIAMETER, DIAMETER, _Styles.media.phone(_templateObject4, DIAMETER * 0.75, DIAMETER * 0.75));
 
