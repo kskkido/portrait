@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
+import { media } from '../shared/Styles'
 import { rotationChange, viewChange } from '../../reducers/events'
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
 const Container = styled.div`
+  ${media.phone`display: none`}
 `
 
 const List = styled.ul`

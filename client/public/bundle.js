@@ -50080,14 +50080,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n'], ['\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  list-style: none;\n  width: 95%;\n  opacity: 0.8;\n  padding-left: 6em;\n'], ['\n  list-style: none;\n  width: 95%;\n  opacity: 0.8;\n  padding-left: 6em;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  color: #F3F2F2;\n'], ['\n  color: #F3F2F2;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  display: block;\n  height: 35px;\n  text-decoration: none;\n  color: inherit;\n  cursor: pointer;\n'], ['\n  display: block;\n  height: 35px;\n  text-decoration: none;\n  color: inherit;\n  cursor: pointer;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  margin-top: 10px;\n  height: inherit;\n  position: relative;\n'], ['\n  margin-top: 10px;\n  height: inherit;\n  position: relative;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n'], ['\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n  padding-top: 4px;\n  opacity: 0.6;\n'], ['\n  padding-top: 4px;\n  opacity: 0.6;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n  padding-left: 1em;\n  font-weight: normal;\n  font-size: 0.55em;\n  text-transform: uppercase;\n'], ['\n  padding-left: 1em;\n  font-weight: normal;\n  font-size: 0.55em;\n  text-transform: uppercase;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  ', '\n'], ['\n  ', '\n']),
+    _templateObject2 = _taggedTemplateLiteral(['display: none'], ['display: none']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  list-style: none;\n  width: 95%;\n  opacity: 0.8;\n  padding-left: 6em;\n'], ['\n  list-style: none;\n  width: 95%;\n  opacity: 0.8;\n  padding-left: 6em;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  color: #F3F2F2;\n'], ['\n  color: #F3F2F2;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  display: block;\n  height: 35px;\n  text-decoration: none;\n  color: inherit;\n  cursor: pointer;\n'], ['\n  display: block;\n  height: 35px;\n  text-decoration: none;\n  color: inherit;\n  cursor: pointer;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  margin-top: 10px;\n  height: inherit;\n  position: relative;\n'], ['\n  margin-top: 10px;\n  height: inherit;\n  position: relative;\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n'], ['\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n']),
+    _templateObject8 = _taggedTemplateLiteral(['\n  padding-top: 4px;\n  opacity: 0.6;\n'], ['\n  padding-top: 4px;\n  opacity: 0.6;\n']),
+    _templateObject9 = _taggedTemplateLiteral(['\n  padding-left: 1em;\n  font-weight: normal;\n  font-size: 0.55em;\n  text-transform: uppercase;\n'], ['\n  padding-left: 1em;\n  font-weight: normal;\n  font-size: 0.55em;\n  text-transform: uppercase;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -50100,6 +50101,8 @@ var _styledComponents = __webpack_require__(5);
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _gsap = __webpack_require__(12);
+
+var _Styles = __webpack_require__(8);
 
 var _events = __webpack_require__(18);
 
@@ -50117,13 +50120,13 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
-var Container = _styledComponents2.default.div(_templateObject);
+var Container = _styledComponents2.default.div(_templateObject, _Styles.media.phone(_templateObject2));
 
-var List = _styledComponents2.default.ul(_templateObject2);
+var List = _styledComponents2.default.ul(_templateObject3);
 
-var ListRow = _styledComponents2.default.li(_templateObject3);
+var ListRow = _styledComponents2.default.li(_templateObject4);
 
-var ListLink = _styledComponents2.default.a(_templateObject4);
+var ListLink = _styledComponents2.default.a(_templateObject5);
 
 var LinkBlock = _styledComponents2.default.div.attrs({
   style: function style(props) {
@@ -50131,7 +50134,7 @@ var LinkBlock = _styledComponents2.default.div.attrs({
       borderLeft: '4px solid ' + props.themeColor
     };
   }
-})(_templateObject5);
+})(_templateObject6);
 
 var LinkBackground = _styledComponents2.default.div.attrs({
   style: function style(props) {
@@ -50139,11 +50142,11 @@ var LinkBackground = _styledComponents2.default.div.attrs({
       backgroundColor: props.themeColor
     };
   }
-})(_templateObject6);
+})(_templateObject7);
 
-var ListTextContainer = _styledComponents2.default.div(_templateObject7);
+var ListTextContainer = _styledComponents2.default.div(_templateObject8);
 
-var ListText = _styledComponents2.default.span(_templateObject8);
+var ListText = _styledComponents2.default.span(_templateObject9);
 
 var SideNav = function SideNav(_ref) {
   var children = _ref.children,
