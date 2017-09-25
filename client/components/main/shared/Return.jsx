@@ -25,7 +25,7 @@ const HomeTextContainer = styled.div`
   text-align: center;
   opacity: 0;
   scale: 0;
-  ${media.phone`opacity: 1; scale: 1; height: 50px;`}
+  ${media.phone`opacity: 1; scale: 1; display: block;`}
 `
 
 const Return = ({ isBody, hide, text, onClick, onHover, onHoverOff, inputButton, inputText }) => (
