@@ -16553,7 +16553,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  ', ';\n  z-index: 100;\n'], ['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  ', ';\n  z-index: 100;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['top: -150px'], ['top: -150px']),
+    _templateObject2 = _taggedTemplateLiteral(['top: -160px'], ['top: -160px']),
     _templateObject3 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 55px;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n'], ['\n  position: relative;\n  top: 55px;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n']);
 
 var _react = __webpack_require__(1);
@@ -16687,6 +16687,7 @@ var LocalContainer = function (_Component) {
       var length = this.props.navigationList.length;
 
 
+      this.isMobile = window.screen.width <= 768;
       this.normalize = LocalContainer.normalize(length);
       this.dragCB = function (targetRotation) {
         return _this2.willSetView(_this2.normalize((0, _Utils.tap)(_this2.props.rotationChange, targetRotation)));
@@ -16696,6 +16697,10 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      if (this.isMobile && this.props.isBody) {
+        return;
+      }
+
       this.props.getNav && this.props.getNav(this.nav);
 
       this.slideSetup = LocalContainer.slide(this.mainDiv, this.props.navigationList.length);

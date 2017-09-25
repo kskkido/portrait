@@ -21,7 +21,7 @@ const MainContainer = styled.div`
   cursor: move;
   position: absolute;
   top: ${props => props.isBody ? '-220px' : '190px'};
-  ${media.phone`top: -150px`};
+  ${media.phone`top: -160px`};
   z-index: 100;
 `
 
@@ -142,6 +142,7 @@ class LocalContainer extends Component {
     console.log('mounting ono no n ono')
     const { length } = this.props.navigationList
 
+    this.isMobile = window.screen.width <= 768
     this.normalize = LocalContainer.normalize(length)
     this.dragCB = (targetRotation) => this.willSetView(this.normalize(tap( this.props.rotationChange, targetRotation)))
     this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB)
@@ -149,6 +150,8 @@ class LocalContainer extends Component {
 
 
   componentDidMount() {
+    if (this.isMobile && this.props.isBody) { return }
+
     this.props.getNav && this.props.getNav(this.nav)
 
     this.slideSetup = LocalContainer.slide(this.mainDiv, this.props.navigationList.length)
