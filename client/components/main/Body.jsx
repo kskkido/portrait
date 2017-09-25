@@ -21,7 +21,7 @@ const MainContainer = styled.div`
   cursor: move;
   position: absolute;
   top: ${props => props.isBody ? '-220px' : '190px'};
-  ${media.phone`top: -160px`};
+  ${media.phone`top: ${props => props.isBody ? '-220px' : '-165px'}`};
   z-index: 100;
 `
 

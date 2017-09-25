@@ -16553,7 +16553,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  ', ';\n  z-index: 100;\n'], ['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  ', ';\n  z-index: 100;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['top: -160px'], ['top: -160px']),
+    _templateObject2 = _taggedTemplateLiteral(['top: ', ''], ['top: ', '']),
     _templateObject3 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 55px;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n'], ['\n  position: relative;\n  top: 55px;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n']);
 
 var _react = __webpack_require__(1);
@@ -16602,7 +16602,9 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var MainContainer = _styledComponents2.default.div(_templateObject, function (props) {
   return props.isBody ? '-220px' : '190px';
-}, _Styles.media.phone(_templateObject2));
+}, _Styles.media.phone(_templateObject2, function (props) {
+  return props.isBody ? '-220px' : '-165px';
+}));
 
 var Body = _styledComponents2.default.div(_templateObject3);
 
