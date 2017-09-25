@@ -15164,9 +15164,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: ', ';\n  left: 50%;\n  transform: translateX(-50%);\n'], ['\n  position: ', ';\n  left: 50%;\n  transform: translateX(-50%);\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n'], ['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n'], ['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  position: ', ';\n  left: 50%;\n  transform: translateX(-50%);\n  ', '\n'], ['\n  position: ', ';\n  left: 50%;\n  transform: translateX(-50%);\n  ', '\n']),
+    _templateObject2 = _taggedTemplateLiteral(['display: ', ''], ['display: ', '']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n'], ['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n  ', '\n'], ['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n  ', '\n']),
+    _templateObject5 = _taggedTemplateLiteral(['opacity: 1; scale: 1'], ['opacity: 1; scale: 1']);
 
 var _react = __webpack_require__(1);
 
@@ -15179,6 +15181,8 @@ var _styledComponents = __webpack_require__(5);
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _gsap = __webpack_require__(12);
+
+var _Styles = __webpack_require__(8);
 
 var _Button = __webpack_require__(56);
 
@@ -15196,11 +15200,13 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var ReturnContainer = _styledComponents2.default.div(_templateObject, function (props) {
   return props.isBody ? 'relative' : 'absolute';
-});
+}, _Styles.media.phone(_templateObject2, function (props) {
+  return !props.isBody && 'none';
+}));
 
-var ButtonContainer = _styledComponents2.default.div(_templateObject2);
+var ButtonContainer = _styledComponents2.default.div(_templateObject3);
 
-var HomeTextContainer = _styledComponents2.default.div(_templateObject3);
+var HomeTextContainer = _styledComponents2.default.div(_templateObject4, _Styles.media.phone(_templateObject5));
 
 var Return = function Return(_ref) {
   var isBody = _ref.isBody,
@@ -15224,7 +15230,7 @@ var Return = function Return(_ref) {
         onMouseOut: onHoverOff,
         innerRef: inputButton
       },
-      _react2.default.createElement(_Button2.default, { pointUp: true, clearTop: true, mediaQuery: hide && { device: 'phone', style: 'display: none' } })
+      _react2.default.createElement(_Button2.default, { pointUp: true, clearTop: true })
     ),
     _react2.default.createElement(
       HomeTextContainer,

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
+import { media } from '../../shared/Styles'
 
 import Button from './Button'
 
@@ -9,6 +10,7 @@ const ReturnContainer = styled.div`
   position: ${props => props.isBody ? 'relative' : 'absolute'};
   left: 50%;
   transform: translateX(-50%);
+  ${media.phone`display: ${props => !props.isBody && 'none'}`}
 `
 
 const ButtonContainer = styled.div`
@@ -23,6 +25,7 @@ const HomeTextContainer = styled.div`
   text-align: center;
   opacity: 0;
   scale: 0;
+  ${media.phone`opacity: 1; scale: 1`}
 `
 
 const Return = ({ isBody, hide, text, onClick, onHover, onHoverOff, inputButton, inputText }) => (
@@ -36,7 +39,7 @@ const Return = ({ isBody, hide, text, onClick, onHover, onHoverOff, inputButton,
       onMouseOut={onHoverOff}
       innerRef={inputButton}
     >
-      <Button pointUp={true} clearTop={true} mediaQuery={hide && {device: 'phone', style: 'display: none'}} />
+      <Button pointUp={true} clearTop={true} />
     </ButtonContainer>
     <HomeTextContainer innerRef={inputText}>
       <p>{text ? text : 'Back to home'}</p>
