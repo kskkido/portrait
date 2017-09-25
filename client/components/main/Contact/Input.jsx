@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { TimelineLite } from 'gsap'
 
 const forwardProps = (Comp) => (
   class LocalContainer extends Component {

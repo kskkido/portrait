@@ -98,7 +98,7 @@ const verticalSlide = (() => {
       new TimelineLite()
         .to(target, 0.3, {
           autoAlpha: 0,
-          y: `-200px`,
+          y: `-200px`
         })
         .delay(0.1)
     }

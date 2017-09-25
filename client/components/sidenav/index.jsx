@@ -14,12 +14,12 @@ import Button from './Button'
 
 const Container = styled.div`
   min-width: ${SIDENAV_WIDTH};
-  ${media.tablet`min-width: 100%`};
   height: 100vh;
   position: fixed;
   left: 0;
   z-index: 100;
   transform: translateX(-2000px);
+  ${media.phone`min-width: 100%`};
 `
 
 const Overlay = styled.div`
@@ -44,6 +44,7 @@ const List = styled.ul`
   z-index: 100;
   overflow-y: scroll;
   overflow-x: hidden;
+  ${media.phone`left: 0%`};
 `
 
 const ListRow = styled.li`
@@ -58,6 +59,7 @@ const ListLink = styled(Link)`
   height: 90px;
   text-decoration: none;
   color: inherit;
+  ${media.phone`height: 60px`};
 `
 
 const LinkBlock = styled.div.attrs({

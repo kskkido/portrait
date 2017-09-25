@@ -139,6 +139,7 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
+    console.log('mounting ono no n ono')
     const { length } = this.props.navigationList
 
     this.normalize = LocalContainer.normalize(length)
