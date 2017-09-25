@@ -44,7 +44,7 @@ const List = styled.ul`
   z-index: 100;
   overflow-y: scroll;
   overflow-x: hidden;
-  ${media.phone`left: 0; width: 90%`};
+  ${media.phone`left: 0; width: 80%`};
 `
 
 const ListRow = styled.li`
