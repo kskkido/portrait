@@ -15168,7 +15168,7 @@ var _templateObject = _taggedTemplateLiteral(['\n  position: ', ';\n  left: 50%;
     _templateObject2 = _taggedTemplateLiteral(['display: ', ''], ['display: ', '']),
     _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n'], ['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n  ', '\n'], ['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n  ', '\n']),
-    _templateObject5 = _taggedTemplateLiteral(['opacity: 1; scale: 1'], ['opacity: 1; scale: 1']);
+    _templateObject5 = _taggedTemplateLiteral(['opacity: 1; scale: 1; height: 50px;'], ['opacity: 1; scale: 1; height: 50px;']);
 
 var _react = __webpack_require__(1);
 
