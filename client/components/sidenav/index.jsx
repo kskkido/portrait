@@ -44,7 +44,7 @@ const List = styled.ul`
   z-index: 100;
   overflow-y: scroll;
   overflow-x: hidden;
-  ${media.phone`left: 0; width: 95%`};
+  ${media.phone`left: 0; width: 90%`};
 `
 
 const ListRow = styled.li`
@@ -52,7 +52,7 @@ const ListRow = styled.li`
   color: #F3F2F2;
   margin-left: 35px;
   margin-bottom: 10px;
-  ${media.phone`height: 17%; margin-left: 10px;`};
+  ${media.phone`height: 17%`};
 `
 
 const ListLink = styled(Link)`
