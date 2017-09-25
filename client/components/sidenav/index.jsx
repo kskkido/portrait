@@ -52,7 +52,7 @@ const ListRow = styled.li`
   color: #F3F2F2;
   margin-left: 35px;
   margin-bottom: 10px;
-  ${media.phone`height: 20%`};
+  ${media.phone`height: 15%`};
 `
 
 const ListLink = styled(Link)`
