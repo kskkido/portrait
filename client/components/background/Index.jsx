@@ -16,7 +16,7 @@ const BgOne = styled.div.attrs({
   })
 })`
   background-color: ${viewData.home.secondaryColor};
-  position: absolute;
+  position: fixed;
   z-index: -99;
 `
 
@@ -39,7 +39,7 @@ class LocalContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      height: '100vh',
+      height: '100%',
       width: '100%'
     }
 

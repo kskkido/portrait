@@ -48819,7 +48819,7 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: -1000;\n'], ['\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: -1000;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  background-color: ', ';\n  position: absolute;\n  z-index: -99;\n'], ['\n  background-color: ', ';\n  position: absolute;\n  z-index: -99;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  background-color: ', ';\n  position: fixed;\n  z-index: -99;\n'], ['\n  background-color: ', ';\n  position: fixed;\n  z-index: -99;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  background-color: ', ';\n  z-index: -100;\n'], ['\n  background-color: ', ';\n  z-index: -100;\n']);
 
 var _react = __webpack_require__(1);
@@ -48874,7 +48874,7 @@ var LocalContainer = function (_Component) {
     var _this = _possibleConstructorReturn(this, (LocalContainer.__proto__ || Object.getPrototypeOf(LocalContainer)).call(this, props));
 
     _this.state = {
-      height: '100vh',
+      height: '100%',
       width: '100%'
     };
 
