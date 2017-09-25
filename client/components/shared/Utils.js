@@ -13,6 +13,7 @@ export const tap = (fn, value) => {
 
 export const once = (fn) => {
   let done = false
+
   return function (...args) {
     return done ? null : (done = true, fn.apply(this, args))
   }
@@ -22,8 +23,6 @@ export const memoize = (fn, context) => {
   const hash = {}
 
   return function (...args) {
-    console.log(hash, 'whahwha')
-
     const key = JSON.stringify(args)
 
     return hash[key] || (hash[key] = fn.apply(context || this, args))
@@ -46,6 +45,7 @@ export const convertToString = (arr) => (
 
 export const createTitle = (string, LetterComponent = Letter) => {
   const title = []
+
   for (let i = 0; i < string.length; i++) {
     title.push(
       <LetterComponent key={`${string}_${i}`}>{string[i]}</LetterComponent>
@@ -56,6 +56,7 @@ export const createTitle = (string, LetterComponent = Letter) => {
 
 export const createSpans = (length, LetterComponent = Letter) => {
   const spanList = []
+
   for (let i = 0; i < length; i++) {
     spanList.push(
       <LetterComponent key={`index_${i}`}></LetterComponent>

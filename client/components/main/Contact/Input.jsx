@@ -15,21 +15,23 @@ const forwardProps = (Comp) => (
     componentWillMount() {
     const { value, isValid } = this.props.value
 
+    this.isTouch = window.screen.width <= 768
     this.trim = this.props.shouldTrim ? (val) => val.trim() : (val) => val
     this.setState(Object.assign({}, {localValue: value, isValid: isValid}))
     }
 
     componentDidMount() {
-      this.input.focus()
+      console.log(this.isTouch, window.screen.width <= 768)
+      !this.isTouch && this.input.focus()
+    }
+
+    componentDidUpdate() {
+      !this.isTouch && this.input.focus()
     }
 
     componentWillUnmount() {
       const { localValue, isValid } = this.state
       this.props.updateText(localValue, isValid)
-    }
-
-    componentDidUpdate() {
-      this.input.focus()
     }
 
     onChangeHandler(value, isValid) {

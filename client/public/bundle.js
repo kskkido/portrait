@@ -14297,6 +14297,7 @@ var tap = exports.tap = function tap(fn, value) {
 
 var once = exports.once = function once(fn) {
   var done = false;
+
   return function () {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -14310,8 +14311,6 @@ var memoize = exports.memoize = function memoize(fn, context) {
   var hash = {};
 
   return function () {
-    console.log(hash, 'whahwha');
-
     for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
     }
@@ -14346,6 +14345,7 @@ var createTitle = exports.createTitle = function createTitle(string) {
   var LetterComponent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _Styles.Letter;
 
   var title = [];
+
   for (var i = 0; i < string.length; i++) {
     title.push(_react2.default.createElement(
       LetterComponent,
@@ -14360,6 +14360,7 @@ var createSpans = exports.createSpans = function createSpans(length) {
   var LetterComponent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _Styles.Letter;
 
   var spanList = [];
+
   for (var i = 0; i < length; i++) {
     spanList.push(_react2.default.createElement(LetterComponent, { key: 'index_' + i }));
   }
@@ -21765,6 +21766,7 @@ var forwardProps = function forwardProps(Comp) {
             isValid = _props$value.isValid;
 
 
+        this.isTouch = window.screen.width <= 768;
         this.trim = this.props.shouldTrim ? function (val) {
           return val.trim();
         } : function (val) {
@@ -21775,7 +21777,13 @@ var forwardProps = function forwardProps(Comp) {
     }, {
       key: 'componentDidMount',
       value: function componentDidMount() {
-        this.input.focus();
+        console.log(this.isTouch, window.screen.width <= 768);
+        !this.isTouch && this.input.focus();
+      }
+    }, {
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate() {
+        !this.isTouch && this.input.focus();
       }
     }, {
       key: 'componentWillUnmount',
@@ -21785,11 +21793,6 @@ var forwardProps = function forwardProps(Comp) {
             isValid = _state.isValid;
 
         this.props.updateText(localValue, isValid);
-      }
-    }, {
-      key: 'componentDidUpdate',
-      value: function componentDidUpdate() {
-        this.input.focus();
       }
     }, {
       key: 'onChangeHandler',
