@@ -39,7 +39,7 @@ class LocalContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      height: '100%',
+      height: '100vh',
       width: '100%'
     }
 

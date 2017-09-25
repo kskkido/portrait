@@ -48874,7 +48874,7 @@ var LocalContainer = function (_Component) {
     var _this = _possibleConstructorReturn(this, (LocalContainer.__proto__ || Object.getPrototypeOf(LocalContainer)).call(this, props));
 
     _this.state = {
-      height: '100%',
+      height: '100vh',
       width: '100%'
     };
 
