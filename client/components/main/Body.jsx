@@ -140,10 +140,9 @@ class LocalContainer extends Component {
   }
 
   componentWillMount() {
-    console.log('mounting ono no n ono')
     const { length } = this.props.navigationList
 
-    this.isMobile = window.screen.width <= 768
+    this.isMobile = window.screen.width <= 365
     this.normalize = LocalContainer.normalize(length)
     this.dragCB = (targetRotation) => this.willSetView(this.normalize(tap( this.props.rotationChange, targetRotation)))
     this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB)

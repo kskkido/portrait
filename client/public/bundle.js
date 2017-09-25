@@ -16692,11 +16692,10 @@ var LocalContainer = function (_Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
-      console.log('mounting ono no n ono');
       var length = this.props.navigationList.length;
 
 
-      this.isMobile = window.screen.width <= 768;
+      this.isMobile = window.screen.width <= 365;
       this.normalize = LocalContainer.normalize(length);
       this.dragCB = function (targetRotation) {
         return _this2.willSetView(_this2.normalize((0, _Utils.tap)(_this2.props.rotationChange, targetRotation)));
