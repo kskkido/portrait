@@ -48929,12 +48929,12 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  min-width: ', ';\n  height: 100vh;\n  position: fixed;\n  left: 0;\n  z-index: 100;\n  transform: translateX(-2000px);\n  ', ';\n'], ['\n  min-width: ', ';\n  height: 100vh;\n  position: fixed;\n  left: 0;\n  z-index: 100;\n  transform: translateX(-2000px);\n  ', ';\n']),
-    _templateObject2 = _taggedTemplateLiteral(['min-width: 100%'], ['min-width: 100%']),
+    _templateObject2 = _taggedTemplateLiteral(['width: 100%'], ['width: 100%']),
     _templateObject3 = _taggedTemplateLiteral(['\n  height: 100vh;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  z-index: 99;\n  background-color: #D3D3D3;\n  opacity: 0.2;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n'], ['\n  height: 100vh;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  z-index: 99;\n  background-color: #D3D3D3;\n  opacity: 0.2;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  height: 80%;\n  width: 93%;\n  position: absolute;\n  list-style: none;\n  left: 6%;\n  top: 80px;\n  padding: 0;\n  z-index: 100;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  ', ';\n'], ['\n  height: 80%;\n  width: 93%;\n  position: absolute;\n  list-style: none;\n  left: 6%;\n  top: 80px;\n  padding: 0;\n  z-index: 100;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  ', ';\n']),
     _templateObject5 = _taggedTemplateLiteral(['left: 0%'], ['left: 0%']),
     _templateObject6 = _taggedTemplateLiteral(['\n  width: 88%;\n  color: #F3F2F2;\n  margin-left: 35px;\n  margin-bottom: 10px;\n  ', ';\n'], ['\n  width: 88%;\n  color: #F3F2F2;\n  margin-left: 35px;\n  margin-bottom: 10px;\n  ', ';\n']),
-    _templateObject7 = _taggedTemplateLiteral(['height: 15%'], ['height: 15%']),
+    _templateObject7 = _taggedTemplateLiteral(['height: 17%'], ['height: 17%']),
     _templateObject8 = _taggedTemplateLiteral(['\n  display: block;\n  height: 90px;\n  text-decoration: none;\n  color: inherit;\n  ', ';\n'], ['\n  display: block;\n  height: 90px;\n  text-decoration: none;\n  color: inherit;\n  ', ';\n']),
     _templateObject9 = _taggedTemplateLiteral(['height: 100%'], ['height: 100%']),
     _templateObject10 = _taggedTemplateLiteral(['\n  height: inherit;\n  position: relative;\n'], ['\n  height: inherit;\n  position: relative;\n']),

@@ -19,7 +19,7 @@ const Container = styled.div`
   left: 0;
   z-index: 100;
   transform: translateX(-2000px);
-  ${media.phone`min-width: 100%`};
+  ${media.phone`width: 100%`};
 `
 
 const Overlay = styled.div`
@@ -52,7 +52,7 @@ const ListRow = styled.li`
   color: #F3F2F2;
   margin-left: 35px;
   margin-bottom: 10px;
-  ${media.phone`height: 15%`};
+  ${media.phone`height: 17%`};
 `
 
 const ListLink = styled(Link)`
