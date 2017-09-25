@@ -52,6 +52,7 @@ const ListRow = styled.li`
   color: #F3F2F2;
   margin-left: 35px;
   margin-bottom: 10px;
+  ${media.phone`height: 20%`};
 `
 
 const ListLink = styled(Link)`
@@ -59,7 +60,7 @@ const ListLink = styled(Link)`
   height: 90px;
   text-decoration: none;
   color: inherit;
-  ${media.phone`height: 60px`};
+  ${media.phone`height: 100%`};
 `
 
 const LinkBlock = styled.div.attrs({

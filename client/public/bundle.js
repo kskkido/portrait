@@ -48933,13 +48933,14 @@ var _templateObject = _taggedTemplateLiteral(['\n  min-width: ', ';\n  height: 1
     _templateObject3 = _taggedTemplateLiteral(['\n  height: 100vh;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  z-index: 99;\n  background-color: #D3D3D3;\n  opacity: 0.2;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n'], ['\n  height: 100vh;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  z-index: 99;\n  background-color: #D3D3D3;\n  opacity: 0.2;\n  box-shadow: 4px 4px 1px 0 rgba(0,0,0,0.14);\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  height: 80%;\n  width: 93%;\n  position: absolute;\n  list-style: none;\n  left: 6%;\n  top: 80px;\n  padding: 0;\n  z-index: 100;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  ', ';\n'], ['\n  height: 80%;\n  width: 93%;\n  position: absolute;\n  list-style: none;\n  left: 6%;\n  top: 80px;\n  padding: 0;\n  z-index: 100;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  ', ';\n']),
     _templateObject5 = _taggedTemplateLiteral(['left: 0%'], ['left: 0%']),
-    _templateObject6 = _taggedTemplateLiteral(['\n  width: 88%;\n  color: #F3F2F2;\n  margin-left: 35px;\n  margin-bottom: 10px;\n'], ['\n  width: 88%;\n  color: #F3F2F2;\n  margin-left: 35px;\n  margin-bottom: 10px;\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n  display: block;\n  height: 90px;\n  text-decoration: none;\n  color: inherit;\n  ', ';\n'], ['\n  display: block;\n  height: 90px;\n  text-decoration: none;\n  color: inherit;\n  ', ';\n']),
-    _templateObject8 = _taggedTemplateLiteral(['height: 60px'], ['height: 60px']),
-    _templateObject9 = _taggedTemplateLiteral(['\n  height: inherit;\n  position: relative;\n'], ['\n  height: inherit;\n  position: relative;\n']),
-    _templateObject10 = _taggedTemplateLiteral(['\n  height: 100%;\n  width: 95%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n'], ['\n  height: 100%;\n  width: 95%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n']),
-    _templateObject11 = _taggedTemplateLiteral(['\n  padding-top: 10px;\n  padding-left: 1em;\n  opacity: 0.6;\n'], ['\n  padding-top: 10px;\n  padding-left: 1em;\n  opacity: 0.6;\n']),
-    _templateObject12 = _taggedTemplateLiteral(['\n  margin: 0 0 8px 0;\n  font-weight: normal;\n  font-size: 0.9em;\n  text-transform: uppercase;\n'], ['\n  margin: 0 0 8px 0;\n  font-weight: normal;\n  font-size: 0.9em;\n  text-transform: uppercase;\n']);
+    _templateObject6 = _taggedTemplateLiteral(['\n  width: 88%;\n  color: #F3F2F2;\n  margin-left: 35px;\n  margin-bottom: 10px;\n  ', ';\n'], ['\n  width: 88%;\n  color: #F3F2F2;\n  margin-left: 35px;\n  margin-bottom: 10px;\n  ', ';\n']),
+    _templateObject7 = _taggedTemplateLiteral(['height: 20%'], ['height: 20%']),
+    _templateObject8 = _taggedTemplateLiteral(['\n  display: block;\n  height: 90px;\n  text-decoration: none;\n  color: inherit;\n  ', ';\n'], ['\n  display: block;\n  height: 90px;\n  text-decoration: none;\n  color: inherit;\n  ', ';\n']),
+    _templateObject9 = _taggedTemplateLiteral(['height: 100%'], ['height: 100%']),
+    _templateObject10 = _taggedTemplateLiteral(['\n  height: inherit;\n  position: relative;\n'], ['\n  height: inherit;\n  position: relative;\n']),
+    _templateObject11 = _taggedTemplateLiteral(['\n  height: 100%;\n  width: 95%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n'], ['\n  height: 100%;\n  width: 95%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \'\';\n  box-size; inherit;\n  z-index: -1;\n  transform-origin: left;\n  transform: scaleX(0);\n  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.14)\n']),
+    _templateObject12 = _taggedTemplateLiteral(['\n  padding-top: 10px;\n  padding-left: 1em;\n  opacity: 0.6;\n'], ['\n  padding-top: 10px;\n  padding-left: 1em;\n  opacity: 0.6;\n']),
+    _templateObject13 = _taggedTemplateLiteral(['\n  margin: 0 0 8px 0;\n  font-weight: normal;\n  font-size: 0.9em;\n  text-transform: uppercase;\n'], ['\n  margin: 0 0 8px 0;\n  font-weight: normal;\n  font-size: 0.9em;\n  text-transform: uppercase;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -48989,9 +48990,9 @@ var Overlay = _styledComponents2.default.div(_templateObject3);
 
 var List = _styledComponents2.default.ul(_templateObject4, _Styles.media.phone(_templateObject5));
 
-var ListRow = _styledComponents2.default.li(_templateObject6);
+var ListRow = _styledComponents2.default.li(_templateObject6, _Styles.media.phone(_templateObject7));
 
-var ListLink = (0, _styledComponents2.default)(_reactRouterDom.Link)(_templateObject7, _Styles.media.phone(_templateObject8));
+var ListLink = (0, _styledComponents2.default)(_reactRouterDom.Link)(_templateObject8, _Styles.media.phone(_templateObject9));
 
 var LinkBlock = _styledComponents2.default.div.attrs({
   style: function style(props) {
@@ -48999,7 +49000,7 @@ var LinkBlock = _styledComponents2.default.div.attrs({
       borderLeft: '6px solid ' + props.themeColor
     };
   }
-})(_templateObject9);
+})(_templateObject10);
 
 var LinkBackground = _styledComponents2.default.div.attrs({
   style: function style(props) {
@@ -49007,13 +49008,13 @@ var LinkBackground = _styledComponents2.default.div.attrs({
       backgroundColor: props.themeColor
     };
   }
-})(_templateObject10);
+})(_templateObject11);
 
 // shadow... box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 
-var ListTitle = _styledComponents2.default.div(_templateObject11);
+var ListTitle = _styledComponents2.default.div(_templateObject12);
 
-var ListText = _styledComponents2.default.h3(_templateObject12);
+var ListText = _styledComponents2.default.h3(_templateObject13);
 
 var SideNav = function SideNav(_ref) {
   var children = _ref.children,
