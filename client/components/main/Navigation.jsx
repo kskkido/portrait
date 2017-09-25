@@ -9,6 +9,7 @@ const DIAMETER = 300
 
 const Container = styled.div`
   width: 100%;
+  ${media.phone`display: ${props.isBody && 'none'}`}
 `
 
 const NavigationDiv = styled.div`
@@ -88,7 +89,7 @@ class LocalContainer extends Component {
     const navigationDivs = this.props.navigationList.map(LocalContainer.createNavigationDiv)
 
     return (
-      <Container>
+      <Container isBody={this.props.isBody}>
         <NavigationDiv
           id="nav"
           innerRef={(div) => {

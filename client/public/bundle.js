@@ -16553,7 +16553,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  ', ';\n  z-index: 100;\n'], ['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  ', ';\n  z-index: 100;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['top: ', ''], ['top: ', '']),
+    _templateObject2 = _taggedTemplateLiteral(['top: -165px'], ['top: -165px']),
     _templateObject3 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 55px;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n'], ['\n  position: relative;\n  top: 55px;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n']);
 
 var _react = __webpack_require__(1);
@@ -16602,9 +16602,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var MainContainer = _styledComponents2.default.div(_templateObject, function (props) {
   return props.isBody ? '-220px' : '190px';
-}, _Styles.media.phone(_templateObject2, function (props) {
-  return props.isBody ? '-220px' : '-165px';
-}));
+}, _Styles.media.phone(_templateObject2));
 
 var Body = _styledComponents2.default.div(_templateObject3);
 
@@ -16629,6 +16627,7 @@ var ContentView = function ContentView(_ref) {
     },
     _react2.default.createElement(_Navigation2.default, {
       navigationList: navigationList,
+      isBody: isBody,
       getDom: inputNav,
       rotation: rotation
     }),
@@ -53212,12 +53211,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n'], ['\n  width: 100%;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: ', 'px;\n  width: ', 'px;\n  ', '\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n'], ['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: ', 'px;\n  width: ', 'px;\n  ', '\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    height: ', 'px;\n    width: ', 'px;\n  '], ['\n    height: ', 'px;\n    width: ', 'px;\n  ']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: ', 'px;\n  width: ', 'px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n'], ['\n  position: absolute;\n  height: ', 'px;\n  width: ', 'px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n'], ['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n    line-height: 30em;\n  '], ['\n    line-height: 30em;\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  ', '\n'], ['\n  width: 100%;\n  ', '\n']),
+    _templateObject2 = _taggedTemplateLiteral(['display: ', ''], ['display: ', '']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: ', 'px;\n  width: ', 'px;\n  ', '\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n'], ['\n  position: relative;\n  top: 0px;\n  margin-left: auto;\n  margin-right: auto;\n  right: 0;\n  height: ', 'px;\n  width: ', 'px;\n  ', '\n  border: 2px solid;\n  border-radius: 50%;\n  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);\n  perspective: 500px;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    height: ', 'px;\n    width: ', 'px;\n  '], ['\n    height: ', 'px;\n    width: ', 'px;\n  ']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  height: ', 'px;\n  width: ', 'px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n'], ['\n  position: absolute;\n  height: ', 'px;\n  width: ', 'px;\n  ', '\n  text-align: center;\n  border-radius: 50%;\n  transform-style: preserve-3d;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n'], ['\n  line-height: 40em;\n  ', '\n  padding: 5px;\n  text-transform: uppercase;\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n    line-height: 30em;\n  '], ['\n    line-height: 30em;\n  ']);
 
 var _react = __webpack_require__(1);
 
@@ -53247,9 +53247,9 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var DIAMETER = 300;
 
-var Container = _styledComponents2.default.div(_templateObject);
+var Container = _styledComponents2.default.div(_templateObject, _Styles.media.phone(_templateObject2, props.isBody && 'none'));
 
-var NavigationDiv = _styledComponents2.default.div(_templateObject2, DIAMETER, DIAMETER, _Styles.media.phone(_templateObject3, DIAMETER * 0.75, DIAMETER * 0.75));
+var NavigationDiv = _styledComponents2.default.div(_templateObject3, DIAMETER, DIAMETER, _Styles.media.phone(_templateObject4, DIAMETER * 0.75, DIAMETER * 0.75));
 
 var InnerNavigationDiv = _styledComponents2.default.div.attrs({
   style: function style(props) {
@@ -53257,9 +53257,9 @@ var InnerNavigationDiv = _styledComponents2.default.div.attrs({
       transform: 'rotate(' + props.spacing + 'turn)'
     };
   }
-})(_templateObject4, DIAMETER, DIAMETER, _Styles.media.phone(_templateObject3, DIAMETER * 0.75, DIAMETER * 0.75));
+})(_templateObject5, DIAMETER, DIAMETER, _Styles.media.phone(_templateObject4, DIAMETER * 0.75, DIAMETER * 0.75));
 
-var NavigationText = _styledComponents2.default.span(_templateObject5, _Styles.media.phone(_templateObject6));
+var NavigationText = _styledComponents2.default.span(_templateObject6, _Styles.media.phone(_templateObject7));
 
 var LocalContainer = function (_Component) {
   _inherits(LocalContainer, _Component);
@@ -53296,7 +53296,7 @@ var LocalContainer = function (_Component) {
 
       return _react2.default.createElement(
         Container,
-        null,
+        { isBody: this.props.isBody },
         _react2.default.createElement(
           NavigationDiv,
           {

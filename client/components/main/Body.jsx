@@ -21,7 +21,7 @@ const MainContainer = styled.div`
   cursor: move;
   position: absolute;
   top: ${props => props.isBody ? '-220px' : '190px'};
-  ${media.phone`top: ${props => props.isBody ? '-220px' : '-165px'}`};
+  ${media.phone`top: -165px`};
   z-index: 100;
 `
 
@@ -42,6 +42,7 @@ const ContentView = ({ backgroundColor, children, isBody, inputBody, inputMain, 
     >
       <Navigation
         navigationList={navigationList}
+        isBody={isBody}
         getDom={inputNav}
         rotation={rotation}
       />
