@@ -184,7 +184,7 @@ class LocalContainer extends Component {
         ease: Power2.easeOut,
       })
       .to(body, 0.3, {
-        marginLeft: `+=${width === SIDENAV_WIDTH ? width : '900px'}`,
+        marginLeft: `+=${width === SIDENAV_WIDTH ? width : '1000px'}`,
       }, '-=0.4') :
 
       new TimelineLite()

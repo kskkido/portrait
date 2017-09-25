@@ -49061,7 +49061,7 @@ var LocalContainer = function (_Component) {
         x: '0px',
         ease: _gsap.Power2.easeOut
       }).to(body, 0.3, {
-        marginLeft: '+=' + (width === _Styles.SIDENAV_WIDTH ? width : '900px')
+        marginLeft: '+=' + (width === _Styles.SIDENAV_WIDTH ? width : '1000px')
       }, '-=0.4') : new _gsap.TimelineLite().to(this.container, 0.6, {
         x: '-2000px',
         ease: _gsap.Power2.easeIn
