@@ -12,7 +12,7 @@ const AboutPreview = ({ toggleBody, viewIndex }) => {
   return (
     <PreviewContainer>
       <p>{preview}</p>
-      <Button onClick={toggleBody} />
+      <Button onClick={toggleBody}/>
     </PreviewContainer>
   )
 }

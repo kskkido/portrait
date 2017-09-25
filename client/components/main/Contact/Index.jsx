@@ -38,7 +38,7 @@ const Body = ({ getProps, viewIndex, onSubmitHandler, createInputHandler, create
 const Contact = ({ getProps, backgroundColor, navigationList, onSubmitHandler, createInputHandler, createOnEnterHandler, setRotation }) => {
   return (
   <div>
-    <Return />
+    <Return hide={true}/>
 
     <BodyComponent
       backgroundColor={backgroundColor}

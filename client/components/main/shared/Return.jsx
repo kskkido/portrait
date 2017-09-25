@@ -25,7 +25,7 @@ const HomeTextContainer = styled.div`
   scale: 0;
 `
 
-const Return = ({ isBody, text, onClick, onHover, onHoverOff, inputButton, inputText }) => (
+const Return = ({ isBody, hide, text, onClick, onHover, onHoverOff, inputButton, inputText }) => (
 
   <ReturnContainer
     isBody={isBody}
@@ -36,7 +36,7 @@ const Return = ({ isBody, text, onClick, onHover, onHoverOff, inputButton, input
       onMouseOut={onHoverOff}
       innerRef={inputButton}
     >
-      <Button pointUp={true} clearTop={true} />
+      <Button pointUp={true} clearTop={true} mediaQuery={hide && {device: 'phone', style: 'visibility: hidden'}} />
     </ButtonContainer>
     <HomeTextContainer innerRef={inputText}>
       <p>{text ? text : 'Back to home'}</p>
@@ -87,6 +87,7 @@ class LocalContainer extends Component {
     return (
       <Return
         isBody={!!this.props.toggleBody}
+        hide={this.props.hide}
         text={this.props.text}
         onClick={this.onClick}
         onHover={this.onHover}

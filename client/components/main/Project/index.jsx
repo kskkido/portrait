@@ -15,7 +15,7 @@ const Project = ({ isBody, toggleBody, backgroundColor, navigationList }) => {
     <TransitionGroup>
       <BodyFade key={isBody}>
         <div>
-          {!isBody && <Return />}
+          {!isBody && <Return hide={true}/>}
           <BodyComponent
             backgroundColor={backgroundColor}
             navigationList={navigationList}

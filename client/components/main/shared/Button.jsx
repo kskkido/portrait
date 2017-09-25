@@ -24,13 +24,14 @@ const Container = styled.div`
   `
     , HOCButton = createSVG(Arrow, Container)
 
- const ArrowComponent = ({ clearTop, onClick, scale, pointUp }) => (
+ const ArrowComponent = ({ clearTop, onClick, scale, mediaQuery, pointUp }) => (
     <HOCButton
-      hoverAnimation={createSVGHoverAnimation(pointUp)}
-      scale={scale || 0.15}
-      onClick={onClick}
       clearTop={clearTop}
+      hoverAnimation={createSVGHoverAnimation(pointUp)}
+      mediaQuery={mediaQuery}
+      onClick={onClick}
       pointUp={pointUp}
+      scale={scale || 0.15}
     />
 
 )

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { TweenLite, Back } from 'gsap'
 import Draggable from 'gsap/Draggable'
 import { rotationChange, rotationRestart, viewChange, viewRestart } from '../../reducers/events'
+import { media } from '../shared/Styles'
 import { Slide } from '../shared/Transition'
 import { memoize, tap } from '../shared/Utils'
 
@@ -20,6 +21,7 @@ const MainContainer = styled.div`
   cursor: move;
   position: absolute;
   top: ${props => props.isBody ? '-220px' : '190px'};
+  ${media.phone`top: -150px`};
   z-index: 100;
 `
 
