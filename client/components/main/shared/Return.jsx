@@ -36,7 +36,7 @@ const Return = ({ isBody, hide, text, onClick, onHover, onHoverOff, inputButton,
       onMouseOut={onHoverOff}
       innerRef={inputButton}
     >
-      <Button pointUp={true} clearTop={true} mediaQuery={hide && {device: 'phone', style: 'visibility: hidden'}} />
+      <Button pointUp={true} clearTop={true} mediaQuery={hide && {device: 'phone', style: 'display: none'}} />
     </ButtonContainer>
     <HomeTextContainer innerRef={inputText}>
       <p>{text ? text : 'Back to home'}</p>

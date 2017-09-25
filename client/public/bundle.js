@@ -15223,7 +15223,7 @@ var Return = function Return(_ref) {
         onMouseOut: onHoverOff,
         innerRef: inputButton
       },
-      _react2.default.createElement(_Button2.default, { pointUp: true, clearTop: true, mediaQuery: hide && { device: 'phone', style: 'visibility: hidden' } })
+      _react2.default.createElement(_Button2.default, { pointUp: true, clearTop: true, mediaQuery: hide && { device: 'phone', style: 'display: none' } })
     ),
     _react2.default.createElement(
       HomeTextContainer,
@@ -50637,7 +50637,7 @@ var About = function About(_ref) {
       _react2.default.createElement(
         'div',
         null,
-        !isBody && _react2.default.createElement(_Return2.default, null),
+        !isBody && _react2.default.createElement(_Return2.default, { hide: true }),
         _react2.default.createElement(
           _Body2.default,
           {
