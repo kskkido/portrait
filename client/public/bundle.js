@@ -54720,8 +54720,8 @@ var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  display: flex
     _templateObject2 = _taggedTemplateLiteral(['\n  margin: 0 auto;\n  width: 450px;\n  height: 214px;\n  background-image: url(leopard.png);\n  background-repeat: no-repeat;\n  display: flex;\n  flex-direction: column;\n'], ['\n  margin: 0 auto;\n  width: 450px;\n  height: 214px;\n  background-image: url(leopard.png);\n  background-repeat: no-repeat;\n  display: flex;\n  flex-direction: column;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  align-self: center;\n  margin-top: 14px;\n  width: 308px;\n  height: 190px;\n'], ['\n  align-self: center;\n  margin-top: 14px;\n  width: 308px;\n  height: 190px;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  width: inherit;\n  height: inherit;\n  background-repeat: no-repeat;\n  background-size: contain;\n'], ['\n  width: inherit;\n  height: inherit;\n  background-repeat: no-repeat;\n  background-size: contain;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  text-align: center;\n  padding: 0 30px;\n  min-height: 100px;\n'], ['\n  text-align: center;\n  padding: 0 30px;\n  min-height: 100px;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n  margin-top: 15px;\n  width: 100%;\n'], ['\n  margin-top: 15px;\n  width: 100%;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  text-align: center;\n  padding: 0 30px;\n'], ['\n  text-align: center;\n  padding: 0 30px;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  margin-top: ', ';\n  width: 100%;\n'], ['\n  margin-top: ', ';\n  width: 100%;\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  font-size: 1.7em;\n  margin: 0 0 10px; 0;\n'], ['\n  font-weight: normal;\n  font-size: 1.7em;\n  margin: 0 0 10px; 0;\n']),
     _templateObject8 = _taggedTemplateLiteral(['\n  margin: 0;\n  text-align: center;\n'], ['\n  margin: 0;\n  text-align: center;\n']);
 
@@ -54782,7 +54782,9 @@ var ProjectImage = _styledComponents2.default.div.attrs({
 
 var Description = _styledComponents2.default.div(_templateObject5);
 
-var TextContainer = Description.extend(_templateObject6);
+var TextContainer = Description.extend(_templateObject6, function (props) {
+  return props.top ? '20px' : '40px';
+});
 
 var Header = _styledComponents2.default.h3(_templateObject7);
 
@@ -54851,7 +54853,7 @@ var ProjectView = function ProjectView(_ref) {
         null,
         _react2.default.createElement(
           TextContainer,
-          null,
+          { top: true },
           _react2.default.createElement(
             Header,
             null,

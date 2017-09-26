@@ -57,11 +57,10 @@ const ProjectImage = styled.div.attrs({
 const Description = styled.div`
   text-align: center;
   padding: 0 30px;
-  min-height: 100px;
 `
 
 const TextContainer = Description.extend`
-  margin-top: 15px;
+  margin-top: ${props => props.top ? '20px' : '40px'};
   width: 100%;
 `
 
@@ -112,7 +111,7 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
       </Section>
 
       <Section>
-        <TextContainer>
+        <TextContainer top>
           <Header>Technology</Header>
           <Text>
             {data.technology}
