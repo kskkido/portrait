@@ -49,7 +49,7 @@ const List = styled.ul`
   ${media.phone`
     left: 0;
     li {
-      height: 20%;
+      height: 18%;
       a {
         height: 100%
       }
