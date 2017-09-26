@@ -16559,7 +16559,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  ', ';\n  z-index: 100;\n'], ['\n  display: inline-block;\n  height: 100vh;\n  width: 100%;\n  cursor: move;\n  position: absolute;\n  top: ', ';\n  ', ';\n  z-index: 100;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['top:', ''], ['top:', '']),
+    _templateObject2 = _taggedTemplateLiteral(['', ''], ['', '']),
     _templateObject3 = _taggedTemplateLiteral(['\n  position: relative;\n  top: 55px;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n'], ['\n  position: relative;\n  top: 55px;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n']);
 
 var _react = __webpack_require__(1);
@@ -16609,7 +16609,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 var MainContainer = _styledComponents2.default.div(_templateObject, function (props) {
   return props.isBody ? '-220px' : '190px';
 }, _Styles.media.phone(_templateObject2, function (props) {
-  return props.isBody ? '0px' : '-165px';
+  return props.isBody ? 'top: 0px; cursor: initial' : 'top: -165px';
 }));
 
 var Body = _styledComponents2.default.div(_templateObject3);
@@ -16780,7 +16780,6 @@ var LocalContainer = function (_Component) {
 
       return function (getRatio) {
         return function () {
-          console.log(this.rotation);
           var rotation = this.rotation,
               targetRotation = getRatio ? getRotation(rotation) : rotation;
 
@@ -56021,8 +56020,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  width: 100%;\n  height: 100%;\n'], ['\n  position: relative;\n  width: 100%;\n  height: 100%;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  height: 50vh;\n  position: absolute;\n  bottom: 0;\n  background-color: ', ';\n  left: 0;\n  border-top: 2px solid;\n  z-index: 1;\n'], ['\n  height: 50vh;\n  position: absolute;\n  bottom: 0;\n  background-color: ', ';\n  left: 0;\n  border-top: 2px solid;\n  z-index: 1;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 30px;\n  top: -40px;\n  width: 300px;\n  letter-spacing: 12px;\n  font-size: 13px;\n'], ['\n  position: absolute;\n  left: 30px;\n  top: -40px;\n  width: 300px;\n  letter-spacing: 12px;\n  font-size: 13px;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  margin: auto;\n  left: 50%;\n  bottom: 33vh;\n  height: 100px;\n  transform: translateX(-50%);\n'], ['\n  position: absolute;\n  margin: auto;\n  left: 50%;\n  bottom: 33vh;\n  height: 100px;\n  transform: translateX(-50%);\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  margin-right: 20px;\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 5em;\n  opacity: 0;\n'], ['\n  margin-right: 20px;\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 5em;\n  opacity: 0;\n']);
+    _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  white-space: nowrap;\n  margin: auto;\n  left: 50%;\n  bottom: 33vh;\n  height: 100px;\n  transform: translateX(-50%);\n  ', '\n'], ['\n  position: absolute;\n  white-space: nowrap;\n  margin: auto;\n  left: 50%;\n  bottom: 33vh;\n  height: 100px;\n  transform: translateX(-50%);\n  ', '\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n    height: 40px;\n    span {\n      font-size: 2.5em;\n      margin-right: 5px\n    };\n  '], ['\n    height: 40px;\n    span {\n      font-size: 2.5em;\n      margin-right: 5px\n    };\n  ']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  margin-right: 20px;\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 5em;\n  opacity: 0;\n'], ['\n  margin-right: 20px;\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 5em;\n  opacity: 0;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -56070,9 +56070,9 @@ var ProgressBar = _styledComponents2.default.div.attrs({
 
 var LoadingText = _Styles.Title3.extend(_templateObject3);
 
-var LetterContainer = _styledComponents2.default.div(_templateObject4);
+var LetterContainer = _styledComponents2.default.div(_templateObject4, _Styles.media.phone(_templateObject5));
 
-var Letter = _styledComponents2.default.span(_templateObject5);
+var Letter = _styledComponents2.default.span(_templateObject6);
 
 var Load = function Load(_ref) {
   var inputRef = _ref.inputRef,

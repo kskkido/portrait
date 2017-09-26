@@ -40,11 +40,19 @@ const LoadingText = Title3.extend`
 
 const LetterContainer = styled.div`
   position: absolute;
+  white-space: nowrap;
   margin: auto;
   left: 50%;
   bottom: 33vh;
   height: 100px;
   transform: translateX(-50%);
+  ${media.phone`
+    height: 40px;
+    span {
+      font-size: 2.5em;
+      margin-right: 5px
+    };
+  `}
 `
 
 const Letter = styled.span`

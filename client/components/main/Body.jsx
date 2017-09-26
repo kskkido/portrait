@@ -21,7 +21,7 @@ const MainContainer = styled.div`
   cursor: move;
   position: absolute;
   top: ${props => props.isBody ? '-220px' : '190px'};
-  ${media.phone`top:${props => props.isBody ? '0px' : '-165px'}`};
+  ${media.phone`${props => props.isBody ? 'top: 0px; cursor: initial' : 'top: -165px'}`};
   z-index: 100;
 `
 
@@ -79,7 +79,7 @@ class LocalContainer extends Component {
 
     return function (getRatio) {
       return function () {
-        console.log(this.rotation)
+
         const { rotation } = this
             , targetRotation = getRatio ? getRotation(rotation) : rotation
         callback(targetRotation)
