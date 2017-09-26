@@ -15,12 +15,13 @@ import Button from './Button'
 const SIDENAV_WIDTH = 325
 
 const Container = styled.div`
-  min-width: ${SIDENAV_WIDTH}px;
+  width: ${SIDENAV_WIDTH}px;
   height: 100vh;
   position: fixed;
   left: 0;
   z-index: 100;
   transform: translateX(-2000px);
+  ${media.phone`width: ${window.screen.width}px`}
 `
 
 const Overlay = styled.div`
@@ -181,6 +182,7 @@ class LocalContainer extends Component {
 
   newClickSvg(toggle) {
     const body = document.getElementById('bodyContainer')
+        , width = window.getComputedStyle(this.container).width
 
     return !toggle ?
 
@@ -190,7 +192,7 @@ class LocalContainer extends Component {
         ease: Power2.easeOut,
       })
       .to(body, 0.3, {
-        marginLeft: `+=${SIDENAV_WIDTH + 2}px`,
+        marginLeft: `+=${width === SIDENAV_WIDTH + 'px' ? SIDENAV_WIDTH + 5 + 'px' : '500px'}`,
       }, '-=0.4') :
 
       new TimelineLite()
