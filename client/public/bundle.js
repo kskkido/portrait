@@ -54764,7 +54764,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 
 var Section = _styledComponents2.default.section(_templateObject, function (props) {
-  return props.bottom ? '20px' : '50px';
+  return !props.bottom && '50px';
 });
 
 var Image = _styledComponents2.default.div(_templateObject2);

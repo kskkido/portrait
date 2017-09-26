@@ -23,7 +23,7 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: ${props => props.bottom ? '20px' : '50px'};
+  margin-bottom: ${props => !props.bottom && '50px'};
 `
 
 const Image = styled.div`
