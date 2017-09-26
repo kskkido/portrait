@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { TimelineLite, Back, Power2 } from 'gsap'
 import { pathChange, rotationRestart, viewRestart } from '../../reducers/events'
-import { media, SIDENAV_WIDTH } from '../shared/Styles'
+import { media } from '../shared/Styles'
 import { UncollapseList } from '../shared/Transition'
 import { viewData } from '../shared/Data'
 
@@ -12,14 +12,15 @@ import SubList from './SubList'
 import Button from './Button'
 // Collapsible button that extends into a navigation, or moves to a new navigation page
 
+const SIDENAV_WIDTH = 325
+
 const Container = styled.div`
-  min-width: ${SIDENAV_WIDTH};
+  min-width: ${SIDENAV_WIDTH}px;
   height: 100vh;
   position: fixed;
   left: 0;
   z-index: 100;
   transform: translateX(-2000px);
-  ${media.phone`width: 100%`};
 `
 
 const Overlay = styled.div`
@@ -44,7 +45,15 @@ const List = styled.ul`
   z-index: 100;
   overflow-y: scroll;
   overflow-x: hidden;
-  ${media.phone`left: 0; width: 80%`};
+  ${media.phone`
+    left: 0;
+    li {
+      height: 20%;
+      a {
+        height: 100%
+      }
+    }
+  `};
 `
 
 const ListRow = styled.li`
@@ -52,7 +61,6 @@ const ListRow = styled.li`
   color: #F3F2F2;
   margin-left: 35px;
   margin-bottom: 10px;
-  ${media.phone`height: 17%`};
 `
 
 const ListLink = styled(Link)`
@@ -60,7 +68,6 @@ const ListLink = styled(Link)`
   height: 90px;
   text-decoration: none;
   color: inherit;
-  ${media.phone`height: 100%`};
 `
 
 const LinkBlock = styled.div.attrs({
@@ -174,7 +181,6 @@ class LocalContainer extends Component {
 
   newClickSvg(toggle) {
     const body = document.getElementById('bodyContainer')
-        , width = window.getComputedStyle(this.container).width
 
     return !toggle ?
 
@@ -184,7 +190,7 @@ class LocalContainer extends Component {
         ease: Power2.easeOut,
       })
       .to(body, 0.3, {
-        marginLeft: `+=${width === SIDENAV_WIDTH ? width : '1000px'}`,
+        marginLeft: `+=${SIDENAV_WIDTH + 2}px`,
       }, '-=0.4') :
 
       new TimelineLite()

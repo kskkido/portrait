@@ -21,10 +21,6 @@ export const media = Object.keys(mediaSizes).reduce((acc, label) => {
   return css
 }, {})
 
-// constants
-
-export const SIDENAV_WIDTH = '325px'
-
 // styles
 
 export const BodyContainer = styled.div`
