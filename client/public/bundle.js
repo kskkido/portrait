@@ -16609,7 +16609,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 var MainContainer = _styledComponents2.default.div(_templateObject, function (props) {
   return props.isBody ? '-220px' : '190px';
 }, _Styles.media.phone(_templateObject2, function (props) {
-  return props.isBody ? 'top: 0px; cursor: initial' : 'top: -165px';
+  return props.isBody ? '\n    top: 0px;\n    cursor: initial;\n    overflow-x: hidden;\n    ' : 'top: -165px';
 }));
 
 var Body = _styledComponents2.default.div(_templateObject3);

@@ -21,7 +21,12 @@ const MainContainer = styled.div`
   cursor: move;
   position: absolute;
   top: ${props => props.isBody ? '-220px' : '190px'};
-  ${media.phone`${props => props.isBody ? 'top: 0px; cursor: initial' : 'top: -165px'}`};
+  ${media.phone`${props => props.isBody ? `
+    top: 0px;
+    cursor: initial;
+    overflow-x: hidden;
+    ` :
+    'top: -165px'}`};
   z-index: 100;
 `
 
