@@ -85,6 +85,7 @@ export const PreviewContainer = styled.div`
   min-height: 200px;
   left: 50%;
   transform: translateX(-50%);
+  padding: 0 10px;
 `
 
 export const Title = styled.h1`

@@ -79,6 +79,7 @@ class LocalContainer extends Component {
 
     return function (getRatio) {
       return function () {
+        console.log(this.rotation)
         const { rotation } = this
             , targetRotation = getRatio ? getRotation(rotation) : rotation
         callback(targetRotation)
@@ -150,12 +151,12 @@ class LocalContainer extends Component {
 
 
   componentDidMount() {
-    if (this.isMobile && this.props.isBody) { return }
-
     this.props.getNav && this.props.getNav(this.nav)
 
     this.slideSetup = LocalContainer.slide(this.mainDiv, this.props.navigationList.length)
     this.slideBody = this.slideSetup(this.body)
+
+    if (this.isMobile && this.props.isBody) { return }
     // DEFINE DRAGGABLE
     Draggable.create(this.nav, {
       type: 'rotation',

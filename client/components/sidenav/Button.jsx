@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { TimelineLite, Back } from 'gsap'
 import { createSVG } from '../shared/Factory'
+import { media } from '../shared/Styles'
 import { Cross } from '../shared/SvgAssets'
 
 const createSVGHoverAnimation = (target) => {
@@ -40,6 +41,7 @@ const Container = styled.div`
   top: 20px;
   z-index: 1001;
   cursor: pointer;
+  ${media.phone`left: 28px`}
 `
     , HOCButton = createSVG(Cross, Container)
 

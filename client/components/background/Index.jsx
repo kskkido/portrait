@@ -5,6 +5,8 @@ import { viewData } from  '../Shared/Data'
 const BgWrapper = styled.div`
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
   position: fixed;
   z-index: -1000;
 `

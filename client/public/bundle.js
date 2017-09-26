@@ -2834,7 +2834,7 @@ var _templateObject = _taggedTemplateLiteral(['\n    @media (max-width: ', 'em) 
     _templateObject9 = _taggedTemplateLiteral(['\n  flex: 3;\n'], ['\n  flex: 3;\n']),
     _templateObject10 = _taggedTemplateLiteral(['\n  flex: 4;\n'], ['\n  flex: 4;\n']),
     _templateObject11 = _taggedTemplateLiteral(['\n  flex: 5;\n'], ['\n  flex: 5;\n']),
-    _templateObject12 = _taggedTemplateLiteral(['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n'], ['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n']),
+    _templateObject12 = _taggedTemplateLiteral(['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 0 10px;\n'], ['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 0 10px;\n']),
     _templateObject13 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n']),
     _templateObject14 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n']),
     _templateObject15 = _taggedTemplateLiteral(['\n  min-height: 60px;\n'], ['\n  min-height: 60px;\n']),
@@ -15168,7 +15168,7 @@ var _templateObject = _taggedTemplateLiteral(['\n  position: ', ';\n  left: 50%;
     _templateObject2 = _taggedTemplateLiteral(['display: ', ''], ['display: ', '']),
     _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n'], ['\n  display: inline-block;\n  position: relative;\n  left: 50%;\n  transform: translateX(-50%);\n  height: 110px;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n  ', '\n'], ['\n  text-align: center;\n  opacity: 0;\n  scale: 0;\n  ', '\n']),
-    _templateObject5 = _taggedTemplateLiteral(['opacity: 1; scale: 1; display: block;'], ['opacity: 1; scale: 1; display: block;']);
+    _templateObject5 = _taggedTemplateLiteral(['opacity: 1; scale: 1;'], ['opacity: 1; scale: 1;']);
 
 var _react = __webpack_require__(1);
 
@@ -16705,14 +16705,14 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      if (this.isMobile && this.props.isBody) {
-        return;
-      }
-
       this.props.getNav && this.props.getNav(this.nav);
 
       this.slideSetup = LocalContainer.slide(this.mainDiv, this.props.navigationList.length);
       this.slideBody = this.slideSetup(this.body);
+
+      if (this.isMobile && this.props.isBody) {
+        return;
+      }
       // DEFINE DRAGGABLE
       _Draggable2.default.create(this.nav, {
         type: 'rotation',
@@ -16780,6 +16780,7 @@ var LocalContainer = function (_Component) {
 
       return function (getRatio) {
         return function () {
+          console.log(this.rotation);
           var rotation = this.rotation,
               targetRotation = getRatio ? getRotation(rotation) : rotation;
 
@@ -48823,7 +48824,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: -1000;\n'], ['\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  z-index: -1000;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  padding: 0;\n  margin: 0;\n  position: fixed;\n  z-index: -1000;\n'], ['\n  width: 100%;\n  height: 100%;\n  padding: 0;\n  margin: 0;\n  position: fixed;\n  z-index: -1000;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  background-color: ', ';\n  position: fixed;\n  z-index: -99;\n'], ['\n  background-color: ', ';\n  position: fixed;\n  z-index: -99;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  background-color: ', ';\n  z-index: -100;\n'], ['\n  background-color: ', ';\n  z-index: -100;\n']);
 
@@ -50365,7 +50366,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: fixed;\n  left: 45px;\n  top: 20px;\n  z-index: 1001;\n  cursor: pointer;\n'], ['\n  position: fixed;\n  left: 45px;\n  top: 20px;\n  z-index: 1001;\n  cursor: pointer;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  position: fixed;\n  left: 45px;\n  top: 20px;\n  z-index: 1001;\n  cursor: pointer;\n  ', '\n'], ['\n  position: fixed;\n  left: 45px;\n  top: 20px;\n  z-index: 1001;\n  cursor: pointer;\n  ', '\n']),
+    _templateObject2 = _taggedTemplateLiteral(['left: 28px'], ['left: 28px']);
 
 var _react = __webpack_require__(1);
 
@@ -50378,6 +50380,8 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 var _gsap = __webpack_require__(12);
 
 var _Factory = __webpack_require__(83);
+
+var _Styles = __webpack_require__(8);
 
 var _SvgAssets = __webpack_require__(84);
 
@@ -50411,7 +50415,7 @@ var createSVGClickAnimation = function createSVGClickAnimation(_ref) {
   }, '-=0.15');
 };
 
-var Container = _styledComponents2.default.div(_templateObject),
+var Container = _styledComponents2.default.div(_templateObject, _Styles.media.phone(_templateObject2)),
     HOCButton = (0, _Factory.createSVG)(_SvgAssets.Cross, Container);
 
 var CrossComponent = function CrossComponent(props) {
@@ -54712,16 +54716,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  flex: 1;\n  display: flex;\n  width: 100%;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  margin-bottom: ', ';\n'], ['\n  flex: 1;\n  display: flex;\n  width: 100%;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  margin-bottom: ', ';\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  margin-bottom: ', ';\n'], ['\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  margin-bottom: ', ';\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  margin: 0 auto;\n  width: 450px;\n  height: 214px;\n  background-image: url(leopard.png);\n  background-repeat: no-repeat;\n  display: flex;\n  flex-direction: column;\n'], ['\n  margin: 0 auto;\n  width: 450px;\n  height: 214px;\n  background-image: url(leopard.png);\n  background-repeat: no-repeat;\n  display: flex;\n  flex-direction: column;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  align-self: center;\n  margin-top: 14px;\n  width: 308px;\n  height: 190px;\n'], ['\n  align-self: center;\n  margin-top: 14px;\n  width: 308px;\n  height: 190px;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  width: inherit;\n  height: inherit;\n  background-repeat: no-repeat;\n  background-size: contain;\n'], ['\n  width: inherit;\n  height: inherit;\n  background-repeat: no-repeat;\n  background-size: contain;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  text-align: center;\n  padding: 0 30px;\n  min-height: 100px;\n'], ['\n  text-align: center;\n  padding: 0 30px;\n  min-height: 100px;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  margin-top: 15px;\n  width: 100%;\n'], ['\n  margin-top: 15px;\n  width: 100%;\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  font-size: 1.7em;\n  margin: 0 0 10px; 0;\n'], ['\n  font-weight: normal;\n  font-size: 1.7em;\n  margin: 0 0 10px; 0;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n  margin: 0;\n  text-align: center;\n'], ['\n  margin: 0;\n  text-align: center;\n']),
-    _templateObject9 = _taggedTemplateLiteral(['\n  font-size: 1em;\n'], ['\n  font-size: 1em;\n']),
-    _templateObject10 = _taggedTemplateLiteral(['\n  display: block;\n  height: 1px;\n  width: 100%;\n  background-color: black;\n  position: relative;\n  border: 0;\n  margin: .5em 0 1em;\n'], ['\n  display: block;\n  height: 1px;\n  width: 100%;\n  background-color: black;\n  position: relative;\n  border: 0;\n  margin: .5em 0 1em;\n']);
+    _templateObject8 = _taggedTemplateLiteral(['\n  margin: 0;\n  text-align: center;\n'], ['\n  margin: 0;\n  text-align: center;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -54785,10 +54787,6 @@ var TextContainer = Description.extend(_templateObject6);
 var Header = _styledComponents2.default.h3(_templateObject7);
 
 var Text = _styledComponents2.default.p(_templateObject8);
-
-var SubText = _styledComponents2.default.span(_templateObject9);
-
-var Line = _styledComponents2.default.hr(_templateObject10);
 
 var ProjectView = function ProjectView(_ref) {
   var isBody = _ref.isBody,

@@ -18,9 +18,8 @@ import Textline from '../shared/Textline'
 
 
 const Section = styled.section`
-  flex: 1;
-  display: flex;
   width: 100%;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -76,21 +75,6 @@ const Text = styled.p`
   margin: 0;
   text-align: center;
 `
-
-const SubText = styled.span`
-  font-size: 1em;
-`
-
-const Line = styled.hr`
-  display: block;
-  height: 1px;
-  width: 100%;
-  background-color: black;
-  position: relative;
-  border: 0;
-  margin: .5em 0 1em;
-`
-
 
 const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
   if (!projectData[viewIndex]) return <div />
@@ -154,9 +138,9 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
         </TextContainer>
       </Section>
       <Section bottom>
-      <Title id="tail">
-        {createSpans(title.length + 3)}<Textline delay={0.8} />
-      </Title>
+        <Title id="tail">
+          {createSpans(title.length + 3)}<Textline delay={0.8} />
+        </Title>
       </Section>
       </BodyContent>
         <Return
