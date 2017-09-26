@@ -84,9 +84,9 @@ class LocalContainer extends Component {
 
     return function (getRatio) {
       return function () {
-
         const { rotation } = this
             , targetRotation = getRatio ? getRotation(rotation) : rotation
+
         callback(targetRotation)
       }
     }
@@ -108,9 +108,9 @@ class LocalContainer extends Component {
     })
   }
 
-  static slide(mainDOM, length) {
-    const ratio = (mainDOM.offsetWidth / 2) / (360 / length) // get the half of bodyDOM
-        , getOffset = ((rat) => memoize((rotation) => ((rotation * rat) * 0.5)))(ratio)
+  static slide(length) {
+    const ratio = (window.innerWidth / 2) / (360 / length) // get the half of bodyDOM
+        , getOffset = memoize((rotation) => ((rotation * ratio) * 0.5))
 
     return (bodyDOM) => {
       const slideBodyDOM = LocalContainer.slideDOM(bodyDOM)
@@ -158,7 +158,7 @@ class LocalContainer extends Component {
   componentDidMount() {
     this.props.getNav && this.props.getNav(this.nav)
 
-    this.slideSetup = LocalContainer.slide(this.mainDiv, this.props.navigationList.length)
+    this.slideSetup = LocalContainer.slide(this.props.navigationList.length)
     this.slideBody = this.slideSetup(this.body)
 
     if (this.isMobile && this.props.isBody) { return }

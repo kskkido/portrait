@@ -16707,7 +16707,7 @@ var LocalContainer = function (_Component) {
     value: function componentDidMount() {
       this.props.getNav && this.props.getNav(this.nav);
 
-      this.slideSetup = LocalContainer.slide(this.mainDiv, this.props.navigationList.length);
+      this.slideSetup = LocalContainer.slide(this.props.navigationList.length);
       this.slideBody = this.slideSetup(this.body);
 
       if (this.isMobile && this.props.isBody) {
@@ -16783,6 +16783,7 @@ var LocalContainer = function (_Component) {
           var rotation = this.rotation,
               targetRotation = getRatio ? getRotation(rotation) : rotation;
 
+
           callback(targetRotation);
         };
       };
@@ -16807,14 +16808,12 @@ var LocalContainer = function (_Component) {
     }
   }, {
     key: 'slide',
-    value: function slide(mainDOM, length) {
-      var ratio = mainDOM.offsetWidth / 2 / (360 / length) // get the half of bodyDOM
+    value: function slide(length) {
+      var ratio = window.innerWidth / 2 / (360 / length) // get the half of bodyDOM
       ,
-          getOffset = function (rat) {
-        return (0, _Utils.memoize)(function (rotation) {
-          return rotation * rat * 0.5;
-        });
-      }(ratio);
+          getOffset = (0, _Utils.memoize)(function (rotation) {
+        return rotation * ratio * 0.5;
+      });
 
       return function (bodyDOM) {
         var slideBodyDOM = LocalContainer.slideDOM(bodyDOM);
