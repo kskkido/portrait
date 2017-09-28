@@ -7,7 +7,8 @@
     "build": "webpack",
     "start": "node server",
     "start-dev": "webpack -w & NODE_ENV=development nodemon ./server --watch server",
-    "start-prod": "npm run build && npm run start"
+    "start-prod": "NODE_ENV=production npm run build && npm run start",
+    "progress": "webpack -p --progress"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +41,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.24.1",
     "chai": "^4.1.0",
+    "compression-webpack-plugin": "^1.0.0",
     "enzyme": "^2.9.1",
     "mocha": "^3.4.2",
     "supertest": "^3.0.0",
