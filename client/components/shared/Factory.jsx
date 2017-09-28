@@ -51,7 +51,6 @@ export const createSVG = function(SVG, Container, createHoverAnimation) {
     }
 
     render() {
-      console.log(this.props.mediaQuery, 'OMGS')
       return (
         <ContainerComponent
           clearTop={this.props.clearTop}

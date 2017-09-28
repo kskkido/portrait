@@ -14,23 +14,23 @@ import Social from './SocialMedia'
 import Return from '../shared/Return'
 
 const list = [
- {text: 'name', component: <Name />},
- {text: 'email', component: <Email />},
- {text: 'message', component: <Message />},
- {text: 'submit', component: <Submit />},
- {text: 'social', component: <Social />}
+ {type: 'name', component: <Name />},
+ {type: 'email', component: <Email />},
+ {type: 'message', component: <Message />},
+ {type: 'submit', component: <Submit />},
+ {type: 'social', component: <Social />}
 ]
 
 const Body = ({ getProps, viewIndex, onSubmitHandler, createInputHandler, createOnEnterHandler, setRotation}) => {
-  const { text, component } = list[viewIndex]
+  const { type, component } = list[viewIndex]
 
   return (
     React.cloneElement(component, {
-      value: text !== 'social' && getProps(text),
-      updateText: createInputHandler(text),
-      onEnterHandler: text === 'submit' ? onSubmitHandler : createOnEnterHandler((viewIndex + 1) % list.length),
+      value: type !== 'social' && getProps(type),
+      updateText: createInputHandler(type),
+      onEnterHandler: type === 'submit' ? onSubmitHandler : createOnEnterHandler((viewIndex + 1) % list.length),
       setRotation: setRotation,
-      shouldTrim: text !== 'message',
+      shouldTrim: type !== 'message',
     })
   )
 }
@@ -38,7 +38,7 @@ const Body = ({ getProps, viewIndex, onSubmitHandler, createInputHandler, create
 const Contact = ({ getProps, backgroundColor, navigationList, onSubmitHandler, createInputHandler, createOnEnterHandler, setRotation }) => {
   return (
   <div>
-    <Return hide={true}/>
+    <Return hide={true} />
 
     <BodyComponent
       backgroundColor={backgroundColor}

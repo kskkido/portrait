@@ -16,7 +16,7 @@ const List = styled.ul`
   width: 95%;
   opacity: 0.8;
   padding-left: 6em;
-`
+` 
 
 const ListRow = styled.li`
   color: #F3F2F2;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { TimelineLite } from 'gsap'
 
 const forwardProps = (Comp) => (
   class LocalContainer extends Component {
@@ -18,11 +17,10 @@ const forwardProps = (Comp) => (
 
     this.isTouch = window.screen.width <= 768
     this.trim = this.props.shouldTrim ? (val) => val.trim() : (val) => val
-    this.setState(Object.assign({}, {localValue: value, isValid: isValid}))
+    this.setState({localValue: value, isValid: isValid})
     }
 
     componentDidMount() {
-      console.log(this.isTouch, window.screen.width <= 768)
       !this.isTouch && this.input.focus()
     }
 
@@ -36,7 +34,7 @@ const forwardProps = (Comp) => (
     }
 
     onChangeHandler(value, isValid) {
-      this.setState(Object.assign({}, {localValue: this.trim(value), isValid}))
+      this.setState({localValue: this.trim(value), isValid})
     }
 
     render() {

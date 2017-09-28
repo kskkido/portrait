@@ -39,9 +39,6 @@ app
 		const file = fs.createReadStream(join(__dirname, '..', '/client/public/kido_resume.pdf'))
 		const stat = fs.statSync(file.path)
 
-		console.log('FILE', file)
-		console.log('STATE', stat)
-
 		res.writeHead(200, {
 			'Content-Type': 'application/pdf',
 			'Content-Length': stat.size,

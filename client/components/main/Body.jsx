@@ -175,7 +175,7 @@ class LocalContainer extends Component {
     const magnitude = this.props.rotation - rotation
         , targetOffset = this.slideBody(magnitude % 360)
 
-    this.setState(Object.assign({}, {targetOffset}))
+    this.setState({targetOffset})
   }
 
   shouldComponentUpdate({ viewIndex }) {

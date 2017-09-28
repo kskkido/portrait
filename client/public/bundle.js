@@ -2518,6 +2518,119 @@ var styled = _styled(StyledComponent, constructWithOptions);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PlaceholderContainer = exports.Input = exports.Letter = exports.TitleDiv = exports.Title3 = exports.Title = exports.PreviewContainer = exports.Flex5 = exports.Flex4 = exports.Flex3 = exports.Flex2 = exports.Flex1 = exports.Text = exports.BodyText = exports.BodyContent = exports.BodyContainer = exports.media = undefined;
+
+var _templateObject = _taggedTemplateLiteral(['\n    @media (max-width: ', 'em) {\n      ', '\n    }\n  '], ['\n    @media (max-width: ', 'em) {\n      ', '\n    }\n  ']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 700px;\n  ', '\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  flex-direction: ', ';\n  justify-content: center;\n'], ['\n  position: absolute;\n  width: 700px;\n  ', '\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  flex-direction: ', ';\n  justify-content: center;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['width: 100%'], ['width: 100%']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  margin-top: 5px;\n  display: flex;\n  flex-direction: ', ';\n  align-items: center;\n  justify-content: center;\n'], ['\n  margin-top: 5px;\n  display: flex;\n  flex-direction: ', ';\n  align-items: center;\n  justify-content: center;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  width: 100%;\n  padding: 0 20px;\n  margin: 20px 0px;\n'], ['\n  width: 100%;\n  padding: 0 20px;\n  margin: 20px 0px;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  margin: 0;\n'], ['\n  margin: 0;\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n  flex: 1;\n  align-self: center;\n'], ['\n  flex: 1;\n  align-self: center;\n']),
+    _templateObject8 = _taggedTemplateLiteral(['\n  flex: 2;\n'], ['\n  flex: 2;\n']),
+    _templateObject9 = _taggedTemplateLiteral(['\n  flex: 3;\n'], ['\n  flex: 3;\n']),
+    _templateObject10 = _taggedTemplateLiteral(['\n  flex: 4;\n'], ['\n  flex: 4;\n']),
+    _templateObject11 = _taggedTemplateLiteral(['\n  flex: 5;\n'], ['\n  flex: 5;\n']),
+    _templateObject12 = _taggedTemplateLiteral(['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 0 10px;\n'], ['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 0 10px;\n']),
+    _templateObject13 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n']),
+    _templateObject14 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n']),
+    _templateObject15 = _taggedTemplateLiteral(['\n  min-height: 60px;\n'], ['\n  min-height: 60px;\n']),
+    _templateObject16 = _taggedTemplateLiteral(['\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 1.4em;\n'], ['\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 1.4em;\n']),
+    _templateObject17 = _taggedTemplateLiteral(['\n  position: absolute;\n  bottom: 20px;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 70%;\n  padding: 6px 14px 5px 33px;\n  border-width: 0 0 1px 0;\n  border-style: solid;\n  border-color: black;\n  background-color: transparent;\n  text-align: center;\n  letter-spacing: 1px;\n  font-size: 1em;\n  transition: color 0.2s, background-color 0.2s;\n\n  &:focus {\n    outline-color: 0;\n    outline-style: none;\n    outline-width: 0;\n  }\n'], ['\n  position: absolute;\n  bottom: 20px;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 70%;\n  padding: 6px 14px 5px 33px;\n  border-width: 0 0 1px 0;\n  border-style: solid;\n  border-color: black;\n  background-color: transparent;\n  text-align: center;\n  letter-spacing: 1px;\n  font-size: 1em;\n  transition: color 0.2s, background-color 0.2s;\n\n  &:focus {\n    outline-color: 0;\n    outline-style: none;\n    outline-width: 0;\n  }\n']),
+    _templateObject18 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 6px 14px 5px 33px;\n  white-space: nowrap;\n  letter-spacing: 1px;\n  color: #424242;\n  opacity: 0.8;\n  transition: bottom 0.2s, font-size 0.2s, color 0.2s;\n'], ['\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 6px 14px 5px 33px;\n  white-space: nowrap;\n  letter-spacing: 1px;\n  color: #424242;\n  opacity: 0.8;\n  transition: bottom 0.2s, font-size 0.2s, color 0.2s;\n']);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = __webpack_require__(5);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+// media query
+var mediaSizes = {
+  giant: 1170,
+  desktop: 992,
+  tablet: 768,
+  phone: 376
+};
+
+var media = exports.media = Object.keys(mediaSizes).reduce(function (acc, label) {
+  var emSize = mediaSizes[label] / 16;
+
+  acc[label] = function () {
+    return (0, _styledComponents.css)(_templateObject, emSize, _styledComponents.css.apply(undefined, arguments));
+  };
+
+  return _styledComponents.css;
+}, {});
+
+// styles
+
+var BodyContainer = exports.BodyContainer = _styledComponents2.default.div(_templateObject2, media.tablet(_templateObject3), function (props) {
+  return props.row ? 'row' : 'column';
+});
+
+var BodyContent = exports.BodyContent = _styledComponents2.default.div(_templateObject4, function (props) {
+  return props.row ? 'row' : 'column';
+});
+
+var BodyText = exports.BodyText = _styledComponents2.default.div(_templateObject5);
+
+var Text = exports.Text = _styledComponents2.default.p(_templateObject6);
+
+var Flex1 = exports.Flex1 = _styledComponents2.default.div(_templateObject7);
+
+var Flex2 = exports.Flex2 = _styledComponents2.default.div(_templateObject8);
+
+var Flex3 = exports.Flex3 = _styledComponents2.default.div(_templateObject9);
+
+var Flex4 = exports.Flex4 = _styledComponents2.default.div(_templateObject10);
+
+var Flex5 = exports.Flex5 = _styledComponents2.default.div(_templateObject11);
+
+var PreviewContainer = exports.PreviewContainer = _styledComponents2.default.div(_templateObject12, media.tablet(_templateObject3));
+
+var Title = exports.Title = _styledComponents2.default.h1(_templateObject13, function (props) {
+  return props.bottom ? '50px' : '10px';
+});
+
+var Title3 = exports.Title3 = _styledComponents2.default.h3(_templateObject14);
+
+var TitleDiv = exports.TitleDiv = _styledComponents2.default.div(_templateObject15);
+
+var Letter = exports.Letter = _styledComponents2.default.span(_templateObject16);
+
+var Input = exports.Input = _styledComponents2.default.input.attrs({
+  style: function style(props) {
+    return props.valid ? {} : { color: 'red', borderColor: 'red' };
+  }
+})(_templateObject17);
+
+var PlaceholderContainer = exports.PlaceholderContainer = _styledComponents2.default.div.attrs({
+  style: function style(props) {
+    return {
+      bottom: props.empty ? '20px' : '40px',
+      fontSize: props.empty ? '1.2em' : '1em',
+      color: props.valid ? '' : 'red'
+    };
+  }
+})(_templateObject18);
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /*
 object-assign
 (c) Sindre Sorhus
@@ -2611,7 +2724,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2810,119 +2923,6 @@ var ReactDOMComponentTree = {
 
 module.exports = ReactDOMComponentTree;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.PlaceholderContainer = exports.Input = exports.Letter = exports.TitleDiv = exports.Title3 = exports.Title = exports.PreviewContainer = exports.Flex5 = exports.Flex4 = exports.Flex3 = exports.Flex2 = exports.Flex1 = exports.Text = exports.BodyText = exports.BodyContent = exports.BodyContainer = exports.media = undefined;
-
-var _templateObject = _taggedTemplateLiteral(['\n    @media (max-width: ', 'em) {\n      ', '\n    }\n  '], ['\n    @media (max-width: ', 'em) {\n      ', '\n    }\n  ']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 700px;\n  ', '\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  flex-direction: ', ';\n  justify-content: center;\n'], ['\n  position: absolute;\n  width: 700px;\n  ', '\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  flex-direction: ', ';\n  justify-content: center;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['width: 100%'], ['width: 100%']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  margin-top: 5px;\n  display: flex;\n  flex-direction: ', ';\n  align-items: center;\n  justify-content: center;\n'], ['\n  margin-top: 5px;\n  display: flex;\n  flex-direction: ', ';\n  align-items: center;\n  justify-content: center;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  width: 100%;\n  padding: 0 20px;\n  margin: 20px 0px;\n'], ['\n  width: 100%;\n  padding: 0 20px;\n  margin: 20px 0px;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n  margin: 0;\n'], ['\n  margin: 0;\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n  flex: 1;\n  align-self: center;\n'], ['\n  flex: 1;\n  align-self: center;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n  flex: 2;\n'], ['\n  flex: 2;\n']),
-    _templateObject9 = _taggedTemplateLiteral(['\n  flex: 3;\n'], ['\n  flex: 3;\n']),
-    _templateObject10 = _taggedTemplateLiteral(['\n  flex: 4;\n'], ['\n  flex: 4;\n']),
-    _templateObject11 = _taggedTemplateLiteral(['\n  flex: 5;\n'], ['\n  flex: 5;\n']),
-    _templateObject12 = _taggedTemplateLiteral(['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 0 10px;\n'], ['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 0 10px;\n']),
-    _templateObject13 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n']),
-    _templateObject14 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n']),
-    _templateObject15 = _taggedTemplateLiteral(['\n  min-height: 60px;\n'], ['\n  min-height: 60px;\n']),
-    _templateObject16 = _taggedTemplateLiteral(['\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 1.4em;\n'], ['\n  display: inline-block;\n  text-transform: uppercase;\n  font-size: 1.4em;\n']),
-    _templateObject17 = _taggedTemplateLiteral(['\n  position: absolute;\n  bottom: 20px;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 70%;\n  padding: 6px 14px 5px 33px;\n  border-width: 0 0 1px 0;\n  border-style: solid;\n  border-color: black;\n  background-color: transparent;\n  text-align: center;\n  letter-spacing: 1px;\n  font-size: 1em;\n  transition: color 0.2s, background-color 0.2s;\n\n  &:focus {\n    outline-color: 0;\n    outline-style: none;\n    outline-width: 0;\n  }\n'], ['\n  position: absolute;\n  bottom: 20px;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 70%;\n  padding: 6px 14px 5px 33px;\n  border-width: 0 0 1px 0;\n  border-style: solid;\n  border-color: black;\n  background-color: transparent;\n  text-align: center;\n  letter-spacing: 1px;\n  font-size: 1em;\n  transition: color 0.2s, background-color 0.2s;\n\n  &:focus {\n    outline-color: 0;\n    outline-style: none;\n    outline-width: 0;\n  }\n']),
-    _templateObject18 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 6px 14px 5px 33px;\n  white-space: nowrap;\n  letter-spacing: 1px;\n  color: #424242;\n  opacity: 0.8;\n  transition: bottom 0.2s, font-size 0.2s, color 0.2s;\n'], ['\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 6px 14px 5px 33px;\n  white-space: nowrap;\n  letter-spacing: 1px;\n  color: #424242;\n  opacity: 0.8;\n  transition: bottom 0.2s, font-size 0.2s, color 0.2s;\n']);
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _styledComponents = __webpack_require__(5);
-
-var _styledComponents2 = _interopRequireDefault(_styledComponents);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-// media query
-var mediaSizes = {
-  giant: 1170,
-  desktop: 992,
-  tablet: 768,
-  phone: 376
-};
-
-var media = exports.media = Object.keys(mediaSizes).reduce(function (acc, label) {
-  var emSize = mediaSizes[label] / 16;
-
-  acc[label] = function () {
-    return (0, _styledComponents.css)(_templateObject, emSize, _styledComponents.css.apply(undefined, arguments));
-  };
-
-  return _styledComponents.css;
-}, {});
-
-// styles
-
-var BodyContainer = exports.BodyContainer = _styledComponents2.default.div(_templateObject2, media.tablet(_templateObject3), function (props) {
-  return props.row ? 'row' : 'column';
-});
-
-var BodyContent = exports.BodyContent = _styledComponents2.default.div(_templateObject4, function (props) {
-  return props.row ? 'row' : 'column';
-});
-
-var BodyText = exports.BodyText = _styledComponents2.default.div(_templateObject5);
-
-var Text = exports.Text = _styledComponents2.default.p(_templateObject6);
-
-var Flex1 = exports.Flex1 = _styledComponents2.default.div(_templateObject7);
-
-var Flex2 = exports.Flex2 = _styledComponents2.default.div(_templateObject8);
-
-var Flex3 = exports.Flex3 = _styledComponents2.default.div(_templateObject9);
-
-var Flex4 = exports.Flex4 = _styledComponents2.default.div(_templateObject10);
-
-var Flex5 = exports.Flex5 = _styledComponents2.default.div(_templateObject11);
-
-var PreviewContainer = exports.PreviewContainer = _styledComponents2.default.div(_templateObject12, media.tablet(_templateObject3));
-
-var Title = exports.Title = _styledComponents2.default.h1(_templateObject13, function (props) {
-  return props.bottom ? '50px' : '10px';
-});
-
-var Title3 = exports.Title3 = _styledComponents2.default.h3(_templateObject14);
-
-var TitleDiv = exports.TitleDiv = _styledComponents2.default.div(_templateObject15);
-
-var Letter = exports.Letter = _styledComponents2.default.span(_templateObject16);
-
-var Input = exports.Input = _styledComponents2.default.input.attrs({
-  style: function style(props) {
-    return props.valid ? {} : { color: 'red', borderColor: 'red' };
-  }
-})(_templateObject17);
-
-var PlaceholderContainer = exports.PlaceholderContainer = _styledComponents2.default.div.attrs({
-  style: function style(props) {
-    return {
-      bottom: props.empty ? '20px' : '40px',
-      fontSize: props.empty ? '1.2em' : '1em',
-      color: props.valid ? '' : 'red'
-    };
-  }
-})(_templateObject18);
 
 /***/ }),
 /* 9 */
@@ -11901,7 +11901,7 @@ module.exports = ReactCurrentOwner;
 
 
 var _prodInvariant = __webpack_require__(4),
-    _assign = __webpack_require__(6);
+    _assign = __webpack_require__(7);
 
 var CallbackQueue = __webpack_require__(100);
 var PooledClass = __webpack_require__(25);
@@ -12157,7 +12157,7 @@ module.exports = ReactUpdates;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var PooledClass = __webpack_require__(25);
 
@@ -13041,7 +13041,7 @@ var BodyFade = exports.BodyFade = function BodyFade(props) {
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var ReactCurrentOwner = __webpack_require__(19);
 
@@ -13663,7 +13663,7 @@ var viewData = exports.viewData = {
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var ReactBaseClasses = __webpack_require__(88);
 var ReactChildren = __webpack_require__(146);
@@ -14275,7 +14275,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15178,7 +15178,7 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _gsap = __webpack_require__(12);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _Button = __webpack_require__(56);
 
@@ -16190,7 +16190,7 @@ module.exports = escapeTextContentForBrowser;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var EventPluginRegistry = __webpack_require__(47);
 var ReactEventEmitterMixin = __webpack_require__(194);
@@ -16580,7 +16580,7 @@ var _Draggable2 = _interopRequireDefault(_Draggable);
 
 var _events = __webpack_require__(18);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _Transition = __webpack_require__(23);
 
@@ -16725,7 +16725,7 @@ var LocalContainer = function (_Component) {
       var magnitude = this.props.rotation - rotation,
           targetOffset = this.slideBody(magnitude % 360);
 
-      this.setState(Object.assign({}, { targetOffset: targetOffset }));
+      this.setState({ targetOffset: targetOffset });
     }
   }, {
     key: 'shouldComponentUpdate',
@@ -19451,7 +19451,7 @@ module.exports = getEventModifierState;
 
 var DOMLazyTree = __webpack_require__(32);
 var Danger = __webpack_require__(179);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactInstrumentation = __webpack_require__(15);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(66);
@@ -20361,7 +20361,7 @@ module.exports = ReactUpdateQueue;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var emptyFunction = __webpack_require__(14);
 var warning = __webpack_require__(3);
@@ -21428,7 +21428,7 @@ var _styledComponents = __webpack_require__(5);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21511,7 +21511,6 @@ var createSVG = exports.createSVG = function createSVG(SVG, Container, createHov
       value: function render() {
         var _this3 = this;
 
-        console.log(this.props.mediaQuery, 'OMGS');
         return _react2.default.createElement(
           ContainerComponent,
           {
@@ -21741,8 +21740,6 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _gsap = __webpack_require__(12);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21783,12 +21780,11 @@ var forwardProps = function forwardProps(Comp) {
         } : function (val) {
           return val;
         };
-        this.setState(Object.assign({}, { localValue: value, isValid: isValid }));
+        this.setState({ localValue: value, isValid: isValid });
       }
     }, {
       key: 'componentDidMount',
       value: function componentDidMount() {
-        console.log(this.isTouch, window.screen.width <= 768);
         !this.isTouch && this.input.focus();
       }
     }, {
@@ -21808,7 +21804,7 @@ var forwardProps = function forwardProps(Comp) {
     }, {
       key: 'onChangeHandler',
       value: function onChangeHandler(value, isValid) {
-        this.setState(Object.assign({}, { localValue: this.trim(value), isValid: isValid }));
+        this.setState({ localValue: this.trim(value), isValid: isValid });
       }
     }, {
       key: 'render',
@@ -21851,7 +21847,7 @@ exports.default = forwardProps;
 
 
 var _prodInvariant = __webpack_require__(30),
-    _assign = __webpack_require__(6);
+    _assign = __webpack_require__(7);
 
 var ReactNoopUpdateQueue = __webpack_require__(89);
 
@@ -23303,7 +23299,7 @@ module.exports = ReactFeatureFlags;
 
 
 
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 
 function isCheckable(elem) {
   var type = elem.type;
@@ -23766,7 +23762,7 @@ module.exports = CSSProperty;
 
 
 var DOMProperty = __webpack_require__(22);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactInstrumentation = __webpack_require__(15);
 
 var quoteAttributeValueForBrowser = __webpack_require__(193);
@@ -24028,10 +24024,10 @@ module.exports = ReactPropTypesSecret;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var LinkedValueUtils = __webpack_require__(67);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(20);
 
 var warning = __webpack_require__(3);
@@ -24235,7 +24231,7 @@ module.exports = ReactDOMSelect;
 
 
 var _prodInvariant = __webpack_require__(4),
-    _assign = __webpack_require__(6);
+    _assign = __webpack_require__(7);
 
 var ReactCompositeComponent = __webpack_require__(201);
 var ReactEmptyComponent = __webpack_require__(113);
@@ -24975,7 +24971,7 @@ var DOMProperty = __webpack_require__(22);
 var React = __webpack_require__(29);
 var ReactBrowserEventEmitter = __webpack_require__(52);
 var ReactCurrentOwner = __webpack_require__(19);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactDOMContainerInfo = __webpack_require__(235);
 var ReactDOMFeatureFlags = __webpack_require__(236);
 var ReactFeatureFlags = __webpack_require__(101);
@@ -26910,7 +26906,7 @@ Link.contextTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PlaceholderContainer = exports.Input = exports.Letter = exports.TitleDiv = exports.Title3 = exports.Title = exports.PreviewContainer = exports.Flex5 = exports.Flex4 = exports.Flex3 = exports.Flex2 = exports.Flex1 = exports.Text = exports.BodyText = exports.BodyContent = exports.BodyContainer = exports.SIDENAV_WIDTH = exports.media = undefined;
+exports.PlaceholderContainer = exports.Input = exports.Letter = exports.TitleDiv = exports.Title3 = exports.Title = exports.PreviewContainer = exports.Flex5 = exports.Flex4 = exports.Flex3 = exports.Flex2 = exports.Flex1 = exports.Text = exports.BodyText = exports.BodyContent = exports.BodyContainer = exports.media = undefined;
 
 var _templateObject = _taggedTemplateLiteral(['\n    @media (max-width: ', 'em) {\n      ', '\n    }\n  '], ['\n    @media (max-width: ', 'em) {\n      ', '\n    }\n  ']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 700px;\n  ', '\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  flex-direction: ', ';\n  justify-content: center;\n'], ['\n  position: absolute;\n  width: 700px;\n  ', '\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  flex-direction: ', ';\n  justify-content: center;\n']),
@@ -26923,7 +26919,7 @@ var _templateObject = _taggedTemplateLiteral(['\n    @media (max-width: ', 'em) 
     _templateObject9 = _taggedTemplateLiteral(['\n  flex: 3;\n'], ['\n  flex: 3;\n']),
     _templateObject10 = _taggedTemplateLiteral(['\n  flex: 4;\n'], ['\n  flex: 4;\n']),
     _templateObject11 = _taggedTemplateLiteral(['\n  flex: 5;\n'], ['\n  flex: 5;\n']),
-    _templateObject12 = _taggedTemplateLiteral(['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n'], ['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n']),
+    _templateObject12 = _taggedTemplateLiteral(['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 0 10px;\n'], ['\n  position: absolute;\n  text-align: center;\n  width: 700px;\n  ', '\n  min-height: 200px;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 0 10px;\n']),
     _templateObject13 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n  height: 25px;\n  margin-top: ', ';\n  margin-bottom: 20px;\n']),
     _templateObject14 = _taggedTemplateLiteral(['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n'], ['\n  font-weight: normal;\n  text-transform: uppercase;\n  font-size: 1.2em;\n']),
     _templateObject15 = _taggedTemplateLiteral(['\n  min-height: 60px;\n'], ['\n  min-height: 60px;\n']),
@@ -26960,10 +26956,6 @@ var media = exports.media = Object.keys(mediaSizes).reduce(function (acc, label)
 
   return _styledComponents.css;
 }, {});
-
-// constants
-
-var SIDENAV_WIDTH = exports.SIDENAV_WIDTH = '325px';
 
 // styles
 
@@ -31725,7 +31717,7 @@ module.exports = factory(Component, isValidElement, ReactNoopUpdateQueue);
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var emptyObject = __webpack_require__(46);
 var _invariant = __webpack_require__(2);
@@ -32651,7 +32643,7 @@ module.exports = onlyChild;
 
 
 
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactDefaultInjection = __webpack_require__(161);
 var ReactMount = __webpack_require__(119);
 var ReactReconciler = __webpack_require__(31);
@@ -32774,7 +32766,7 @@ var EnterLeaveEventPlugin = __webpack_require__(176);
 var HTMLDOMPropertyConfig = __webpack_require__(177);
 var ReactComponentBrowserEnvironment = __webpack_require__(178);
 var ReactDOMComponent = __webpack_require__(184);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactDOMEmptyComponent = __webpack_require__(210);
 var ReactDOMTreeTraversal = __webpack_require__(211);
 var ReactDOMTextComponent = __webpack_require__(212);
@@ -33325,7 +33317,7 @@ module.exports = BeforeInputEventPlugin;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var PooledClass = __webpack_require__(25);
 
@@ -33511,7 +33503,7 @@ module.exports = SyntheticInputEvent;
 var EventPluginHub = __webpack_require__(38);
 var EventPropagators = __webpack_require__(37);
 var ExecutionEnvironment = __webpack_require__(11);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(20);
 var SyntheticEvent = __webpack_require__(21);
 
@@ -34566,7 +34558,7 @@ module.exports = DefaultEventPluginOrder;
 
 
 var EventPropagators = __webpack_require__(37);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var SyntheticMouseEvent = __webpack_require__(49);
 
 var eventTypes = {
@@ -35319,7 +35311,7 @@ module.exports = getMarkupWrap;
 
 
 var DOMChildrenOperations = __webpack_require__(64);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 
 /**
  * Operations used to process updates to DOM nodes.
@@ -35359,7 +35351,7 @@ module.exports = ReactDOMIDOperations;
 
 
 var _prodInvariant = __webpack_require__(4),
-    _assign = __webpack_require__(6);
+    _assign = __webpack_require__(7);
 
 var AutoFocusUtils = __webpack_require__(185);
 var CSSPropertyOperations = __webpack_require__(186);
@@ -35371,7 +35363,7 @@ var EventPluginHub = __webpack_require__(38);
 var EventPluginRegistry = __webpack_require__(47);
 var ReactBrowserEventEmitter = __webpack_require__(52);
 var ReactDOMComponentFlags = __webpack_require__(96);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactDOMInput = __webpack_require__(196);
 var ReactDOMOption = __webpack_require__(197);
 var ReactDOMSelect = __webpack_require__(110);
@@ -36372,7 +36364,7 @@ module.exports = ReactDOMComponent;
 
 
 
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 
 var focusNode = __webpack_require__(106);
 
@@ -37081,11 +37073,11 @@ module.exports = getVendorPrefixedEventName;
 
 
 var _prodInvariant = __webpack_require__(4),
-    _assign = __webpack_require__(6);
+    _assign = __webpack_require__(7);
 
 var DOMPropertyOperations = __webpack_require__(108);
 var LinkedValueUtils = __webpack_require__(67);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(20);
 
 var invariant = __webpack_require__(2);
@@ -37373,10 +37365,10 @@ module.exports = ReactDOMInput;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var React = __webpack_require__(29);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactDOMSelect = __webpack_require__(110);
 
 var warning = __webpack_require__(3);
@@ -37502,10 +37494,10 @@ module.exports = ReactDOMOption;
 
 
 var _prodInvariant = __webpack_require__(4),
-    _assign = __webpack_require__(6);
+    _assign = __webpack_require__(7);
 
 var LinkedValueUtils = __webpack_require__(67);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(20);
 
 var invariant = __webpack_require__(2);
@@ -38279,7 +38271,7 @@ module.exports = ReactChildReconciler;
 
 
 var _prodInvariant = __webpack_require__(4),
-    _assign = __webpack_require__(6);
+    _assign = __webpack_require__(7);
 
 var React = __webpack_require__(29);
 var ReactComponentEnvironment = __webpack_require__(68);
@@ -39487,7 +39479,7 @@ module.exports = flattenChildren;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var PooledClass = __webpack_require__(25);
 var Transaction = __webpack_require__(48);
@@ -39728,10 +39720,10 @@ module.exports = ReactServerUpdateQueue;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var DOMLazyTree = __webpack_require__(32);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 
 var ReactDOMEmptyComponent = function (instantiate) {
   // ReactCompositeComponent uses this:
@@ -39936,11 +39928,11 @@ module.exports = {
 
 
 var _prodInvariant = __webpack_require__(4),
-    _assign = __webpack_require__(6);
+    _assign = __webpack_require__(7);
 
 var DOMChildrenOperations = __webpack_require__(64);
 var DOMLazyTree = __webpack_require__(32);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 
 var escapeTextContentForBrowser = __webpack_require__(51);
 var invariant = __webpack_require__(2);
@@ -40103,7 +40095,7 @@ module.exports = ReactDOMTextComponent;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var ReactUpdates = __webpack_require__(20);
 var Transaction = __webpack_require__(48);
@@ -40176,12 +40168,12 @@ module.exports = ReactDefaultBatchingStrategy;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var EventListener = __webpack_require__(116);
 var ExecutionEnvironment = __webpack_require__(11);
 var PooledClass = __webpack_require__(25);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(20);
 
 var getEventTarget = __webpack_require__(61);
@@ -40419,7 +40411,7 @@ module.exports = ReactInjection;
 
 
 
-var _assign = __webpack_require__(6);
+var _assign = __webpack_require__(7);
 
 var CallbackQueue = __webpack_require__(100);
 var PooledClass = __webpack_require__(25);
@@ -41313,7 +41305,7 @@ module.exports = SVGDOMPropertyConfig;
 
 var EventPropagators = __webpack_require__(37);
 var ExecutionEnvironment = __webpack_require__(11);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactInputSelection = __webpack_require__(117);
 var SyntheticEvent = __webpack_require__(21);
 
@@ -41509,7 +41501,7 @@ var _prodInvariant = __webpack_require__(4);
 
 var EventListener = __webpack_require__(116);
 var EventPropagators = __webpack_require__(37);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var SyntheticAnimationEvent = __webpack_require__(226);
 var SyntheticClipboardEvent = __webpack_require__(227);
 var SyntheticEvent = __webpack_require__(21);
@@ -42450,7 +42442,7 @@ module.exports = '15.6.1';
 var _prodInvariant = __webpack_require__(4);
 
 var ReactCurrentOwner = __webpack_require__(19);
-var ReactDOMComponentTree = __webpack_require__(7);
+var ReactDOMComponentTree = __webpack_require__(8);
 var ReactInstanceMap = __webpack_require__(40);
 
 var getHostComponentFromComposite = __webpack_require__(120);
@@ -48894,7 +48886,7 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'onResize',
     value: function onResize(height, width) {
-      this.setState(Object.assign({}, { height: height, width: width }));
+      this.setState({ height: height, width: width });
     }
   }, {
     key: 'render',
@@ -48964,7 +48956,7 @@ var _gsap = __webpack_require__(12);
 
 var _events = __webpack_require__(18);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _Transition = __webpack_require__(23);
 
@@ -50111,7 +50103,7 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _gsap = __webpack_require__(12);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _events = __webpack_require__(18);
 
@@ -50375,7 +50367,7 @@ var _gsap = __webpack_require__(12);
 
 var _Factory = __webpack_require__(83);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _SvgAssets = __webpack_require__(84);
 
@@ -50431,8 +50423,6 @@ exports.default = CrossComponent;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -50537,7 +50527,6 @@ var BodyRoutes = function BodyRoutes(_ref) {
 };
 
 var Main = function Main(props) {
-  console.log('dude', props.toggle);
   return _react2.default.createElement(
     _styledComponents.ThemeProvider,
     { theme: theme },
@@ -50553,30 +50542,16 @@ var Main = function Main(props) {
 var LocalContainer = function (_Component) {
   _inherits(LocalContainer, _Component);
 
-  function LocalContainer(props) {
+  function LocalContainer() {
     _classCallCheck(this, LocalContainer);
 
-    var _this = _possibleConstructorReturn(this, (LocalContainer.__proto__ || Object.getPrototypeOf(LocalContainer)).call(this, props));
-
-    _this.state = {
-      toggle: false
-    };
-
-    _this.onClickHandler = _this.onClickHandler.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (LocalContainer.__proto__ || Object.getPrototypeOf(LocalContainer)).apply(this, arguments));
   }
 
   _createClass(LocalContainer, [{
-    key: 'onClickHandler',
-    value: function onClickHandler() {
-      this.setState({ toggle: !this.state.toggle });
-    }
-  }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(Main, _extends({}, this.props, this.state, {
-        onClickHandler: this.onClickHandler
-      }));
+      return _react2.default.createElement(Main, this.props);
     }
   }]);
 
@@ -50699,7 +50674,10 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'toggleBody',
     value: function toggleBody() {
-      this.setState(Object.assign({}, { isBody: !this.state.isBody }));
+      this.setState(function (_ref2) {
+        var isBody = _ref2.isBody;
+        return { isBody: !isBody };
+      });
     }
   }, {
     key: 'render',
@@ -53238,7 +53216,7 @@ var _gsap = __webpack_require__(12);
 
 var _events = __webpack_require__(18);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53386,7 +53364,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _Utils = __webpack_require__(36);
 
@@ -53488,7 +53466,7 @@ var _styledComponents = __webpack_require__(5);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53541,7 +53519,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _content = __webpack_require__(86);
 
@@ -53585,7 +53563,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _content = __webpack_require__(86);
 
@@ -53627,7 +53605,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _styledComponents = __webpack_require__(5);
 
@@ -53669,7 +53647,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _content = __webpack_require__(86);
 
@@ -53769,7 +53747,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var list = [{ text: 'name', component: _react2.default.createElement(_Name2.default, null) }, { text: 'email', component: _react2.default.createElement(_Email2.default, null) }, { text: 'message', component: _react2.default.createElement(_Message2.default, null) }, { text: 'submit', component: _react2.default.createElement(_Submit2.default, null) }, { text: 'social', component: _react2.default.createElement(_SocialMedia2.default, null) }];
+var list = [{ type: 'name', component: _react2.default.createElement(_Name2.default, null) }, { type: 'email', component: _react2.default.createElement(_Email2.default, null) }, { type: 'message', component: _react2.default.createElement(_Message2.default, null) }, { type: 'submit', component: _react2.default.createElement(_Submit2.default, null) }, { type: 'social', component: _react2.default.createElement(_SocialMedia2.default, null) }];
 
 var Body = function Body(_ref) {
   var getProps = _ref.getProps,
@@ -53779,16 +53757,16 @@ var Body = function Body(_ref) {
       createOnEnterHandler = _ref.createOnEnterHandler,
       setRotation = _ref.setRotation;
   var _list$viewIndex = list[viewIndex],
-      text = _list$viewIndex.text,
+      type = _list$viewIndex.type,
       component = _list$viewIndex.component;
 
 
   return _react2.default.cloneElement(component, {
-    value: text !== 'social' && getProps(text),
-    updateText: createInputHandler(text),
-    onEnterHandler: text === 'submit' ? onSubmitHandler : createOnEnterHandler((viewIndex + 1) % list.length),
+    value: type !== 'social' && getProps(type),
+    updateText: createInputHandler(type),
+    onEnterHandler: type === 'submit' ? onSubmitHandler : createOnEnterHandler((viewIndex + 1) % list.length),
     setRotation: setRotation,
-    shouldTrim: text !== 'message'
+    shouldTrim: type !== 'message'
   });
 };
 
@@ -53960,7 +53938,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _utils = __webpack_require__(33);
 
@@ -53997,7 +53975,7 @@ var Name = function Name(_ref) {
     _react2.default.createElement(
       'p',
       null,
-      'Lets get in touch! Fill out each section and go to the \'submit\' section to send out your message! Or email me a message at',
+      'Lets get in touch! Fill out each section and go to the \'submit\' section to send out your message! Or if thats too much, just shoot me a message at',
       _react2.default.createElement(
         EmailContainer,
         null,
@@ -54048,7 +54026,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _utils = __webpack_require__(33);
 
@@ -54128,7 +54106,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _utils = __webpack_require__(33);
 
@@ -54214,7 +54192,7 @@ var _gsap = __webpack_require__(12);
 
 var _events = __webpack_require__(18);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _Utils = __webpack_require__(36);
 
@@ -54458,7 +54436,7 @@ var _styledComponents = __webpack_require__(5);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _Button = __webpack_require__(349);
 
@@ -54653,7 +54631,10 @@ var LocalContainer = function (_Component) {
   }, {
     key: 'toggleBody',
     value: function toggleBody() {
-      this.setState(Object.assign({}, { isBody: !this.state.isBody }));
+      this.setState(function (_ref2) {
+        var isBody = _ref2.isBody;
+        return { isBody: !isBody };
+      });
     }
   }, {
     key: 'render',
@@ -54727,7 +54708,7 @@ var _styledComponents = __webpack_require__(5);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _Transition = __webpack_require__(23);
 
@@ -54937,7 +54918,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _content = __webpack_require__(144);
 
@@ -54998,7 +54979,7 @@ var _Data = __webpack_require__(28);
 
 var _events = __webpack_require__(18);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _Body = __webpack_require__(54);
 
@@ -55103,7 +55084,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(34);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _content = __webpack_require__(355);
 
@@ -55917,6 +55898,7 @@ var tap = exports.tap = function tap(fn, value) {
 
 var once = exports.once = function once(fn) {
   var done = false;
+
   return function () {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -55930,8 +55912,6 @@ var memoize = exports.memoize = function memoize(fn, context) {
   var hash = {};
 
   return function () {
-    console.log(hash, 'whahwha');
-
     for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
     }
@@ -55966,6 +55946,7 @@ var createTitle = exports.createTitle = function createTitle(string) {
   var LetterComponent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _Styles.Letter;
 
   var title = [];
+
   for (var i = 0; i < string.length; i++) {
     title.push(_react2.default.createElement(
       LetterComponent,
@@ -55980,6 +55961,7 @@ var createSpans = exports.createSpans = function createSpans(length) {
   var LetterComponent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _Styles.Letter;
 
   var spanList = [];
+
   for (var i = 0; i < length; i++) {
     spanList.push(_react2.default.createElement(LetterComponent, { key: 'index_' + i }));
   }
@@ -56037,7 +56019,7 @@ var _form = __webpack_require__(42);
 
 var _Data = __webpack_require__(28);
 
-var _Styles = __webpack_require__(8);
+var _Styles = __webpack_require__(6);
 
 var _Transition = __webpack_require__(23);
 
@@ -56135,7 +56117,7 @@ var LocalContainer = function (_Component) {
       var _this3 = this;
 
       return clearInterval(interval), LocalContainer.letterAnimation(this.letters, function () {
-        return _this3.setState(Object.assign({}, _this3.state, { loaded: true }));
+        return _this3.setState({ loaded: true });
       });
     }
   }, {

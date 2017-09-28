@@ -59,7 +59,7 @@ class LocalContainer extends Component {
   }
 
   onResize(height, width) {
-    this.setState(Object.assign({}, {height, width}))
+    this.setState({height, width})
   }
 
   render () {

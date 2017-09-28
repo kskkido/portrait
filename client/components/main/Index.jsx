@@ -59,7 +59,6 @@ const BodyRoutes = ({ viewIndex }) => (
 )
 
 const Main = (props) => {
-  console.log('dude', props.toggle)
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -71,27 +70,9 @@ const Main = (props) => {
 }
 
 class LocalContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      toggle: false
-    }
-
-    this.onClickHandler = this.onClickHandler.bind(this)
-  }
-
-  onClickHandler() {
-    this.setState({toggle: !this.state.toggle})
-  }
 
   render() {
-    return (
-      <Main
-        {...this.props}
-        {...this.state}
-        onClickHandler={this.onClickHandler}
-      />
-    )
+    return <Main {...this.props} />
   }
 }
 

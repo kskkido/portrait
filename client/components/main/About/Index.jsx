@@ -56,7 +56,7 @@ class LocalContainer extends Component {
   }
 
   toggleBody() {
-    this.setState(Object.assign({}, {isBody: !this.state.isBody}))
+    this.setState(({isBody}) => ({isBody: !isBody}))
   }
 
   render () {
