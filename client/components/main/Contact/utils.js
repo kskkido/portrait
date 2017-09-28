@@ -11,6 +11,16 @@ export const asyncFormPut = (prop, data) => (
   })
 )
 
-export const tap = (fn, ...args) => {
+export const tap = function (fn, ...args) {
   return (fn.apply(this, args), args)
+}
+
+export const truncate = (string) => {
+  return string.length > 15 ?
+  `${string.slice(0, 15)}...` :
+  string
+}
+
+export const isEveryPropValid = (state) => {
+  return Object.keys(state).every((prop) => state[prop].isValid)
 }

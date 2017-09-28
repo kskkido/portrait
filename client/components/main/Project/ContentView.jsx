@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import Textline from '../Textline'
 import { BodyContainer, BodyContent, Title} from '../../shared/Styles'
-import { createSpans, createTitle } from '../../shared/Utils'
 import { Scramble } from '../../shared/Transition'
+import { createSpans, createTitle } from '../../shared/Utils'
 import projectData from './content'
-import Return from '../Return'
+
+import Return from '../shared/Return'
+import Textline from '../shared/Textline'
 
 // const createMetadataItem = (metadata) => (key) => (
 //   <li key={key}>{metadata[key]}</li>
@@ -17,13 +18,12 @@ import Return from '../Return'
 
 
 const Section = styled.section`
-  flex: 1;
-  display: flex;
   width: 100%;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: ${props => props.bottom ? '20px' : '50px'};
+  margin-bottom: ${props => !props.bottom && '50px'};
 `
 
 const Image = styled.div`
@@ -56,12 +56,11 @@ const ProjectImage = styled.div.attrs({
 
 const Description = styled.div`
   text-align: center;
-  padding: 0 10px 0 10px;
-  min-height: 100px;
+  padding: 0 30px;
 `
 
 const TextContainer = Description.extend`
-  margin-top: 15px;
+  margin-top: ${props => props.top ? '20px' : '40px'};
   width: 100%;
 `
 
@@ -76,21 +75,6 @@ const Text = styled.p`
   text-align: center;
 `
 
-const SubText = styled.span`
-  font-size: 1em;
-`
-
-const Line = styled.hr`
-  display: block;
-  height: 1px;
-  width: 100%;
-  background-color: black;
-  position: relative;
-  border: 0;
-  margin: .5em 0 1em;
-`
-
-
 const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
   if (!projectData[viewIndex]) return <div />
 
@@ -100,7 +84,14 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
   return (
     <BodyContainer key={viewIndex}>
       <Section>
-        <Scramble key={title} in={true} appear={true} delay={0.2} text={`<${title}>`}>
+        <Scramble
+          key={title}
+          in={true}
+          appear={true}
+          delay={0.2}
+          text={`<${title}>`}
+          tailText={`</${title}>`}
+        >
           <Title>
             {createSpans(title.length + 2)}
           </Title>
@@ -120,7 +111,7 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
       </Section>
 
       <Section>
-        <TextContainer>
+        <TextContainer top>
           <Header>Technology</Header>
           <Text>
             {data.technology}
@@ -146,9 +137,8 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
         </TextContainer>
       </Section>
       <Section bottom>
-        <Title>
-          {createTitle(`</${title}>`)}
-          <Textline />
+        <Title id="tail">
+          {createSpans(title.length + 3)}<Textline delay={0.8} />
         </Title>
       </Section>
       </BodyContent>

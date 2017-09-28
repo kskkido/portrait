@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { TransitionGroup } from 'react-transition-group'
+import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
+import { BodyFade } from '../../shared/Transition'
+import { viewData } from '../../shared/Data'
+
 import BodyComponent from '../Body'
 import Content from './ContentView'
 import Preview from './Preview'
-import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
-import { viewData } from '../../shared/Data'
-import { BodyFade } from '../../shared/Transition'
-import { TransitionGroup } from 'react-transition-group'
-import Return from '../Return'
-import styled from 'styled-components'
+import Return from '../shared/Return'
 
 
 const About = ({ isBody, toggleBody, backgroundColor, navigationList }) => {
@@ -17,7 +16,7 @@ const About = ({ isBody, toggleBody, backgroundColor, navigationList }) => {
     <TransitionGroup>
       <BodyFade key={isBody}>
       <div>
-        {!isBody && <Return />}
+        {!isBody && <Return hide={true}/>}
         <BodyComponent
           backgroundColor={backgroundColor}
           navigationList={navigationList}
@@ -54,16 +53,10 @@ class LocalContainer extends Component {
 
   componentWillMount() {
     this.props.pathChange(1)
-    // this.isBody = this.props.location.state && this.props.location.state.isBody
-    // return !this.isBody && (this.props.pathChange(1), this.props.viewRestart(), this.props.rotationRestart())
   }
 
   toggleBody() {
-    this.setState(Object.assign({}, {isBody: !this.state.isBody}))
-  }
-
-  onClickHandler() {
-
+    this.setState(({isBody}) => ({isBody: !isBody}))
   }
 
   render () {

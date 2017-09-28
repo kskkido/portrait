@@ -1,7 +1,8 @@
 import React from 'react'
-import Button from '../Button'
 import { PreviewContainer } from '../../shared/Styles'
 import data from './content'
+
+import Button from '../shared/Button'
 
 const AboutPreview = ({ toggleBody, viewIndex }) => {
   if (!data[viewIndex]) return <div />
@@ -11,7 +12,7 @@ const AboutPreview = ({ toggleBody, viewIndex }) => {
   return (
     <PreviewContainer>
       <p>{preview}</p>
-      <Button onClick={toggleBody} />
+      <Button onClick={toggleBody}/>
     </PreviewContainer>
   )
 }

@@ -24,14 +24,11 @@ injectGlobal`
   }
 `
 
-const Container = styled.main`
-`
-
 const Loaded = () => (
-    <Container>
+    <div>
         <Sidebar />
         <Main />
-    </Container>
+    </div>
 )
 
 const App = ({ loaded }) => (

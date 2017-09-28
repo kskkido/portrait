@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { viewData } from '../../shared/Data'
 import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
-import BodyComponent from '../Body'
+import { BodyContainer } from '../../shared/Styles'
 
+import BodyComponent from '../Body'
 import Preview from './Preview'
 
 const Welcome = ({ backgroundColor, navigationList }) => {

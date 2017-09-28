@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Input, PlaceholderContainer, PreviewContainer } from '../../shared/Styles'
 import { initialValue } from './utils'
 import styled from 'styled-components'
+import forwardProps from './Input'
 
 const EmailContainer = styled.span`
   position: relative;
@@ -22,21 +23,21 @@ const EmailContainer = styled.span`
 `
 
 const Email = styled.a`
-  color: #424242;
+  color: #DCE775;
   transition: color 0.3s;
   &:hover {
-    color: #8f8f8f;
+    color: #F0F4C3;
   }
 `
 
-const Name = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef, inputRef2 }) => {
+const Name = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef }) => {
   const isInitial = value === initialValue
       , inputValue = isInitial ? '' : value
       , isValid = isInitial ? true : _isValid
 
   return (
     <PreviewContainer>
-      <p>Interested in getting in touch with me? Enter your name below and press enter to navigate to the next section. Once you fill out each section, go to the 'submit' section to send out your message! Or send me a message at
+      <p>Lets get in touch! Fill out each section and go to the 'submit' section to send out your message! Or if thats too much, just shoot me a message at
         <EmailContainer><Email href="mailto:kskkido@gmail.com?Subject=Hello%20nice%20to%20meet%20you" target="_top"> kskkido@gmail.com</Email></EmailContainer>
       </p>
       <PlaceholderContainer
@@ -56,53 +57,5 @@ const Name = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef, inpu
   )
 }
 
-class LocalContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      localValue: '',
-      isValid: false
-    }
-
-    this.onChangeHandler = this.onChangeHandler.bind(this)
-  }
-
-  componentWillMount() {
-  const { value, isValid } = this.props.value
-    this.setState(Object.assign({}, {localValue: value, isValid: isValid}))
-  }
-
-  componentDidMount() {
-    this.input.focus()
-  }
-
-  componentWillUnmount() {
-    const { localValue, isValid } = this.state
-    this.props.updateText(localValue, isValid)
-  }
-
-  componentDidUpdate() {
-    this.input.focus()
-  }
-
-  onChangeHandler(value, isValid) {
-    this.setState(Object.assign({}, {localValue: value.trim(), isValid}))
-  }
-
-  render() {
-
-    return (
-      <Name
-        _isValid={this.state.isValid}
-        value={this.state.localValue}
-        onChangeHandler={this.onChangeHandler}
-        onEnterHandler={this.props.onEnterHandler}
-        inputRef={div => this.input = div}
-        inputRef2={div => this.placeholder = div}
-      />
-    )
-  }
-}
-
-export default LocalContainer
+export default forwardProps(Name)
 

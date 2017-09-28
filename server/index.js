@@ -1,10 +1,11 @@
 const { join } = require('path')
+		, fs = require('fs')
 		, bodyParser = require('body-parser')
 		, express = require('express')
 		, app = express()
 		, port = require('../').port
 		, session = require('express-session')
-		, { initialProp } = require('./constant')
+		, { initialProp } = require('./util')
 
 app
 // logging middleware
@@ -33,6 +34,19 @@ app
 
 // redirect to api routes
 	.use(express.static(join(__dirname, '..', '/client/public')))
+
+	.get('/resume', (req, res, next) => {
+		const file = fs.createReadStream(join(__dirname, '..', '/client/public/kido_resume.pdf'))
+		const stat = fs.statSync(file.path)
+
+		res.writeHead(200, {
+			'Content-Type': 'application/pdf',
+			'Content-Length': stat.size,
+			'Content-Disposition': 'attachment; filename="kido_resume.pdf'
+		})
+
+		file.pipe(res)
+	})
 
 	.get('*', (req, res, next) => {
 		res.sendFile(join(__dirname, '..', '/client/public/index.html'))

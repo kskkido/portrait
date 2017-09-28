@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { PreviewContainer } from '../../shared/Styles'
-import { viewChange, rotationChange } from '../../../reducers/events'
-import { asyncFormRestart } from '../../../reducers/form'
 import { TimelineLite } from 'gsap'
+import { viewChange, rotationChange } from '../../../reducers/events'
+import { PreviewContainer } from '../../shared/Styles'
+import { tap } from '../../shared/Utils'
+import { truncate, isEveryPropValid } from './utils'
 
 const ListContainer = styled.div`
   position: relative;
@@ -83,20 +84,6 @@ class LocalContainer extends Component {
     this.onButtonHoverOffHandler = this.onButtonHoverOffHandler.bind(this)
   }
 
-  static tap (value, fn) {
-    return (fn(value), value)
-  }
-
-  static truncate (string) {
-    return string.length > 15 ?
-    `${string.slice(0, 15)}...` :
-    string
-  }
-
-  static isEveryPropValid(state) {
-    return Object.keys(state).every((prop) => state[prop].isValid)
-  }
-
   static createHoverAnimation(target) {
     return new TimelineLite({paused: true})
       .to(target, 0.2, {
@@ -114,7 +101,7 @@ class LocalContainer extends Component {
         onMouseOut={this.onHoverOffHandler(index)}
         innerRef={div => this.listRef.push(div)}
       >
-        {`${prop.toUpperCase()}: ${isValid ? LocalContainer.truncate(value) : 'Needs some work!'}`}
+        {`${prop.toUpperCase()}: ${isValid ? truncate(value) : 'Needs some work!'}`}
       </ListBlock>
     )
   }
@@ -135,7 +122,7 @@ class LocalContainer extends Component {
   }
 
   onClickHandler(index) {
-    return () => this.props.viewChange(LocalContainer.tap(index, (i) => this.props.rotationChange(this.props.setRotation(i))))
+    return () => this.props.viewChange(tap((i) => this.props.rotationChange(this.props.setRotation(i)), index))
   }
 
   onHoverHandler(index) {
@@ -158,7 +145,7 @@ class LocalContainer extends Component {
 
     return (
       <Submit
-        isValid={LocalContainer.isEveryPropValid(this.props.value)}
+        isValid={isEveryPropValid(this.props.value)}
         onSubmit={this.props.onEnterHandler}
         onMouseOver={this.onButtonHoverHandler}
         onMouseOut={this.onButtonHoverOffHandler}

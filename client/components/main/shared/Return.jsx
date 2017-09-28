@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-import { Link, withRouter } from 'react-router-dom'
-import Button from './Button'
 import { TimelineLite, Back } from 'gsap'
+import { media } from '../../shared/Styles'
+
+import Button from './Button'
 
 const ReturnContainer = styled.div`
   position: ${props => props.isBody ? 'relative' : 'absolute'};
   left: 50%;
   transform: translateX(-50%);
+  ${media.phone`display: ${props => !props.isBody && 'none'}`}
 `
 
 const ButtonContainer = styled.div`
@@ -22,9 +25,10 @@ const HomeTextContainer = styled.div`
   text-align: center;
   opacity: 0;
   scale: 0;
+  ${media.phone`opacity: 1; scale: 1; margin-bottom: 40px;`}
 `
 
-const Return = ({ isBody, text, onClick, onHover, onHoverOff, inputButton, inputText }) => (
+const Return = ({ isBody, hide, text, onClick, onHover, onHoverOff, inputButton, inputText }) => (
 
   <ReturnContainer
     isBody={isBody}
@@ -86,6 +90,7 @@ class LocalContainer extends Component {
     return (
       <Return
         isBody={!!this.props.toggleBody}
+        hide={this.props.hide}
         text={this.props.text}
         onClick={this.onClick}
         onHover={this.onHover}

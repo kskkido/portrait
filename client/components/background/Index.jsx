@@ -5,6 +5,8 @@ import { viewData } from  '../Shared/Data'
 const BgWrapper = styled.div`
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
   position: fixed;
   z-index: -1000;
 `
@@ -16,7 +18,7 @@ const BgOne = styled.div.attrs({
   })
 })`
   background-color: ${viewData.home.secondaryColor};
-  position: absolute;
+  position: fixed;
   z-index: -99;
 `
 
@@ -25,31 +27,12 @@ const BgTwo = BgOne.extend`
   z-index: -100;
 `
 
-const BgDiv = styled.div`
-  background-color: inherit;
-  float: left;
-  top: 0;
-  width: 25%;
-  height: 100%;
-  z-index: inherit;
-`
-
 const Background = () => {
 
   return (
     <BgWrapper id="bgWrapper">
-      <BgOne id="bgOne">
-        {/* <BgDiv />
-        <BgDiv />
-        <BgDiv />
-        <BgDiv /> */}
-      </BgOne>
-      <BgTwo id="bgTwo">
-        {/* <BgDiv />
-        <BgDiv />
-        <BgDiv />
-        <BgDiv /> */}
-      </BgTwo>
+      <BgOne id="bgOne" />
+      <BgTwo id="bgTwo" />
     </BgWrapper>
   )
 }
@@ -76,7 +59,7 @@ class LocalContainer extends Component {
   }
 
   onResize(height, width) {
-    this.setState(Object.assign({}, {height, width}))
+    this.setState({height, width})
   }
 
   render () {

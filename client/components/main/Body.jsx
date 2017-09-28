@@ -1,35 +1,39 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { TransitionGroup } from 'react-transition-group'
-import Draggable from 'gsap/Draggable'
-import { TweenLite, Back } from 'gsap'
 import { withRouter } from 'react-router-dom'
-import { Slide } from '../shared/Transition'
-import { rotationChange, rotationRestart, viewChange, viewRestart } from '../../reducers/events'
+import { TransitionGroup } from 'react-transition-group'
 import styled from 'styled-components'
+import { TweenLite, Back } from 'gsap'
+import Draggable from 'gsap/Draggable'
+import { rotationChange, rotationRestart, viewChange, viewRestart } from '../../reducers/events'
+import { media } from '../shared/Styles'
+import { Slide } from '../shared/Transition'
+import { memoize, tap } from '../shared/Utils'
+
 import Navigation from './Navigation'
 
 /* ====== HIGHER LEVEL COMPONENT FOR ABOUT AND PROJECT ====== */
-  /* ===== UNIQUE TRAITS =====
-    navigationList
-  */
 
 const MainContainer = styled.div`
   display: inline-block;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   cursor: move;
   position: absolute;
   top: ${props => props.isBody ? '-220px' : '190px'};
-  left: 0;
-  right: 0;
-  z-index: 100
+  ${media.phone`${props => props.isBody ? `
+    top: 0px;
+    cursor: initial;
+    overflow-x: hidden;
+    ` :
+    'top: -165px'}`};
+  z-index: 100;
 `
 
 const Body = styled.div`
   position: relative;
   top: 55px;
-  max-width: 800px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 `
@@ -43,6 +47,7 @@ const ContentView = ({ backgroundColor, children, isBody, inputBody, inputMain, 
     >
       <Navigation
         navigationList={navigationList}
+        isBody={isBody}
         getDom={inputNav}
         rotation={rotation}
       />
@@ -72,49 +77,49 @@ class LocalContainer extends Component {
     this.state = {
       targetOffset: 0
     }
-
-    this.handleOnWheel = this.handleOnWheel.bind(this)
   }
 
   static nearest(ratio, callback) {
+    const getRotation = memoize((rotation) => Math.round(rotation / ratio) * ratio)
+
     return function (getRatio) {
       return function () {
         const { rotation } = this
-            , targetRotation = getRatio ? Math.round(rotation / ratio) * ratio : rotation
+            , targetRotation = getRatio ? getRotation(rotation) : rotation
+
         callback(targetRotation)
       }
     }
   }
 
-  static tap (value, fn) {
-    return (fn(value), value)
-  }
-
   static slideDOM(bodyDOM) {
     return (targetOffset) => {
       TweenLite.to(bodyDOM, 0.7, {
-        left: `${-targetOffset}px`,
+        marginLeft: `${-targetOffset}px`,
         ease: Back.easeOut
       })
     }
   }
 
   static normalize (length) {
-    return (rotation) => {
+    return memoize((rotation) => {
       const normalized = rotation / (360 / length)
       return normalized < 0 ? (Math.ceil(-(normalized) / length) * length) + normalized : normalized % length
-    }
+    })
   }
 
-  static slide(bodyDOM, mainDOM, length) {
-    const ratio = (mainDOM.offsetWidth / 2) / (360 / length) // get the half of bodyDOM
-        , getOffset = ((rat) => (rotation) => ((rotation * rat) * 0.5))(ratio)
-        , slideBodyDOM = LocalContainer.slideDOM(bodyDOM)
-    let prevRotation = 0
+  static slide(length) {
+    const ratio = (window.innerWidth / 2) / (360 / length) // get the half of bodyDOM
+        , getOffset = memoize((rotation) => ((rotation * ratio) * 0.5))
 
-    return (magnitude) => {
-      prevRotation -= magnitude
-      return LocalContainer.tap(getOffset(prevRotation), slideBodyDOM)
+    return (bodyDOM) => {
+      const slideBodyDOM = LocalContainer.slideDOM(bodyDOM)
+      let prevRotation = 0
+
+      return (magnitude) => {
+        prevRotation -= magnitude
+        return tap(slideBodyDOM, getOffset(prevRotation))
+      }
     }
   }
 
@@ -143,8 +148,9 @@ class LocalContainer extends Component {
   componentWillMount() {
     const { length } = this.props.navigationList
 
+    this.isMobile = window.screen.width <= 365
     this.normalize = LocalContainer.normalize(length)
-    this.dragCB = (targetRotation) => this.willSetView(this.normalize(LocalContainer.tap(targetRotation, this.props.rotationChange)))
+    this.dragCB = (targetRotation) => this.willSetView(this.normalize(tap( this.props.rotationChange, targetRotation)))
     this.getTargetRotation = LocalContainer.nearest(360 / length, this.dragCB)
   }
 
@@ -152,7 +158,10 @@ class LocalContainer extends Component {
   componentDidMount() {
     this.props.getNav && this.props.getNav(this.nav)
 
-    this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
+    this.slideSetup = LocalContainer.slide(this.props.navigationList.length)
+    this.slideBody = this.slideSetup(this.body)
+
+    if (this.isMobile && this.props.isBody) { return }
     // DEFINE DRAGGABLE
     Draggable.create(this.nav, {
       type: 'rotation',
@@ -166,7 +175,7 @@ class LocalContainer extends Component {
     const magnitude = this.props.rotation - rotation
         , targetOffset = this.slideBody(magnitude % 360)
 
-    this.setState(Object.assign({}, {targetOffset}))
+    this.setState({targetOffset})
   }
 
   shouldComponentUpdate({ viewIndex }) {
@@ -174,7 +183,7 @@ class LocalContainer extends Component {
   }
 
   componentDidUpdate() {
-    this.slideBody = LocalContainer.slide(this.body, this.mainDiv, this.props.navigationList.length)
+    this.slideBody = this.slideSetup(this.body)
   }
 
   componentWillUnmount() {
@@ -185,20 +194,12 @@ class LocalContainer extends Component {
     this.toggleBody()
   }
 
-  handleOnWheel ({nativeEvent}) {
-    LocalContainer.preventEvent(nativeEvent)
-    this.props.rotationChange(
-      LocalContainer.getRotation(nativeEvent.wheelDelta || (-1 * nativeEvent.deltaY)
-    , this.props.rotation))
-  }
-
   render() {
 
     return (
         <ContentView // ABOUT OR PROJECT
           {...this.props}
           {...this.state}
-          onWheel={this.handleOnWheel}
           inputBody={div => this.body = div}
           inputMain={div => this.mainDiv = div}
           inputNav={div => this.nav = div}

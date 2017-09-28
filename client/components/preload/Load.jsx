@@ -5,9 +5,9 @@ import { TimelineLite, Back } from 'gsap'
 import { loadComplete } from '../../reducers/events'
 import { asyncFormFetch } from '../../reducers/form'
 import { viewData } from  '../shared/Data'
-import { Title3 } from '../shared/Styles'
-import { createTitle } from '../shared/Utils'
+import { Title3, media } from '../shared/Styles'
 import { Fade, Scramble } from '../shared/Transition'
+import { createTitle } from '../shared/Utils'
 
 const Container = styled.div`
   position: relative;
@@ -40,11 +40,19 @@ const LoadingText = Title3.extend`
 
 const LetterContainer = styled.div`
   position: absolute;
+  white-space: nowrap;
   margin: auto;
   left: 50%;
   bottom: 33vh;
   height: 100px;
   transform: translateX(-50%);
+  ${media.phone`
+    height: 40px;
+    span {
+      font-size: 2.5em;
+      margin-right: 5px
+    };
+  `}
 `
 
 const Letter = styled.span`
@@ -102,7 +110,7 @@ class LocalContainer extends Component {
   }
 
   clearIntervalAndToggle(interval) {
-    return (clearInterval(interval), LocalContainer.letterAnimation(this.letters, () => this.setState(Object.assign({}, this.state, {loaded: true}))))
+    return (clearInterval(interval), LocalContainer.letterAnimation(this.letters, () => this.setState({loaded: true})))
   }
 
   componentWillMount() {

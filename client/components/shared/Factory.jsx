@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { media } from './Styles'
 
 export const createSVG = function(SVG, Container, createHoverAnimation) {
 
     const ContainerComponent = ((styledContainer) => styledContainer.extend`
         top: ${props => props.clearTop && '50%'};
+        ${({ mediaQuery }) =>
+          mediaQuery && media[mediaQuery.device]`${mediaQuery.style}`}
+        ;
       `
     )(Container ? Container : styled.div`
       position: absolute;
@@ -47,15 +51,15 @@ export const createSVG = function(SVG, Container, createHoverAnimation) {
     }
 
     render() {
-
       return (
         <ContainerComponent
-          pointUp={this.props.pointUp}
           clearTop={this.props.clearTop}
-          innerRef={div => this.container = div}
+          pointUp={this.props.pointUp}
+          mediaQuery={this.props.mediaQuery}
+          onClick={this.onClickHandler.bind(this)}
           onMouseOver={this.onHoverHandler.bind(this)}
           onMouseOut={this.onHoverOffHandler.bind(this)}
-          onClick={this.onClickHandler.bind(this)}
+          innerRef={div => this.container = div}
         >
           <SVG
             scale={this.props.scale || 0.1}

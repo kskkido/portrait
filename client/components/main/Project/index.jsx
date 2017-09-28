@@ -1,36 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import Preview from './Preview'
-import Content from './ContentView'
 import { TransitionGroup } from 'react-transition-group'
-import { BodyFade } from '../../shared/Transition'
-import BodyComponent from '../Body'
 import { pathChange, viewRestart, rotationRestart } from '../../../reducers/events'
+import { BodyFade } from '../../shared/Transition'
 import { viewData } from '../../shared/Data'
-import Return from '../Return'
-import styled from 'styled-components'
 
-const ButtonContainer = styled.div`
-  position: relative;
-  height: 100px;
-  top: 0
-`
-const HomeTextContainer = styled.div`
-  position: relative;
-  text-align: center;
-`
-
-const ReturnContainer = styled.div`
-  position: relative;
-`
+import BodyComponent from '../Body'
+import Content from './ContentView'
+import Preview from './Preview'
+import Return from '../shared/Return'
 
 const Project = ({ isBody, toggleBody, backgroundColor, navigationList }) => {
   return (
     <TransitionGroup>
       <BodyFade key={isBody}>
         <div>
-          {!isBody && <Return />}
+          {!isBody && <Return hide={true}/>}
           <BodyComponent
             backgroundColor={backgroundColor}
             navigationList={navigationList}
@@ -72,7 +57,7 @@ class LocalContainer extends Component {
   }
 
   toggleBody() {
-    this.setState(Object.assign({}, {isBody: !this.state.isBody}))
+    this.setState(({isBody}) => ({isBody: !isBody}))
   }
 
   render () {

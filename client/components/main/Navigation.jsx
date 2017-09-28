@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { TweenLite, TimelineLite, Back } from 'gsap'
+import { TweenLite, Back } from 'gsap'
+import { rotationRestart, viewChange, viewRestart } from '../../reducers/events'
+import { media } from '../shared/Styles'
 
-import { rotationChange, rotationRestart, viewChange, viewRestart } from '../../reducers/events'
+const DIAMETER = 300
 
 const Container = styled.div`
   width: 100%;
+  ${media.phone`display: ${props => props.isBody && 'none'}`}
 `
 
 const NavigationDiv = styled.div`
@@ -15,8 +18,12 @@ const NavigationDiv = styled.div`
   margin-left: auto;
   margin-right: auto;
   right: 0;
-  height: 300px;
-  width: 300px;
+  height: ${DIAMETER}px;
+  width: ${DIAMETER}px;
+  ${media.phone`
+    height: ${DIAMETER * 0.75}px;
+    width: ${DIAMETER * 0.75}px;
+  `}
   border: 2px solid;
   border-radius: 50%;
   box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
@@ -29,8 +36,12 @@ const InnerNavigationDiv = styled.div.attrs({
   })
 })`
   position: absolute;
-  height: 300px;
-  width: 300px;
+  height: ${DIAMETER}px;
+  width: ${DIAMETER}px;
+  ${media.phone`
+    height: ${DIAMETER * 0.75}px;
+    width: ${DIAMETER * 0.75}px;
+  `}
   text-align: center;
   border-radius: 50%;
   transform-style: preserve-3d;
@@ -38,6 +49,9 @@ const InnerNavigationDiv = styled.div.attrs({
 
 const NavigationText = styled.span`
   line-height: 40em;
+  ${media.phone`
+    line-height: 30em;
+  `}
   padding: 5px;
   text-transform: uppercase;
 `
@@ -75,7 +89,7 @@ class LocalContainer extends Component {
     const navigationDivs = this.props.navigationList.map(LocalContainer.createNavigationDiv)
 
     return (
-      <Container>
+      <Container isBody={this.props.isBody}>
         <NavigationDiv
           id="nav"
           innerRef={(div) => {
