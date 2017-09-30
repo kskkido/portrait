@@ -2,6 +2,7 @@ const path = require('path')
 const NODE_ENV = require('./').env.NODE_ENV
 
 const webpack = require('webpack')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CompressionPlugin = require('compression-webpack-plugin')
 const LiveReloadPlugin = require('webpack-livereload-plugin')
 
@@ -12,7 +13,7 @@ module.exports = {
 		path: path.join(__dirname, '/client/public'),
 		filename: 'bundle.js'
 	},
-	devtool: NODE_ENV === 'production' ? false : 'source-map',
+	devtool: NODE_ENV !== 'production' && 'source-map',
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '*']
 	},
@@ -60,6 +61,9 @@ module.exports = {
 						minRatio: 0.8
 					})
 				] :
-				[new LiveReloadPlugin({appendScriptTag: true})]
+				[
+					new BundleAnalyzerPlugin(),
+					new LiveReloadPlugin({appendScriptTag: true})
+				]
 		]
 }

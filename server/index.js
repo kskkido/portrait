@@ -23,8 +23,7 @@ app
 	}))
 
 	.use((req, res, next) => {
-		req.session.contact = req.session.contact ?
-			req.session.contact :
+		req.session.contact = req.session.contact ||
 			{name: initialProp, email: initialProp, message: initialProp}
 
 		next()

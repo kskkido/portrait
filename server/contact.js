@@ -12,6 +12,7 @@ api
       flags: 'a',
       defaultEncoding: 'utf8'
     })
+
     ls.write(toText(body.contact))
     ls.end('\n', (err) => {
       if (err) throw err
