@@ -1,5 +1,6 @@
 import React from 'react'
-import { Letter } from './Styles'
+import reactStringReplace from 'react-string-replace'
+import { Letter, Keyword, KeywordOverlay, Keylink, KeylinkText } from './Styles'
 
 // decorators
 
@@ -66,4 +67,48 @@ export const createSpans = (length, LetterComponent = Letter) => {
 }
 
 const isEven = n => n % 2 === 0
+
 export const getPair = (n, [front, back]) => isEven(n) ? [front, back] : [back, front]
+
+const matchKeyword = /\*(.*?)\*/
+
+export const markup = (full, keyword) => 'open' + keyword + 'close'
+
+const keyMarkup = (text, color) => {
+  const match = /\*(.*?)\*/g
+
+  return reactStringReplace(text, match, (target, i) => (
+    <Keyword
+      key={'keyword' + i}
+      className="keyword"
+      color={color}
+    >
+      {target}
+      <KeywordOverlay className="overlay"/>
+    </Keyword>
+  ))
+}
+
+const linkMarkup = (text, color) => {
+  const match = /@@(.*?)@@/
+  const hrefMatch = /:(.*):#(.*)#(.*)/
+
+  return reactStringReplace(text, match, (target) => {
+    let props
+    target.replace(hrefMatch, (full, _href, _target, _text) => { props = [_href, _target, _text] })
+
+    return (
+      <Keylink>
+        <KeylinkText target={props[1]} href={props[0]} color={color}>
+          {props[2]}
+        </KeylinkText>
+      </Keylink>
+    )
+  })
+}
+
+export const keywordMarkup = (text, color = '#9E9E9E', withLink = false) => {
+  let linkMatch = withLink ? linkMarkup : (i) => i
+
+  return linkMatch(keyMarkup(text, color), color)
+}

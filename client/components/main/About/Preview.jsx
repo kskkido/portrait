@@ -1,5 +1,7 @@
 import React from 'react'
 import { PreviewContainer } from '../../shared/Styles'
+import { Keyword } from '../../shared/Transition'
+import { keywordMarkup } from '../../shared/Utils'
 import data from './content'
 
 import Button from '../shared/Button'
@@ -11,7 +13,9 @@ const AboutPreview = ({ toggleBody, viewIndex }) => {
 
   return (
     <PreviewContainer>
-      <p>{preview}</p>
+      <Keyword key={'about' + viewIndex}>
+        <p>{keywordMarkup(preview, '#F5F5F5')}</p>
+      </Keyword>
       <Button onClick={toggleBody}/>
     </PreviewContainer>
   )

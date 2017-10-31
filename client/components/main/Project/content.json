@@ -15,7 +15,7 @@
     "description": "Audiosphere is a music streaming web application that uses Spotify Web API and Three-JS to create a 3d planetary system with your Spotify playlists.",
     "imageSource": "audiosphere-icon.png",
     "url": "https://audiosphere.herokuapp.com",
-    "preview": "Imagine a planetarium for your playlists"
+    "preview": "Imagine a *planetarium* for your *playlists*"
   },
   "1": {
     "title": "StackQuest",
@@ -27,7 +27,7 @@
     "description": "StackQuest is an in-browser real-time multiplayer adventure game. The multiplayer aspect is powered by Socket IO and the game logic leverages Phaser JS.",
     "imageSource": "stackquest-icon.png",
     "url": "https://stackquest.herokuapp.com",
-    "preview": "It's real-time multiplayer game"
+    "preview": "It's *real-time multiplayer* game"
   },
   "2": {
     "title": "Portfolio",

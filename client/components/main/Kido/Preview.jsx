@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { PreviewContainer } from '../../shared/Styles'
+import { keywordMarkup } from '../../shared/Utils'
+import { Keyword } from '../../shared/Transition'
 import data from './content'
 
 import Button from '../shared/Button'
@@ -8,11 +10,14 @@ import Button from '../shared/Button'
 const ProjectsPreview = ({ history, viewIndex }) => {
    if (!data[viewIndex]) return <div />
 
-  const { path, text } = data[viewIndex]
+  const { keyword, path, text } = data[viewIndex],
+        marked = keywordMarkup(text, keyword)
 
   return (
     <PreviewContainer>
-      <p>{text}</p>
+      <Keyword key={viewIndex} >
+        <p>{marked}</p>
+      </Keyword>
       {path && <Button onClick={() => history.push(path)} />}
     </PreviewContainer>
   )

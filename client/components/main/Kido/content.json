@@ -6,18 +6,22 @@
      "TITLE": "PROJECTS YO"
    },
   "0": {
-    "text": "Welcome to my portfolio website. Drag anywhere on the page to rotate the circular navigation. Rotate the circle to the section of your interest to access it. Or you can just open up the side nav by clicking on the button around the top left corner of this page and use that instead... Enjoy!"
+    "text": "Welcome to my portfolio website. *Drag anywhere* on the page to rotate the *circular navigation*. Rotate the circle to the section of your interest to access it. Or you can just open up the *side nav* by clicking on the button around the *top left* corner of this page and use that instead... *Enjoy!*",
+    "keyword": "#90A4AE"
   },
   "1": {
-    "text": "Learn about me?",
-    "path": "/about"
+    "text": "Learn about *me*?",
+    "path": "/about",
+    "keyword": "#F5F5F5"
   },
   "2": {
-    "text": "Take a look at my projects",
-    "path": "/projects"
+    "text": "Take a look at my *projects*",
+    "path": "/projects",
+    "keyword": "#F5F5F5"
   },
   "3": {
-    "text": "Lets get in touch!",
-    "path": "/contact"
+    "text": "Lets get in *touch!*",
+    "path": "/contact",
+    "keyword": "#F5F5F5"
   }
 }

@@ -299,7 +299,8 @@ const scrambleAnimation = (() => {
       const letterDuration = duration / asciList.length
           , tail = tailText && document.getElementById('tail')
           , tl = new TimelineLite()
-          .delay(delay)
+            .delay(delay)
+
       new Promise(res => asciList.forEach((asci, i, { length }) => {
         tl.
           to({value: Math.floor(Math.random() * 93) + 33}, letterDuration, {
@@ -329,6 +330,57 @@ export const Scramble = (_props) => {
       timeout={650}
       exit={false}
       onEnter={scrambleAnimation.onEnter(0.65, _props.delay, convertToAsci(_props.text || 'bleh'), _props.tailText)}
+    />
+  )
+}
+
+const KeywordAnimation = (() => {
+  const duration = 0.3
+
+  const callback = (tl, keyword) => {
+    tl
+      .set(keyword, {top: 0})
+      .to(keyword, duration, {
+          height: '0%',
+          ease: Power2.easeOut,
+        })
+      .set(keyword, {bottom: 0})
+  }
+
+  const slideUp = (parent) => (keyword, i) => {
+    const child = new TimelineLite()
+
+    child.to(keyword, duration, {
+        height: '100%',
+        onComplete: callback,
+        onCompleteParams: [child, keyword]
+      })
+    parent.add(child, duration * i)
+  }
+
+  const onEnter = (target) => {
+    const keywords = [].slice.call(target.getElementsByClassName('overlay')),
+          parent = new TimelineLite()
+
+    keywords.forEach(slideUp(parent))
+    parent.delay(0.6)
+  }
+
+  return {
+    onEnter
+  }
+})()
+
+export const Keyword = (props) => {
+
+  return (
+    <Transition
+      {...props}
+      appear={true}
+      in={true}
+      timeout={1000}
+      exit={false}
+      onEnter={KeywordAnimation.onEnter}
     />
   )
 }
