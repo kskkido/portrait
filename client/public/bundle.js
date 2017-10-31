@@ -2628,7 +2628,7 @@ module.exports = ReactDOMComponentTree;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.KeylinkText = exports.Keylink = exports.KeywordOverlay = exports.Keyword = exports.PlaceholderContainer = exports.Input = exports.Letter = exports.TitleDiv = exports.Title3 = exports.Title = exports.PreviewContainer = exports.Flex5 = exports.Flex4 = exports.Flex3 = exports.Flex2 = exports.Flex1 = exports.Text = exports.BodyText = exports.BodyContent = exports.BodyContainer = exports.media = undefined;
+exports.KeylinkText = exports.KeylinkOverlay = exports.Keylink = exports.KeywordOverlay = exports.Keyword = exports.PlaceholderContainer = exports.Input = exports.Letter = exports.TitleDiv = exports.Title3 = exports.Title = exports.PreviewContainer = exports.Flex5 = exports.Flex4 = exports.Flex3 = exports.Flex2 = exports.Flex1 = exports.Text = exports.BodyText = exports.BodyContent = exports.BodyContainer = exports.media = undefined;
 
 var _templateObject = _taggedTemplateLiteral(['\n    @media (max-width: ', 'em) {\n      ', '\n    }\n  '], ['\n    @media (max-width: ', 'em) {\n      ', '\n    }\n  ']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 700px;\n  ', '\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  flex-direction: ', ';\n  justify-content: center;\n'], ['\n  position: absolute;\n  width: 700px;\n  ', '\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  flex-direction: ', ';\n  justify-content: center;\n']),
@@ -2650,8 +2650,9 @@ var _templateObject = _taggedTemplateLiteral(['\n    @media (max-width: ', 'em) 
     _templateObject18 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 6px 14px 5px 33px;\n  white-space: nowrap;\n  letter-spacing: 1px;\n  color: #424242;\n  opacity: 0.8;\n  transition: bottom 0.2s, font-size 0.2s, color 0.2s;\n'], ['\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 6px 14px 5px 33px;\n  white-space: nowrap;\n  letter-spacing: 1px;\n  color: #424242;\n  opacity: 0.8;\n  transition: bottom 0.2s, font-size 0.2s, color 0.2s;\n']),
     _templateObject19 = _taggedTemplateLiteral(['\n  position: relative;\n  color: ', ';\n  display: inline-block;\n  white-space:nowrap;\n'], ['\n  position: relative;\n  color: ', ';\n  display: inline-block;\n  white-space:nowrap;\n']),
     _templateObject20 = _taggedTemplateLiteral(['\n  position: absolute;\n  display: inline-block;\n  left: -2.5%;\n  bottom: 0;\n  height: 0%;\n  width: 105%;\n  background-color: white;\n  opacity: 0.9;\n'], ['\n  position: absolute;\n  display: inline-block;\n  left: -2.5%;\n  bottom: 0;\n  height: 0%;\n  width: 105%;\n  background-color: white;\n  opacity: 0.9;\n']),
-    _templateObject21 = _taggedTemplateLiteral(['\n  position: relative;\n  white-space:nowrap;\n\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: white;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.4;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n'], ['\n  position: relative;\n  white-space:nowrap;\n\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: white;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.4;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n']),
-    _templateObject22 = _taggedTemplateLiteral(['\n  color: ', ';\n  transition: color 0.3s;\n  &:hover {\n    color: #F0F4C3;\n  }\n'], ['\n  color: ', ';\n  transition: color 0.3s;\n  &:hover {\n    color: #F0F4C3;\n  }\n']);
+    _templateObject21 = _taggedTemplateLiteral(['\n  position: relative;\n  white-space:nowrap;\n  display: inline-block;\n\n  &:hover::before {\n    height: 100%;\n  }\n\n  &::before {\n    content: \'\';\n    position: absolute;\n    left: -2.5%;\n    bottom: 0;\n    height: 0;\n    width: 105%;\n    background-color: white;\n    opacity: 0.4;\n    transition: height 0.3s;\n    z-index: -1;\n  }\n'], ['\n  position: relative;\n  white-space:nowrap;\n  display: inline-block;\n\n  &:hover::before {\n    height: 100%;\n  }\n\n  &::before {\n    content: \'\';\n    position: absolute;\n    left: -2.5%;\n    bottom: 0;\n    height: 0;\n    width: 105%;\n    background-color: white;\n    opacity: 0.4;\n    transition: height 0.3s;\n    z-index: -1;\n  }\n']),
+    _templateObject22 = _taggedTemplateLiteral(['\n  position: absolute;\n  display: inline-block;\n  left: -2.5%;\n  bottom: 0;\n  height: 0;\n  width: 105%;\n  background-color: white;\n  opacity: 0.8;\n\n'], ['\n  position: absolute;\n  display: inline-block;\n  left: -2.5%;\n  bottom: 0;\n  height: 0;\n  width: 105%;\n  background-color: white;\n  opacity: 0.8;\n\n']),
+    _templateObject23 = _taggedTemplateLiteral(['\n  color: ', ';\n  transition: color 0.3s;\n  &:hover {\n    color: #F0F4C3;\n  }\n'], ['\n  color: ', ';\n  transition: color 0.3s;\n  &:hover {\n    color: #F0F4C3;\n  }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -2741,9 +2742,11 @@ var Keyword = exports.Keyword = _styledComponents2.default.div(_templateObject19
 
 var KeywordOverlay = exports.KeywordOverlay = _styledComponents2.default.div(_templateObject20);
 
-var Keylink = exports.Keylink = _styledComponents2.default.span(_templateObject21);
+var Keylink = exports.Keylink = _styledComponents2.default.div(_templateObject21);
 
-var KeylinkText = exports.KeylinkText = _styledComponents2.default.a(_templateObject22, function (props) {
+var KeylinkOverlay = exports.KeylinkOverlay = _styledComponents2.default.div(_templateObject22);
+
+var KeylinkText = exports.KeylinkText = _styledComponents2.default.a(_templateObject23, function (props) {
   return props.color || '#DCE775';
 });
 
@@ -12148,6 +12151,7 @@ var linkMarkup = function linkMarkup(text, color) {
       _react2.default.createElement(
         _Styles.KeylinkText,
         { target: props[1], href: props[0], color: color },
+        _react2.default.createElement(_Styles.KeylinkOverlay, { className: 'overlay' }),
         props[2]
       )
     );
@@ -27130,7 +27134,7 @@ var _templateObject = _taggedTemplateLiteral(['\n    @media (max-width: ', 'em) 
     _templateObject18 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 6px 14px 5px 33px;\n  white-space: nowrap;\n  letter-spacing: 1px;\n  color: #424242;\n  opacity: 0.8;\n  transition: bottom 0.2s, font-size 0.2s, color 0.2s;\n'], ['\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 6px 14px 5px 33px;\n  white-space: nowrap;\n  letter-spacing: 1px;\n  color: #424242;\n  opacity: 0.8;\n  transition: bottom 0.2s, font-size 0.2s, color 0.2s;\n']),
     _templateObject19 = _taggedTemplateLiteral(['\n  position: relative;\n  color: ', ';\n  display: inline-block;\n  white-space:nowrap;\n'], ['\n  position: relative;\n  color: ', ';\n  display: inline-block;\n  white-space:nowrap;\n']),
     _templateObject20 = _taggedTemplateLiteral(['\n  position: absolute;\n  display: inline-block;\n  left: -2.5%;\n  bottom: 0;\n  height: 0%;\n  width: 105%;\n  background-color: white;\n  opacity: 0.9;\n'], ['\n  position: absolute;\n  display: inline-block;\n  left: -2.5%;\n  bottom: 0;\n  height: 0%;\n  width: 105%;\n  background-color: white;\n  opacity: 0.9;\n']),
-    _templateObject21 = _taggedTemplateLiteral(['\n  position: relative;\n  white-space:nowrap;\n\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: black;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.1;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n'], ['\n  position: relative;\n  white-space:nowrap;\n\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: black;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.1;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n']),
+    _templateObject21 = _taggedTemplateLiteral(['\n  position: relative;\n  white-space:nowrap;\n\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: white;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.4;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n'], ['\n  position: relative;\n  white-space:nowrap;\n\n  &::before {\n    position: absolute;\n    left: 0;\n    content: \'\';\n    background-color: white;\n    width: 0;\n    height: 1.1em;\n    opacity: 0.4;\n    transition: width 0.3s;\n    z-index: -1;\n  }\n  &:hover::before {\n    width: 100%;\n  }\n']),
     _templateObject22 = _taggedTemplateLiteral(['\n  color: ', ';\n  transition: color 0.3s;\n  &:hover {\n    color: #F0F4C3;\n  }\n'], ['\n  color: ', ';\n  transition: color 0.3s;\n  &:hover {\n    color: #F0F4C3;\n  }\n']);
 
 var _react = __webpack_require__(0);

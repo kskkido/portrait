@@ -172,24 +172,39 @@ export const KeywordOverlay = styled.div`
   opacity: 0.9;
 `
 
-export const Keylink = styled.span`
+export const Keylink = styled.div`
   position: relative;
   white-space:nowrap;
+  display: inline-block;
+
+  &:hover::before {
+    height: 100%;
+  }
 
   &::before {
-    position: absolute;
-    left: 0;
     content: '';
+    position: absolute;
+    left: -2.5%;
+    bottom: 0;
+    height: 0;
+    width: 105%;
     background-color: white;
-    width: 0;
-    height: 1.1em;
     opacity: 0.4;
-    transition: width 0.3s;
+    transition: height 0.3s;
     z-index: -1;
   }
-  &:hover::before {
-    width: 100%;
-  }
+`
+
+export const KeylinkOverlay = styled.div`
+  position: absolute;
+  display: inline-block;
+  left: -2.5%;
+  bottom: 0;
+  height: 0;
+  width: 105%;
+  background-color: white;
+  opacity: 0.8;
+
 `
 
 export const KeylinkText = styled.a`

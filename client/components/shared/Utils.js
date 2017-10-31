@@ -1,6 +1,6 @@
 import React from 'react'
 import reactStringReplace from 'react-string-replace'
-import { Letter, Keyword, KeywordOverlay, Keylink, KeylinkText } from './Styles'
+import { Letter, Keyword, KeywordOverlay, Keylink, KeylinkOverlay, KeylinkText } from './Styles'
 
 // decorators
 
@@ -84,7 +84,7 @@ const keyMarkup = (text, color) => {
       color={color}
     >
       {target}
-      <KeywordOverlay className="overlay"/>
+      <KeywordOverlay className="overlay" />
     </Keyword>
   ))
 }
@@ -100,6 +100,7 @@ const linkMarkup = (text, color) => {
     return (
       <Keylink>
         <KeylinkText target={props[1]} href={props[0]} color={color}>
+          <KeylinkOverlay className="overlay" />
           {props[2]}
         </KeylinkText>
       </Keylink>
