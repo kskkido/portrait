@@ -1,8 +1,11 @@
 import React from 'react'
 import { Input, PlaceholderContainer, PreviewContainer } from '../../shared/Styles'
+import { Keyword } from '../../shared/Transition'
+import { keywordMarkup } from '../../shared/Utils'
 import { initialValue } from './utils'
 import styled from 'styled-components'
 import forwardProps from './Input'
+import data from './name.json'
 
 const EmailContainer = styled.span`
   position: relative;
@@ -35,11 +38,13 @@ const Name = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef }) =>
       , inputValue = isInitial ? '' : value
       , isValid = isInitial ? true : _isValid
 
+      console.log(data.content, 'dude what')
+
   return (
     <PreviewContainer>
-      <p>Lets get in touch! Fill out each section and go to the 'submit' section to send out your message! Or if thats too much, just shoot me a message at
-        <EmailContainer><Email href="mailto:kskkido@gmail.com?Subject=Hello%20nice%20to%20meet%20you" target="_top"> kskkido@gmail.com</Email></EmailContainer>
-      </p>
+      <Keyword key={'contact'}>
+        <p>{keywordMarkup(data.content, '#F5F5F5', true)}</p>
+      </Keyword>
       <PlaceholderContainer
         empty={inputValue.length === 0}
         valid={isValid}

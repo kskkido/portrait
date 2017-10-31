@@ -1,14 +1,22 @@
 {
   "0": {
-      "preview": "Who am I?"
+      "main": "Hi there, my name is *Keisuke Kido*. I used to pursue a career in the music industry, but now I am a *fullstack web developer* who recently graduated Fullstack Academy of Code in New York 2017 May. I'm still new to the field, but so far I'm loving every step of the process. I currently live in *Tokyo, Japan*, so if you happen to be in town and love programming, lets get in touch! Also, @@:resume:#_self#here's my resume@@ for your interest.",
+      "withLink": "true",
+      "preview": "*Who* am I?"
   },
   "1": {
-    "preview": "What do I do and what can I do?"
+      "main": "There are many things I can do like most people, but there are few activities I truly enjoy. Music, cooking, working-out, and anything *Javascript*. As a graduate of Fullstack Academy of Code, I am most comfortable developing web applications using the *NERP* (Node, Express, React, Postgres) stack.",
+      "withLink": "true",
+      "preview": "*What* do I do and what can I do?"
   },
   "2": {
-    "preview": "Where have I been and where am I now?"
+      "main": "I was born and raised in *Tokyo, Japan* and called it my home until 2012 when I moved to *Boston* for college and a year of post graduation field experience in *New York*. As of June 2017, I'm *back in Tokyo* to make use of what I learned over my period overseas. If you're in town, *let me know!*",
+      "withLink": "false",
+      "preview": "*Where* have I been and where am I now?"
   },
   "3": {
-    "preview": "When did I start doing this?"
+      "main": "From late 2016 - early 2017, during the first half of the year following my college graduation, I spent my time in the *New York music industry* to familiarize myself with the American music scene. The experience was educational, but to my concerns, many of the tasks were work that could be automated. So, to delegate my work to computers, I began *teaching myself* how to code and found myself enjoying the experience. To accelerate my learning speed I joined the 2017 February cohort of *Fullstack Academy of Code* in New York. There I met invaluable friends and mentors, gained practical and hollistic understanding of Javascript development, and now I feel well equiped to take on *new challenges* as a developer. I currently reside in *Japan* where I work on personal projects and continue building my programming chops.",
+      "withLink": "false",
+      "preview": "*When* did I start doing this?"
   }
 }

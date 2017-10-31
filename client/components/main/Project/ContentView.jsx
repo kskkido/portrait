@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BodyContainer, BodyContent, Title} from '../../shared/Styles'
-import { Scramble } from '../../shared/Transition'
-import { createSpans, createTitle } from '../../shared/Utils'
+import { Scramble, Keyword } from '../../shared/Transition'
+import { createSpans, keywordMarkup } from '../../shared/Utils'
 import projectData from './content'
 
 import Return from '../shared/Return'
@@ -97,7 +97,9 @@ const ProjectView = ({ isBody, toggleBody, viewIndex }) => {
           </Title>
         </Scramble>
           <Description>
-            <p>{data.description}</p>
+            <Keyword key={'projectMain' + viewIndex}>
+            <p>{keywordMarkup(data.description, '#EEEEEE')}</p>
+            </Keyword>
           </Description>
       </Section>
     <BodyContent column={true}>

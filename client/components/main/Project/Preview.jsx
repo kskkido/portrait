@@ -1,5 +1,7 @@
 import React from 'react'
 import { PreviewContainer } from '../../shared/Styles'
+import { keywordMarkup } from '../../shared/Utils'
+import { Keyword } from '../../shared/transition'
 import data from './content'
 
 import Button from '../shared/Button'
@@ -8,13 +10,12 @@ const ProjectPreview = ({ toggleBody, viewIndex }) => {
   if (data[viewIndex] === undefined) return <div />
 
   const { preview } = data[viewIndex]
-      , location = {
-          pathname: '/projects',
-          state: {isBody: true}
-        }
+
   return (
     <PreviewContainer>
-      <p>{preview}</p>
+      <Keyword key={'project' + viewIndex}>
+        <p>{keywordMarkup(preview, '#EEEEEE')}</p>
+      </Keyword>
       <Button onClick={toggleBody} />
     </PreviewContainer>
   )

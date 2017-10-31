@@ -58,12 +58,15 @@ const verticalSlide = (() => {
             [direction]: 0,
             height: 0,
             ease: Power2.easeIn,
-            onComplete: (...args) => (cb && cb.call(this, tl), curriedSlide.apply(this, args)),
-            onCompleteParams: [bgFront, bgBehind, tl, repeat - 1],
+            onComplete: () => {
+              cb.call(this, tl)
+              curriedSlide.call(this, bgFront, bgBehind, tl, repeat - 1)
+            },
             clearProps: direction
           }) // tween new front to fill background
       }
     }
+
     return curriedSlide
   }
 
@@ -91,9 +94,14 @@ const verticalSlide = (() => {
             .set(front, {height: '100vh'})
             .set(behind, {backgroundColor: frontColor, height: '100vh'})
             .delay(0.4)
-      slideVerticalBackground(once(cbAnimation(front, backColor)), fadeInBody(target), direction)(front, behind, tl, repeat)
 
+      slideVerticalBackground(
+        once(cbAnimation(front, backColor)),
+        fadeInBody(target),
+        direction
+      )(front, behind, tl, repeat)
     },
+
     onExit: (target) => {
       new TimelineLite()
         .to(target, 0.3, {
@@ -161,9 +169,11 @@ const horizontalSlide = (() => {
           , tl = new TimelineLite()
             .set(behind, {backgroundColor: color})
 
-      slideHorizontalBackground(front, behind, tl, direction); slideInContent(direction === 'right' ? '250px' : '-250px', target, tl)
+      slideHorizontalBackground(front, behind, tl, direction)
+      slideInContent(direction === 'right' ? '250px' : '-250px', target, tl)
       toggle = !toggle
     },
+
     onExit: (target) => {
       new TimelineLite()
         .to(target, 0.2, {
@@ -299,7 +309,8 @@ const scrambleAnimation = (() => {
       const letterDuration = duration / asciList.length
           , tail = tailText && document.getElementById('tail')
           , tl = new TimelineLite()
-          .delay(delay)
+            .delay(delay)
+
       new Promise(res => asciList.forEach((asci, i, { length }) => {
         tl.
           to({value: Math.floor(Math.random() * 93) + 33}, letterDuration, {
@@ -329,6 +340,57 @@ export const Scramble = (_props) => {
       timeout={650}
       exit={false}
       onEnter={scrambleAnimation.onEnter(0.65, _props.delay, convertToAsci(_props.text || 'bleh'), _props.tailText)}
+    />
+  )
+}
+
+const KeywordAnimation = (() => {
+  const duration = 0.3
+
+  const callback = (tl, keyword) => {
+    tl
+      .set(keyword, {top: 0})
+      .to(keyword, duration, {
+          height: '0%',
+          ease: Power2.easeOut,
+        })
+      .set(keyword, {bottom: 0})
+  }
+
+  const slideUp = (parent) => (keyword, i) => {
+    const child = new TimelineLite()
+
+    child.to(keyword, duration, {
+        height: '100%',
+        onComplete: callback,
+        onCompleteParams: [child, keyword]
+      })
+    parent.add(child, duration * i)
+  }
+
+  const onEnter = (target) => {
+    const keywords = [].slice.call(target.getElementsByClassName('overlay')),
+          parent = new TimelineLite()
+
+    keywords.forEach(slideUp(parent))
+    parent.delay(0.6)
+  }
+
+  return {
+    onEnter
+  }
+})()
+
+export const Keyword = (props) => {
+
+  return (
+    <Transition
+      {...props}
+      appear={true}
+      in={true}
+      timeout={1000}
+      exit={false}
+      onEnter={KeywordAnimation.onEnter}
     />
   )
 }

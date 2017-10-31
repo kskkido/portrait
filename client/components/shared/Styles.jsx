@@ -153,3 +153,64 @@ export const PlaceholderContainer = styled.div.attrs({
   opacity: 0.8;
   transition: bottom 0.2s, font-size 0.2s, color 0.2s;
 `
+
+export const Keyword = styled.div`
+  position: relative;
+  color: ${props => props.color};
+  display: inline-block;
+  white-space:nowrap;
+`
+
+export const KeywordOverlay = styled.div`
+  position: absolute;
+  display: inline-block;
+  left: -2.5%;
+  bottom: 0;
+  height: 0%;
+  width: 105%;
+  background-color: white;
+  opacity: 0.9;
+`
+
+export const Keylink = styled.div`
+  position: relative;
+  white-space:nowrap;
+  display: inline-block;
+
+  &:hover::before {
+    height: 100%;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -2.5%;
+    bottom: 0;
+    height: 0;
+    width: 105%;
+    background-color: white;
+    opacity: 0.4;
+    transition: height 0.3s;
+    z-index: -1;
+  }
+`
+
+export const KeylinkOverlay = styled.div`
+  position: absolute;
+  display: inline-block;
+  left: -2.5%;
+  bottom: 0;
+  height: 0;
+  width: 105%;
+  background-color: white;
+  opacity: 0.8;
+
+`
+
+export const KeylinkText = styled.a`
+  color: ${props => props.color || '#DCE775'};
+  transition: color 0.3s;
+  &:hover {
+    color: #F0F4C3;
+  }
+`

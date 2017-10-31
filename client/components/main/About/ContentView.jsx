@@ -5,16 +5,7 @@ import { Scramble } from '../../shared/Transition'
 
 import Return from '../shared/Return'
 import Textline from '../shared/Textline'
-import Who from './Who'
-import What from './What'
-import Where from './Where'
-import When from './When'
-
-const list = [
-  <Who key="one" />,
-  <What  key="two" />,
-  <Where key="three" />,
-  <When key="four" />]
+import Body from './Body'
 
 const AboutView = ({ navigationList, viewIndex, toggleBody }) => {
   if (!navigationList[viewIndex]) return <div />
@@ -30,7 +21,7 @@ const AboutView = ({ navigationList, viewIndex, toggleBody }) => {
             </Title>
           </Scramble>
         </Flex1>
-        {list[viewIndex]}
+        <Body viewIndex={viewIndex} />
         <Flex1>
           <Title id="tail">
             {createSpans(title.length + 3)}<Textline delay={0.8} />

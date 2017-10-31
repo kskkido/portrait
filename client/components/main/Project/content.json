@@ -12,10 +12,10 @@
     "idea": "The idea of Audiosphere emerged out of my love for the figurative space that music playlists create. I wanted to amplify this playlist experience by coupling its personal element with a literal space.",
     "technology": "HTML5/Javascript/Node/Spotify API",
     "date": "April 2017",
-    "description": "Audiosphere is a music streaming web application that uses Spotify Web API and Three-JS to create a 3d planetary system with your Spotify playlists.",
+    "description": "Audiosphere is a *music streaming web application* that uses *Spotify Web API* and *Three-JS* to create a *3d* planetary system with your *Spotify playlists*.",
     "imageSource": "audiosphere-icon.png",
     "url": "https://audiosphere.herokuapp.com",
-    "preview": "Imagine a planetarium for your playlists"
+    "preview": "Imagine a *planetarium* for your *playlists*"
   },
   "1": {
     "title": "StackQuest",
@@ -24,10 +24,10 @@
     "idea": "As folks who enjoy games and challenges, my team at Fullstack Academy Of Code decided to create an in-browser game. In-browser over native because we wanted to build an accessible product and bring a social element by leveraging socket IO for a multiplayer experience",
     "technology": "HTML5/SocketIO/Javascript/Node",
     "date": "April - May 2017",
-    "description": "StackQuest is an in-browser real-time multiplayer adventure game. The multiplayer aspect is powered by Socket IO and the game logic leverages Phaser JS.",
+    "description": "StackQuest is an *in-browser* real-time multiplayer *adventure game*. The multiplayer aspect is powered by *Socket IO* and the game logic leverages *Phaser JS*.",
     "imageSource": "stackquest-icon.png",
     "url": "https://stackquest.herokuapp.com",
-    "preview": "It's real-time multiplayer game"
+    "preview": "It's *real-time multiplayer* game"
   },
   "2": {
     "title": "Portfolio",
@@ -36,9 +36,9 @@
     "idea": "I aimed to create a website that responds to the direction of user interaction. By using a circular navigation I thought it would look natural with rotation animations that seemed like an intuitive way to show direction of interaction without sacrificing usability. Also hand-spinners",
     "technology": "HTML5/Styled-Components/GSAP/React/Redux/Node",
     "date": "July 2017",
-    "description": "Meta... This portfolio website was built using react-redux framework coupled with styled-components and gsap for page aesthetics. I tried to take a different approach with page navigation by taking into account navigation direction",
+    "description": "Meta... This *portfolio website* was built using *react-redux* framework coupled with *styled-components* and *GSAP* for page aesthetics. I tried to take a different approach with page navigation by taking into account *navigation direction*",
     "imageSource": "portfolio.png",
     "url": "/",
-    "preview": "Meta"
+    "preview": "*Meta*"
   }
 }
