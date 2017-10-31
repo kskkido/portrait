@@ -6,7 +6,7 @@ import data from './content'
 
 const Content = ({ viewIndex }) => {
   const { main, withLink } = data[viewIndex]
-  console.log(main, 'MAIN', viewIndex)
+
   return (
     <BodyContent>
       <BodyText>
