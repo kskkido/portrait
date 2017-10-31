@@ -180,10 +180,10 @@ export const Keylink = styled.span`
     position: absolute;
     left: 0;
     content: '';
-    background-color: black;
+    background-color: white;
     width: 0;
     height: 1.1em;
-    opacity: 0.1;
+    opacity: 0.4;
     transition: width 0.3s;
     z-index: -1;
   }

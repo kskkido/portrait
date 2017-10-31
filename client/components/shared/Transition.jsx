@@ -58,12 +58,15 @@ const verticalSlide = (() => {
             [direction]: 0,
             height: 0,
             ease: Power2.easeIn,
-            onComplete: (...args) => (cb && cb.call(this, tl), curriedSlide.apply(this, args)),
-            onCompleteParams: [bgFront, bgBehind, tl, repeat - 1],
+            onComplete: () => {
+              cb.call(this, tl)
+              curriedSlide.call(this, bgFront, bgBehind, tl, repeat - 1)
+            },
             clearProps: direction
           }) // tween new front to fill background
       }
     }
+
     return curriedSlide
   }
 
@@ -91,9 +94,14 @@ const verticalSlide = (() => {
             .set(front, {height: '100vh'})
             .set(behind, {backgroundColor: frontColor, height: '100vh'})
             .delay(0.4)
-      slideVerticalBackground(once(cbAnimation(front, backColor)), fadeInBody(target), direction)(front, behind, tl, repeat)
 
+      slideVerticalBackground(
+        once(cbAnimation(front, backColor)),
+        fadeInBody(target),
+        direction
+      )(front, behind, tl, repeat)
     },
+
     onExit: (target) => {
       new TimelineLite()
         .to(target, 0.3, {
@@ -161,9 +169,11 @@ const horizontalSlide = (() => {
           , tl = new TimelineLite()
             .set(behind, {backgroundColor: color})
 
-      slideHorizontalBackground(front, behind, tl, direction); slideInContent(direction === 'right' ? '250px' : '-250px', target, tl)
+      slideHorizontalBackground(front, behind, tl, direction)
+      slideInContent(direction === 'right' ? '250px' : '-250px', target, tl)
       toggle = !toggle
     },
+
     onExit: (target) => {
       new TimelineLite()
         .to(target, 0.2, {

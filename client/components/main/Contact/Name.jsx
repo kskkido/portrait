@@ -43,7 +43,7 @@ const Name = ({ _isValid, value, onChangeHandler, onEnterHandler, inputRef }) =>
   return (
     <PreviewContainer>
       <Keyword key={'contact'}>
-        <p>{keywordMarkup(data.content, '#DCE775', true)}</p>
+        <p>{keywordMarkup(data.content, '#F5F5F5', true)}</p>
       </Keyword>
       <PlaceholderContainer
         empty={inputValue.length === 0}
